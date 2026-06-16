@@ -1,0 +1,82 @@
+{%- if settings.age_gate_enabled -%}
+<div id="age-gate" class="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-heading"
+     data-remember-days="{{ settings.age_gate_remember_days | default: 30 }}"
+     data-min-age="{{ settings.age_gate_min_age }}"
+     {% if settings.age_gate_bg != blank %}style="background-image:url('{{ settings.age_gate_bg | image_url: width: 2000 }}')"{% endif %}>
+  <div class="age-gate__scrim"></div>
+  <div class="age-gate__inner" id="age-gate-main">
+    {%- if settings.age_gate_logo != blank -%}
+      <img class="age-gate__logo" src="{{ settings.age_gate_logo | image_url: width: 200 }}" alt="Hedonistas Mezcal" width="84" height="84">
+    {%- endif -%}
+    {%- if settings.age_gate_eyebrow != blank -%}<div class="age-gate__eyebrow">{{ settings.age_gate_eyebrow | escape }}</div>{%- endif -%}
+    <h2 class="age-gate__heading" id="age-gate-heading">{{ settings.age_gate_heading }}</h2>
+    {%- if settings.age_gate_subheading != blank -%}<p class="age-gate__sub">{{ settings.age_gate_subheading | escape }}</p>{%- endif -%}
+    <div class="age-gate__actions">
+      <button type="button" class="age-gate__btn age-gate__btn--yes" data-age-confirm>{{ settings.age_gate_confirm | default: 'Yes, enter' | escape }}</button>
+      <button type="button" class="age-gate__btn age-gate__btn--no" data-age-deny>{{ settings.age_gate_deny | default: 'No' | escape }}</button>
+    </div>
+    {%- if settings.age_gate_footnote != blank -%}<div class="age-gate__footnote">{{ settings.age_gate_footnote }}</div>{%- endif -%}
+  </div>
+  <div class="age-gate__inner age-gate__denied" id="age-gate-denied" hidden>
+    <h2 class="age-gate__heading">{{ settings.age_gate_deny_heading | default: 'Come back soon.' }}</h2>
+    {%- if settings.age_gate_deny_body != blank -%}<p class="age-gate__sub">{{ settings.age_gate_deny_body | escape }}</p>{%- endif -%}
+    <button type="button" class="age-gate__btn age-gate__btn--ghost" data-age-back>← Back</button>
+  </div>
+</div>
+<script>
+(function(){
+  var gate=document.getElementById('age-gate');
+  if(!gate) return;
+  var KEY='hed_age_ok_v1';
+  var days=parseInt(gate.getAttribute('data-remember-days'),10)||30;
+  var design=(window.Shopify&&window.Shopify.designMode)===true;
+  var html=document.documentElement;
+  function verified(){
+    try{
+      var raw=localStorage.getItem(KEY);
+      if(!raw) return false;
+      var rec=JSON.parse(raw);
+      if(!rec||!rec.t) return false;
+      return (Date.now()-rec.t) < days*86400000;
+    }catch(e){ return false; }
+  }
+  function remove(){
+    gate.classList.add('is-hiding');
+    html.classList.remove('age-gate-open');
+    setTimeout(function(){ if(gate&&gate.parentNode) gate.parentNode.removeChild(gate); },450);
+  }
+  function open(){
+    html.classList.add('age-gate-open');
+    var yes=gate.querySelector('[data-age-confirm]');
+    if(yes) yes.focus();
+  }
+  if(verified() && !design){ if(gate.parentNode) gate.parentNode.removeChild(gate); return; }
+  open();
+  var main=document.getElementById('age-gate-main');
+  var denied=document.getElementById('age-gate-denied');
+  gate.addEventListener('click',function(e){
+    if(e.target.closest('[data-age-confirm]')){
+      if(!design){ try{ localStorage.setItem(KEY, JSON.stringify({t:Date.now()})); }catch(err){} }
+      remove();
+    } else if(e.target.closest('[data-age-deny]')){
+      main.hidden=true; denied.hidden=false;
+      var back=denied.querySelector('[data-age-back]'); if(back) back.focus();
+    } else if(e.target.closest('[data-age-back]')){
+      denied.hidden=true; main.hidden=false;
+      var yes=main.querySelector('[data-age-confirm]'); if(yes) yes.focus();
+    }
+  });
+  gate.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){ e.preventDefault(); return; }
+    if(e.key==='Tab'){
+      var pane=denied.hidden?main:denied;
+      var f=pane.querySelectorAll('button');
+      if(!f.length) return;
+      var first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+    }
+  });
+})();
+</script>
+{%- endif -%}

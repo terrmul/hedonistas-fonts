@@ -1,0 +1,86 @@
+<!-- COCKTAILS — filterable horizontal menu -->
+<section id="cocktails" data-bg="bg-cream">
+  <div class="ck-header reveal">
+    <div>
+      <div class="label">{{ section.settings.label | escape }}</div>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="ck-header-right">
+      <a class="mag-btn mag-dark" href="{{ section.settings.view_all_url }}">{{ section.settings.view_all_label | escape }}</a>
+      <div class="ck-filters">
+        <button class="ck-filter active" data-filter="all">All</button>
+        <button class="ck-filter" data-filter="citrus">Citrus</button>
+        <button class="ck-filter" data-filter="smoky">Smoky</button>
+        <button class="ck-filter" data-filter="stirred">Stirred</button>
+        <button class="ck-filter" data-filter="shaken">Shaken</button>
+        <button class="ck-filter" data-filter="spirit-forward">Spirit Forward</button>
+        <button class="ck-filter" data-filter="seasonal">Seasonal</button>
+      </div>
+    </div>
+  </div>
+  <div class="ck-track" id="cktrack">
+    {%- for block in section.blocks -%}
+      {%- assign n = forloop.index -%}
+      <div class="ck-card" data-cat="{{ block.settings.categories }}" {{ block.shopify_attributes }}>
+        <div class="ck-card-num">{% if n < 10 %}0{% endif %}{{ n }}</div>
+        <div class="ck-card-front">
+          <div class="ck-card-cat">{{ block.settings.category_label | escape }}</div>
+          <div class="ck-card-name">{{ block.settings.name | escape }}</div>
+          <div class="ck-card-spirit">{{ block.settings.spirit | escape }}</div>
+        </div>
+        <div class="ck-card-back">
+          <div class="ck-card-name">{{ block.settings.name | escape }}</div>
+          {%- if block.settings.ingredient_1 != blank -%}<div class="ck-recipe-item">{{ block.settings.ingredient_1 | escape }}</div>{%- endif -%}
+          {%- if block.settings.ingredient_2 != blank -%}<div class="ck-recipe-item">{{ block.settings.ingredient_2 | escape }}</div>{%- endif -%}
+          {%- if block.settings.ingredient_3 != blank -%}<div class="ck-recipe-item">{{ block.settings.ingredient_3 | escape }}</div>{%- endif -%}
+          {%- if block.settings.ingredient_4 != blank -%}<div class="ck-recipe-item">{{ block.settings.ingredient_4 | escape }}</div>{%- endif -%}
+          {%- if block.settings.ingredient_5 != blank -%}<div class="ck-recipe-item">{{ block.settings.ingredient_5 | escape }}</div>{%- endif -%}
+          <div class="ck-recipe-method">{{ block.settings.method | escape }}</div>
+          <a class="mag-btn mag-cream" style="font-size:.75rem;padding:.6rem 1.4rem" href="{{ block.settings.recipe_url }}">{{ section.settings.recipe_button | escape }}</a>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  <div class="ck-footer">
+    <div class="ck-count"><span class="ck-count-shown"><span id="ck-visible-count">{{ section.blocks.size }}</span> {{ section.settings.count_suffix | escape }}</span><a class="ck-count-dl" href="{{ section.settings.pdf_url }}">{{ section.settings.pdf_label | escape }}</a></div>
+    <div class="ck-scroll-hint">{{ section.settings.scroll_hint | escape }}</div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Cocktails",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Eyebrow label", "default": "Crafted with Hedonistas" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Signature<br>Cocktails" },
+    { "type": "text", "id": "view_all_label", "label": "View-all button text", "default": "View All Recipes" },
+    { "type": "url", "id": "view_all_url", "label": "View-all button link" },
+    { "type": "text", "id": "recipe_button", "label": "Per-card button text", "default": "Full Recipe" },
+    { "type": "header", "content": "Footer" },
+    { "type": "text", "id": "count_suffix", "label": "Count suffix", "default": "cocktails · shuffled each visit" },
+    { "type": "text", "id": "pdf_label", "label": "PDF link text", "default": "Download Full Menu PDF" },
+    { "type": "url", "id": "pdf_url", "label": "PDF link" },
+    { "type": "text", "id": "scroll_hint", "label": "Scroll hint", "default": "← Drag to explore →" }
+  ],
+  "blocks": [
+    {
+      "type": "cocktail",
+      "name": "Cocktail",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Mezcalrita" },
+        { "type": "text", "id": "category_label", "label": "Category label (shown)", "default": "Citrus · Shaken" },
+        { "type": "text", "id": "categories", "label": "Filter categories (space-separated)", "default": "citrus shaken", "info": "Use: citrus smoky stirred shaken spirit-forward seasonal" },
+        { "type": "text", "id": "spirit", "label": "Base spirit", "default": "Espadín" },
+        { "type": "text", "id": "ingredient_1", "label": "Ingredient 1" },
+        { "type": "text", "id": "ingredient_2", "label": "Ingredient 2" },
+        { "type": "text", "id": "ingredient_3", "label": "Ingredient 3" },
+        { "type": "text", "id": "ingredient_4", "label": "Ingredient 4" },
+        { "type": "text", "id": "ingredient_5", "label": "Ingredient 5" },
+        { "type": "text", "id": "method", "label": "Method line" },
+        { "type": "url", "id": "recipe_url", "label": "Full-recipe link" }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [{ "name": "Cocktails" }]
+}
+{% endschema %}

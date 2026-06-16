@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hedonistas Mezcal — Artisanal Oaxacan Mezcal | La Noche &amp; Más</title>
+<meta name="description" content="Hedonistas Mezcal crafts small-batch, sustainably-sourced mezcals from Oaxaca, Mexico. Discover La Noche Espadín, award-winning spirits rooted in tradition.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1a1716">
+<link rel="canonical" href="https://hedonistasmezcal.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hedonistas Mezcal">
+<meta property="og:url" content="https://hedonistasmezcal.com/">
+<meta property="og:title" content="Hedonistas Mezcal — Artisanal Oaxacan Mezcal">
+<meta property="og:description" content="Small-batch, sustainably-sourced mezcals crafted in Oaxaca, Mexico. Award-winning La Noche Espadín and beyond.">
+<meta property="og:image" content="https://hedonistasmezcal.com/images/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@HedonistasM">
+<meta name="twitter:title" content="Hedonistas Mezcal — Artisanal Oaxacan Mezcal">
+<meta name="twitter:description" content="Small-batch, sustainably-sourced mezcals crafted in Oaxaca, Mexico. Award-winning La Noche Espadín and beyond.">
+<meta name="twitter:image" content="https://hedonistasmezcal.com/images/og-cover.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Hedonistas Mezcal",
+  "url": "https://hedonistasmezcal.com",
+  "logo": "https://hedonistasmezcal.com/images/icon.png",
+  "sameAs": [
+    "https://www.instagram.com/hedonistasmezcal",
+    "https://www.facebook.com/hedonistasmezcal",
+    "https://www.tiktok.com/@hedonistasmezcal"
+  ],
+  "description": "Hedonistas Mezcal crafts small-batch, sustainably-sourced artisanal mezcals from Oaxaca, Mexico.",
+  "foundingLocation": { "@type": "Place", "name": "Oaxaca, Mexico" }
+}
+</script>
+<link rel="preconnect" href="https://use.typekit.net" crossorigin>
+<link rel="preconnect" href="https://p.typekit.net" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="preload" as="image" href="{{ 'icon.png' | asset_url }}" fetchpriority="high">
+<link rel="stylesheet" href="https://use.typekit.net/cps0ucd.css">
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ content_for_header }}
+</head>
+<body>
+<a class="skip-link" href="#maincontent">Skip to content</a>
+{% render 'age-gate' %}
+<div id="bg-overlay" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
+{% render 'header' %}
+<main id="maincontent">
+{{ content_for_layout }}
+</main>
+{% render 'footer' %}
+<script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!-- FIND US -->
+<div class="findus" id="findus" data-nav="dark" data-bg="bg-cactus">
+  <div class="findus-head">
+    <div class="findus-head-left">
+      <div class="label">{{ section.settings.label | escape }}</div>
+      <h2>{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="findus-head-right">{{ section.settings.intro }}</div>
+  </div>
+  <div class="findus-map" id="findus-map">
+    <stockist-store-locator data-stockist-widget-tag="{{ section.settings.stockist_tag }}" style="display:block;width:100%">
+      Loading store locator from <a href="https://stockist.co">Stockist store locator</a>...
+    </stockist-store-locator>
+    <script async src="https://stockist.co/embed/v1/widget.min.js"></script>
+    <div class="map-gate" id="map-gate" role="button" aria-label="Click to interact with map" tabindex="0">
+      <div class="map-gate-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      </div>
+      <span class="map-gate-label">{{ section.settings.gate_label | escape }}</span>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Find Us",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Eyebrow label", "default": "Bars · Restaurants · Retail" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find Us" },
+    { "type": "richtext", "id": "intro", "label": "Intro copy", "default": "<p>Every bar is a sanctuary where strangers become confidants and the bartender a Curandero. Find Hedonistas near you.</p>" },
+    { "type": "text", "id": "stockist_tag", "label": "Stockist widget tag", "default": "map_93gwz2p3", "info": "From your Stockist dashboard." },
+    { "type": "text", "id": "gate_label", "label": "Map gate label", "default": "Click to explore the map" }
+  ],
+  "presets": [{ "name": "Find Us" }]
+}
+{% endschema %}

@@ -1,0 +1,54 @@
+<!-- AWARDS — filterable carousel -->
+<section class="awards" id="awards" data-nav="dark" data-bg="bg-marine">
+  <div class="aw-header reveal">
+    <div>
+      <div class="label">{{ section.settings.label | escape }}</div>
+      <h2>{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="aw-filters">
+      <button class="aw-filter active" data-filter="all">All</button>
+      <button class="aw-filter" data-filter="espadin">Espadín</button>
+      <button class="aw-filter" data-filter="tobala">Tobalá</button>
+      <button class="aw-filter" data-filter="cuishe">Cuishe</button>
+      <button class="aw-filter" data-filter="tepeztate">Tepeztate</button>
+    </div>
+  </div>
+  <div class="aw-track" id="awtrack">
+    {%- for block in section.blocks -%}
+      <div class="aw" data-expr="{{ block.settings.expression }}" {{ block.shopify_attributes }}>
+        <div class="aw-top"><span class="aw-year">{{ block.settings.year | escape }}</span><span class="aw-expr">{{ block.settings.expression_label | escape }}</span></div>
+        <div><div class="aw-medal">{{ block.settings.medal }}</div><div class="aw-src">{{ block.settings.source | escape }}</div></div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Awards",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Eyebrow label", "default": "Recognized Worldwide" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Reviews & Awards" }
+  ],
+  "blocks": [
+    {
+      "type": "award",
+      "name": "Award",
+      "settings": [
+        { "type": "text", "id": "year", "label": "Year", "default": "2025" },
+        { "type": "select", "id": "expression", "label": "Expression (filter)", "default": "espadin",
+          "options": [
+            { "value": "espadin", "label": "Espadín" },
+            { "value": "tobala", "label": "Tobalá" },
+            { "value": "cuishe", "label": "Cuishe" },
+            { "value": "tepeztate", "label": "Tepeztate" }
+          ] },
+        { "type": "text", "id": "expression_label", "label": "Expression label (shown on card)", "default": "Espadín" },
+        { "type": "inline_richtext", "id": "medal", "label": "Medal / score", "default": "Gold", "info": "Use <br> to wrap, e.g. Double<br>Gold." },
+        { "type": "text", "id": "source", "label": "Source / competition", "default": "SF World Spirits Competition" }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [{ "name": "Awards" }]
+}
+{% endschema %}

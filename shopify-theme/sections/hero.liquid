@@ -1,0 +1,54 @@
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-back" id="hero-back">{{ section.settings.backdrop_word | escape }}</div>
+  <div class="hero-mid" id="hero-mid">
+    <div class="hero-brand">
+      {%- if section.settings.logo != blank -%}
+        <img class="hero-logo" src="{{ section.settings.logo | image_url: width: 360 }}" alt="{{ section.settings.logo_alt | escape }}" fetchpriority="high" decoding="async" width="180" height="180">
+      {%- else -%}
+        <img class="hero-logo" src="{{ 'icon.png' | asset_url }}" alt="{{ section.settings.logo_alt | escape }}" fetchpriority="high" decoding="async" width="180" height="180">
+      {%- endif -%}
+      <h1 class="hero-h1"><span class="split">{{ section.settings.heading_1 | escape }}</span><span class="split">{{ section.settings.heading_2 | escape }}</span></h1>
+    </div>
+  </div>
+  <a class="hero-badge" href="{{ section.settings.badge_link }}" aria-label="{{ section.settings.badge_aria | escape }}">
+    <span class="hero-badge-top">{{ section.settings.badge_top | escape }}</span>
+    <span class="hero-badge-medal">{{ section.settings.badge_medal | escape }}</span>
+    <span class="hero-badge-year">{{ section.settings.badge_year | escape }}</span>
+    <span class="hero-badge-body">{{ section.settings.badge_body | escape }}</span>
+  </a>
+  <div class="hero-fore" id="hero-fore">
+    <p class="hero-tagline">{{ section.settings.tagline }}</p>
+    <div class="hero-locale">
+      <p>{{ section.settings.locale }}</p>
+      <span class="hero-cue label">{{ section.settings.scroll_cue | escape }}</span>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "header", "content": "Brand" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (cream / inverted PNG)" },
+    { "type": "text", "id": "logo_alt", "label": "Logo alt text", "default": "Hedonistas Mezcal" },
+    { "type": "text", "id": "backdrop_word", "label": "Oversized backdrop word", "default": "Hedonistas" },
+    { "type": "header", "content": "Headline" },
+    { "type": "text", "id": "heading_1", "label": "Headline line 1", "default": "Go" },
+    { "type": "text", "id": "heading_2", "label": "Headline line 2", "default": "Deep." },
+    { "type": "header", "content": "Award Badge" },
+    { "type": "text", "id": "badge_top", "label": "Lead-in line", "default": "Winner of" },
+    { "type": "text", "id": "badge_medal", "label": "Award", "default": "Four Golds" },
+    { "type": "text", "id": "badge_year", "label": "Year", "default": "2026" },
+    { "type": "text", "id": "badge_body", "label": "Competition / source", "default": "SF World Spirits" },
+    { "type": "url", "id": "badge_link", "label": "Badge link", "default": "#awards" },
+    { "type": "text", "id": "badge_aria", "label": "Badge screen-reader label", "default": "Winner of Four Golds, 2026, SF World Spirits Competition" },
+    { "type": "header", "content": "Foreground" },
+    { "type": "inline_richtext", "id": "tagline", "label": "Tagline", "default": "We are purveyors of the unforgettable.<br>Late nights. Bold pours. No spectators." },
+    { "type": "inline_richtext", "id": "locale", "label": "Locale", "default": "Hecho en<br>Oaxaca" },
+    { "type": "text", "id": "scroll_cue", "label": "Scroll cue", "default": "Scroll ↓" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

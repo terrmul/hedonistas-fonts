@@ -1,0 +1,32 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Hedonistas",
+    "theme_version": "0.3.0",
+    "theme_author": "Hedonistas",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Age gate",
+    "settings": [
+      { "type": "checkbox", "id": "age_gate_enabled", "label": "Enable age gate", "default": true },
+      { "type": "text", "id": "age_gate_min_age", "label": "Minimum age", "default": "21" },
+      { "type": "range", "id": "age_gate_remember_days", "label": "Remember a verified visitor for", "min": 1, "max": 90, "step": 1, "unit": "d", "default": 30 },
+      { "type": "header", "content": "Copy" },
+      { "type": "text", "id": "age_gate_eyebrow", "label": "Eyebrow", "default": "Hecho en Oaxaca" },
+      { "type": "text", "id": "age_gate_heading", "label": "Heading", "default": "Are you of legal<br>drinking age?" },
+      { "type": "textarea", "id": "age_gate_subheading", "label": "Subheading", "default": "You must be of legal drinking age to enter. We craft mezcal for those who savour responsibly." },
+      { "type": "text", "id": "age_gate_confirm", "label": "Confirm button", "default": "Yes, enter" },
+      { "type": "text", "id": "age_gate_deny", "label": "Decline button", "default": "No" },
+      { "type": "header", "content": "Decline state" },
+      { "type": "text", "id": "age_gate_deny_heading", "label": "Decline heading", "default": "Come back soon." },
+      { "type": "textarea", "id": "age_gate_deny_body", "label": "Decline message", "default": "You must be of legal drinking age to enter Hedonistas Mezcal." },
+      { "type": "header", "content": "Appearance" },
+      { "type": "image_picker", "id": "age_gate_bg", "label": "Background image (optional)" },
+      { "type": "image_picker", "id": "age_gate_logo", "label": "Logo (optional, cream PNG)" },
+      { "type": "header", "content": "Legal footnote" },
+      { "type": "richtext", "id": "age_gate_footnote", "label": "Footnote", "default": "<p>Please drink responsibly. By entering you accept our Terms & Privacy Policy.</p>" }
+    ]
+  }
+]

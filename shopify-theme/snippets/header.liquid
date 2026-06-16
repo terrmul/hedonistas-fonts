@@ -1,0 +1,30 @@
+<!-- NAV -->
+<nav id="mainnav" aria-label="Primary">
+  <a class="nav-logo" href="/">
+    <img class="nav-icon" src="{{ 'icon.png' | asset_url }}" alt="" decoding="async" width="52" height="52">
+    <span class="nav-wordmark">Hedonistas Mezcal</span>
+  </a>
+  <ul>
+    <li><a href="#mezcals">Mezcals</a></li>
+    <li><a href="#craft">Craft</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#maestro">El Maestro</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#cocktails">Cocktails</a></li>
+    <li><a href="#findus">Find Us</a></li>
+    <li><a class="nav-cart" href="/cart">Cart ({{ cart.item_count }})</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+  </button>
+</nav>
+<nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
+  <a href="#mezcals">Mezcals</a>
+  <a href="#craft">Craft</a>
+  <a href="#story">Story</a>
+  <a href="#maestro">El Maestro</a>
+  <a href="#awards">Awards</a>
+  <a href="#cocktails">Cocktails</a>
+  <a href="#findus">Find Us</a>
+  <a href="/cart">Cart ({{ cart.item_count }})</a>
+</nav>

@@ -1,0 +1,82 @@
+<!-- GO DEEP / SOCIAL + NEWSLETTER -->
+<section class="deep-social" data-nav="light" data-bg="bg-cream">
+  <div class="deep-head">
+    <div class="deep-panel deep-panel-left reveal">
+      <h2 class="deep-word-h2"><span>g</span><span>o</span><span class="sp"> </span><span>d</span><span>e</span><span>e</span><span>p</span><span>.</span></h2>
+      <a class="handle" href="{{ section.settings.instagram_url }}" aria-label="Hedonistas on Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        {{ section.settings.instagram_handle | escape }}
+      </a>
+    </div>
+    <div class="deep-panel deep-panel-right reveal">
+      {%- if section.settings.newsletter_url != blank -%}
+        <form class="deep-form" action="{{ section.settings.newsletter_url }}" method="post" target="_blank">
+          <input type="email" name="email" placeholder="{{ section.settings.newsletter_placeholder | escape }}" aria-label="Email address" autocomplete="email"><button type="submit">{{ section.settings.newsletter_button | escape }}</button>
+        </form>
+      {%- else -%}
+        {%- form 'customer' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="deep-form">
+            <input type="email" name="contact[email]" placeholder="{{ section.settings.newsletter_placeholder | escape }}" aria-label="Email address" autocomplete="email"><button type="submit">{{ section.settings.newsletter_button | escape }}</button>
+          </div>
+        {%- endform -%}
+      {%- endif -%}
+      <h2>{{ section.settings.newsletter_heading | escape }}</h2>
+    </div>
+  </div>
+  <div class="ig-track-outer">
+    <div class="ig-grid" id="igtrack">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="ig-tile" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" aria-label="{{ block.settings.alt | escape }}">{%- endif -%}
+              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.alt | escape }}" decoding="async" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+              {%- if block.settings.link != blank -%}</a>{%- endif -%}
+            {%- else -%}
+              <div class="ig{{ forloop.index }}"></div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="ig-tile"><div class="ig1"></div></div>
+        <div class="ig-tile"><div class="ig2"></div></div>
+        <div class="ig-tile"><div class="ig3"></div></div>
+        <div class="ig-tile"><div class="ig4"></div></div>
+        <div class="ig-tile"><div class="ig5"></div></div>
+        <div class="ig-tile"><div class="ig6"></div></div>
+        <div class="ig-tile"><div class="ig7"></div></div>
+        <div class="ig-tile"><div class="ig8"></div></div>
+        <div class="ig-tile"><div class="ig9"></div></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Social + Newsletter",
+  "settings": [
+    { "type": "header", "content": "Instagram" },
+    { "type": "text", "id": "instagram_handle", "label": "Handle", "default": "@HEDONISTASDELAFE" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram URL", "default": "https://www.instagram.com/hedonistasdelafe/" },
+    { "type": "header", "content": "Newsletter" },
+    { "type": "text", "id": "newsletter_heading", "label": "Heading", "default": "Go Deeper." },
+    { "type": "text", "id": "newsletter_placeholder", "label": "Input placeholder", "default": "Your email address" },
+    { "type": "text", "id": "newsletter_button", "label": "Button label", "default": "Subscribe" },
+    { "type": "url", "id": "newsletter_url", "label": "External form action (Klaviyo/Mailchimp)", "info": "Leave blank to use Shopify's built-in customer signup." }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Instagram tile",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "alt", "label": "Alt text", "default": "Hedonistas on Instagram" },
+        { "type": "url", "id": "link", "label": "Link (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [{ "name": "Social + Newsletter" }]
+}
+{% endschema %}
