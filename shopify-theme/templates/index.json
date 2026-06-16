@@ -1,0 +1,214 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero"
+    },
+    "bottles": {
+      "type": "bottles",
+      "blocks": {
+        "expression-0": {
+          "type": "expression",
+          "settings": {
+            "name": "Espadín",
+            "species": "Angustifolia",
+            "copy_label": "100% Agave Angustifolia",
+            "price": "$64",
+            "accent": "hibiscus",
+            "thumb_height": 42,
+            "tier_name": "The Gateway",
+            "spec_1": "100% Agave Angustifolia",
+            "spec_2": "6–8 Year Plant Maturation",
+            "spec_3": "ABV: 46%",
+            "nose": "Gentle smoke, aloe, honey, green olive",
+            "palate": "Sichuan pepper, grapefruit peel, star fruit, miso, light smoke, citrus lift",
+            "body": "Medium bodied, balanced, approachable",
+            "finish": "Clean, delicate",
+            "desc_body": "This expression captures a classic mezcal profile, balancing smoke, spice, acidity, and subtle sweetness, all grounded by savory mineral notes. Fun to mix but good enough to simply sip neat.",
+            "pair_cocktails": "Mezcal Negroni, Oaxacan Old Fashioned, Paloma",
+            "pair_food": "Grilled citrus shrimp, queso fresco, charred corn, salsa verde",
+            "pair_body": "Its balanced smoke and bright acidity make Espadín the most versatile pour in the range — equally at home stirred down or chilled over a single rock.",
+            "highlight_1": "Single-village production in the highlands of Oaxaca",
+            "highlight_2": "Earthen-pit roasted, tahona-crushed, copper distilled",
+            "highlight_3": "Small-batch — never more than 600 bottles per run",
+            "highlight_4": "The ideal introduction to artesanal mezcal",
+            "review_rating": "5.00",
+            "review_count": "20",
+            "review_quote": "\"Probably the most complex mezcal I've ever tasted. Truly special.\"",
+            "review_author": "— Verified Buyer"
+          }
+        },
+        "expression-1": {
+          "type": "expression",
+          "settings": {
+            "name": "Tobalá",
+            "species": "Potatorum",
+            "copy_label": "100% Agave Potatorum",
+            "price": "$119",
+            "accent": "lake",
+            "thumb_height": 45,
+            "tier_name": "The Connoisseur",
+            "spec_1": "100% Agave Potatorum",
+            "spec_2": "10–12 Year Plant Maturation",
+            "spec_3": "ABV: 48%",
+            "nose": "Mango, roasted agave, wet stone, cacao",
+            "palate": "Tropical fruit, baking spice, citrus oil, deep smoke",
+            "body": "Full bodied, rich, layered",
+            "finish": "Long, warming, lingering",
+            "desc_body": "A prized wild agave that takes over a decade to mature. Smoke-forward and unmistakably complex — a finish that stays with you long after the glass is empty.",
+            "pair_cocktails": "Best enjoyed neat — or a whisper of mineral water",
+            "pair_food": "Dark chocolate, mole negro, aged cheese, toasted nuts",
+            "pair_body": "Tobalá rewards slow sipping. Pair it with rich, savory flavors that echo its depth rather than compete with it.",
+            "highlight_1": "Wild-harvested Potatorum agave — never cultivated",
+            "highlight_2": "Over a decade of maturation per plant",
+            "highlight_3": "Hand-numbered, ultra-limited release",
+            "highlight_4": "A collector's pour for the dedicated drinker",
+            "review_rating": "5.00",
+            "review_count": "14",
+            "review_quote": "\"Worth every penny. The most layered sipping mezcal in my cabinet.\"",
+            "review_author": "— Verified Buyer"
+          }
+        },
+        "expression-2": {
+          "type": "expression",
+          "settings": {
+            "name": "Cuishe",
+            "species": "Karwinskii",
+            "copy_label": "100% Agave Karwinskii",
+            "price": "$89",
+            "accent": "copper",
+            "thumb_height": 48,
+            "tier_name": "The Wild One",
+            "spec_1": "100% Agave Karwinskii",
+            "spec_2": "12–14 Year Plant Maturation",
+            "spec_3": "ABV: 47%",
+            "nose": "Wet earth, green herbs, citrus blossom, flint",
+            "palate": "Mineral, wild herbs, white pepper, dry grass",
+            "body": "Medium-full, dry, structured",
+            "finish": "Long, vegetal, mineral",
+            "desc_body": "Earthy minerality and wild herbs with a long vegetal finish that rewards patience. For the drinker ready to go a little further off the beaten path.",
+            "pair_cocktails": "Mezcal Martini, Tommy's Margarita, Mezcal Sour",
+            "pair_food": "Ceviche, grilled vegetables, herbed goat cheese, olives",
+            "pair_body": "Cuishe's dry minerality cuts through bright, acidic, and herbaceous dishes — a sommelier's choice for the adventurous table.",
+            "highlight_1": "Distinctive Karwinskii agave — tall and tree-like",
+            "highlight_2": "Pronounced terroir from highland mineral soil",
+            "highlight_3": "Small-lot, traditionally produced",
+            "highlight_4": "A character study in wild-agave complexity",
+            "review_rating": "4.90",
+            "review_count": "11",
+            "review_quote": "\"So distinct and mineral-driven. Unlike anything else I've poured.\"",
+            "review_author": "— Verified Buyer"
+          }
+        },
+        "expression-3": {
+          "type": "expression",
+          "settings": {
+            "name": "Tepeztate",
+            "species": "Marmorata",
+            "copy_label": "100% Agave Marmorata",
+            "price": "$139",
+            "accent": "mustard",
+            "thumb_height": 52,
+            "tier_name": "The Pinnacle",
+            "spec_1": "100% Agave Marmorata",
+            "spec_2": "25–35 Year Plant Maturation",
+            "spec_3": "ABV: 49%",
+            "nose": "Green pepper, jasmine, tropical fruit, fresh herbs",
+            "palate": "Floral, green chile, mango, citrus, bright minerality",
+            "body": "Full, vibrant, expressive",
+            "finish": "Exceptionally long, floral, complex",
+            "desc_body": "Wild and floral with an unmistakable green pepper bite. Decades in the making — the extraordinary, rarely-encountered end of the spectrum.",
+            "pair_cocktails": "Strictly neat — this is a contemplative pour",
+            "pair_food": "Fresh oysters, ripe stone fruit, mild blue cheese",
+            "pair_body": "A bottle to open for the occasion that deserves it. Let it breathe, sip slowly, and let the floral complexity unfold.",
+            "highlight_1": "Marmorata agave — up to 35 years to mature",
+            "highlight_2": "One of the rarest expressions in all of mezcal",
+            "highlight_3": "Individually numbered, allocation-only release",
+            "highlight_4": "The extraordinary apex of the Hedonistas range",
+            "review_rating": "5.00",
+            "review_count": "8",
+            "review_quote": "\"A once-a-year bottle. Floral, wild, and utterly unforgettable.\"",
+            "review_author": "— Verified Buyer"
+          }
+        }
+      },
+      "block_order": ["expression-0","expression-1","expression-2","expression-3"]
+    },
+    "craft": {
+      "type": "craft",
+      "blocks": {
+        "chapter-0": {"type":"chapter","settings":{"bg":"bg-marine","num":"01","word":"La Tierra","title":"Wild Harvest","body":"Agaves grow for up to 12 years in the mineral-rich earth of Oaxaca before hand-selection. No cultivation. The soil decides."}},
+        "chapter-1": {"type":"chapter","settings":{"bg":"bg-rust","num":"02","word":"El Fuego","title":"Pit Roast","body":"Hearts roast for days over river stone in earthen pits. The smoke doesn't just flavour — it becomes the mezcal."}},
+        "chapter-2": {"type":"chapter","settings":{"bg":"bg-raspberry","num":"03","word":"La Piedra","title":"Tahona Crush","body":"A two-tonne volcanic stone wheel, horse-drawn, slowly releases every fibre of the agave. Ancient technology. Irreplaceable results."}},
+        "chapter-3": {"type":"chapter","settings":{"bg":"bg-umber","num":"04","word":"La Fermentación","title":"La Fermentación","subtitle":"Fermentation","body":"The crushed agave fibres and juice rest in open pine or clay vats. Wild airborne yeasts do the rest — unhurried, uncontrolled, alive. Time is the only ingredient."}},
+        "chapter-4": {"type":"chapter","settings":{"bg":"bg-cactus","num":"05","word":"El Alambique","title":"El Alambique","subtitle":"Copper Still","body":"Double-distilled in small copper pot stills. Adjusted only by the maestro's palate. No shortcuts. No compromise. Never."}}
+      },
+      "block_order": ["chapter-0","chapter-1","chapter-2","chapter-3","chapter-4"]
+    },
+    "story": {"type": "story"},
+    "maestro": {"type": "maestro"},
+    "awards": {
+      "type": "awards",
+      "blocks": {
+        "award-0":  {"type":"award","settings":{"year":"2025","expression":"tobala","expression_label":"Tobalá","medal":"Double<br>Gold","source":"SF World Spirits Competition"}},
+        "award-1":  {"type":"award","settings":{"year":"2025","expression":"tobala","expression_label":"Tobalá","medal":"96<br>Points","source":"Ultimate Spirits Challenge"}},
+        "award-2":  {"type":"award","settings":{"year":"2025","expression":"espadin","expression_label":"Espadín","medal":"Gold","source":"London Spirits Competition"}},
+        "award-3":  {"type":"award","settings":{"year":"2025","expression":"espadin","expression_label":"Espadín","medal":"94<br>Points","source":"Tasting Panel Magazine"}},
+        "award-4":  {"type":"award","settings":{"year":"2025","expression":"cuishe","expression_label":"Cuishe","medal":"Double<br>Gold","source":"NY International Spirits"}},
+        "award-5":  {"type":"award","settings":{"year":"2025","expression":"tepeztate","expression_label":"Tepeztate","medal":"Gold","source":"SIP Awards"}},
+        "award-6":  {"type":"award","settings":{"year":"2024","expression":"tobala","expression_label":"Tobalá","medal":"95<br>Points","source":"Wine Enthusiast"}},
+        "award-7":  {"type":"award","settings":{"year":"2024","expression":"espadin","expression_label":"Espadín","medal":"Gold","source":"SF World Spirits Competition"}},
+        "award-8":  {"type":"award","settings":{"year":"2024","expression":"cuishe","expression_label":"Cuishe","medal":"93<br>Points","source":"Ultimate Spirits Challenge"}},
+        "award-9":  {"type":"award","settings":{"year":"2024","expression":"tepeztate","expression_label":"Tepeztate","medal":"Double<br>Gold","source":"London Spirits Competition"}},
+        "award-10": {"type":"award","settings":{"year":"2024","expression":"espadin","expression_label":"Espadín","medal":"★★★★★","source":"Imbibe Magazine"}},
+        "award-11": {"type":"award","settings":{"year":"2024","expression":"tobala","expression_label":"Tobalá","medal":"Gold","source":"SIP Awards"}},
+        "award-12": {"type":"award","settings":{"year":"2024","expression":"cuishe","expression_label":"Cuishe","medal":"Gold","source":"NY International Spirits"}},
+        "award-13": {"type":"award","settings":{"year":"2024","expression":"tepeztate","expression_label":"Tepeztate","medal":"94<br>Points","source":"Tasting Panel Magazine"}},
+        "award-14": {"type":"award","settings":{"year":"2023","expression":"espadin","expression_label":"Espadín","medal":"Double<br>Gold","source":"NY International Spirits"}},
+        "award-15": {"type":"award","settings":{"year":"2023","expression":"tobala","expression_label":"Tobalá","medal":"Best in<br>Class","source":"SF World Spirits Competition"}},
+        "award-16": {"type":"award","settings":{"year":"2023","expression":"cuishe","expression_label":"Cuishe","medal":"Gold","source":"London Spirits Competition"}},
+        "award-17": {"type":"award","settings":{"year":"2023","expression":"tepeztate","expression_label":"Tepeztate","medal":"92<br>Points","source":"Wine Enthusiast"}},
+        "award-18": {"type":"award","settings":{"year":"2023","expression":"espadin","expression_label":"Espadín","medal":"Silver","source":"SIP Awards"}},
+        "award-19": {"type":"award","settings":{"year":"2023","expression":"tobala","expression_label":"Tobalá","medal":"Gold","source":"Ultimate Spirits Challenge"}},
+        "award-20": {"type":"award","settings":{"year":"2023","expression":"cuishe","expression_label":"Cuishe","medal":"★★★★½","source":"Imbibe Magazine"}}
+      },
+      "block_order": ["award-0","award-1","award-2","award-3","award-4","award-5","award-6","award-7","award-8","award-9","award-10","award-11","award-12","award-13","award-14","award-15","award-16","award-17","award-18","award-19","award-20"]
+    },
+    "cocktails": {
+      "type": "cocktails",
+      "blocks": {
+        "cocktail-0":  {"type":"cocktail","settings":{"name":"Mezcalrita","category_label":"Citrus · Shaken","categories":"citrus shaken","spirit":"Espadín","ingredient_1":"2oz Hedonistas Espadín","ingredient_2":"¾oz fresh lime juice","ingredient_3":"½oz agave nectar","ingredient_4":"Sal de gusano rim","method":"Shake · Coupe · Lime wheel"}},
+        "cocktail-1":  {"type":"cocktail","settings":{"name":"Oaxacan Old Fashioned","category_label":"Stirred · Spirit Forward","categories":"stirred spirit-forward","spirit":"Cuishe","ingredient_1":"2oz Hedonistas Cuishe","ingredient_2":"¼oz agave syrup","ingredient_3":"2 dash mole bitters","ingredient_4":"Orange expression","method":"Stir · Rocks · Orange peel"}},
+        "cocktail-2":  {"type":"cocktail","settings":{"name":"Todo La Noche","category_label":"Shaken · Smoky","categories":"shaken citrus smoky","spirit":"Tobalá","ingredient_1":"2oz Hedonistas Tobalá","ingredient_2":"¾oz hibiscus syrup","ingredient_3":"½oz lime juice","ingredient_4":"Habanero tincture (2 drops)","method":"Shake · Nick & Nora · No garnish"}},
+        "cocktail-3":  {"type":"cocktail","settings":{"name":"Niebla Negra","category_label":"Smoky · Stirred","categories":"smoky spirit-forward stirred","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz Averna amaro","ingredient_3":"¼oz black walnut bitters","ingredient_4":"Smoked salt rim (optional)","method":"Stir · Coupe · Expressed orange"}},
+        "cocktail-4":  {"type":"cocktail","settings":{"name":"La Cosecha","category_label":"Citrus · Seasonal","categories":"citrus shaken seasonal","spirit":"Espadín","ingredient_1":"1.5oz Hedonistas Espadín","ingredient_2":"1oz fresh grapefruit juice","ingredient_3":"½oz honey syrup","ingredient_4":"Thyme sprig (muddled)","method":"Shake · Highball · Grapefruit twist"}},
+        "cocktail-5":  {"type":"cocktail","settings":{"name":"El Curandero","category_label":"Spirit Forward","categories":"spirit-forward stirred smoky","spirit":"Cuishe","ingredient_1":"2oz Hedonistas Cuishe","ingredient_2":"½oz Bénédictine","ingredient_3":"¼oz mezcal rinse (Espadín)","ingredient_4":"2 drops Angostura","method":"Stir · Coupe · Lemon twist"}},
+        "cocktail-6":  {"type":"cocktail","settings":{"name":"Flor de Noche","category_label":"Seasonal · Shaken","categories":"shaken seasonal citrus","spirit":"Tobalá","ingredient_1":"1.5oz Hedonistas Tobalá","ingredient_2":"¾oz elderflower liqueur","ingredient_3":"½oz lemon juice","ingredient_4":"Egg white","method":"Dry shake · Shake · Coupe · Edible flower"}},
+        "cocktail-7":  {"type":"cocktail","settings":{"name":"Piedra Viva","category_label":"Smoky · Spirit Forward","categories":"smoky spirit-forward","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz mezcal-washed Aperol","ingredient_3":"¼oz fresh lime","ingredient_4":"Tajín rim","method":"Build · Rocks · Lime wedge"}},
+        "cocktail-8":  {"type":"cocktail","settings":{"name":"Mezcal Negroni","category_label":"Stirred · Smoky","categories":"stirred spirit-forward smoky","spirit":"Espadín","ingredient_1":"1oz Hedonistas Espadín","ingredient_2":"1oz Campari","ingredient_3":"1oz sweet vermouth","ingredient_4":"Orange peel","method":"Stir · Rocks · Orange twist"}},
+        "cocktail-9":  {"type":"cocktail","settings":{"name":"Paloma Silvestre","category_label":"Citrus · Shaken","categories":"shaken citrus","spirit":"Cuishe","ingredient_1":"1.5oz Hedonistas Cuishe","ingredient_2":"2oz fresh grapefruit juice","ingredient_3":"¾oz lime juice","ingredient_4":"Pinch of sea salt","method":"Shake · Highball on ice · Grapefruit"}},
+        "cocktail-10": {"type":"cocktail","settings":{"name":"Sangre de Agave","category_label":"Seasonal · Smoky","categories":"seasonal smoky stirred","spirit":"Tobalá","ingredient_1":"2oz Hedonistas Tobalá","ingredient_2":"1oz pomegranate juice","ingredient_3":"½oz fresh lime","ingredient_4":"Rosemary sprig (smoked)","method":"Stir · Coupe · Smoked rosemary"}},
+        "cocktail-11": {"type":"cocktail","settings":{"name":"La Última","category_label":"Spirit Forward · Stirred","categories":"spirit-forward stirred","spirit":"Tepeztate","ingredient_1":"¾oz Hedonistas Tepeztate","ingredient_2":"¾oz green Chartreuse","ingredient_3":"¾oz maraschino liqueur","ingredient_4":"¾oz fresh lime juice","method":"Shake · Coupe · No garnish"}},
+        "cocktail-12": {"type":"cocktail","settings":{"name":"Lluvia de Oro","category_label":"Seasonal · Shaken","categories":"shaken seasonal","spirit":"Espadín","ingredient_1":"1.5oz Hedonistas Espadín","ingredient_2":"1oz passion fruit purée","ingredient_3":"½oz turmeric honey syrup","ingredient_4":"½oz lemon juice","method":"Shake · Nick & Nora · Marigold petal"}},
+        "cocktail-13": {"type":"cocktail","settings":{"name":"Carbón y Cobre","category_label":"Smoky · Spirit Forward","categories":"smoky stirred spirit-forward","spirit":"Cuishe","ingredient_1":"2oz Hedonistas Cuishe","ingredient_2":"½oz activated charcoal syrup","ingredient_3":"¼oz peated Scotch rinse","ingredient_4":"Dash of saline","method":"Stir · Rocks · Smoked cedar plank"}},
+        "cocktail-14": {"type":"cocktail","settings":{"name":"Sol de Invierno","category_label":"Citrus · Seasonal","categories":"citrus shaken seasonal","spirit":"Tobalá","ingredient_1":"1.5oz Hedonistas Tobalá","ingredient_2":"1oz blood orange juice","ingredient_3":"½oz cardamom syrup","ingredient_4":"Pinch Tajín","method":"Shake · Coupe · Blood orange wheel"}},
+        "cocktail-15": {"type":"cocktail","settings":{"name":"El Fantasma","category_label":"Spirit Forward · Smoky","categories":"spirit-forward stirred smoky","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz blanc vermouth","ingredient_3":"¼oz Suze","ingredient_4":"2 dashes orange bitters","method":"Stir · Coupe · Lemon oil"}},
+        "cocktail-16": {"type":"cocktail","settings":{"name":"Bruja Sour","category_label":"Shaken · Citrus","categories":"shaken citrus smoky","spirit":"Espadín","ingredient_1":"2oz Hedonistas Espadín","ingredient_2":"¾oz lemon juice","ingredient_3":"½oz tamarind syrup","ingredient_4":"Egg white","method":"Dry shake · Shake · Rocks · Ancho dust"}},
+        "cocktail-17": {"type":"cocktail","settings":{"name":"Costal de Seda","category_label":"Seasonal · Stirred","categories":"seasonal spirit-forward stirred","spirit":"Cuishe","ingredient_1":"1.5oz Hedonistas Cuishe","ingredient_2":"½oz pear eau de vie","ingredient_3":"¼oz honey-ginger syrup","ingredient_4":"Sage leaf","method":"Stir · Coupe · Candied sage"}},
+        "cocktail-18": {"type":"cocktail","settings":{"name":"Humo y Sal","category_label":"Smoky · Shaken","categories":"smoky shaken citrus","spirit":"Tobalá","ingredient_1":"2oz Hedonistas Tobalá","ingredient_2":"½oz mezcal-washed Cointreau","ingredient_3":"¾oz lime juice","ingredient_4":"Black lava salt rim","method":"Shake · Coupe · Smoked lime wedge"}},
+        "cocktail-19": {"type":"cocktail","settings":{"name":"Nocturno","category_label":"Spirit Forward · Seasonal","categories":"spirit-forward stirred seasonal","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz cold-brew coffee concentrate","ingredient_3":"¼oz dark agave syrup","ingredient_4":"2 drops mole bitters","method":"Stir · Rocks · Coffee bean garnish"}}
+      },
+      "block_order": ["cocktail-0","cocktail-1","cocktail-2","cocktail-3","cocktail-4","cocktail-5","cocktail-6","cocktail-7","cocktail-8","cocktail-9","cocktail-10","cocktail-11","cocktail-12","cocktail-13","cocktail-14","cocktail-15","cocktail-16","cocktail-17","cocktail-18","cocktail-19"]
+    },
+    "findus": {"type": "findus"},
+    "social": {
+      "type": "social",
+      "blocks": {
+        "tile-0":{"type":"tile"},"tile-1":{"type":"tile"},"tile-2":{"type":"tile"},
+        "tile-3":{"type":"tile"},"tile-4":{"type":"tile"},"tile-5":{"type":"tile"},
+        "tile-6":{"type":"tile"},"tile-7":{"type":"tile"},"tile-8":{"type":"tile"}
+      },
+      "block_order": ["tile-0","tile-1","tile-2","tile-3","tile-4","tile-5","tile-6","tile-7","tile-8"]
+    }
+  },
+  "order": ["hero","bottles","craft","story","maestro","awards","cocktails","findus","social"]
+}
