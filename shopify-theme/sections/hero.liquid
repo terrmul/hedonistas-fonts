@@ -1,16 +1,21 @@
 <!-- HERO — flat Raspberry, halftone dots, logo centrepiece -->
-<!--
-  📹 VIDEO OPTION — Hero background:
-  Replace .hero-dots with a full-cover <video> element:
-  <video class="hero-video-bg" autoplay muted loop playsinline>
-    <source src="hero-oaxaca.mp4" type="video/mp4">
-  </video>
-  Add to CSS: .hero-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.45}
-  Recommended: 15–30s loop, desaturated / slow aerial or palenque smoke footage, <8MB
--->
 <main id="maincontent" tabindex="-1" style="display:contents">
 <section class="hero" id="hero">
-  <div class="hero-dots"></div>
+  {%- if section.blocks.size > 0 -%}
+    <div class="hero-video-carousel" id="hero-video-carousel">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.video != blank -%}
+          <video class="hero-video-bg{% if forloop.first %} is-active{% endif %}" autoplay muted playsinline{% if section.blocks.size == 1 %} loop{% endif %} {{ block.shopify_attributes }}>
+            {%- for source in block.settings.video.sources -%}
+              <source src="{{ source.url }}" type="{{ source.mime_type }}">
+            {%- endfor -%}
+          </video>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <div class="hero-dots"></div>
+  {%- endif -%}
   <div class="hero-back" id="hero-back">{{ section.settings.backdrop_word | escape }}</div>
   <div class="hero-mid" id="hero-mid">
     <!-- Logo large in hero, inverted cream, above headline -->
@@ -38,6 +43,26 @@
   </div>
 </section>
 
+{%- if section.blocks.size > 1 -%}
+<script>
+(function(){
+  var carousel = document.getElementById('hero-video-carousel');
+  if(!carousel) return;
+  var videos = Array.from(carousel.querySelectorAll('.hero-video-bg'));
+  if(videos.length < 2) return;
+  var current = 0;
+  function showNext(){
+    videos[current].classList.remove('is-active');
+    current = (current + 1) % videos.length;
+    var next = videos[current];
+    next.currentTime = 0;
+    next.play();
+    next.classList.add('is-active');
+  }
+  videos.forEach(function(v){ v.addEventListener('ended', showNext); });
+})();
+</script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -62,6 +87,16 @@
     { "type": "inline_richtext", "id": "locale", "label": "Locale", "default": "Hecho en Oaxaca" },
     { "type": "text", "id": "scroll_cue", "label": "Scroll cue", "default": "Scroll ↓" }
   ],
+  "blocks": [
+    {
+      "type": "video_slide",
+      "name": "Background video",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
   "presets": [{ "name": "Hero" }]
 }
 {% endschema %}
