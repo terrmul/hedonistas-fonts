@@ -31,15 +31,33 @@
           <div class="ce-visual-word">{{ block.settings.name | escape }}</div>
           <div class="ce-main-shot">
             {%- if block.settings.bottle_image != blank -%}
-              <img class="ce-bottle-img" src="{{ block.settings.bottle_image | image_url: width: 400 }}" alt="{{ block.settings.name | escape }} bottle" decoding="async">
+              <img class="ce-bottle-img" data-main-img src="{{ block.settings.bottle_image | image_url: width: 600 }}" alt="{{ block.settings.name | escape }} bottle" decoding="async">
             {%- else -%}
               <div class="b-shape" style="background:rgba(26,23,22,.2);width:88px;height:280px"></div>
             {%- endif -%}
           </div>
           <div class="ce-shots">
-            <div class="ce-shot-thumb active"><div class="ce-shot-label">Front</div></div>
-            <div class="ce-shot-thumb"><div class="ce-shot-label">Back</div></div>
-            <div class="ce-shot-thumb"><div class="ce-shot-label">Style</div></div>
+            {%- if block.settings.bottle_image != blank -%}
+              <div class="ce-shot-thumb active" data-shot="{{ block.settings.bottle_image | image_url: width: 600 }}">
+                <img src="{{ block.settings.bottle_image | image_url: width: 120 }}" alt="Front" loading="lazy" decoding="async">
+              </div>
+            {%- else -%}
+              <div class="ce-shot-thumb active"><div class="ce-shot-label">Front</div></div>
+            {%- endif -%}
+            {%- if block.settings.shot_2_image != blank -%}
+              <div class="ce-shot-thumb" data-shot="{{ block.settings.shot_2_image | image_url: width: 600 }}">
+                <img src="{{ block.settings.shot_2_image | image_url: width: 120 }}" alt="Back" loading="lazy" decoding="async">
+              </div>
+            {%- else -%}
+              <div class="ce-shot-thumb"><div class="ce-shot-label">Back</div></div>
+            {%- endif -%}
+            {%- if block.settings.shot_3_image != blank -%}
+              <div class="ce-shot-thumb" data-shot="{{ block.settings.shot_3_image | image_url: width: 600 }}">
+                <img src="{{ block.settings.shot_3_image | image_url: width: 120 }}" alt="Style" loading="lazy" decoding="async">
+              </div>
+            {%- else -%}
+              <div class="ce-shot-thumb"><div class="ce-shot-label">Style</div></div>
+            {%- endif -%}
           </div>
         </div>
         <div class="ce-divider"></div>
@@ -103,6 +121,23 @@
   </div>
 </div>
 </section>
+
+<script>
+(function(){
+  document.querySelectorAll('.ce-panel').forEach(function(panel){
+    panel.querySelectorAll('.ce-shot-thumb[data-shot]').forEach(function(thumb){
+      thumb.addEventListener('click', function(){
+        var main = panel.querySelector('[data-main-img]');
+        if(!main) return;
+        main.src = thumb.dataset.shot;
+        panel.querySelectorAll('.ce-shot-thumb').forEach(function(t){ t.classList.remove('active'); });
+        thumb.classList.add('active');
+      });
+    });
+  });
+})();
+</script>
+
 {% schema %}
 {
   "name": "Bottle Selector",
@@ -117,7 +152,7 @@
       "name": "Expression",
       "settings": [
         { "type": "header", "content": "Identity" },
-        { "type": "text", "id": "name", "label": "Name", "default": "Espadín" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Espadin" },
         { "type": "text", "id": "species", "label": "Agave species (short)", "default": "Angustifolia" },
         { "type": "text", "id": "copy_label", "label": "Copy eyebrow", "default": "100% Agave Angustifolia" },
         { "type": "text", "id": "price", "label": "Price", "default": "$64" },
@@ -135,11 +170,13 @@
         { "type": "range", "id": "thumb_height", "label": "Selector swatch height", "min": 30, "max": 60, "step": 1, "unit": "px", "default": 42 },
         { "type": "header", "content": "Images" },
         { "type": "image_picker", "id": "agave_image", "label": "Agave illustration (PNG)" },
-        { "type": "image_picker", "id": "bottle_image", "label": "Bottle shot (transparent PNG)" },
+        { "type": "image_picker", "id": "bottle_image", "label": "Bottle shot — Front (transparent PNG)" },
+        { "type": "image_picker", "id": "shot_2_image", "label": "Bottle shot — Back (optional)" },
+        { "type": "image_picker", "id": "shot_3_image", "label": "Bottle shot — Lifestyle / Style (optional)" },
         { "type": "header", "content": "Description tab" },
         { "type": "text", "id": "tier_name", "label": "Tier name", "default": "The Gateway" },
         { "type": "text", "id": "spec_1", "label": "Spec 1", "default": "100% Agave Angustifolia" },
-        { "type": "text", "id": "spec_2", "label": "Spec 2", "default": "6–8 Year Plant Maturation" },
+        { "type": "text", "id": "spec_2", "label": "Spec 2", "default": "6-8 Year Plant Maturation" },
         { "type": "text", "id": "spec_3", "label": "Spec 3", "default": "ABV: 46%" },
         { "type": "text", "id": "nose", "label": "Nose", "default": "Gentle smoke, aloe, honey, green olive" },
         { "type": "text", "id": "palate", "label": "Palate", "default": "Sichuan pepper, grapefruit peel, star fruit, miso, light smoke, citrus lift" },
@@ -149,7 +186,7 @@
         { "type": "header", "content": "Pairing tab" },
         { "type": "text", "id": "pair_cocktails", "label": "Cocktails", "default": "Mezcal Negroni, Oaxacan Old Fashioned, Paloma" },
         { "type": "text", "id": "pair_food", "label": "Food", "default": "Grilled citrus shrimp, queso fresco, charred corn, salsa verde" },
-        { "type": "inline_richtext", "id": "pair_body", "label": "Pairing paragraph", "default": "Its balanced smoke and bright acidity make Espadín the most versatile pour in the range." },
+        { "type": "inline_richtext", "id": "pair_body", "label": "Pairing paragraph", "default": "Its balanced smoke and bright acidity make Espadin the most versatile pour in the range." },
         { "type": "header", "content": "Highlights tab" },
         { "type": "text", "id": "highlight_1", "label": "Highlight 1", "default": "Single-village production in the highlands of Oaxaca" },
         { "type": "text", "id": "highlight_2", "label": "Highlight 2", "default": "Earthen-pit roasted, tahona-crushed, copper distilled" },
