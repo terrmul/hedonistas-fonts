@@ -1,6 +1,7 @@
 <!-- GO DEEP / SOCIAL + NEWSLETTER -->
 <section class="deep-social" data-nav="light" data-bg="bg-cream">
   <div class="deep-head">
+    <!-- LEFT panel: Instagram identity -->
     <div class="deep-panel deep-panel-left reveal">
       <h2 class="deep-word-h2"><span>g</span><span>o</span><span class="sp"> </span><span>d</span><span>e</span><span>e</span><span>p</span><span>.</span></h2>
       <a class="handle" href="{{ section.settings.instagram_url }}" aria-label="Hedonistas on Instagram">
@@ -8,6 +9,7 @@
         {{ section.settings.instagram_handle | escape }}
       </a>
     </div>
+    <!-- RIGHT panel: newsletter sign-up -->
     <div class="deep-panel deep-panel-right reveal">
       {%- if section.settings.newsletter_url != blank -%}
         <form class="deep-form" action="{{ section.settings.newsletter_url }}" method="post" target="_blank">
@@ -52,13 +54,15 @@
     </div>
   </div>
 </section>
+</main>
+
 {% schema %}
 {
   "name": "Social + Newsletter",
   "settings": [
     { "type": "header", "content": "Instagram" },
     { "type": "text", "id": "instagram_handle", "label": "Handle", "default": "@HEDONISTASDELAFE" },
-    { "type": "url", "id": "instagram_url", "label": "Instagram URL", "default": "https://www.instagram.com/hedonistasdelafe/" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
     { "type": "header", "content": "Newsletter" },
     { "type": "text", "id": "newsletter_heading", "label": "Heading", "default": "Go Deeper." },
     { "type": "text", "id": "newsletter_placeholder", "label": "Input placeholder", "default": "Your email address" },
@@ -77,6 +81,15 @@
     }
   ],
   "max_blocks": 12,
-  "presets": [{ "name": "Social + Newsletter" }]
+  "presets": [
+    {
+      "name": "Social + Newsletter",
+      "blocks": [
+        { "type": "tile" }, { "type": "tile" }, { "type": "tile" },
+        { "type": "tile" }, { "type": "tile" }, { "type": "tile" },
+        { "type": "tile" }, { "type": "tile" }, { "type": "tile" }
+      ]
+    }
+  ]
 }
 {% endschema %}

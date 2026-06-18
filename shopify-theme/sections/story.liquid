@@ -1,6 +1,7 @@
 <!-- BRAND STORY -->
 <section class="brand-story reveal-section" id="story" data-nav="light" data-bg="bg-cream">
   <div class="bs-inner">
+    <!-- LEFT panel: MANIFESTO — text first, image anchored at the bottom -->
     <div class="bs-panel bs-manifesto">
       <div class="label">{{ section.settings.manifesto_label | escape }}</div>
       <h2>{{ section.settings.manifesto_heading }}</h2>
@@ -14,6 +15,7 @@
         {%- endif -%}
       </div>
     </div>
+    <!-- RIGHT panel: STORY — image up top, narrative below -->
     <div class="bs-panel bs-story">
       <div class="label">{{ section.settings.story_label | escape }}</div>
       <h2>{{ section.settings.story_heading }}</h2>
@@ -28,19 +30,20 @@
     </div>
   </div>
 </section>
+
 {% schema %}
 {
   "name": "Brand Story",
   "settings": [
     { "type": "header", "content": "Manifesto (left panel)" },
     { "type": "text", "id": "manifesto_label", "label": "Eyebrow label", "default": "Nuestro Manifiesto" },
-    { "type": "inline_richtext", "id": "manifesto_heading", "label": "Heading", "default": "Go<br>Deep." },
-    { "type": "inline_richtext", "id": "creed", "label": "Creed", "default": "We are hedonists in the truest sense — devoted to the pursuit of pleasure through craft." },
-    { "type": "inline_richtext", "id": "quote", "label": "Pull quote", "default": "\"The agave gives you everything.<br>Your job is to not get in the way.\"" },
+    { "type": "inline_richtext", "id": "manifesto_heading", "label": "Heading", "default": "Go Deep." },
+    { "type": "inline_richtext", "id": "creed", "label": "Creed", "default": "We are hedonists in the truest sense — devoted to the pursuit of pleasure through craft. Going deep means no shortcuts and no gatekeeping: the finest mezcal in the world deserves to be shared, not hoarded." },
+    { "type": "inline_richtext", "id": "quote", "label": "Pull quote", "default": "\"The agave gives you everything. Your job is to not get in the way.\"" },
     { "type": "image_picker", "id": "manifesto_image", "label": "Image — agave / fire / palenque (1200×800)" },
     { "type": "header", "content": "Story (right panel)" },
     { "type": "text", "id": "story_label", "label": "Eyebrow label", "default": "Nuestra Historia" },
-    { "type": "inline_richtext", "id": "story_heading", "label": "Heading", "default": "Born from<br>Obsession." },
+    { "type": "inline_richtext", "id": "story_heading", "label": "Heading", "default": "Born from Obsession." },
     { "type": "image_picker", "id": "story_image", "label": "Image — founders, candid (1200×800)" },
     { "type": "richtext", "id": "story_body", "label": "Story copy", "default": "<p>Hedonistas Mezcal began with two friends and a stubborn belief — that the finest mezcal in the world deserves to be shared. Not hoarded. Not gatekept. Shared.</p><p>Founded in the highlands of Oaxaca, we partnered with maestros mezcaleros whose families have cultivated and cooked agave the same way for generations. No shortcuts. No industrial process. Just fire, stone, time, and copper — and a friendship that wouldn't settle for less.</p>" }
   ],

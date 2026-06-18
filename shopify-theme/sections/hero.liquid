@@ -1,8 +1,19 @@
-<!-- HERO -->
+<!-- HERO — flat Raspberry, halftone dots, logo centrepiece -->
+<!--
+  📹 VIDEO OPTION — Hero background:
+  Replace .hero-dots with a full-cover <video> element:
+  <video class="hero-video-bg" autoplay muted loop playsinline>
+    <source src="hero-oaxaca.mp4" type="video/mp4">
+  </video>
+  Add to CSS: .hero-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.45}
+  Recommended: 15–30s loop, desaturated / slow aerial or palenque smoke footage, <8MB
+-->
+<main id="maincontent" tabindex="-1" style="display:contents">
 <section class="hero" id="hero">
   <div class="hero-dots"></div>
   <div class="hero-back" id="hero-back">{{ section.settings.backdrop_word | escape }}</div>
   <div class="hero-mid" id="hero-mid">
+    <!-- Logo large in hero, inverted cream, above headline -->
     <div class="hero-brand">
       {%- if section.settings.logo != blank -%}
         <img class="hero-logo" src="{{ section.settings.logo | image_url: width: 360 }}" alt="{{ section.settings.logo_alt | escape }}" fetchpriority="high" decoding="async" width="180" height="180">
@@ -26,6 +37,8 @@
     </div>
   </div>
 </section>
+
+
 {% schema %}
 {
   "name": "Hero",
@@ -42,11 +55,11 @@
     { "type": "text", "id": "badge_medal", "label": "Award", "default": "Four Golds" },
     { "type": "text", "id": "badge_year", "label": "Year", "default": "2026" },
     { "type": "text", "id": "badge_body", "label": "Competition / source", "default": "SF World Spirits" },
-    { "type": "url", "id": "badge_link", "label": "Badge link", "default": "#awards" },
+    { "type": "url", "id": "badge_link", "label": "Badge link" },
     { "type": "text", "id": "badge_aria", "label": "Badge screen-reader label", "default": "Winner of Four Golds, 2026, SF World Spirits Competition" },
     { "type": "header", "content": "Foreground" },
-    { "type": "inline_richtext", "id": "tagline", "label": "Tagline", "default": "We are purveyors of the unforgettable.<br>Late nights. Bold pours. No spectators." },
-    { "type": "inline_richtext", "id": "locale", "label": "Locale", "default": "Hecho en<br>Oaxaca" },
+    { "type": "inline_richtext", "id": "tagline", "label": "Tagline", "default": "We are purveyors of the unforgettable. Late nights. Bold pours. No spectators." },
+    { "type": "inline_richtext", "id": "locale", "label": "Locale", "default": "Hecho en Oaxaca" },
     { "type": "text", "id": "scroll_cue", "label": "Scroll cue", "default": "Scroll ↓" }
   ],
   "presets": [{ "name": "Hero" }]
