@@ -7,7 +7,6 @@
     </div>
     <div class="ck-header-right">
       <a class="mag-btn mag-dark" href="{{ section.settings.view_all_url }}">{{ section.settings.view_all_label | escape }}</a>
-      <!-- Filter tabs — add/remove categories as your menu grows -->
       <div class="ck-filters">
         <button class="ck-filter active" data-filter="all">All</button>
         <button class="ck-filter" data-filter="citrus">Citrus</button>
@@ -20,11 +19,14 @@
     </div>
   </div>
 
-  <!-- Card track -->
   <div class="ck-track" id="cktrack">
     {%- for block in section.blocks -%}
       {%- assign n = forloop.index -%}
       <div class="ck-card" data-cat="{{ block.settings.categories }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          <img class="ck-card-img" src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.name | escape }}" loading="lazy" decoding="async">
+        {%- endif -%}
+        <div class="ck-card-scrim"></div>
         <div class="ck-card-num">{% if n < 10 %}0{% endif %}{{ n }}</div>
         <div class="ck-card-front">
           <div class="ck-card-cat">{{ block.settings.category_label | escape }}</div>
@@ -43,7 +45,7 @@
         </div>
       </div>
     {%- endfor -%}
-  </div><!-- /ck-track -->
+  </div>
 
   <div class="ck-footer">
     <div class="ck-count"><span class="ck-count-shown"><span id="ck-visible-count">{{ section.blocks.size }}</span> {{ section.settings.count_suffix | escape }}</span><a class="ck-count-dl" href="{{ section.settings.pdf_url }}">{{ section.settings.pdf_label | escape }}</a></div>
@@ -71,6 +73,7 @@
       "type": "cocktail",
       "name": "Cocktail",
       "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card image" },
         { "type": "text", "id": "name", "label": "Name", "default": "Mezcalrita" },
         { "type": "text", "id": "category_label", "label": "Category label (shown)", "default": "Citrus · Shaken" },
         { "type": "text", "id": "categories", "label": "Filter categories (space-separated)", "default": "citrus shaken", "info": "Use: citrus smoky stirred shaken spirit-forward seasonal" },
@@ -103,7 +106,7 @@
         { "type": "cocktail", "settings": { "name": "Sangre de Agave", "category_label": "Seasonal · Smoky", "categories": "seasonal smoky stirred", "spirit": "Tobalá", "ingredient_1": "2oz Hedonistas Tobalá", "ingredient_2": "1oz pomegranate juice", "ingredient_3": "½oz fresh lime", "ingredient_4": "Rosemary sprig (smoked)", "method": "Stir · Coupe · Smoked rosemary" } },
         { "type": "cocktail", "settings": { "name": "La Última", "category_label": "Spirit Forward · Stirred", "categories": "spirit-forward stirred", "spirit": "Tepeztate", "ingredient_1": "¾oz Hedonistas Tepeztate", "ingredient_2": "¾oz green Chartreuse", "ingredient_3": "¾oz maraschino liqueur", "ingredient_4": "¾oz fresh lime juice", "method": "Shake · Coupe · No garnish" } },
         { "type": "cocktail", "settings": { "name": "Lluvia de Oro", "category_label": "Seasonal · Shaken", "categories": "shaken seasonal", "spirit": "Espadín", "ingredient_1": "1.5oz Hedonistas Espadín", "ingredient_2": "1oz passion fruit purée", "ingredient_3": "½oz turmeric honey syrup", "ingredient_4": "½oz lemon juice", "method": "Shake · Nick & Nora · Marigold petal" } },
-        { "type": "cocktail", "settings": { "name": "Carbón y Cobre", "category_label": "Smoky · Spirit Forward", "categories": "smoky stirred spirit-forward", "spirit": "Cuishe", "ingredient_1": "2oz Hedonistas Cuishe", "ingredient_2": "½oz activated charcoal syrup", "ingredient_3": "¼oz peated Scotch rinse", "ingredient_4": "Dash of saline", "method": "Stir · Rocks · Smoked cedar plank" } },
+        { "type": "cocktail", "settings": { "name": "Carbon y Cobre", "category_label": "Smoky · Spirit Forward", "categories": "smoky stirred spirit-forward", "spirit": "Cuishe", "ingredient_1": "2oz Hedonistas Cuishe", "ingredient_2": "½oz activated charcoal syrup", "ingredient_3": "¼oz peated Scotch rinse", "ingredient_4": "Dash of saline", "method": "Stir · Rocks · Smoked cedar plank" } },
         { "type": "cocktail", "settings": { "name": "Sol de Invierno", "category_label": "Citrus · Seasonal", "categories": "citrus shaken seasonal", "spirit": "Tobalá", "ingredient_1": "1.5oz Hedonistas Tobalá", "ingredient_2": "1oz blood orange juice", "ingredient_3": "½oz cardamom syrup", "ingredient_4": "Pinch Tajín", "method": "Shake · Coupe · Blood orange wheel" } },
         { "type": "cocktail", "settings": { "name": "El Fantasma", "category_label": "Spirit Forward · Smoky", "categories": "spirit-forward stirred smoky", "spirit": "Tepeztate", "ingredient_1": "2oz Hedonistas Tepeztate", "ingredient_2": "½oz blanc vermouth", "ingredient_3": "¼oz Suze", "ingredient_4": "2 dashes orange bitters", "method": "Stir · Coupe · Lemon oil" } },
         { "type": "cocktail", "settings": { "name": "Bruja Sour", "category_label": "Shaken · Citrus", "categories": "shaken citrus smoky", "spirit": "Espadín", "ingredient_1": "2oz Hedonistas Espadín", "ingredient_2": "¾oz lemon juice", "ingredient_3": "½oz tamarind syrup", "ingredient_4": "Egg white", "method": "Dry shake · Shake · Rocks · Ancho dust" } },
