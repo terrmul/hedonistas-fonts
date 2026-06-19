@@ -7,8 +7,8 @@
     </div>
     <div class="aw-filters">
       <button class="aw-filter active" data-filter="all">All</button>
-      <button class="aw-filter" data-filter="espadin">Espadín</button>
-      <button class="aw-filter" data-filter="tobala">Tobalá</button>
+      <button class="aw-filter" data-filter="espadin">Espadin</button>
+      <button class="aw-filter" data-filter="tobala">Tobala</button>
       <button class="aw-filter" data-filter="cuishe">Cuishe</button>
       <button class="aw-filter" data-filter="tepeztate">Tepeztate</button>
     </div>
@@ -17,6 +17,11 @@
     {%- for block in section.blocks -%}
       <div class="aw" data-expr="{{ block.settings.expression }}" {{ block.shopify_attributes }}>
         <div class="aw-top"><span class="aw-year">{{ block.settings.year | escape }}</span><span class="aw-expr">{{ block.settings.expression_label | escape }}</span></div>
+        <div class="aw-img">
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.source | escape }}" loading="lazy" decoding="async">
+          {%- endif -%}
+        </div>
         <div><div class="aw-medal">{{ block.settings.medal }}</div><div class="aw-src">{{ block.settings.source | escape }}</div></div>
       </div>
     {%- endfor -%}
@@ -37,13 +42,14 @@
         { "type": "text", "id": "year", "label": "Year", "default": "2025" },
         { "type": "select", "id": "expression", "label": "Expression (filter)", "default": "espadin",
           "options": [
-            { "value": "espadin", "label": "Espadín" },
-            { "value": "tobala", "label": "Tobalá" },
+            { "value": "espadin", "label": "Espadin" },
+            { "value": "tobala", "label": "Tobala" },
             { "value": "cuishe", "label": "Cuishe" },
             { "value": "tepeztate", "label": "Tepeztate" }
           ] },
-        { "type": "text", "id": "expression_label", "label": "Expression label (shown on card)", "default": "Espadín" },
-        { "type": "inline_richtext", "id": "medal", "label": "Medal / score", "default": "Gold", "info": "Use <br> to wrap, e.g. Double<br>Gold." },
+        { "type": "text", "id": "expression_label", "label": "Expression label (shown on card)", "default": "Espadin" },
+        { "type": "image_picker", "id": "image", "label": "Card image (optional)" },
+        { "type": "inline_richtext", "id": "medal", "label": "Medal / score", "default": "Gold" },
         { "type": "text", "id": "source", "label": "Source / competition", "default": "SF World Spirits Competition" }
       ]
     }
