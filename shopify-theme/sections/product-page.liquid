@@ -1,0 +1,71 @@
+<section class="pdp" data-nav="light" data-bg="bg-dark">
+  <div class="pdp-inner">
+
+    <!-- IMAGE COLUMN -->
+    <div class="pdp-gallery">
+      <div class="pdp-main-img">
+        {%- if product.featured_image -%}
+          <img id="pdp-hero" src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title | escape }}" decoding="async">
+        {%- endif -%}
+      </div>
+      {%- if product.images.size > 1 -%}
+        <div class="pdp-thumbs">
+          {%- for img in product.images -%}
+            <div class="pdp-thumb{% if forloop.first %} active{% endif %}" data-src="{{ img | image_url: width: 800 }}">
+              <img src="{{ img | image_url: width: 120 }}" alt="{{ product.title | escape }} view {{ forloop.index }}" loading="lazy" decoding="async">
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- COPY COLUMN -->
+    <div class="pdp-copy">
+      <div class="label">{{ product.type | escape }}</div>
+      <h1 class="pdp-title">{{ product.title }}</h1>
+      <div class="pdp-price">{{ product.selected_or_first_available_variant.price | money }}</div>
+
+      <div class="pdp-desc">{{ product.description }}</div>
+
+      <form class="pdp-form" action="/cart/add" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {%- if product.variants.size > 1 -%}
+          <div class="pdp-variants">
+            <select name="id" class="pdp-select" aria-label="Select variant">
+              {%- for variant in product.variants -%}
+                <option value="{{ variant.id }}"{% unless variant.available %} disabled{% endunless %}>{{ variant.title }}{% unless variant.available %} — Sold out{% endunless %}</option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endif -%}
+        <button type="submit" class="mag-btn mag-dark pdp-atc"{% unless product.available %} disabled{% endunless %}>
+          {%- if product.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
+        </button>
+      </form>
+
+      <a class="pdp-back" href="/#mezcals">&larr; The Collection</a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function(){
+  document.querySelectorAll('.pdp-thumb').forEach(function(thumb){
+    thumb.addEventListener('click', function(){
+      var hero = document.getElementById('pdp-hero');
+      if(hero) hero.src = thumb.dataset.src;
+      document.querySelectorAll('.pdp-thumb').forEach(function(t){ t.classList.remove('active'); });
+      thumb.classList.add('active');
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "settings": [],
+  "presets": [{ "name": "Product Page" }]
+}
+{% endschema %}
