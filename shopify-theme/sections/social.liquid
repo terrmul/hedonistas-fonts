@@ -27,31 +27,13 @@
     </div>
   </div>
   <div class="ig-track-outer">
-    <div class="ig-grid" id="igtrack">
-      {%- if section.blocks.size > 0 -%}
-        {%- for block in section.blocks -%}
-          <div class="ig-tile" {{ block.shopify_attributes }}>
-            {%- if block.settings.image != blank -%}
-              {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" aria-label="{{ block.settings.alt | escape }}">{%- endif -%}
-              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.alt | escape }}" decoding="async" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
-              {%- if block.settings.link != blank -%}</a>{%- endif -%}
-            {%- else -%}
-              <div class="ig{{ forloop.index }}"></div>
-            {%- endif -%}
-          </div>
-        {%- endfor -%}
-      {%- else -%}
-        <div class="ig-tile"><div class="ig1"></div></div>
-        <div class="ig-tile"><div class="ig2"></div></div>
-        <div class="ig-tile"><div class="ig3"></div></div>
-        <div class="ig-tile"><div class="ig4"></div></div>
-        <div class="ig-tile"><div class="ig5"></div></div>
-        <div class="ig-tile"><div class="ig6"></div></div>
-        <div class="ig-tile"><div class="ig7"></div></div>
-        <div class="ig-tile"><div class="ig8"></div></div>
-        <div class="ig-tile"><div class="ig9"></div></div>
-      {%- endif -%}
-    </div>
+    <div data-behold-id="rmloD6PyZAAVIsB6Rp5L"></div>
+    <script>
+      (function() {
+        const d=document,s=d.createElement("script");s.type="module";
+        s.src="https://w.behold.so/widget.js";d.head.append(s);
+      })();
+    </script>
   </div>
 </section>
 </main>
@@ -61,7 +43,7 @@
   "name": "Social + Newsletter",
   "settings": [
     { "type": "header", "content": "Instagram" },
-    { "type": "text", "id": "instagram_handle", "label": "Handle", "default": "@HEDONISTASDELAFE" },
+    { "type": "text", "id": "instagram_handle", "label": "Handle", "default": "@hedonistasdelafe" },
     { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
     { "type": "header", "content": "Newsletter" },
     { "type": "text", "id": "newsletter_heading", "label": "Heading", "default": "Go Deeper." },
@@ -69,27 +51,8 @@
     { "type": "text", "id": "newsletter_button", "label": "Button label", "default": "Subscribe" },
     { "type": "url", "id": "newsletter_url", "label": "External form action (Klaviyo/Mailchimp)", "info": "Leave blank to use Shopify's built-in customer signup." }
   ],
-  "blocks": [
-    {
-      "type": "tile",
-      "name": "Instagram tile",
-      "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "alt", "label": "Alt text", "default": "Hedonistas on Instagram" },
-        { "type": "url", "id": "link", "label": "Link (optional)" }
-      ]
-    }
-  ],
-  "max_blocks": 12,
   "presets": [
-    {
-      "name": "Social + Newsletter",
-      "blocks": [
-        { "type": "tile" }, { "type": "tile" }, { "type": "tile" },
-        { "type": "tile" }, { "type": "tile" }, { "type": "tile" },
-        { "type": "tile" }, { "type": "tile" }, { "type": "tile" }
-      ]
-    }
+    { "name": "Social + Newsletter" }
   ]
 }
 {% endschema %}
