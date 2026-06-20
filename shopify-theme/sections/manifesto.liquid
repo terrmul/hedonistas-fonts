@@ -91,6 +91,7 @@
 <script>
 (function(){
   var overlay = document.getElementById('bg-overlay');
+  var section = document.querySelector('.manifesto');
 
   var colorEls = document.querySelectorAll('.manifesto [data-mf-color]');
   if(overlay && colorEls.length){
@@ -100,6 +101,14 @@
       });
     },{ threshold: 0.3 });
     colorEls.forEach(function(el){ colorIO.observe(el); });
+
+    // Reset to cream the moment manifesto is fully out of view
+    var resetIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) overlay.style.background = '#F3E6D1';
+      });
+    },{ threshold: 0 });
+    if(section) resetIO.observe(section);
   }
 
   var reveals = document.querySelectorAll('.manifesto .mf-reveal, .manifesto .mf-open-inner');
