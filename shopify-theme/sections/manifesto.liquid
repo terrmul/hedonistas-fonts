@@ -100,11 +100,11 @@
         overlay.style.background = '#F3E6D1';
         return;
       }
-      var mid = window.scrollY + window.innerHeight * 0.5;
+      var trigger = window.scrollY + window.innerHeight * 0.2;
       var active = null;
       for(var i = 0; i < colorEls.length; i++){
         var top = colorEls[i].getBoundingClientRect().top + window.scrollY;
-        if(mid >= top) active = colorEls[i];
+        if(trigger >= top) active = colorEls[i];
       }
       if(active) overlay.style.background = active.dataset.mfColor;
     }
