@@ -207,15 +207,7 @@
       "block_order": ["cocktail-0","cocktail-1","cocktail-2","cocktail-3","cocktail-4","cocktail-5","cocktail-6","cocktail-7","cocktail-8","cocktail-9","cocktail-10","cocktail-11","cocktail-12","cocktail-13","cocktail-14","cocktail-15","cocktail-16","cocktail-17","cocktail-18","cocktail-19"]
     },
     "findus": {"type": "findus"},
-    "social": {
-      "type": "social",
-      "blocks": {
-        "tile-0":{"type":"tile"},"tile-1":{"type":"tile"},"tile-2":{"type":"tile"},
-        "tile-3":{"type":"tile"},"tile-4":{"type":"tile"},"tile-5":{"type":"tile"},
-        "tile-6":{"type":"tile"},"tile-7":{"type":"tile"},"tile-8":{"type":"tile"}
-      },
-      "block_order": ["tile-0","tile-1","tile-2","tile-3","tile-4","tile-5","tile-6","tile-7","tile-8"]
-    }
+    "social": {"type": "social"}
   },
   "order": ["hero","bottles","manifesto","story","maestro","awards","cocktails","findus","social"]
 }
