@@ -133,16 +133,23 @@
       },
       "block_order": ["expression-0","expression-1","expression-2","expression-3"]
     },
-    "craft": {
-      "type": "craft",
-      "blocks": {
-        "chapter-0": {"type":"chapter","settings":{"bg":"bg-marine","num":"01","word":"La Tierra","title":"Wild Harvest","body":"Agaves grow for up to 12 years in the mineral-rich earth of Oaxaca before hand-selection. No cultivation. The soil decides."}},
-        "chapter-1": {"type":"chapter","settings":{"bg":"bg-rust","num":"02","word":"El Fuego","title":"Pit Roast","body":"Hearts roast for days over river stone in earthen pits. The smoke doesn't just flavour — it becomes the mezcal."}},
-        "chapter-2": {"type":"chapter","settings":{"bg":"bg-raspberry","num":"03","word":"La Piedra","title":"Tahona Crush","body":"A two-tonne volcanic stone wheel, horse-drawn, slowly releases every fibre of the agave. Ancient technology. Irreplaceable results."}},
-        "chapter-3": {"type":"chapter","settings":{"bg":"bg-umber","num":"04","word":"La Fermentación","title":"La Fermentación","subtitle":"Fermentation","body":"The crushed agave fibres and juice rest in open pine or clay vats. Wild airborne yeasts do the rest — unhurried, uncontrolled, alive. Time is the only ingredient."}},
-        "chapter-4": {"type":"chapter","settings":{"bg":"bg-cactus","num":"05","word":"El Alambique","title":"El Alambique","subtitle":"Copper Still","body":"Double-distilled in small copper pot stills. Adjusted only by the maestro's palate. No shortcuts. No compromise. Never."}}
-      },
-      "block_order": ["chapter-0","chapter-1","chapter-2","chapter-3","chapter-4"]
+    "manifesto": {
+      "type": "manifesto",
+      "settings": {
+        "eyebrow": "The Hedonistas Creed",
+        "headline_1": "Not A Spirit.",
+        "headline_2": "A Ritual.",
+        "subline": "Every bottle carries smoke, fire, and the hands of a maestro who learned from his grandfather. This is mezcal the way it was always meant to be.",
+        "marquee_text": "SMOKE · FIRE · EARTH · TRADITION · WILD · PLEASURE · UNCOMPROMISED · OAXACA · MEZCAL ·",
+        "quote_1": "The smoke doesn’t just flavour the mezcal. It becomes it.",
+        "body_1": "Agave hearts roast for three days in earthen pits over volcanic river stone. The smoke penetrates every fibre, every sugar, every molecule — and carries the memory of that fire into every sip.",
+        "quote_2": "The stone wheel has turned for centuries. We refuse to let it stop.",
+        "body_2": "A two-tonne tahona — a volcanic millstone pulled by a horse — slowly crushes the roasted agave. It takes longer. It costs more. The result cannot be replicated by a mechanical shredder. So we keep turning the stone.",
+        "quote_3": "This is the mezcal they make for themselves, not for us. We just get to drink it.",
+        "body_3": "Our maestro learned the craft from his father, who learned it from his. Every decision — the wood of the fermentation vat, the clay of the still, the cut of the distillation — comes from generations of accumulated knowledge that cannot be taught in a school.",
+        "closing_statement": "Pleasure, uncompromised.",
+        "cta_label": "The Craft Behind Every Bottle"
+      }
     },
     "story": {"type": "story"},
     "maestro": {"type": "maestro"},
@@ -177,25 +184,25 @@
       "type": "cocktails",
       "blocks": {
         "cocktail-0":  {"type":"cocktail","settings":{"name":"Mezcalrita","category_label":"Citrus · Shaken","categories":"citrus shaken","spirit":"Espadín","ingredient_1":"2oz Hedonistas Espadín","ingredient_2":"¾oz fresh lime juice","ingredient_3":"½oz agave nectar","ingredient_4":"Sal de gusano rim","method":"Shake · Coupe · Lime wheel"}},
-        "cocktail-1":  {"type":"cocktail","settings":{"name":"Oaxacan Old Fashioned","category_label":"Stirred · Spirit Forward","categories":"stirred spirit-forward","spirit":"Cuishe","ingredient_1":"2oz Hedonistas Cuishe","ingredient_2":"¼oz agave syrup","ingredient_3":"2 dash mole bitters","ingredient_4":"Orange expression","method":"Stir · Rocks · Orange peel"}},
+        "cocktail-1":  {"type":"cocktail","settings":{"name":"Oaxacan Old Fashioned","category_label":"Stirred · Spirit Forward","categories":"stirred spirit-forward","spirit":"Cuishe","ingredient_1":"2oz Hedonistas Cuishe","ingredient_2":"½oz agave syrup","ingredient_3":"2 dash mole bitters","ingredient_4":"Orange expression","method":"Stir · Rocks · Orange peel"}},
         "cocktail-2":  {"type":"cocktail","settings":{"name":"Todo La Noche","category_label":"Shaken · Smoky","categories":"shaken citrus smoky","spirit":"Tobalá","ingredient_1":"2oz Hedonistas Tobalá","ingredient_2":"¾oz hibiscus syrup","ingredient_3":"½oz lime juice","ingredient_4":"Habanero tincture (2 drops)","method":"Shake · Nick & Nora · No garnish"}},
-        "cocktail-3":  {"type":"cocktail","settings":{"name":"Niebla Negra","category_label":"Smoky · Stirred","categories":"smoky spirit-forward stirred","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz Averna amaro","ingredient_3":"¼oz black walnut bitters","ingredient_4":"Smoked salt rim (optional)","method":"Stir · Coupe · Expressed orange"}},
+        "cocktail-3":  {"type":"cocktail","settings":{"name":"Niebla Negra","category_label":"Smoky · Stirred","categories":"smoky spirit-forward stirred","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz Averna amaro","ingredient_3":"½oz black walnut bitters","ingredient_4":"Smoked salt rim (optional)","method":"Stir · Coupe · Expressed orange"}},
         "cocktail-4":  {"type":"cocktail","settings":{"name":"La Cosecha","category_label":"Citrus · Seasonal","categories":"citrus shaken seasonal","spirit":"Espadín","ingredient_1":"1.5oz Hedonistas Espadín","ingredient_2":"1oz fresh grapefruit juice","ingredient_3":"½oz honey syrup","ingredient_4":"Thyme sprig (muddled)","method":"Shake · Highball · Grapefruit twist"}},
-        "cocktail-5":  {"type":"cocktail","settings":{"name":"El Curandero","category_label":"Spirit Forward","categories":"spirit-forward stirred smoky","spirit":"Cuishe","ingredient_1":"2oz Hedonistas Cuishe","ingredient_2":"½oz Bénédictine","ingredient_3":"¼oz mezcal rinse (Espadín)","ingredient_4":"2 drops Angostura","method":"Stir · Coupe · Lemon twist"}},
+        "cocktail-5":  {"type":"cocktail","settings":{"name":"El Curandero","category_label":"Spirit Forward","categories":"spirit-forward stirred smoky","spirit":"Cuishe","ingredient_1":"2oz Hedonistas Cuishe","ingredient_2":"½oz Bénédictine","ingredient_3":"½oz mezcal rinse (Espadín)","ingredient_4":"2 drops Angostura","method":"Stir · Coupe · Lemon twist"}},
         "cocktail-6":  {"type":"cocktail","settings":{"name":"Flor de Noche","category_label":"Seasonal · Shaken","categories":"shaken seasonal citrus","spirit":"Tobalá","ingredient_1":"1.5oz Hedonistas Tobalá","ingredient_2":"¾oz elderflower liqueur","ingredient_3":"½oz lemon juice","ingredient_4":"Egg white","method":"Dry shake · Shake · Coupe · Edible flower"}},
-        "cocktail-7":  {"type":"cocktail","settings":{"name":"Piedra Viva","category_label":"Smoky · Spirit Forward","categories":"smoky spirit-forward","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz mezcal-washed Aperol","ingredient_3":"¼oz fresh lime","ingredient_4":"Tajín rim","method":"Build · Rocks · Lime wedge"}},
+        "cocktail-7":  {"type":"cocktail","settings":{"name":"Piedra Viva","category_label":"Smoky · Spirit Forward","categories":"smoky spirit-forward","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz mezcal-washed Aperol","ingredient_3":"½oz fresh lime","ingredient_4":"Tajín rim","method":"Build · Rocks · Lime wedge"}},
         "cocktail-8":  {"type":"cocktail","settings":{"name":"Mezcal Negroni","category_label":"Stirred · Smoky","categories":"stirred spirit-forward smoky","spirit":"Espadín","ingredient_1":"1oz Hedonistas Espadín","ingredient_2":"1oz Campari","ingredient_3":"1oz sweet vermouth","ingredient_4":"Orange peel","method":"Stir · Rocks · Orange twist"}},
         "cocktail-9":  {"type":"cocktail","settings":{"name":"Paloma Silvestre","category_label":"Citrus · Shaken","categories":"shaken citrus","spirit":"Cuishe","ingredient_1":"1.5oz Hedonistas Cuishe","ingredient_2":"2oz fresh grapefruit juice","ingredient_3":"¾oz lime juice","ingredient_4":"Pinch of sea salt","method":"Shake · Highball on ice · Grapefruit"}},
         "cocktail-10": {"type":"cocktail","settings":{"name":"Sangre de Agave","category_label":"Seasonal · Smoky","categories":"seasonal smoky stirred","spirit":"Tobalá","ingredient_1":"2oz Hedonistas Tobalá","ingredient_2":"1oz pomegranate juice","ingredient_3":"½oz fresh lime","ingredient_4":"Rosemary sprig (smoked)","method":"Stir · Coupe · Smoked rosemary"}},
         "cocktail-11": {"type":"cocktail","settings":{"name":"La Última","category_label":"Spirit Forward · Stirred","categories":"spirit-forward stirred","spirit":"Tepeztate","ingredient_1":"¾oz Hedonistas Tepeztate","ingredient_2":"¾oz green Chartreuse","ingredient_3":"¾oz maraschino liqueur","ingredient_4":"¾oz fresh lime juice","method":"Shake · Coupe · No garnish"}},
         "cocktail-12": {"type":"cocktail","settings":{"name":"Lluvia de Oro","category_label":"Seasonal · Shaken","categories":"shaken seasonal","spirit":"Espadín","ingredient_1":"1.5oz Hedonistas Espadín","ingredient_2":"1oz passion fruit purée","ingredient_3":"½oz turmeric honey syrup","ingredient_4":"½oz lemon juice","method":"Shake · Nick & Nora · Marigold petal"}},
-        "cocktail-13": {"type":"cocktail","settings":{"name":"Carbón y Cobre","category_label":"Smoky · Spirit Forward","categories":"smoky stirred spirit-forward","spirit":"Cuishe","ingredient_1":"2oz Hedonistas Cuishe","ingredient_2":"½oz activated charcoal syrup","ingredient_3":"¼oz peated Scotch rinse","ingredient_4":"Dash of saline","method":"Stir · Rocks · Smoked cedar plank"}},
+        "cocktail-13": {"type":"cocktail","settings":{"name":"Carbón y Cobre","category_label":"Smoky · Spirit Forward","categories":"smoky stirred spirit-forward","spirit":"Cuishe","ingredient_1":"2oz Hedonistas Cuishe","ingredient_2":"½oz activated charcoal syrup","ingredient_3":"½oz peated Scotch rinse","ingredient_4":"Dash of saline","method":"Stir · Rocks · Smoked cedar plank"}},
         "cocktail-14": {"type":"cocktail","settings":{"name":"Sol de Invierno","category_label":"Citrus · Seasonal","categories":"citrus shaken seasonal","spirit":"Tobalá","ingredient_1":"1.5oz Hedonistas Tobalá","ingredient_2":"1oz blood orange juice","ingredient_3":"½oz cardamom syrup","ingredient_4":"Pinch Tajín","method":"Shake · Coupe · Blood orange wheel"}},
-        "cocktail-15": {"type":"cocktail","settings":{"name":"El Fantasma","category_label":"Spirit Forward · Smoky","categories":"spirit-forward stirred smoky","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz blanc vermouth","ingredient_3":"¼oz Suze","ingredient_4":"2 dashes orange bitters","method":"Stir · Coupe · Lemon oil"}},
+        "cocktail-15": {"type":"cocktail","settings":{"name":"El Fantasma","category_label":"Spirit Forward · Smoky","categories":"spirit-forward stirred smoky","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz blanc vermouth","ingredient_3":"½oz Suze","ingredient_4":"2 dashes orange bitters","method":"Stir · Coupe · Lemon oil"}},
         "cocktail-16": {"type":"cocktail","settings":{"name":"Bruja Sour","category_label":"Shaken · Citrus","categories":"shaken citrus smoky","spirit":"Espadín","ingredient_1":"2oz Hedonistas Espadín","ingredient_2":"¾oz lemon juice","ingredient_3":"½oz tamarind syrup","ingredient_4":"Egg white","method":"Dry shake · Shake · Rocks · Ancho dust"}},
-        "cocktail-17": {"type":"cocktail","settings":{"name":"Costal de Seda","category_label":"Seasonal · Stirred","categories":"seasonal spirit-forward stirred","spirit":"Cuishe","ingredient_1":"1.5oz Hedonistas Cuishe","ingredient_2":"½oz pear eau de vie","ingredient_3":"¼oz honey-ginger syrup","ingredient_4":"Sage leaf","method":"Stir · Coupe · Candied sage"}},
+        "cocktail-17": {"type":"cocktail","settings":{"name":"Costal de Seda","category_label":"Seasonal · Stirred","categories":"seasonal spirit-forward stirred","spirit":"Cuishe","ingredient_1":"1.5oz Hedonistas Cuishe","ingredient_2":"½oz pear eau de vie","ingredient_3":"½oz honey-ginger syrup","ingredient_4":"Sage leaf","method":"Stir · Coupe · Candied sage"}},
         "cocktail-18": {"type":"cocktail","settings":{"name":"Humo y Sal","category_label":"Smoky · Shaken","categories":"smoky shaken citrus","spirit":"Tobalá","ingredient_1":"2oz Hedonistas Tobalá","ingredient_2":"½oz mezcal-washed Cointreau","ingredient_3":"¾oz lime juice","ingredient_4":"Black lava salt rim","method":"Shake · Coupe · Smoked lime wedge"}},
-        "cocktail-19": {"type":"cocktail","settings":{"name":"Nocturno","category_label":"Spirit Forward · Seasonal","categories":"spirit-forward stirred seasonal","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz cold-brew coffee concentrate","ingredient_3":"¼oz dark agave syrup","ingredient_4":"2 drops mole bitters","method":"Stir · Rocks · Coffee bean garnish"}}
+        "cocktail-19": {"type":"cocktail","settings":{"name":"Nocturno","category_label":"Spirit Forward · Seasonal","categories":"spirit-forward stirred seasonal","spirit":"Tepeztate","ingredient_1":"2oz Hedonistas Tepeztate","ingredient_2":"½oz cold-brew coffee concentrate","ingredient_3":"½oz dark agave syrup","ingredient_4":"2 drops mole bitters","method":"Stir · Rocks · Coffee bean garnish"}}
       },
       "block_order": ["cocktail-0","cocktail-1","cocktail-2","cocktail-3","cocktail-4","cocktail-5","cocktail-6","cocktail-7","cocktail-8","cocktail-9","cocktail-10","cocktail-11","cocktail-12","cocktail-13","cocktail-14","cocktail-15","cocktail-16","cocktail-17","cocktail-18","cocktail-19"]
     },
@@ -210,5 +217,5 @@
       "block_order": ["tile-0","tile-1","tile-2","tile-3","tile-4","tile-5","tile-6","tile-7","tile-8"]
     }
   },
-  "order": ["hero","bottles","craft","story","maestro","awards","cocktails","findus","social"]
+  "order": ["hero","bottles","manifesto","story","maestro","awards","cocktails","findus","social"]
 }
