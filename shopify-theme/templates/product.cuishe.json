@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-page",
+      "settings": {
+        "name": "Cuishe",
+        "copy_label": "100% Agave Karwinskii",
+        "price": "$89"
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-page",
+      "settings": {
+        "name": "Tobalá",
+        "copy_label": "100% Agave Potatórum",
+        "price": "$89"
+      }
+    }
+  },
+  "order": ["main"]
+}

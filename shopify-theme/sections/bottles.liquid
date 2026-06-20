@@ -103,6 +103,9 @@
             <span class="ce-copy-price">{{ block.settings.price | escape }}</span>
             <a class="mag-btn mag-dark" href="{{ block.settings.buy_url }}">{{ section.settings.buy_label | escape }}</a>
           </div>
+          {%- if block.settings.buy_url != blank -%}
+            <a class="pdp-details-link" href="{{ block.settings.buy_url }}">Full Details &rarr;</a>
+          {%- endif -%}
           {%- if block.settings.review_quote != blank -%}
             <div class="ce-reviews">
               <div class="ce-rev-head">Customers Are Saying</div>
@@ -144,7 +147,7 @@
   "settings": [
     { "type": "text", "id": "strip_label", "label": "Eyebrow label", "default": "Four Expressions · Ships to 40+ States" },
     { "type": "text", "id": "strip_heading", "label": "Heading", "default": "The Collection" },
-    { "type": "text", "id": "buy_label", "label": "Buy button text", "default": "Add to Cart" }
+    { "type": "text", "id": "buy_label", "label": "Buy button text", "default": "Shop Now" }
   ],
   "blocks": [
     {
@@ -156,7 +159,7 @@
         { "type": "text", "id": "species", "label": "Agave species (short)", "default": "Angustifolia" },
         { "type": "text", "id": "copy_label", "label": "Copy eyebrow", "default": "100% Agave Angustifolia" },
         { "type": "text", "id": "price", "label": "Price", "default": "$64" },
-        { "type": "url", "id": "buy_url", "label": "Buy / product link" },
+        { "type": "url", "id": "buy_url", "label": "Product page link" },
         { "type": "select", "id": "accent", "label": "Accent colour", "default": "hibiscus",
           "options": [
             { "value": "hibiscus", "label": "Hibiscus" },

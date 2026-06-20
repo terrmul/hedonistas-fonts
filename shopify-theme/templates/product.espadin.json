@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-page",
+      "settings": {
+        "name": "Espadín",
+        "copy_label": "100% Agave Angustifolia",
+        "price": "$64"
+      }
+    }
+  },
+  "order": ["main"]
+}

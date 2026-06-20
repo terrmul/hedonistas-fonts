@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-page",
+      "settings": {
+        "name": "Tepeztate",
+        "copy_label": "100% Agave Marmorata",
+        "price": "$109"
+      }
+    }
+  },
+  "order": ["main"]
+}
