@@ -91,7 +91,7 @@
 <script>
 (function(){
   var overlay = document.getElementById('bg-overlay');
-  var section = document.querySelector('.manifesto');
+  var mfSection = document.querySelector('.manifesto');
 
   var colorEls = document.querySelectorAll('.manifesto [data-mf-color]');
   if(overlay && colorEls.length){
@@ -102,13 +102,12 @@
     },{ threshold: 0.2 });
     colorEls.forEach(function(el){ colorIO.observe(el); });
 
-    // Reset to cream as soon as manifesto fully exits the viewport
     var resetIO = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(!e.isIntersecting) overlay.style.background = '#F3E6D1';
       });
     },{ threshold: 0 });
-    if(section) resetIO.observe(section);
+    if(mfSection) resetIO.observe(mfSection);
   }
 
   var reveals = document.querySelectorAll('.manifesto .mf-reveal, .manifesto .mf-open-inner');
@@ -131,14 +130,14 @@
     { "type": "color", "id": "color_open", "label": "Background", "default": "#F3E6D1" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Hedonistas De La Fe" },
     { "type": "color", "id": "text_eyebrow", "label": "Eyebrow color", "default": "#7C3A09" },
-    { "type": "text", "id": "headline_1", "label": "Headline — Line 1", "default": "We Don't Sell Drinks." },
+    { "type": "text", "id": "headline_1", "label": "Headline - Line 1", "default": "We Don't Sell Drinks." },
     { "type": "color", "id": "text_headline_1", "label": "Headline line 1 color", "default": "#1a1716" },
-    { "type": "text", "id": "headline_2", "label": "Headline — Line 2", "default": "We Sell The Unforgettable." },
+    { "type": "text", "id": "headline_2", "label": "Headline - Line 2", "default": "We Sell The Unforgettable." },
     { "type": "color", "id": "text_headline_2", "label": "Headline line 2 color", "default": "#7C3A09" },
-    { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Most brands sell a drink. A fleeting sensation. But drinks are forgotten — poured out, lost to the glass, abandoned on a table. At Hedonistas Mezcal, we are purveyors of something else entirely." },
+    { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Most brands sell a drink. A fleeting sensation. But drinks are forgotten - poured out, lost to the glass, abandoned on a table. At Hedonistas Mezcal, we are purveyors of something else entirely." },
     { "type": "color", "id": "text_subline", "label": "Sub-headline color", "default": "#4F4E4F" },
     { "type": "header", "content": "Marquee band" },
-    { "type": "text", "id": "marquee_text", "label": "Marquee words", "default": "GO DEEP · LAUGHTER · CONNECTION · EARTH · FIRE · TIME · NO SHORTCUTS · NO ALGORITHMS · THE UNFORGETTABLE ·" },
+    { "type": "text", "id": "marquee_text", "label": "Marquee words", "default": "GO DEEP - LAUGHTER - CONNECTION - EARTH - FIRE - TIME - NO SHORTCUTS - NO ALGORITHMS - THE UNFORGETTABLE -" },
     { "type": "header", "content": "Panel 1" },
     { "type": "color", "id": "color_panel_1", "label": "Background", "default": "#09627A" },
     { "type": "image_picker", "id": "image_1", "label": "Image" },
@@ -153,18 +152,18 @@
     { "type": "color", "id": "text_panel_2_quote", "label": "Statement color", "default": "#F3E6D1" },
     { "type": "inline_richtext", "id": "body_2", "label": "Body copy", "default": "It is the ritual of Earth, Fire, and Time. No shortcuts. No spreadsheets. No algorithms." },
     { "type": "color", "id": "text_panel_2_body", "label": "Body color", "default": "#F3E6D1" },
-    { "type": "header", "content": "Panel 3 — Cinematic" },
+    { "type": "header", "content": "Panel 3 - Cinematic" },
     { "type": "color", "id": "color_panel_3", "label": "Background", "default": "#1a1716" },
     { "type": "image_picker", "id": "image_3", "label": "Full-width image" },
     { "type": "text", "id": "panel_3_word", "label": "Big word (bottom left)", "default": "Go Deep." },
     { "type": "color", "id": "text_panel_3_word", "label": "Big word color", "default": "#DBB149" },
-    { "type": "header", "content": "Poem — Closing" },
+    { "type": "header", "content": "Poem - Closing" },
     { "type": "color", "id": "color_close", "label": "Background", "default": "#F3E6D1" },
-    { "type": "richtext", "id": "poem_body", "label": "Poem text (italic lines appear in rust)", "default": "<p>Go Deep is not a line on a label.</p><p>It is an invitation, a challenge,</p><p>and a compass for a life lived fully.</p><p><em>Go Deep into laughter</em></p><p>that shakes your whole body loose.</p><p><em>Go Deep into silence</em></p><p>that dares to tell the truth.</p><p><em>Go Deep into the risky, the restless,</em></p><p>the unforgettable pursuit of pleasure.</p><p>Every bottle holds the story of its soil.</p><p>Every pour begins a new chapter.</p><p>Every bar is a sanctuary</p><p>where strangers become confidants,</p><p>and the bartender a Curandero —</p><p>the keeper of the moment,</p><p>the guard of the sacred flame.</p><p>This is our resistance.</p><p>In a time that rewards the shallow,</p><p>we answer the desperate craving</p><p>for genuine connection.</p>" },
+    { "type": "richtext", "id": "poem_body", "label": "Poem text (italic lines appear in rust)", "default": "<p>Go Deep is not a line on a label.</p><p>It is an invitation, a challenge,</p><p>and a compass for a life lived fully.</p><p><em>Go Deep into laughter</em></p><p>that shakes your whole body loose.</p><p><em>Go Deep into silence</em></p><p>that dares to tell the truth.</p><p><em>Go Deep into the risky, the restless,</em></p><p>the unforgettable pursuit of pleasure.</p><p>Every bottle holds the story of its soil.</p><p>Every pour begins a new chapter.</p><p>Every bar is a sanctuary</p><p>where strangers become confidants,</p><p>and the bartender a Curandero -</p><p>the keeper of the moment,</p><p>the guard of the sacred flame.</p><p>This is our resistance.</p><p>In a time that rewards the shallow,</p><p>we answer the desperate craving</p><p>for genuine connection.</p>" },
     { "type": "color", "id": "text_poem", "label": "Poem text color", "default": "#1a1716" },
-    { "type": "text", "id": "poem_finale_name", "label": "Finale — Brand name", "default": "Hedonistas." },
+    { "type": "text", "id": "poem_finale_name", "label": "Finale - Brand name", "default": "Hedonistas." },
     { "type": "color", "id": "text_finale_name", "label": "Finale name color", "default": "#1a1716" },
-    { "type": "text", "id": "poem_finale_call", "label": "Finale — Call to action", "default": "Go Deep." },
+    { "type": "text", "id": "poem_finale_call", "label": "Finale - Call to action", "default": "Go Deep." },
     { "type": "color", "id": "text_finale_call", "label": "Finale call color", "default": "#7C3A09" },
     { "type": "header", "content": "CTA Button" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "The Craft Behind Every Bottle" },
