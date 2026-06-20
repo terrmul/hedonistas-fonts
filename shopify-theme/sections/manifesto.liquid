@@ -5,12 +5,12 @@
   <div class="mf-open" data-mf-color="{{ section.settings.color_open }}">
     <div class="mf-dot-grid" aria-hidden="true"></div>
     <div class="mf-open-inner">
-      <div class="label mf-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      <div class="label mf-eyebrow" style="color:{{ section.settings.text_eyebrow }}">{{ section.settings.eyebrow | escape }}</div>
       <h2 class="mf-headline">
-        <span class="mf-h-line mf-h-line--ink">{{ section.settings.headline_1 | escape }}</span>
-        <span class="mf-h-line mf-h-line--rust">{{ section.settings.headline_2 | escape }}</span>
+        <span class="mf-h-line" style="color:{{ section.settings.text_headline_1 }}">{{ section.settings.headline_1 | escape }}</span>
+        <span class="mf-h-line" style="color:{{ section.settings.text_headline_2 }}">{{ section.settings.headline_2 | escape }}</span>
       </h2>
-      <p class="mf-open-sub">{{ section.settings.subline }}</p>
+      <p class="mf-open-sub" style="color:{{ section.settings.text_subline }}">{{ section.settings.subline }}</p>
     </div>
   </div>
 
@@ -33,8 +33,8 @@
     </div>
     <div class="mf-p1-copy">
       <div class="mf-panel-num" aria-hidden="true">01</div>
-      <blockquote class="mf-big-quote">{{ section.settings.quote_1 }}</blockquote>
-      <p class="mf-body--cream">{{ section.settings.body_1 }}</p>
+      <blockquote class="mf-big-quote" style="color:{{ section.settings.text_panel_1_quote }}">{{ section.settings.quote_1 }}</blockquote>
+      <p class="mf-body--cream" style="color:{{ section.settings.text_panel_1_body }}">{{ section.settings.body_1 }}</p>
     </div>
   </div>
 
@@ -42,7 +42,7 @@
   <div class="mf-panel mf-panel--2 mf-reveal" data-mf-color="{{ section.settings.color_panel_2 }}">
     <div class="mf-p2-quote-wrap">
       <div class="mf-panel-num" aria-hidden="true">02</div>
-      <blockquote class="mf-p2-quote">{{ section.settings.quote_2 }}</blockquote>
+      <blockquote class="mf-p2-quote" style="color:{{ section.settings.text_panel_2_quote }}">{{ section.settings.quote_2 }}</blockquote>
     </div>
     <div class="mf-p2-lower">
       <div class="mf-p2-media">
@@ -54,7 +54,7 @@
       </div>
       <div class="mf-p2-body-wrap">
         <div class="mf-rule--solar"></div>
-        <p class="mf-body--cream">{{ section.settings.body_2 }}</p>
+        <p class="mf-body--cream" style="color:{{ section.settings.text_panel_2_body }}">{{ section.settings.body_2 }}</p>
       </div>
     </div>
   </div>
@@ -69,17 +69,17 @@
       {%- endif -%}
       <div class="mf-full-scrim"></div>
     </div>
-    <div class="mf-p3-word mf-reveal">{{ section.settings.panel_3_word | escape }}</div>
+    <div class="mf-p3-word mf-reveal" style="color:{{ section.settings.text_panel_3_word }}">{{ section.settings.panel_3_word | escape }}</div>
   </div>
 
   <!-- 6 — CLOSING: poem -->
   <div class="mf-close mf-reveal" data-mf-color="{{ section.settings.color_close }}">
-    <div class="mf-poem">
+    <div class="mf-poem" style="color:{{ section.settings.text_poem }}">
       {{ section.settings.poem_body }}
     </div>
     <div class="mf-poem-finale">
-      <span class="mf-poem-finale-name">{{ section.settings.poem_finale_name | escape }}</span>
-      <span class="mf-poem-finale-call">{{ section.settings.poem_finale_call | escape }}</span>
+      <span class="mf-poem-finale-name" style="color:{{ section.settings.text_finale_name }}">{{ section.settings.poem_finale_name | escape }}</span>
+      <span class="mf-poem-finale-call" style="color:{{ section.settings.text_finale_call }}">{{ section.settings.poem_finale_call | escape }}</span>
     </div>
     {%- if section.settings.cta_url != blank -%}
       <a class="mag-btn mag-dark mf-poem-cta" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label | escape }}</a>
@@ -119,32 +119,44 @@
   "name": "Manifesto",
   "settings": [
     { "type": "header", "content": "Opening" },
+    { "type": "color", "id": "color_open", "label": "Background", "default": "#F3E6D1" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Hedonistas De La Fe" },
+    { "type": "color", "id": "text_eyebrow", "label": "Eyebrow color", "default": "#7C3A09" },
     { "type": "text", "id": "headline_1", "label": "Headline — Line 1", "default": "We Don't Sell Drinks." },
-    { "type": "text", "id": "headline_2", "label": "Headline — Line 2 (rust)", "default": "We Sell The Unforgettable." },
+    { "type": "color", "id": "text_headline_1", "label": "Headline line 1 color", "default": "#1a1716" },
+    { "type": "text", "id": "headline_2", "label": "Headline — Line 2", "default": "We Sell The Unforgettable." },
+    { "type": "color", "id": "text_headline_2", "label": "Headline line 2 color", "default": "#7C3A09" },
     { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Most brands sell a drink. A fleeting sensation. But drinks are forgotten — poured out, lost to the glass, abandoned on a table. At Hedonistas Mezcal, we are purveyors of something else entirely." },
-    { "type": "color", "id": "color_open", "label": "Opening background color", "default": "#F3E6D1" },
+    { "type": "color", "id": "text_subline", "label": "Sub-headline color", "default": "#4F4E4F" },
     { "type": "header", "content": "Marquee band" },
     { "type": "text", "id": "marquee_text", "label": "Marquee words", "default": "GO DEEP · LAUGHTER · CONNECTION · EARTH · FIRE · TIME · NO SHORTCUTS · NO ALGORITHMS · THE UNFORGETTABLE ·" },
-    { "type": "header", "content": "Panel 1 — Marine" },
-    { "type": "color", "id": "color_panel_1", "label": "Panel 1 background color", "default": "#09627A" },
+    { "type": "header", "content": "Panel 1" },
+    { "type": "color", "id": "color_panel_1", "label": "Background", "default": "#09627A" },
     { "type": "image_picker", "id": "image_1", "label": "Image" },
     { "type": "inline_richtext", "id": "quote_1", "label": "Statement", "default": "Late nights that bleed into early mornings. Laughter that cracks the room open." },
+    { "type": "color", "id": "text_panel_1_quote", "label": "Statement color", "default": "#F3E6D1" },
     { "type": "inline_richtext", "id": "body_1", "label": "Body copy", "default": "Strangers who become soulmates over a shared pour. We believe conversation begins in person, not chat boxes. That moments matter more than follower count. And that participants live richer, fuller lives than spectators." },
-    { "type": "header", "content": "Panel 2 — Rust" },
-    { "type": "color", "id": "color_panel_2", "label": "Panel 2 background color", "default": "#7C3A09" },
+    { "type": "color", "id": "text_panel_1_body", "label": "Body color", "default": "#F3E6D1" },
+    { "type": "header", "content": "Panel 2" },
+    { "type": "color", "id": "color_panel_2", "label": "Background", "default": "#7C3A09" },
     { "type": "image_picker", "id": "image_2", "label": "Image" },
     { "type": "inline_richtext", "id": "quote_2", "label": "Statement (full width)", "default": "Our mezcal is forged the same way our best nights are. Slowly. Passionately. Without compromise." },
+    { "type": "color", "id": "text_panel_2_quote", "label": "Statement color", "default": "#F3E6D1" },
     { "type": "inline_richtext", "id": "body_2", "label": "Body copy", "default": "It is the ritual of Earth, Fire, and Time. No shortcuts. No spreadsheets. No algorithms." },
+    { "type": "color", "id": "text_panel_2_body", "label": "Body color", "default": "#F3E6D1" },
     { "type": "header", "content": "Panel 3 — Cinematic" },
-    { "type": "color", "id": "color_panel_3", "label": "Panel 3 background color", "default": "#1a1716" },
+    { "type": "color", "id": "color_panel_3", "label": "Background", "default": "#1a1716" },
     { "type": "image_picker", "id": "image_3", "label": "Full-width image" },
     { "type": "text", "id": "panel_3_word", "label": "Big word (bottom left)", "default": "Go Deep." },
+    { "type": "color", "id": "text_panel_3_word", "label": "Big word color", "default": "#DBB149" },
     { "type": "header", "content": "Poem — Closing" },
-    { "type": "color", "id": "color_close", "label": "Closing background color", "default": "#F3E6D1" },
+    { "type": "color", "id": "color_close", "label": "Background", "default": "#F3E6D1" },
     { "type": "richtext", "id": "poem_body", "label": "Poem text (italic lines appear in rust)", "default": "<p>Go Deep is not a line on a label.</p><p>It is an invitation, a challenge,</p><p>and a compass for a life lived fully.</p><p><em>Go Deep into laughter</em></p><p>that shakes your whole body loose.</p><p><em>Go Deep into silence</em></p><p>that dares to tell the truth.</p><p><em>Go Deep into the risky, the restless,</em></p><p>the unforgettable pursuit of pleasure.</p><p>Every bottle holds the story of its soil.</p><p>Every pour begins a new chapter.</p><p>Every bar is a sanctuary</p><p>where strangers become confidants,</p><p>and the bartender a Curandero —</p><p>the keeper of the moment,</p><p>the guard of the sacred flame.</p><p>This is our resistance.</p><p>In a time that rewards the shallow,</p><p>we answer the desperate craving</p><p>for genuine connection.</p>" },
+    { "type": "color", "id": "text_poem", "label": "Poem text color", "default": "#1a1716" },
     { "type": "text", "id": "poem_finale_name", "label": "Finale — Brand name", "default": "Hedonistas." },
+    { "type": "color", "id": "text_finale_name", "label": "Finale name color", "default": "#1a1716" },
     { "type": "text", "id": "poem_finale_call", "label": "Finale — Call to action", "default": "Go Deep." },
+    { "type": "color", "id": "text_finale_call", "label": "Finale call color", "default": "#7C3A09" },
     { "type": "header", "content": "CTA Button" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "The Craft Behind Every Bottle" },
     { "type": "url", "id": "cta_url", "label": "Button link" }
