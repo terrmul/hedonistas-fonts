@@ -1068,7 +1068,7 @@ html.age-gate-open{overflow:hidden}
 .mf-p3-word.on{opacity:1;transform:none}
 .mf-close{padding:8rem 3rem;text-align:center;border-top:1px solid rgba(26,23,22,.08)}
 .mf-poem{max-width:52ch;margin:0 auto 4rem;font-size:1.1rem;line-height:2;color:rgba(26,23,22,.75)}
-.mf-poem p{margin:.1em 0}
+.mf-poem p{margin:.1em 0}.mf-poem em{color:var(--rust);font-style:italic}
 .mf-poem-accent{color:var(--rust);font-style:italic}
 .mf-poem-break{margin-top:1.5em!important}
 .mf-poem-finale{display:flex;flex-direction:column;gap:.2em;margin:0 auto 2.5rem}
