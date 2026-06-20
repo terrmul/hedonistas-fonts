@@ -26,7 +26,7 @@
   <div class="mf-panel mf-panel--1 mf-reveal" data-mf-color="{{ section.settings.color_panel_1 }}">
     <div class="mf-p1-media">
       {%- if section.settings.image_1 != blank -%}
-        <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" loading="lazy" decoding="async">
+        <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" width="{{ section.settings.image_1.width }}" height="{{ section.settings.image_1.height }}" loading="lazy" decoding="async">
       {%- else -%}
         <div class="mf-media-ph" data-label="Add image in Customizer"></div>
       {%- endif -%}
@@ -47,7 +47,7 @@
     <div class="mf-p2-lower">
       <div class="mf-p2-media">
         {%- if section.settings.image_2 != blank -%}
-          <img src="{{ section.settings.image_2 | image_url: width: 1200 }}" alt="{{ section.settings.image_2.alt | default: '' | escape }}" loading="lazy" decoding="async">
+          <img src="{{ section.settings.image_2 | image_url: width: 1200 }}" alt="{{ section.settings.image_2.alt | default: '' | escape }}" width="{{ section.settings.image_2.width }}" height="{{ section.settings.image_2.height }}" loading="lazy" decoding="async">
         {%- else -%}
           <div class="mf-media-ph" data-label="Add image in Customizer"></div>
         {%- endif -%}
@@ -63,7 +63,7 @@
   <div class="mf-panel mf-panel--3" data-mf-color="{{ section.settings.color_panel_3 }}">
     <div class="mf-full-bg">
       {%- if section.settings.image_3 != blank -%}
-        <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" loading="lazy" decoding="async">
+        <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" width="{{ section.settings.image_3.width }}" height="{{ section.settings.image_3.height }}" loading="lazy" decoding="async">
       {%- else -%}
         <div class="mf-media-ph mf-media-ph--full" data-label="Add full-width image in Customizer"></div>
       {%- endif -%}
