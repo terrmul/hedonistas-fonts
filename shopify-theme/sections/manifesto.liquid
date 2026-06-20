@@ -93,17 +93,30 @@
   var overlay = document.getElementById('bg-overlay');
   var section = document.querySelector('.manifesto');
 
-  // Fire only when panel occupies the middle 40% of the viewport
+  // Track scroll direction
+  var lastScroll = window.scrollY;
+  var scrollDir = 'down';
+  window.addEventListener('scroll', function(){
+    scrollDir = window.scrollY > lastScroll ? 'down' : 'up';
+    lastScroll = window.scrollY;
+  },{ passive: true });
+
   var colorEls = document.querySelectorAll('.manifesto [data-mf-color]');
   if(overlay && colorEls.length){
+    // Fire at both thresholds; apply color based on scroll direction
     var colorIO = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
-        if(e.isIntersecting) overlay.style.background = e.target.dataset.mfColor;
+        if(!e.isIntersecting) return;
+        if(scrollDir === 'down' && e.intersectionRatio >= 0.4){
+          overlay.style.background = e.target.dataset.mfColor;
+        } else if(scrollDir === 'up' && e.intersectionRatio >= 0.1){
+          overlay.style.background = e.target.dataset.mfColor;
+        }
       });
-    },{ rootMargin: '-30% 0px -30% 0px', threshold: 0 });
+    },{ threshold: [0.1, 0.4] });
     colorEls.forEach(function(el){ colorIO.observe(el); });
 
-    // Reset to cream as soon as manifesto is fully out of view in either direction
+    // Reset to cream as soon as manifesto fully exits the viewport
     var resetIO = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(!e.isIntersecting) overlay.style.background = '#F3E6D1';
