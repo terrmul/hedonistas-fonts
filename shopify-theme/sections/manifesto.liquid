@@ -91,15 +91,10 @@
 <script>
 (function(){
   var overlay = document.getElementById('bg-overlay');
-  var mfSection = document.querySelector('.manifesto');
-  var colorEls = Array.prototype.slice.call(document.querySelectorAll('.manifesto [data-mf-color]'));
+  var colorEls = Array.prototype.slice.call(document.querySelectorAll('[data-mf-color]'));
 
   if(overlay && colorEls.length){
     function updateColor(){
-      if(mfSection && window.scrollY < mfSection.offsetTop){
-        overlay.style.background = '#F3E6D1';
-        return;
-      }
       var viewBottom = window.scrollY + window.innerHeight;
       var active = null;
       for(var i = 0; i < colorEls.length; i++){
