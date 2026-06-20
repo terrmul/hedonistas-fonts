@@ -1,8 +1,8 @@
 <!-- BRAND MANIFESTO — The Confession -->
 <section class="manifesto" id="manifesto" data-bg="bg-cream">
 
-  <!-- 1 — OPENING: cream, enormous headline -->
-  <div class="mf-open" data-mf-color="#F3E6D1">
+  <!-- 1 — OPENING -->
+  <div class="mf-open" data-mf-color="{{ section.settings.color_open }}">
     <div class="mf-dot-grid" aria-hidden="true"></div>
     <div class="mf-open-inner">
       <div class="label mf-eyebrow">{{ section.settings.eyebrow | escape }}</div>
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <!-- 2 — MARQUEE: gold bg, ink text -->
+  <!-- 2 — MARQUEE -->
   <div class="mf-marquee" aria-hidden="true">
     <div class="mf-marquee-track">
       <span>{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
@@ -22,8 +22,8 @@
     </div>
   </div>
 
-  <!-- 3 — PANEL 1: deep marine, photo left, raw oversized quote right -->
-  <div class="mf-panel mf-panel--1 mf-reveal" data-mf-color="#09627A">
+  <!-- 3 — PANEL 1 -->
+  <div class="mf-panel mf-panel--1 mf-reveal" data-mf-color="{{ section.settings.color_panel_1 }}">
     <div class="mf-p1-media">
       {%- if section.settings.image_1 != blank -%}
         <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" loading="lazy" decoding="async">
@@ -38,8 +38,8 @@
     </div>
   </div>
 
-  <!-- 4 — PANEL 2: deep rust, full-width quote THEN image + body below -->
-  <div class="mf-panel mf-panel--2 mf-reveal" data-mf-color="#7C3A09">
+  <!-- 4 — PANEL 2 -->
+  <div class="mf-panel mf-panel--2 mf-reveal" data-mf-color="{{ section.settings.color_panel_2 }}">
     <div class="mf-p2-quote-wrap">
       <div class="mf-panel-num" aria-hidden="true">02</div>
       <blockquote class="mf-p2-quote">{{ section.settings.quote_2 }}</blockquote>
@@ -59,8 +59,8 @@
     </div>
   </div>
 
-  <!-- 5 — PANEL 3: cinematic full bleed, "GO DEEP." solar gold bottom-left -->
-  <div class="mf-panel mf-panel--3" data-mf-color="#1a1716">
+  <!-- 5 — PANEL 3: cinematic -->
+  <div class="mf-panel mf-panel--3" data-mf-color="{{ section.settings.color_panel_3 }}">
     <div class="mf-full-bg">
       {%- if section.settings.image_3 != blank -%}
         <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" loading="lazy" decoding="async">
@@ -72,33 +72,14 @@
     <div class="mf-p3-word mf-reveal">{{ section.settings.panel_3_word | escape }}</div>
   </div>
 
-  <!-- 6 — CLOSING: back to cream, manifesto as poem -->
-  <div class="mf-close mf-reveal" data-mf-color="#F3E6D1">
+  <!-- 6 — CLOSING: poem -->
+  <div class="mf-close mf-reveal" data-mf-color="{{ section.settings.color_close }}">
     <div class="mf-poem">
-      <p>Go Deep is not a line on a label.</p>
-      <p>It is an invitation, a challenge,</p>
-      <p>and a compass for a life lived fully.</p>
-      <p class="mf-poem-break mf-poem-accent">Go Deep into laughter</p>
-      <p>that shakes your whole body loose.</p>
-      <p class="mf-poem-accent">Go Deep into silence</p>
-      <p>that dares to tell the truth.</p>
-      <p class="mf-poem-accent">Go Deep into the risky, the restless,</p>
-      <p>the unforgettable pursuit of pleasure.</p>
-      <p class="mf-poem-break">Every bottle holds the story of its soil.</p>
-      <p>Every pour begins a new chapter.</p>
-      <p>Every bar is a sanctuary</p>
-      <p>where strangers become confidants,</p>
-      <p>and the bartender a Curandero &mdash;</p>
-      <p>the keeper of the moment,</p>
-      <p>the guard of the sacred flame.</p>
-      <p class="mf-poem-break">This is our resistance.</p>
-      <p>In a time that rewards the shallow,</p>
-      <p>we answer the desperate craving</p>
-      <p>for genuine connection.</p>
+      {{ section.settings.poem_body }}
     </div>
     <div class="mf-poem-finale">
-      <span class="mf-poem-finale-name">Hedonistas.</span>
-      <span class="mf-poem-finale-call">Go Deep.</span>
+      <span class="mf-poem-finale-name">{{ section.settings.poem_finale_name | escape }}</span>
+      <span class="mf-poem-finale-call">{{ section.settings.poem_finale_call | escape }}</span>
     </div>
     {%- if section.settings.cta_url != blank -%}
       <a class="mag-btn mag-dark mf-poem-cta" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label | escape }}</a>
@@ -142,20 +123,29 @@
     { "type": "text", "id": "headline_1", "label": "Headline — Line 1", "default": "We Don't Sell Drinks." },
     { "type": "text", "id": "headline_2", "label": "Headline — Line 2 (rust)", "default": "We Sell The Unforgettable." },
     { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Most brands sell a drink. A fleeting sensation. But drinks are forgotten — poured out, lost to the glass, abandoned on a table. At Hedonistas Mezcal, we are purveyors of something else entirely." },
+    { "type": "color", "id": "color_open", "label": "Opening background color", "default": "#F3E6D1" },
     { "type": "header", "content": "Marquee band" },
     { "type": "text", "id": "marquee_text", "label": "Marquee words", "default": "GO DEEP · LAUGHTER · CONNECTION · EARTH · FIRE · TIME · NO SHORTCUTS · NO ALGORITHMS · THE UNFORGETTABLE ·" },
     { "type": "header", "content": "Panel 1 — Marine" },
+    { "type": "color", "id": "color_panel_1", "label": "Panel 1 background color", "default": "#09627A" },
     { "type": "image_picker", "id": "image_1", "label": "Image" },
     { "type": "inline_richtext", "id": "quote_1", "label": "Statement", "default": "Late nights that bleed into early mornings. Laughter that cracks the room open." },
     { "type": "inline_richtext", "id": "body_1", "label": "Body copy", "default": "Strangers who become soulmates over a shared pour. We believe conversation begins in person, not chat boxes. That moments matter more than follower count. And that participants live richer, fuller lives than spectators." },
     { "type": "header", "content": "Panel 2 — Rust" },
+    { "type": "color", "id": "color_panel_2", "label": "Panel 2 background color", "default": "#7C3A09" },
     { "type": "image_picker", "id": "image_2", "label": "Image" },
     { "type": "inline_richtext", "id": "quote_2", "label": "Statement (full width)", "default": "Our mezcal is forged the same way our best nights are. Slowly. Passionately. Without compromise." },
     { "type": "inline_richtext", "id": "body_2", "label": "Body copy", "default": "It is the ritual of Earth, Fire, and Time. No shortcuts. No spreadsheets. No algorithms." },
     { "type": "header", "content": "Panel 3 — Cinematic" },
+    { "type": "color", "id": "color_panel_3", "label": "Panel 3 background color", "default": "#1a1716" },
     { "type": "image_picker", "id": "image_3", "label": "Full-width image" },
     { "type": "text", "id": "panel_3_word", "label": "Big word (bottom left)", "default": "Go Deep." },
-    { "type": "header", "content": "CTA" },
+    { "type": "header", "content": "Poem — Closing" },
+    { "type": "color", "id": "color_close", "label": "Closing background color", "default": "#F3E6D1" },
+    { "type": "richtext", "id": "poem_body", "label": "Poem text (italic lines appear in rust)", "default": "<p>Go Deep is not a line on a label.</p><p>It is an invitation, a challenge,</p><p>and a compass for a life lived fully.</p><p><em>Go Deep into laughter</em></p><p>that shakes your whole body loose.</p><p><em>Go Deep into silence</em></p><p>that dares to tell the truth.</p><p><em>Go Deep into the risky, the restless,</em></p><p>the unforgettable pursuit of pleasure.</p><p>Every bottle holds the story of its soil.</p><p>Every pour begins a new chapter.</p><p>Every bar is a sanctuary</p><p>where strangers become confidants,</p><p>and the bartender a Curandero —</p><p>the keeper of the moment,</p><p>the guard of the sacred flame.</p><p>This is our resistance.</p><p>In a time that rewards the shallow,</p><p>we answer the desperate craving</p><p>for genuine connection.</p>" },
+    { "type": "text", "id": "poem_finale_name", "label": "Finale — Brand name", "default": "Hedonistas." },
+    { "type": "text", "id": "poem_finale_call", "label": "Finale — Call to action", "default": "Go Deep." },
+    { "type": "header", "content": "CTA Button" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "The Craft Behind Every Bottle" },
     { "type": "url", "id": "cta_url", "label": "Button link" }
   ],
