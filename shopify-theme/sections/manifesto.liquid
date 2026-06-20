@@ -1,22 +1,22 @@
-<!-- BRAND MANIFESTO — editorial centerpiece -->
-<section class="manifesto" id="manifesto" data-bg="bg-ink">
+<!-- BRAND MANIFESTO — The Confession -->
+<section class="manifesto" id="manifesto" data-bg="bg-cream">
 
   <div class="mf-color-bg" id="mf-color-bg"></div>
 
-  <!-- 1 — OPENING STATEMENT -->
-  <div class="mf-open" data-mf-color="#1a1716">
+  <!-- 1 — OPENING: cream, enormous headline -->
+  <div class="mf-open" data-mf-color="#F3E6D1">
     <div class="mf-dot-grid" aria-hidden="true"></div>
     <div class="mf-open-inner">
       <div class="label mf-eyebrow">{{ section.settings.eyebrow | escape }}</div>
       <h2 class="mf-headline">
-        <span class="mf-h-line mf-h-line--cream">{{ section.settings.headline_1 | escape }}</span>
-        <span class="mf-h-line mf-h-line--accent">{{ section.settings.headline_2 | escape }}</span>
+        <span class="mf-h-line mf-h-line--ink">{{ section.settings.headline_1 | escape }}</span>
+        <span class="mf-h-line mf-h-line--rust">{{ section.settings.headline_2 | escape }}</span>
       </h2>
-      <p class="mf-sub">{{ section.settings.subline }}</p>
+      <p class="mf-open-sub">{{ section.settings.subline }}</p>
     </div>
   </div>
 
-  <!-- 2 — MARQUEE -->
+  <!-- 2 — MARQUEE: gold bg, ink text -->
   <div class="mf-marquee" aria-hidden="true">
     <div class="mf-marquee-track">
       <span>{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
@@ -24,64 +24,86 @@
     </div>
   </div>
 
-  <!-- 3 — EDITORIAL PANELS -->
-  <div class="mf-panels">
-
-    <div class="mf-panel mf-panel--img-left mf-reveal" data-mf-color="#07181f">
-      <div class="mf-panel-media">
-        {%- if section.settings.image_1 != blank -%}
-          <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" loading="lazy" decoding="async">
-        {%- else -%}
-          <div class="mf-img-ph" data-label="Add image in Customizer"></div>
-        {%- endif -%}
-        <div class="mf-panel-counter" aria-hidden="true">01</div>
-      </div>
-      <div class="mf-panel-copy mf-panel-copy--marine">
-        <blockquote class="mf-quote">{{ section.settings.quote_1 }}</blockquote>
-        <div class="mf-rule"></div>
-        <p class="mf-body">{{ section.settings.body_1 }}</p>
-      </div>
+  <!-- 3 — PANEL 1: deep marine, photo left, raw oversized quote right -->
+  <div class="mf-panel mf-panel--1 mf-reveal" data-mf-color="#09627A">
+    <div class="mf-p1-media">
+      {%- if section.settings.image_1 != blank -%}
+        <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" loading="lazy" decoding="async">
+      {%- else -%}
+        <div class="mf-media-ph" data-label="Add image in Customizer"></div>
+      {%- endif -%}
     </div>
+    <div class="mf-p1-copy">
+      <div class="mf-panel-num" aria-hidden="true">01</div>
+      <blockquote class="mf-big-quote">{{ section.settings.quote_1 }}</blockquote>
+      <p class="mf-body--cream">{{ section.settings.body_1 }}</p>
+    </div>
+  </div>
 
-    <div class="mf-panel mf-panel--img-right mf-reveal" data-mf-color="#1f0b04">
-      <div class="mf-panel-copy mf-panel-copy--rust">
-        <blockquote class="mf-quote">{{ section.settings.quote_2 }}</blockquote>
-        <div class="mf-rule mf-rule--copper"></div>
-        <p class="mf-body">{{ section.settings.body_2 }}</p>
-      </div>
-      <div class="mf-panel-media">
+  <!-- 4 — PANEL 2: deep rust, full-width quote THEN image + body below -->
+  <div class="mf-panel mf-panel--2 mf-reveal" data-mf-color="#7C3A09">
+    <div class="mf-p2-quote-wrap">
+      <div class="mf-panel-num" aria-hidden="true">02</div>
+      <blockquote class="mf-p2-quote">{{ section.settings.quote_2 }}</blockquote>
+    </div>
+    <div class="mf-p2-lower">
+      <div class="mf-p2-media">
         {%- if section.settings.image_2 != blank -%}
           <img src="{{ section.settings.image_2 | image_url: width: 1200 }}" alt="{{ section.settings.image_2.alt | default: '' | escape }}" loading="lazy" decoding="async">
         {%- else -%}
-          <div class="mf-img-ph" data-label="Add image in Customizer"></div>
+          <div class="mf-media-ph" data-label="Add image in Customizer"></div>
         {%- endif -%}
-        <div class="mf-panel-counter" aria-hidden="true">02</div>
+      </div>
+      <div class="mf-p2-body-wrap">
+        <div class="mf-rule--solar"></div>
+        <p class="mf-body--cream">{{ section.settings.body_2 }}</p>
       </div>
     </div>
-
-    <div class="mf-panel mf-panel--full" data-mf-color="#1a0810">
-      <div class="mf-full-bg">
-        {%- if section.settings.image_3 != blank -%}
-          <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" loading="lazy" decoding="async">
-        {%- else -%}
-          <div class="mf-img-ph mf-img-ph--full" data-label="Add full-width image in Customizer"></div>
-        {%- endif -%}
-        <div class="mf-full-scrim"></div>
-      </div>
-      <div class="mf-full-content mf-reveal">
-        <div class="mf-panel-counter mf-panel-counter--center" aria-hidden="true">03</div>
-        <blockquote class="mf-full-quote">{{ section.settings.quote_3 }}</blockquote>
-        <p class="mf-body mf-body--center">{{ section.settings.body_3 }}</p>
-      </div>
-    </div>
-
   </div>
 
-  <!-- 4 — CLOSING -->
-  <div class="mf-close mf-reveal" data-mf-color="#1a1716">
-    <p class="mf-close-stmt">{{ section.settings.closing_statement }}</p>
+  <!-- 5 — PANEL 3: cinematic full bleed, "GO DEEP." solar gold bottom-left -->
+  <div class="mf-panel mf-panel--3" data-mf-color="#1a1716">
+    <div class="mf-full-bg">
+      {%- if section.settings.image_3 != blank -%}
+        <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" loading="lazy" decoding="async">
+      {%- else -%}
+        <div class="mf-media-ph mf-media-ph--full" data-label="Add full-width image in Customizer"></div>
+      {%- endif -%}
+      <div class="mf-full-scrim"></div>
+    </div>
+    <div class="mf-p3-word mf-reveal">{{ section.settings.panel_3_word | escape }}</div>
+  </div>
+
+  <!-- 6 — CLOSING: back to cream, manifesto as poem -->
+  <div class="mf-close mf-reveal" data-mf-color="#F3E6D1">
+    <div class="mf-poem">
+      <p>Go Deep is not a line on a label.</p>
+      <p>It is an invitation, a challenge,</p>
+      <p>and a compass for a life lived fully.</p>
+      <p class="mf-poem-break mf-poem-accent">Go Deep into laughter</p>
+      <p>that shakes your whole body loose.</p>
+      <p class="mf-poem-accent">Go Deep into silence</p>
+      <p>that dares to tell the truth.</p>
+      <p class="mf-poem-accent">Go Deep into the risky, the restless,</p>
+      <p>the unforgettable pursuit of pleasure.</p>
+      <p class="mf-poem-break">Every bottle holds the story of its soil.</p>
+      <p>Every pour begins a new chapter.</p>
+      <p>Every bar is a sanctuary</p>
+      <p>where strangers become confidants,</p>
+      <p>and the bartender a Curandero &mdash;</p>
+      <p>the keeper of the moment,</p>
+      <p>the guard of the sacred flame.</p>
+      <p class="mf-poem-break">This is our resistance.</p>
+      <p>In a time that rewards the shallow,</p>
+      <p>we answer the desperate craving</p>
+      <p>for genuine connection.</p>
+    </div>
+    <div class="mf-poem-finale">
+      <span class="mf-poem-finale-name">Hedonistas.</span>
+      <span class="mf-poem-finale-call">Go Deep.</span>
+    </div>
     {%- if section.settings.cta_url != blank -%}
-      <a class="mag-btn mag-cream" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label | escape }}</a>
+      <a class="mag-btn mag-dark mf-poem-cta" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label | escape }}</a>
     {%- endif -%}
   </div>
 
@@ -92,27 +114,23 @@
   var bg = document.getElementById('mf-color-bg');
   if(!bg) return;
 
-  // colour morph on scroll
   var colorEls = document.querySelectorAll('.manifesto [data-mf-color]');
-  if(colorEls.length) {
+  if(colorEls.length){
     var colorIO = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
-        if(e.isIntersecting && bg) {
-          bg.style.background = e.target.dataset.mfColor;
-        }
+        if(e.isIntersecting) bg.style.background = e.target.dataset.mfColor;
       });
-    }, { threshold: 0.3 });
+    },{ threshold: 0.25 });
     colorEls.forEach(function(el){ colorIO.observe(el); });
   }
 
-  // reveal on scroll
   var reveals = document.querySelectorAll('.manifesto .mf-reveal, .manifesto .mf-open-inner');
-  if(reveals.length) {
+  if(reveals.length){
     var revealIO = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(e.isIntersecting){ e.target.classList.add('on'); revealIO.unobserve(e.target); }
       });
-    }, { threshold: 0.1 });
+    },{ threshold: 0.08 });
     reveals.forEach(function(el){ revealIO.observe(el); });
   }
 })();
@@ -124,27 +142,25 @@
   "settings": [
     { "type": "header", "content": "Opening" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Hedonistas De La Fe" },
-    { "type": "text", "id": "headline_1", "label": "Headline — Line 1 (cream)", "default": "We Don't Sell Drinks." },
-    { "type": "text", "id": "headline_2", "label": "Headline — Line 2 (gold)", "default": "We Sell The Unforgettable." },
-    { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Most brands sell a drink. A fleeting sensation. But drinks are forgotten. At Hedonistas Mezcal, we are purveyors of something else entirely." },
+    { "type": "text", "id": "headline_1", "label": "Headline — Line 1", "default": "We Don’t Sell Drinks." },
+    { "type": "text", "id": "headline_2", "label": "Headline — Line 2 (rust)", "default": "We Sell The Unforgettable." },
+    { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Most brands sell a drink. A fleeting sensation. But drinks are forgotten — poured out, lost to the glass, abandoned on a table. At Hedonistas Mezcal, we are purveyors of something else entirely." },
     { "type": "header", "content": "Marquee band" },
     { "type": "text", "id": "marquee_text", "label": "Marquee words", "default": "GO DEEP · LAUGHTER · CONNECTION · EARTH · FIRE · TIME · NO SHORTCUTS · NO ALGORITHMS · THE UNFORGETTABLE ·" },
-    { "type": "header", "content": "Panel 1 — Image Left" },
+    { "type": "header", "content": "Panel 1 — Marine" },
     { "type": "image_picker", "id": "image_1", "label": "Image" },
     { "type": "inline_richtext", "id": "quote_1", "label": "Statement", "default": "Late nights that bleed into early mornings. Laughter that cracks the room open." },
     { "type": "inline_richtext", "id": "body_1", "label": "Body copy", "default": "Strangers who become soulmates over a shared pour. We believe conversation begins in person, not chat boxes. That moments matter more than follower count. And that participants live richer, fuller lives than spectators." },
-    { "type": "header", "content": "Panel 2 — Image Right" },
+    { "type": "header", "content": "Panel 2 — Rust" },
     { "type": "image_picker", "id": "image_2", "label": "Image" },
-    { "type": "inline_richtext", "id": "quote_2", "label": "Statement", "default": "Our mezcal is forged the same way our best nights are. Slowly. Passionately. Without compromise." },
-    { "type": "inline_richtext", "id": "body_2", "label": "Body copy", "default": "It is the ritual of Earth, Fire, and Time. No shortcuts. No spreadsheets. No algorithms. Go Deep is not a line on a label. It is an invitation, a challenge, and a compass for a life lived fully." },
-    { "type": "header", "content": "Panel 3 — Full Width" },
+    { "type": "inline_richtext", "id": "quote_2", "label": "Statement (full width)", "default": "Our mezcal is forged the same way our best nights are. Slowly. Passionately. Without compromise." },
+    { "type": "inline_richtext", "id": "body_2", "label": "Body copy", "default": "It is the ritual of Earth, Fire, and Time. No shortcuts. No spreadsheets. No algorithms." },
+    { "type": "header", "content": "Panel 3 — Cinematic" },
     { "type": "image_picker", "id": "image_3", "label": "Full-width image" },
-    { "type": "inline_richtext", "id": "quote_3", "label": "Overlay statement", "default": "Go Deep into the risky, the restless, the unforgettable pursuit of pleasure." },
-    { "type": "inline_richtext", "id": "body_3", "label": "Overlay body", "default": "Every bottle holds the story of its soil. Every pour begins a new chapter. Every bar is a sanctuary where strangers become confidants, and the bartender a Curandero — the keeper of the moment, the guard of the sacred flame." },
-    { "type": "header", "content": "Closing" },
-    { "type": "inline_richtext", "id": "closing_statement", "label": "Closing statement", "default": "This is our resistance. Hedonistas. Go Deep." },
+    { "type": "text", "id": "panel_3_word", "label": "Big word (bottom left)", "default": "Go Deep." },
+    { "type": "header", "content": "CTA" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "The Craft Behind Every Bottle" },
-    { "type": "url", "id": "cta_url", "label": "Button link (craft page)" }
+    { "type": "url", "id": "cta_url", "label": "Button link" }
   ],
   "presets": [{ "name": "Manifesto" }]
 }
