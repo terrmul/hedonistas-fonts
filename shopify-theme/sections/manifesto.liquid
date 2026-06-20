@@ -1,8 +1,6 @@
 <!-- BRAND MANIFESTO — The Confession -->
 <section class="manifesto" id="manifesto" data-bg="bg-cream">
 
-  <div class="mf-color-bg" id="mf-color-bg"></div>
-
   <!-- 1 — OPENING: cream, enormous headline -->
   <div class="mf-open" data-mf-color="#F3E6D1">
     <div class="mf-dot-grid" aria-hidden="true"></div>
@@ -111,16 +109,15 @@
 
 <script>
 (function(){
-  var bg = document.getElementById('mf-color-bg');
-  if(!bg) return;
+  var overlay = document.getElementById('bg-overlay');
 
   var colorEls = document.querySelectorAll('.manifesto [data-mf-color]');
-  if(colorEls.length){
+  if(overlay && colorEls.length){
     var colorIO = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
-        if(e.isIntersecting) bg.style.background = e.target.dataset.mfColor;
+        if(e.isIntersecting) overlay.style.background = e.target.dataset.mfColor;
       });
-    },{ threshold: 0.25 });
+    },{ threshold: 0.3 });
     colorEls.forEach(function(el){ colorIO.observe(el); });
   }
 
@@ -142,7 +139,7 @@
   "settings": [
     { "type": "header", "content": "Opening" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Hedonistas De La Fe" },
-    { "type": "text", "id": "headline_1", "label": "Headline — Line 1", "default": "We Don’t Sell Drinks." },
+    { "type": "text", "id": "headline_1", "label": "Headline — Line 1", "default": "We Don't Sell Drinks." },
     { "type": "text", "id": "headline_2", "label": "Headline — Line 2 (rust)", "default": "We Sell The Unforgettable." },
     { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Most brands sell a drink. A fleeting sensation. But drinks are forgotten — poured out, lost to the glass, abandoned on a table. At Hedonistas Mezcal, we are purveyors of something else entirely." },
     { "type": "header", "content": "Marquee band" },
