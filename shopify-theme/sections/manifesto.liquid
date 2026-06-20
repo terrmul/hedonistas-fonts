@@ -1,8 +1,10 @@
-<!-- BRAND MANIFESTO — editorial centerpiece, replaces craft on homepage -->
+<!-- BRAND MANIFESTO — editorial centerpiece -->
 <section class="manifesto" id="manifesto" data-bg="bg-ink">
 
+  <div class="mf-color-bg" id="mf-color-bg"></div>
+
   <!-- 1 — OPENING STATEMENT -->
-  <div class="mf-open">
+  <div class="mf-open" data-mf-color="#1a1716">
     <div class="mf-dot-grid" aria-hidden="true"></div>
     <div class="mf-open-inner">
       <div class="label mf-eyebrow">{{ section.settings.eyebrow | escape }}</div>
@@ -25,8 +27,7 @@
   <!-- 3 — EDITORIAL PANELS -->
   <div class="mf-panels">
 
-    <!-- Panel 1: image left, statement right -->
-    <div class="mf-panel mf-panel--img-left mf-reveal">
+    <div class="mf-panel mf-panel--img-left mf-reveal" data-mf-color="#07181f">
       <div class="mf-panel-media">
         {%- if section.settings.image_1 != blank -%}
           <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" loading="lazy" decoding="async">
@@ -35,18 +36,17 @@
         {%- endif -%}
         <div class="mf-panel-counter" aria-hidden="true">01</div>
       </div>
-      <div class="mf-panel-copy">
+      <div class="mf-panel-copy mf-panel-copy--marine">
         <blockquote class="mf-quote">{{ section.settings.quote_1 }}</blockquote>
         <div class="mf-rule"></div>
         <p class="mf-body">{{ section.settings.body_1 }}</p>
       </div>
     </div>
 
-    <!-- Panel 2: statement left, image right -->
-    <div class="mf-panel mf-panel--img-right mf-reveal">
-      <div class="mf-panel-copy">
+    <div class="mf-panel mf-panel--img-right mf-reveal" data-mf-color="#1f0b04">
+      <div class="mf-panel-copy mf-panel-copy--rust">
         <blockquote class="mf-quote">{{ section.settings.quote_2 }}</blockquote>
-        <div class="mf-rule"></div>
+        <div class="mf-rule mf-rule--copper"></div>
         <p class="mf-body">{{ section.settings.body_2 }}</p>
       </div>
       <div class="mf-panel-media">
@@ -59,8 +59,7 @@
       </div>
     </div>
 
-    <!-- Panel 3: full-bleed image with overlay text -->
-    <div class="mf-panel mf-panel--full">
+    <div class="mf-panel mf-panel--full" data-mf-color="#1a0810">
       <div class="mf-full-bg">
         {%- if section.settings.image_3 != blank -%}
           <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" loading="lazy" decoding="async">
@@ -78,8 +77,8 @@
 
   </div>
 
-  <!-- 4 — CLOSING CTA -->
-  <div class="mf-close mf-reveal">
+  <!-- 4 — CLOSING -->
+  <div class="mf-close mf-reveal" data-mf-color="#1a1716">
     <p class="mf-close-stmt">{{ section.settings.closing_statement }}</p>
     {%- if section.settings.cta_url != blank -%}
       <a class="mag-btn mag-cream" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label | escape }}</a>
@@ -90,12 +89,32 @@
 
 <script>
 (function(){
-  var els = document.querySelectorAll('.manifesto .mf-reveal, .manifesto .mf-open-inner');
-  if(!els.length) return;
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
-  },{threshold:.1});
-  els.forEach(function(el){ io.observe(el); });
+  var bg = document.getElementById('mf-color-bg');
+  if(!bg) return;
+
+  // colour morph on scroll
+  var colorEls = document.querySelectorAll('.manifesto [data-mf-color]');
+  if(colorEls.length) {
+    var colorIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting && bg) {
+          bg.style.background = e.target.dataset.mfColor;
+        }
+      });
+    }, { threshold: 0.3 });
+    colorEls.forEach(function(el){ colorIO.observe(el); });
+  }
+
+  // reveal on scroll
+  var reveals = document.querySelectorAll('.manifesto .mf-reveal, .manifesto .mf-open-inner');
+  if(reveals.length) {
+    var revealIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('on'); revealIO.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(function(el){ revealIO.observe(el); });
+  }
 })();
 </script>
 
@@ -104,26 +123,26 @@
   "name": "Manifesto",
   "settings": [
     { "type": "header", "content": "Opening" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Hedonistas Creed" },
-    { "type": "text", "id": "headline_1", "label": "Headline — Line 1 (cream)", "default": "Not A Spirit." },
-    { "type": "text", "id": "headline_2", "label": "Headline — Line 2 (gold)", "default": "A Ritual." },
-    { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Every bottle carries smoke, fire, and the hands of a maestro who learned from his grandfather. This is mezcal the way it was always meant to be." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Hedonistas De La Fe" },
+    { "type": "text", "id": "headline_1", "label": "Headline — Line 1 (cream)", "default": "We Don't Sell Drinks." },
+    { "type": "text", "id": "headline_2", "label": "Headline — Line 2 (gold)", "default": "We Sell The Unforgettable." },
+    { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Most brands sell a drink. A fleeting sensation. But drinks are forgotten. At Hedonistas Mezcal, we are purveyors of something else entirely." },
     { "type": "header", "content": "Marquee band" },
-    { "type": "text", "id": "marquee_text", "label": "Marquee words", "default": "SMOKE · FIRE · EARTH · TRADITION · WILD · PLEASURE · UNCOMPROMISED · OAXACA · MEZCAL ·" },
+    { "type": "text", "id": "marquee_text", "label": "Marquee words", "default": "GO DEEP · LAUGHTER · CONNECTION · EARTH · FIRE · TIME · NO SHORTCUTS · NO ALGORITHMS · THE UNFORGETTABLE ·" },
     { "type": "header", "content": "Panel 1 — Image Left" },
     { "type": "image_picker", "id": "image_1", "label": "Image" },
-    { "type": "inline_richtext", "id": "quote_1", "label": "Statement", "default": "The smoke doesn't just flavour the mezcal. It becomes it." },
-    { "type": "inline_richtext", "id": "body_1", "label": "Body copy", "default": "Agave hearts roast for three days in earthen pits over volcanic river stone. The smoke penetrates every fibre, every sugar, every molecule — and carries the memory of that fire into every sip." },
+    { "type": "inline_richtext", "id": "quote_1", "label": "Statement", "default": "Late nights that bleed into early mornings. Laughter that cracks the room open." },
+    { "type": "inline_richtext", "id": "body_1", "label": "Body copy", "default": "Strangers who become soulmates over a shared pour. We believe conversation begins in person, not chat boxes. That moments matter more than follower count. And that participants live richer, fuller lives than spectators." },
     { "type": "header", "content": "Panel 2 — Image Right" },
     { "type": "image_picker", "id": "image_2", "label": "Image" },
-    { "type": "inline_richtext", "id": "quote_2", "label": "Statement", "default": "The stone wheel has turned for centuries. We refuse to let it stop." },
-    { "type": "inline_richtext", "id": "body_2", "label": "Body copy", "default": "A two-tonne tahona — a volcanic millstone pulled by a horse — slowly crushes the roasted agave. It takes longer. It costs more. The result cannot be replicated by a mechanical shredder. So we keep turning the stone." },
+    { "type": "inline_richtext", "id": "quote_2", "label": "Statement", "default": "Our mezcal is forged the same way our best nights are. Slowly. Passionately. Without compromise." },
+    { "type": "inline_richtext", "id": "body_2", "label": "Body copy", "default": "It is the ritual of Earth, Fire, and Time. No shortcuts. No spreadsheets. No algorithms. Go Deep is not a line on a label. It is an invitation, a challenge, and a compass for a life lived fully." },
     { "type": "header", "content": "Panel 3 — Full Width" },
     { "type": "image_picker", "id": "image_3", "label": "Full-width image" },
-    { "type": "inline_richtext", "id": "quote_3", "label": "Overlay statement", "default": "This is the mezcal they make for themselves, not for us. We just get to drink it." },
-    { "type": "inline_richtext", "id": "body_3", "label": "Overlay body", "default": "Our maestro learned the craft from his father, who learned it from his. Every decision — the wood of the fermentation vat, the clay of the still, the cut of the distillation — comes from generations of accumulated knowledge that cannot be taught in a school." },
+    { "type": "inline_richtext", "id": "quote_3", "label": "Overlay statement", "default": "Go Deep into the risky, the restless, the unforgettable pursuit of pleasure." },
+    { "type": "inline_richtext", "id": "body_3", "label": "Overlay body", "default": "Every bottle holds the story of its soil. Every pour begins a new chapter. Every bar is a sanctuary where strangers become confidants, and the bartender a Curandero — the keeper of the moment, the guard of the sacred flame." },
     { "type": "header", "content": "Closing" },
-    { "type": "inline_richtext", "id": "closing_statement", "label": "Closing statement", "default": "Pleasure, uncompromised." },
+    { "type": "inline_richtext", "id": "closing_statement", "label": "Closing statement", "default": "This is our resistance. Hedonistas. Go Deep." },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "The Craft Behind Every Bottle" },
     { "type": "url", "id": "cta_url", "label": "Button link (craft page)" }
   ],
