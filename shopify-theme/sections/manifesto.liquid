@@ -93,16 +93,17 @@
   var overlay = document.getElementById('bg-overlay');
   var section = document.querySelector('.manifesto');
 
+  // Fire only when panel occupies the middle 40% of the viewport
   var colorEls = document.querySelectorAll('.manifesto [data-mf-color]');
   if(overlay && colorEls.length){
     var colorIO = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(e.isIntersecting) overlay.style.background = e.target.dataset.mfColor;
       });
-    },{ threshold: 0.3 });
+    },{ rootMargin: '-30% 0px -30% 0px', threshold: 0 });
     colorEls.forEach(function(el){ colorIO.observe(el); });
 
-    // Reset to cream the moment manifesto is fully out of view
+    // Reset to cream as soon as manifesto is fully out of view in either direction
     var resetIO = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(!e.isIntersecting) overlay.style.background = '#F3E6D1';
