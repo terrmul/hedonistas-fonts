@@ -102,12 +102,12 @@
     },{ threshold: 0.2 });
     colorEls.forEach(function(el){ colorIO.observe(el); });
 
-    var resetIO = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(!e.isIntersecting) overlay.style.background = '#F3E6D1';
-      });
-    },{ threshold: 0 });
-    if(mfSection) resetIO.observe(mfSection);
+    // Reset to cream immediately when scroll position moves above the manifesto
+    window.addEventListener('scroll', function(){
+      if(mfSection && window.scrollY < mfSection.offsetTop) {
+        overlay.style.background = '#F3E6D1';
+      }
+    },{ passive: true });
   }
 
   var reveals = document.querySelectorAll('.manifesto .mf-reveal, .manifesto .mf-open-inner');
