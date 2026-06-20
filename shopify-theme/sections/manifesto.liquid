@@ -1,0 +1,132 @@
+<!-- BRAND MANIFESTO — editorial centerpiece, replaces craft on homepage -->
+<section class="manifesto" id="manifesto" data-bg="bg-ink">
+
+  <!-- 1 — OPENING STATEMENT -->
+  <div class="mf-open">
+    <div class="mf-dot-grid" aria-hidden="true"></div>
+    <div class="mf-open-inner">
+      <div class="label mf-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      <h2 class="mf-headline">
+        <span class="mf-h-line mf-h-line--cream">{{ section.settings.headline_1 | escape }}</span>
+        <span class="mf-h-line mf-h-line--accent">{{ section.settings.headline_2 | escape }}</span>
+      </h2>
+      <p class="mf-sub">{{ section.settings.subline }}</p>
+    </div>
+  </div>
+
+  <!-- 2 — MARQUEE -->
+  <div class="mf-marquee" aria-hidden="true">
+    <div class="mf-marquee-track">
+      <span>{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
+      <span>{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- 3 — EDITORIAL PANELS -->
+  <div class="mf-panels">
+
+    <!-- Panel 1: image left, statement right -->
+    <div class="mf-panel mf-panel--img-left mf-reveal">
+      <div class="mf-panel-media">
+        {%- if section.settings.image_1 != blank -%}
+          <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" loading="lazy" decoding="async">
+        {%- else -%}
+          <div class="mf-img-ph" data-label="Add image in Customizer"></div>
+        {%- endif -%}
+        <div class="mf-panel-counter" aria-hidden="true">01</div>
+      </div>
+      <div class="mf-panel-copy">
+        <blockquote class="mf-quote">{{ section.settings.quote_1 }}</blockquote>
+        <div class="mf-rule"></div>
+        <p class="mf-body">{{ section.settings.body_1 }}</p>
+      </div>
+    </div>
+
+    <!-- Panel 2: statement left, image right -->
+    <div class="mf-panel mf-panel--img-right mf-reveal">
+      <div class="mf-panel-copy">
+        <blockquote class="mf-quote">{{ section.settings.quote_2 }}</blockquote>
+        <div class="mf-rule"></div>
+        <p class="mf-body">{{ section.settings.body_2 }}</p>
+      </div>
+      <div class="mf-panel-media">
+        {%- if section.settings.image_2 != blank -%}
+          <img src="{{ section.settings.image_2 | image_url: width: 1200 }}" alt="{{ section.settings.image_2.alt | default: '' | escape }}" loading="lazy" decoding="async">
+        {%- else -%}
+          <div class="mf-img-ph" data-label="Add image in Customizer"></div>
+        {%- endif -%}
+        <div class="mf-panel-counter" aria-hidden="true">02</div>
+      </div>
+    </div>
+
+    <!-- Panel 3: full-bleed image with overlay text -->
+    <div class="mf-panel mf-panel--full">
+      <div class="mf-full-bg">
+        {%- if section.settings.image_3 != blank -%}
+          <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" loading="lazy" decoding="async">
+        {%- else -%}
+          <div class="mf-img-ph mf-img-ph--full" data-label="Add full-width image in Customizer"></div>
+        {%- endif -%}
+        <div class="mf-full-scrim"></div>
+      </div>
+      <div class="mf-full-content mf-reveal">
+        <div class="mf-panel-counter mf-panel-counter--center" aria-hidden="true">03</div>
+        <blockquote class="mf-full-quote">{{ section.settings.quote_3 }}</blockquote>
+        <p class="mf-body mf-body--center">{{ section.settings.body_3 }}</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 4 — CLOSING CTA -->
+  <div class="mf-close mf-reveal">
+    <p class="mf-close-stmt">{{ section.settings.closing_statement }}</p>
+    {%- if section.settings.cta_url != blank -%}
+      <a class="mag-btn mag-cream" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label | escape }}</a>
+    {%- endif -%}
+  </div>
+
+</section>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.manifesto .mf-reveal, .manifesto .mf-open-inner');
+  if(!els.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+  },{threshold:.1});
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Manifesto",
+  "settings": [
+    { "type": "header", "content": "Opening" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Hedonistas Creed" },
+    { "type": "text", "id": "headline_1", "label": "Headline — Line 1 (cream)", "default": "Not A Spirit." },
+    { "type": "text", "id": "headline_2", "label": "Headline — Line 2 (gold)", "default": "A Ritual." },
+    { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Every bottle carries smoke, fire, and the hands of a maestro who learned from his grandfather. This is mezcal the way it was always meant to be." },
+    { "type": "header", "content": "Marquee band" },
+    { "type": "text", "id": "marquee_text", "label": "Marquee words", "default": "SMOKE · FIRE · EARTH · TRADITION · WILD · PLEASURE · UNCOMPROMISED · OAXACA · MEZCAL ·" },
+    { "type": "header", "content": "Panel 1 — Image Left" },
+    { "type": "image_picker", "id": "image_1", "label": "Image" },
+    { "type": "inline_richtext", "id": "quote_1", "label": "Statement", "default": "The smoke doesn't just flavour the mezcal. It becomes it." },
+    { "type": "inline_richtext", "id": "body_1", "label": "Body copy", "default": "Agave hearts roast for three days in earthen pits over volcanic river stone. The smoke penetrates every fibre, every sugar, every molecule — and carries the memory of that fire into every sip." },
+    { "type": "header", "content": "Panel 2 — Image Right" },
+    { "type": "image_picker", "id": "image_2", "label": "Image" },
+    { "type": "inline_richtext", "id": "quote_2", "label": "Statement", "default": "The stone wheel has turned for centuries. We refuse to let it stop." },
+    { "type": "inline_richtext", "id": "body_2", "label": "Body copy", "default": "A two-tonne tahona — a volcanic millstone pulled by a horse — slowly crushes the roasted agave. It takes longer. It costs more. The result cannot be replicated by a mechanical shredder. So we keep turning the stone." },
+    { "type": "header", "content": "Panel 3 — Full Width" },
+    { "type": "image_picker", "id": "image_3", "label": "Full-width image" },
+    { "type": "inline_richtext", "id": "quote_3", "label": "Overlay statement", "default": "This is the mezcal they make for themselves, not for us. We just get to drink it." },
+    { "type": "inline_richtext", "id": "body_3", "label": "Overlay body", "default": "Our maestro learned the craft from his father, who learned it from his. Every decision — the wood of the fermentation vat, the clay of the still, the cut of the distillation — comes from generations of accumulated knowledge that cannot be taught in a school." },
+    { "type": "header", "content": "Closing" },
+    { "type": "inline_richtext", "id": "closing_statement", "label": "Closing statement", "default": "Pleasure, uncompromised." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "The Craft Behind Every Bottle" },
+    { "type": "url", "id": "cta_url", "label": "Button link (craft page)" }
+  ],
+  "presets": [{ "name": "Manifesto" }]
+}
+{% endschema %}

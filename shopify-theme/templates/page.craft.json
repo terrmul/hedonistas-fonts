@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "craft_hero": {
+      "type": "craft-hero",
+      "settings": {
+        "eyebrow": "La Tradición",
+        "headline": "Made By Hand. As It Always Was.",
+        "subline": "Five steps. Zero shortcuts. The same process, unchanged, for generations.",
+        "scroll_label": "↓ The Process"
+      }
+    },
+    "craft_main": {
+      "type": "craft",
+      "blocks": {
+        "chapter-0": {"type":"chapter","settings":{"bg":"bg-marine","num":"01","word":"La Tierra","title":"Wild Harvest","body":"Agaves grow for up to 12 years in the mineral-rich earth of Oaxaca before hand-selection. No cultivation. The soil decides."}},
+        "chapter-1": {"type":"chapter","settings":{"bg":"bg-rust","num":"02","word":"El Fuego","title":"Pit Roast","body":"Hearts roast for days over river stone in earthen pits. The smoke doesn't just flavour — it becomes the mezcal."}},
+        "chapter-2": {"type":"chapter","settings":{"bg":"bg-raspberry","num":"03","word":"La Piedra","title":"Tahona Crush","body":"A two-tonne volcanic stone wheel, horse-drawn, slowly releases every fibre of the agave. Ancient technology. Irreplaceable results."}},
+        "chapter-3": {"type":"chapter","settings":{"bg":"bg-umber","num":"04","word":"La Fermentación","title":"La Fermentación","subtitle":"Fermentation","body":"The crushed agave fibres and juice rest in open pine or clay vats. Wild airborne yeasts do the rest — unhurried, uncontrolled, alive. Time is the only ingredient."}},
+        "chapter-4": {"type":"chapter","settings":{"bg":"bg-cactus","num":"05","word":"El Alambique","title":"El Alambique","subtitle":"Copper Still","body":"Double-distilled in small copper pot stills. Adjusted only by the maestro's palate. No shortcuts. No compromise. Never."}}
+      },
+      "block_order": ["chapter-0","chapter-1","chapter-2","chapter-3","chapter-4"]
+    }
+  },
+  "order": ["craft_hero","craft_main"]
+}

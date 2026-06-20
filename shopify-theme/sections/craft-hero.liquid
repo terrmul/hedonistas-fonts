@@ -1,0 +1,30 @@
+<!-- CRAFT PAGE HERO -->
+<section class="craft-hero" data-bg="bg-ink">
+  <div class="craft-hero-bg">
+    {%- if section.settings.bg_image != blank -%}
+      <img src="{{ section.settings.bg_image | image_url: width: 2000 }}" alt="" loading="eager" decoding="async">
+    {%- endif -%}
+    <div class="craft-hero-scrim"></div>
+    <div class="craft-hero-dots" aria-hidden="true"></div>
+  </div>
+  <div class="craft-hero-content">
+    <div class="label craft-hero-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+    <h1 class="craft-hero-h1">{{ section.settings.headline | escape }}</h1>
+    <p class="craft-hero-sub">{{ section.settings.subline }}</p>
+    <a class="mag-btn mag-cream craft-hero-cta" href="#craft">{{ section.settings.scroll_label | escape }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Craft Hero",
+  "settings": [
+    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "La Tradición" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Made By Hand. As It Always Was." },
+    { "type": "inline_richtext", "id": "subline", "label": "Subline", "default": "Five steps. Zero shortcuts. The same process, unchanged, for generations." },
+    { "type": "text", "id": "scroll_label", "label": "Scroll CTA", "default": "↓ The Process" }
+  ],
+  "presets": [{ "name": "Craft Hero" }]
+}
+{% endschema %}
