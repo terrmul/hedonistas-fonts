@@ -92,22 +92,24 @@
 (function(){
   var overlay = document.getElementById('bg-overlay');
   var mfSection = document.querySelector('.manifesto');
+  var colorEls = Array.prototype.slice.call(document.querySelectorAll('.manifesto [data-mf-color]'));
 
-  var colorEls = document.querySelectorAll('.manifesto [data-mf-color]');
   if(overlay && colorEls.length){
-    var colorIO = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting) overlay.style.background = e.target.dataset.mfColor;
-      });
-    },{ threshold: 0.2 });
-    colorEls.forEach(function(el){ colorIO.observe(el); });
-
-    // Reset to cream immediately when scroll position moves above the manifesto
-    window.addEventListener('scroll', function(){
-      if(mfSection && window.scrollY < mfSection.offsetTop) {
+    function updateColor(){
+      if(mfSection && window.scrollY < mfSection.offsetTop){
         overlay.style.background = '#F3E6D1';
+        return;
       }
-    },{ passive: true });
+      var mid = window.scrollY + window.innerHeight * 0.5;
+      var active = null;
+      for(var i = 0; i < colorEls.length; i++){
+        var top = colorEls[i].getBoundingClientRect().top + window.scrollY;
+        if(mid >= top) active = colorEls[i];
+      }
+      if(active) overlay.style.background = active.dataset.mfColor;
+    }
+    window.addEventListener('scroll', updateColor, { passive: true });
+    updateColor();
   }
 
   var reveals = document.querySelectorAll('.manifesto .mf-reveal, .manifesto .mf-open-inner');
