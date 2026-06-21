@@ -94,16 +94,46 @@
   var colorEls = Array.prototype.slice.call(document.querySelectorAll('[data-mf-color]'));
 
   if(overlay && colorEls.length){
+    var lastScrollY = window.scrollY;
+
     function updateColor(){
-      var viewBottom = window.scrollY + window.innerHeight;
+      var scrollY = window.scrollY;
+      var viewBottom = scrollY + window.innerHeight;
+      var goingDown = scrollY >= lastScrollY;
+      lastScrollY = scrollY;
       var active = null;
-      for(var i = 0; i < colorEls.length; i++){
-        var el = colorEls[i];
-        var elTop = el.getBoundingClientRect().top + window.scrollY;
-        if(viewBottom >= elTop + el.offsetHeight * 0.2) active = el;
+
+      if(goingDown){
+        // Scrolling down: switch when 20% of new panel enters from bottom
+        for(var i = 0; i < colorEls.length; i++){
+          var el = colorEls[i];
+          var elTop = el.getBoundingClientRect().top + scrollY;
+          if(viewBottom >= elTop + el.offsetHeight * 0.2) active = el;
+        }
+      } else {
+        // Scrolling up: switch when 20% of new panel enters from top
+        for(var i = 0; i < colorEls.length; i++){
+          var el = colorEls[i];
+          var elTop = el.getBoundingClientRect().top + scrollY;
+          var elBottom = elTop + el.offsetHeight;
+          if(elBottom > scrollY && elTop < viewBottom && scrollY <= elTop + el.offsetHeight * 0.8){
+            active = el;
+            break;
+          }
+        }
+        // Fallback to down logic if nothing matched
+        if(!active){
+          for(var i = 0; i < colorEls.length; i++){
+            var el = colorEls[i];
+            var elTop = el.getBoundingClientRect().top + scrollY;
+            if(viewBottom >= elTop + el.offsetHeight * 0.2) active = el;
+          }
+        }
       }
+
       if(active) overlay.style.background = active.dataset.mfColor;
     }
+
     window.addEventListener('scroll', updateColor, { passive: true });
     updateColor();
   }
