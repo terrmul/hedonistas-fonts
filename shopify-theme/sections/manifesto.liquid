@@ -17,6 +17,10 @@
   <!-- 2 — MARQUEE -->
   {% style %}
     #manifesto .mf-marquee-track { animation-duration: {{ section.settings.marquee_speed }}s; }
+    #manifesto .mf-finale-line {
+      font-family: {% if section.settings.finale_font_family == 'pacifico' %}'Pacifico', serif{% else %}"metallophile-sp8", sans-serif{% endif %};
+      font-size: clamp(1.2rem, 4vw, {{ section.settings.finale_font_size }}rem);
+    }
   {% endstyle %}
   <div class="mf-marquee" aria-hidden="true" style="background:{{ section.settings.color_marquee_bg }}">
     <div class="mf-marquee-track">
@@ -250,6 +254,11 @@
     { "type": "text", "id": "finale_line_4", "label": "Line 4", "default": "Every bottle holds the story of its soil." },
     { "type": "text", "id": "finale_line_5", "label": "Line 5", "default": "Every bartender, a Curandero — keeper of the sacred flame." },
     { "type": "text", "id": "finale_line_6", "label": "Line 6", "default": "In a time that rewards the shallow, we go deeper." },
+    { "type": "select", "id": "finale_font_family", "label": "Line font", "options": [
+      { "value": "pacifico", "label": "Pacifico (Display)" },
+      { "value": "sans", "label": "Hedonistas Sans" }
+    ], "default": "pacifico" },
+    { "type": "range", "id": "finale_font_size", "label": "Line font size", "info": "Max size on desktop — scales down on mobile", "min": 1, "max": 6, "step": 0.5, "unit": "rem", "default": 3.5 },
     { "type": "color", "id": "color_finale_regular", "label": "Regular line color", "default": "#F3E6D1" },
     { "type": "color", "id": "color_finale_bold", "label": "Bold line color", "default": "#DBB149" },
     { "type": "header", "content": "Finale - Sign-off" },
