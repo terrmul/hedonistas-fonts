@@ -166,7 +166,7 @@
     reveals.forEach(function(el){ revealIO.observe(el); });
   }
 
-  // Finale poem sequence
+  // Finale poem sequence — scroll-based trigger (avoids scroll-snap IO conflicts)
   var finaleEl = document.querySelector('.mf-finale');
   if(finaleEl){
     var finaleLines = Array.prototype.slice.call(finaleEl.querySelectorAll('.mf-finale-line'));
@@ -192,10 +192,16 @@
       });
     }
 
-    var finaleIO = new IntersectionObserver(function(entries){
-      if(entries[0].isIntersecting){ runSequence(); finaleIO.disconnect(); }
-    },{ threshold: 0.35 });
-    finaleIO.observe(finaleEl);
+    function checkFinale(){
+      if(started) return;
+      var rect = finaleEl.getBoundingClientRect();
+      if(rect.top < window.innerHeight * 0.85 && rect.bottom > 0){
+        runSequence();
+        window.removeEventListener('scroll', checkFinale);
+      }
+    }
+    window.addEventListener('scroll', checkFinale, { passive: true });
+    checkFinale();
   }
 })();
 </script>
