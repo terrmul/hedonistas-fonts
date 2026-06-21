@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "story": {
+      "type": "story",
+      "settings": {}
+    },
+    "craft-hero": {
+      "type": "craft-hero",
+      "settings": {}
+    }
+  },
+  "order": ["story", "craft-hero"]
+}
