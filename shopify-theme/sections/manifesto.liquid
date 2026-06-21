@@ -1,8 +1,8 @@
 <!-- BRAND MANIFESTO — The Confession -->
 <section class="manifesto" id="manifesto" data-bg="bg-cream">
 
-  <!-- 1 — OPENING -->
-  <div class="mf-open" data-mf-color="{{ section.settings.color_open }}">
+  <!-- 1 — OPENING (marquee lives inside so it sticks with the card) -->
+  <div class="mf-open" data-mf-color="{{ section.settings.color_open }}" style="background:{{ section.settings.color_open }}">
     <div class="mf-dot-grid" aria-hidden="true"></div>
     <div class="mf-open-inner">
       <div class="label mf-eyebrow" style="color:{{ section.settings.text_eyebrow }}">{{ section.settings.eyebrow | escape }}</div>
@@ -12,18 +12,16 @@
       </h2>
       <p class="mf-open-sub" style="color:{{ section.settings.text_subline }}">{{ section.settings.subline }}</p>
     </div>
-  </div>
-
-  <!-- 2 — MARQUEE -->
-  <div class="mf-marquee" aria-hidden="true">
-    <div class="mf-marquee-track">
-      <span>{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
-      <span>{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
+    <div class="mf-marquee" aria-hidden="true">
+      <div class="mf-marquee-track">
+        <span>{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
+        <span>{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
+      </div>
     </div>
   </div>
 
-  <!-- 3 — PANEL 1 -->
-  <div class="mf-panel mf-panel--1 mf-reveal" data-mf-color="{{ section.settings.color_panel_1 }}">
+  <!-- 2 — PANEL 1 -->
+  <div class="mf-panel mf-panel--1 mf-reveal" data-mf-color="{{ section.settings.color_panel_1 }}" style="background:{{ section.settings.color_panel_1 }}">
     <div class="mf-p1-media">
       {%- if section.settings.image_1 != blank -%}
         <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" width="{{ section.settings.image_1.width }}" height="{{ section.settings.image_1.height }}" loading="lazy" decoding="async">
@@ -38,8 +36,8 @@
     </div>
   </div>
 
-  <!-- 4 — PANEL 2 -->
-  <div class="mf-panel mf-panel--2 mf-reveal" data-mf-color="{{ section.settings.color_panel_2 }}">
+  <!-- 3 — PANEL 2 -->
+  <div class="mf-panel mf-panel--2 mf-reveal" data-mf-color="{{ section.settings.color_panel_2 }}" style="background:{{ section.settings.color_panel_2 }}">
     <div class="mf-p2-quote-wrap">
       <div class="mf-panel-num" aria-hidden="true">02</div>
       <blockquote class="mf-p2-quote" style="color:{{ section.settings.text_panel_2_quote }}">{{ section.settings.quote_2 }}</blockquote>
@@ -59,8 +57,8 @@
     </div>
   </div>
 
-  <!-- 5 — PANEL 3: cinematic -->
-  <div class="mf-panel mf-panel--3" data-mf-color="{{ section.settings.color_panel_3 }}">
+  <!-- 4 — PANEL 3: cinematic -->
+  <div class="mf-panel mf-panel--3" data-mf-color="{{ section.settings.color_panel_3 }}" style="background:{{ section.settings.color_panel_3 }}">
     <div class="mf-full-bg">
       {%- if section.settings.image_3 != blank -%}
         <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" width="{{ section.settings.image_3.width }}" height="{{ section.settings.image_3.height }}" loading="lazy" decoding="async" style="object-position: {{ section.settings.panel_3_focal_x }}% center">
@@ -72,8 +70,8 @@
     <div class="mf-p3-word mf-reveal" style="color:{{ section.settings.text_panel_3_word }}">{{ section.settings.panel_3_word | escape }}</div>
   </div>
 
-  <!-- 6 — CLOSING: poem -->
-  <div class="mf-close mf-reveal" data-mf-color="{{ section.settings.color_close }}">
+  <!-- 5 — CLOSING: poem -->
+  <div class="mf-close mf-reveal" data-mf-color="{{ section.settings.color_close }}" style="background:{{ section.settings.color_close }}">
     <div class="mf-poem" style="color:{{ section.settings.text_poem }}">
       {{ section.settings.poem_body }}
     </div>
@@ -93,6 +91,14 @@
   var overlay = document.getElementById('bg-overlay');
   var colorEls = Array.prototype.slice.call(document.querySelectorAll('[data-mf-color]'));
 
+  // Pre-compute natural document positions (unaffected by sticky)
+  colorEls.forEach(function(el){
+    var top = 0, node = el;
+    while(node && node.offsetParent){ top += node.offsetTop; node = node.offsetParent; }
+    el._naturalTop = top;
+    el._naturalHeight = el.offsetHeight;
+  });
+
   if(overlay && colorEls.length){
     var lastScrollY = window.scrollY;
 
@@ -104,29 +110,23 @@
       var active = null;
 
       if(goingDown){
-        // Scrolling down: switch when 20% of new panel enters from bottom
         for(var i = 0; i < colorEls.length; i++){
           var el = colorEls[i];
-          var elTop = el.getBoundingClientRect().top + scrollY;
-          if(viewBottom >= elTop + el.offsetHeight * 0.2) active = el;
+          if(viewBottom >= el._naturalTop + el._naturalHeight * 0.2) active = el;
         }
       } else {
-        // Scrolling up: switch when 20% of new panel enters from top
         for(var i = 0; i < colorEls.length; i++){
           var el = colorEls[i];
-          var elTop = el.getBoundingClientRect().top + scrollY;
-          var elBottom = elTop + el.offsetHeight;
-          if(elBottom > scrollY && elTop < viewBottom && scrollY <= elTop + el.offsetHeight * 0.8){
+          var elBottom = el._naturalTop + el._naturalHeight;
+          if(elBottom > scrollY && el._naturalTop < viewBottom && scrollY <= el._naturalTop + el._naturalHeight * 0.8){
             active = el;
             break;
           }
         }
-        // Fallback to down logic if nothing matched
         if(!active){
           for(var i = 0; i < colorEls.length; i++){
             var el = colorEls[i];
-            var elTop = el.getBoundingClientRect().top + scrollY;
-            if(viewBottom >= elTop + el.offsetHeight * 0.2) active = el;
+            if(viewBottom >= el._naturalTop + el._naturalHeight * 0.2) active = el;
           }
         }
       }
