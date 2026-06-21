@@ -63,7 +63,7 @@
   <div class="mf-panel mf-panel--3" data-mf-color="{{ section.settings.color_panel_3 }}">
     <div class="mf-full-bg">
       {%- if section.settings.image_3 != blank -%}
-        <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" width="{{ section.settings.image_3.width }}" height="{{ section.settings.image_3.height }}" loading="lazy" decoding="async">
+        <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" width="{{ section.settings.image_3.width }}" height="{{ section.settings.image_3.height }}" loading="lazy" decoding="async" style="object-position: {{ section.settings.panel_3_focal_x }}% center">
       {%- else -%}
         <div class="mf-media-ph mf-media-ph--full" data-label="Add full-width image in Customizer"></div>
       {%- endif -%}
@@ -153,6 +153,7 @@
     { "type": "header", "content": "Panel 3 - Cinematic" },
     { "type": "color", "id": "color_panel_3", "label": "Background", "default": "#1a1716" },
     { "type": "image_picker", "id": "image_3", "label": "Full-width image" },
+    { "type": "range", "id": "panel_3_focal_x", "label": "Image focal point - horizontal", "info": "Slide to keep the main subject in frame on all screen sizes. 50 = center, lower = shift left, higher = shift right.", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
     { "type": "text", "id": "panel_3_word", "label": "Big word (bottom left)", "default": "Go Deep." },
     { "type": "color", "id": "text_panel_3_word", "label": "Big word color", "default": "#DBB149" },
     { "type": "header", "content": "Poem - Closing" },
