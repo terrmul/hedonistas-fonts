@@ -1,13 +1,85 @@
 {
   "sections": {
-    "story": {
+    "story_main": {
       "type": "story",
-      "settings": {}
+      "settings": {
+        "manifesto_label": "Nuestro Manifiesto",
+        "manifesto_heading": "Go Deep.",
+        "creed": "We are hedonists in the truest sense — devoted to the pursuit of pleasure through craft. Going deep means no shortcuts and no gatekeeping: the finest mezcal in the world deserves to be shared, not hoarded.",
+        "quote": "\"The agave gives you everything. Your job is to not get in the way.\"",
+        "story_label": "Nuestra Historia",
+        "story_heading": "Born from Obsession.",
+        "story_body": "<p>Hedonistas Mezcal began with two friends and a stubborn belief — that the finest mezcal in the world deserves to be shared. Not hoarded. Not gatekept. Shared.</p><p>Founded in the highlands of Oaxaca, we partnered with maestros mezcaleros whose families have cultivated and cooked agave the same way for generations. No shortcuts. No industrial process. Just fire, stone, time, and copper — and a friendship that wouldn't settle for less.</p>"
+      }
     },
-    "craft-hero": {
+    "craft_hero": {
       "type": "craft-hero",
+      "settings": {
+        "eyebrow": "La Tradición",
+        "headline": "Made By Hand. As It Always Was.",
+        "subline": "Five steps. Zero shortcuts. The same process, unchanged, for generations.",
+        "scroll_label": "↓ The Process"
+      }
+    },
+    "craft_main": {
+      "type": "craft",
+      "blocks": {
+        "chapter-0": {
+          "type": "chapter",
+          "settings": {
+            "bg": "bg-marine",
+            "num": "01",
+            "word": "La Tierra",
+            "title": "Wild Harvest",
+            "body": "Agaves grow for up to 12 years in the mineral-rich earth of Oaxaca before hand-selection. No cultivation. The soil decides."
+          }
+        },
+        "chapter-1": {
+          "type": "chapter",
+          "settings": {
+            "bg": "bg-rust",
+            "num": "02",
+            "word": "El Fuego",
+            "title": "Pit Roast",
+            "body": "Hearts roast for days over river stone in earthen pits. The smoke doesn't just flavour — it becomes the mezcal."
+          }
+        },
+        "chapter-2": {
+          "type": "chapter",
+          "settings": {
+            "bg": "bg-raspberry",
+            "num": "03",
+            "word": "La Piedra",
+            "title": "Tahona Crush",
+            "body": "A two-tonne volcanic stone wheel, horse-drawn, slowly releases every fibre of the agave. Ancient technology. Irreplaceable results."
+          }
+        },
+        "chapter-3": {
+          "type": "chapter",
+          "settings": {
+            "bg": "bg-umber",
+            "num": "04",
+            "word": "La Fermentación",
+            "title": "La Fermentación",
+            "subtitle": "Fermentation",
+            "body": "The crushed agave fibres and juice rest in open pine or clay vats. Wild airborne yeasts do the rest — unhurried, uncontrolled, alive. Time is the only ingredient."
+          }
+        },
+        "chapter-4": {
+          "type": "chapter",
+          "settings": {
+            "bg": "bg-cactus",
+            "num": "05",
+            "word": "El Alambique",
+            "title": "El Alambique",
+            "subtitle": "Copper Still",
+            "body": "Double-distilled in small copper pot stills. Adjusted only by the maestro's palate. No shortcuts. No compromise. Never."
+          }
+        }
+      },
+      "block_order": ["chapter-0", "chapter-1", "chapter-2", "chapter-3", "chapter-4"],
       "settings": {}
     }
   },
-  "order": ["story", "craft-hero"]
+  "order": ["story_main", "craft_hero", "craft_main"]
 }
