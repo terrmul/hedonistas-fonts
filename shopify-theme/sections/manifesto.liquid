@@ -2,7 +2,7 @@
 <section class="manifesto" id="manifesto" data-bg="bg-cream">
 
   <!-- 1 — OPENING -->
-  <div class="mf-open" data-mf-color="{{ section.settings.color_open }}" style="background:{{ section.settings.color_open }}">
+  <div class="mf-open" data-mf-color="{{ section.settings.color_open }}">
     <div class="mf-dot-grid" aria-hidden="true"></div>
     <div class="mf-open-inner">
       <div class="label mf-eyebrow" style="color:{{ section.settings.text_eyebrow }}">{{ section.settings.eyebrow | escape }}</div>
@@ -23,7 +23,7 @@
   </div>
 
   <!-- 3 — PANEL 1 -->
-  <div class="mf-panel mf-panel--1 mf-reveal" data-mf-color="{{ section.settings.color_panel_1 }}" style="background:{{ section.settings.color_panel_1 }}">
+  <div class="mf-panel mf-panel--1 mf-reveal" data-mf-color="{{ section.settings.color_panel_1 }}">
     <div class="mf-p1-media">
       {%- if section.settings.image_1 != blank -%}
         <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" width="{{ section.settings.image_1.width }}" height="{{ section.settings.image_1.height }}" loading="lazy" decoding="async">
@@ -39,7 +39,7 @@
   </div>
 
   <!-- 4 — PANEL 2 -->
-  <div class="mf-panel mf-panel--2 mf-reveal" data-mf-color="{{ section.settings.color_panel_2 }}" style="background:{{ section.settings.color_panel_2 }}">
+  <div class="mf-panel mf-panel--2 mf-reveal" data-mf-color="{{ section.settings.color_panel_2 }}">
     <div class="mf-p2-quote-wrap">
       <div class="mf-panel-num" aria-hidden="true">02</div>
       <blockquote class="mf-p2-quote" style="color:{{ section.settings.text_panel_2_quote }}">{{ section.settings.quote_2 }}</blockquote>
@@ -60,7 +60,7 @@
   </div>
 
   <!-- 5 — PANEL 3: cinematic -->
-  <div class="mf-panel mf-panel--3" data-mf-color="{{ section.settings.color_panel_3 }}" style="background:{{ section.settings.color_panel_3 }}">
+  <div class="mf-panel mf-panel--3" data-mf-color="{{ section.settings.color_panel_3 }}">
     <div class="mf-full-bg">
       {%- if section.settings.image_3 != blank -%}
         <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" width="{{ section.settings.image_3.width }}" height="{{ section.settings.image_3.height }}" loading="lazy" decoding="async" style="object-position: {{ section.settings.panel_3_focal_x }}% center">
@@ -73,7 +73,7 @@
   </div>
 
   <!-- 6 — CLOSING: poem -->
-  <div class="mf-close mf-reveal" data-mf-color="{{ section.settings.color_close }}" style="background:{{ section.settings.color_close }}">
+  <div class="mf-close mf-reveal" data-mf-color="{{ section.settings.color_close }}">
     <div class="mf-poem" style="color:{{ section.settings.text_poem }}">
       {{ section.settings.poem_body }}
     </div>
