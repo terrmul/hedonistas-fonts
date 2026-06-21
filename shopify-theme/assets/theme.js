@@ -384,6 +384,7 @@ var SECTION_INITS={
   'maestro':  function(el){ initReveal(el); },
   'awards':   function(el){ initAwards(el);    initReveal(el); initMagButtons(el); },
   'cocktails':function(el){ initCocktails(el); initReveal(el); initMagButtons(el); },
+  'manifesto':function(el){ initReveal(el); },
   'findus':   function(el){ initMapScroll(el); },
   'social':   function(el){ initIgTrack(el);   initReveal(el); }
 };

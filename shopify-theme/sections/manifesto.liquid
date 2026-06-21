@@ -26,7 +26,7 @@
   </div>
 
   <!-- 3 — PANEL 1 -->
-  <div class="mf-panel mf-panel--1 mf-reveal" data-mf-color="{{ section.settings.color_panel_1 }}">
+  <div class="mf-panel mf-panel--1" data-mf-color="{{ section.settings.color_panel_1 }}">
     <div class="mf-p1-media">
       {%- if section.settings.image_1 != blank -%}
         <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" width="{{ section.settings.image_1.width }}" height="{{ section.settings.image_1.height }}" loading="lazy" decoding="async">
@@ -42,7 +42,7 @@
   </div>
 
   <!-- 4 — PANEL 2 -->
-  <div class="mf-panel mf-panel--2 mf-reveal" data-mf-color="{{ section.settings.color_panel_2 }}">
+  <div class="mf-panel mf-panel--2" data-mf-color="{{ section.settings.color_panel_2 }}">
     <div class="mf-p2-quote-wrap">
       <div class="mf-panel-num" aria-hidden="true">02</div>
       <blockquote class="mf-p2-quote" style="color:{{ section.settings.text_panel_2_quote }}">{{ section.settings.quote_2 }}</blockquote>
