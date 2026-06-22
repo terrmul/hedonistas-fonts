@@ -53,6 +53,18 @@ nav.nav-scrolled{
   padding-top:1rem;padding-bottom:1rem;
   border-bottom:1px solid rgba(26,23,22,.12);
 }
+body.template-product nav,body.template-page nav{
+  mix-blend-mode:normal;
+  background:rgba(243,230,209,.42);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  padding-top:1rem;padding-bottom:1rem;
+  border-bottom:1px solid rgba(26,23,22,.12);
+}
+body.template-product nav .nav-wordmark,body.template-product nav ul a,
+body.template-page nav .nav-wordmark,body.template-page nav ul a{color:var(--ink)}
+body.template-product nav .nav-cart,body.template-page nav .nav-cart{border-color:rgba(26,23,22,.35)}
+body.template-product nav img.nav-icon,body.template-page nav img.nav-icon{filter:brightness(0)}
+body.template-product .nav-hamburger span,body.template-page .nav-hamburger span{background:var(--ink)}
 nav.nav-scrolled .nav-wordmark,nav.nav-scrolled ul a{color:var(--ink)}
 nav.nav-scrolled .nav-cart{border-color:rgba(26,23,22,.35)}
 nav.nav-scrolled .nav-logo img.nav-icon{height:42px;filter:brightness(0)}
