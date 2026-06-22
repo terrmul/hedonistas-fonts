@@ -1103,3 +1103,11 @@ html.age-gate-open{overflow:hidden}
 .craft-hero-h1{font-size:clamp(3.2rem,12vw,9.5rem);color:var(--cream);line-height:.88;margin-bottom:1.5rem;text-shadow:2px 4px 0 rgba(26,23,22,.45)}
 .craft-hero-sub{font-size:1.05rem;line-height:1.8;color:rgba(243,230,209,.7);max-width:46ch;margin:0 auto 2.5rem;font-style:italic}
 @media(max-width:920px){.craft-hero-content{padding:7rem 1.5rem}}
+
+.pdp-page .bottles-selector{min-height:100vh}
+.pdp-page .ce-hero{flex:1;width:100%}
+.pdp-page .ce-panel.active{display:flex;min-height:100vh}
+.pdp-page .ce-visual{flex:0 0 48%}
+.pdp-h1{font-size:clamp(2.2rem,4vw,3.8rem);margin-bottom:1rem;line-height:.92}
+.pdp-back{display:inline-block;margin-top:2rem;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--smoke);text-decoration:none;transition:color .25s}
+.pdp-back:hover{color:var(--ink)}

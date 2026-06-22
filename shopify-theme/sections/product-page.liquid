@@ -1,0 +1,182 @@
+<!-- PRODUCT DETAIL PAGE — matches bottle selector layout -->
+<section class="bottles-section pdp-page" id="pdp" data-nav="light" data-bg="bg-cream">
+  <div class="bottles-selector">
+    <div class="ce-hero">
+      <div class="ce-panel active">
+
+        <!-- LEFT: sticky bottle visual -->
+        <div class="ce-visual">
+          <div class="ce-visual-word">{{ section.settings.name | escape }}</div>
+          <div class="ce-main-shot">
+            {%- if section.settings.bottle_image != blank -%}
+              <img class="ce-bottle-img" id="pdp-hero-img" src="{{ section.settings.bottle_image | image_url: width: 700 }}" alt="{{ section.settings.name | escape }} bottle" decoding="async">
+            {%- else -%}
+              <div class="b-shape" style="background:rgba(26,23,22,.2);width:88px;height:280px"></div>
+            {%- endif -%}
+          </div>
+          <div class="ce-shots">
+            {%- if section.settings.bottle_image != blank -%}
+              <div class="ce-shot-thumb active" data-shot="{{ section.settings.bottle_image | image_url: width: 700 }}">
+                <img src="{{ section.settings.bottle_image | image_url: width: 120 }}" alt="Front" loading="lazy" decoding="async">
+              </div>
+            {%- else -%}
+              <div class="ce-shot-thumb active"><div class="ce-shot-label">Front</div></div>
+            {%- endif -%}
+            {%- if section.settings.shot_2_image != blank -%}
+              <div class="ce-shot-thumb" data-shot="{{ section.settings.shot_2_image | image_url: width: 700 }}">
+                <img src="{{ section.settings.shot_2_image | image_url: width: 120 }}" alt="Back" loading="lazy" decoding="async">
+              </div>
+            {%- else -%}
+              <div class="ce-shot-thumb"><div class="ce-shot-label">Back</div></div>
+            {%- endif -%}
+            {%- if section.settings.shot_3_image != blank -%}
+              <div class="ce-shot-thumb" data-shot="{{ section.settings.shot_3_image | image_url: width: 700 }}">
+                <img src="{{ section.settings.shot_3_image | image_url: width: 120 }}" alt="Style" loading="lazy" decoding="async">
+              </div>
+            {%- else -%}
+              <div class="ce-shot-thumb"><div class="ce-shot-label">Style</div></div>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <div class="ce-divider"></div>
+
+        <!-- RIGHT: copy -->
+        <div class="ce-copy">
+          <div class="label">{{ section.settings.copy_label | escape }}</div>
+          <h1 class="pdp-h1">{{ section.settings.name | escape }}</h1>
+
+          <div class="ce-tabs">
+            <button class="ce-tab active" data-tab="desc">Description</button>
+            <button class="ce-tab" data-tab="pair">Cocktail &amp; Food Pairing</button>
+            <button class="ce-tab" data-tab="high">Highlights</button>
+          </div>
+
+          <div class="ce-tab-panel active" data-tab="desc">
+            <div class="ce-rev-head" style="font-size:1.2rem;margin-bottom:1rem">{{ section.settings.tier_name | escape }}</div>
+            <ul class="ce-specs">
+              {%- if section.settings.spec_1 != blank -%}<li>{{ section.settings.spec_1 | escape }}</li>{%- endif -%}
+              {%- if section.settings.spec_2 != blank -%}<li>{{ section.settings.spec_2 | escape }}</li>{%- endif -%}
+              {%- if section.settings.spec_3 != blank -%}<li>{{ section.settings.spec_3 | escape }}</li>{%- endif -%}
+            </ul>
+            <div class="ce-notes">
+              {%- if section.settings.nose != blank -%}<p><b>Nose:</b> {{ section.settings.nose | escape }}</p>{%- endif -%}
+              {%- if section.settings.palate != blank -%}<p><b>Palate:</b> {{ section.settings.palate | escape }}</p>{%- endif -%}
+              {%- if section.settings.body != blank -%}<p><b>Body:</b> {{ section.settings.body | escape }}</p>{%- endif -%}
+              {%- if section.settings.finish != blank -%}<p><b>Finish:</b> {{ section.settings.finish | escape }}</p>{%- endif -%}
+            </div>
+            <p class="ce-notes-body">{{ section.settings.desc_body }}</p>
+          </div>
+
+          <div class="ce-tab-panel" data-tab="pair">
+            <div class="ce-notes">
+              {%- if section.settings.pair_cocktails != blank -%}<p><b>Cocktails:</b> {{ section.settings.pair_cocktails | escape }}</p>{%- endif -%}
+              {%- if section.settings.pair_food != blank -%}<p><b>Food:</b> {{ section.settings.pair_food | escape }}</p>{%- endif -%}
+            </div>
+            <p class="ce-notes-body">{{ section.settings.pair_body }}</p>
+          </div>
+
+          <div class="ce-tab-panel" data-tab="high">
+            <ul class="ce-highlights">
+              {%- if section.settings.highlight_1 != blank -%}<li>{{ section.settings.highlight_1 | escape }}</li>{%- endif -%}
+              {%- if section.settings.highlight_2 != blank -%}<li>{{ section.settings.highlight_2 | escape }}</li>{%- endif -%}
+              {%- if section.settings.highlight_3 != blank -%}<li>{{ section.settings.highlight_3 | escape }}</li>{%- endif -%}
+              {%- if section.settings.highlight_4 != blank -%}<li>{{ section.settings.highlight_4 | escape }}</li>{%- endif -%}
+            </ul>
+          </div>
+
+          <div class="ce-copy-buy">
+            <span class="ce-copy-price">{{ section.settings.price | escape }}</span>
+            <form action="/cart/add" method="post" enctype="multipart/form-data" style="display:contents">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button type="submit" class="mag-btn mag-dark"{% unless product.available %} disabled{% endunless %}>
+                {%- if product.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
+              </button>
+            </form>
+          </div>
+
+          {%- if section.settings.review_quote != blank -%}
+            <div class="ce-reviews">
+              <div class="ce-rev-head">Customers Are Saying</div>
+              <div class="ce-rev-meta">
+                <span class="ce-stars">★★★★★</span>
+                <span>{{ section.settings.review_rating | escape }} ★ ({{ section.settings.review_count | escape }})</span>
+                <span class="ce-rev-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Verified</span>
+              </div>
+              <p class="ce-rev-quote">{{ section.settings.review_quote }}</p>
+              <div class="ce-rev-author">{{ section.settings.review_author | escape }}</div>
+            </div>
+          {%- endif -%}
+
+          <a class="pdp-back" href="/#mezcals">&larr; The Collection</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var hero = document.getElementById('pdp-hero-img');
+  document.querySelectorAll('.pdp-page .ce-shot-thumb[data-shot]').forEach(function(thumb){
+    thumb.addEventListener('click', function(){
+      if(hero) hero.src = thumb.dataset.shot;
+      document.querySelectorAll('.pdp-page .ce-shot-thumb').forEach(function(t){ t.classList.remove('active'); });
+      thumb.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.pdp-page .ce-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var t = tab.dataset.tab;
+      document.querySelectorAll('.pdp-page .ce-tab').forEach(function(x){ x.classList.remove('active'); });
+      document.querySelectorAll('.pdp-page .ce-tab-panel').forEach(function(x){ x.classList.remove('active'); });
+      tab.classList.add('active');
+      var panel = document.querySelector('.pdp-page .ce-tab-panel[data-tab="'+t+'"]');
+      if(panel) panel.classList.add('active');
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "settings": [
+    { "type": "header", "content": "Identity" },
+    { "type": "text", "id": "name", "label": "Name", "default": "Espadín" },
+    { "type": "text", "id": "species", "label": "Agave species", "default": "Angustifolia" },
+    { "type": "text", "id": "copy_label", "label": "Eyebrow", "default": "100% Agave Angustifolia" },
+    { "type": "text", "id": "price", "label": "Price", "default": "$64" },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "bottle_image", "label": "Bottle — Front" },
+    { "type": "image_picker", "id": "shot_2_image", "label": "Bottle — Back (optional)" },
+    { "type": "image_picker", "id": "shot_3_image", "label": "Bottle — Lifestyle (optional)" },
+    { "type": "header", "content": "Description tab" },
+    { "type": "text", "id": "tier_name", "label": "Tier name", "default": "The Gateway" },
+    { "type": "text", "id": "spec_1", "label": "Spec 1" },
+    { "type": "text", "id": "spec_2", "label": "Spec 2" },
+    { "type": "text", "id": "spec_3", "label": "Spec 3" },
+    { "type": "text", "id": "nose", "label": "Nose" },
+    { "type": "text", "id": "palate", "label": "Palate" },
+    { "type": "text", "id": "body", "label": "Body" },
+    { "type": "text", "id": "finish", "label": "Finish" },
+    { "type": "inline_richtext", "id": "desc_body", "label": "Description paragraph" },
+    { "type": "header", "content": "Pairing tab" },
+    { "type": "text", "id": "pair_cocktails", "label": "Cocktails" },
+    { "type": "text", "id": "pair_food", "label": "Food" },
+    { "type": "inline_richtext", "id": "pair_body", "label": "Pairing paragraph" },
+    { "type": "header", "content": "Highlights tab" },
+    { "type": "text", "id": "highlight_1", "label": "Highlight 1" },
+    { "type": "text", "id": "highlight_2", "label": "Highlight 2" },
+    { "type": "text", "id": "highlight_3", "label": "Highlight 3" },
+    { "type": "text", "id": "highlight_4", "label": "Highlight 4" },
+    { "type": "header", "content": "Review" },
+    { "type": "text", "id": "review_rating", "label": "Rating", "default": "5.00" },
+    { "type": "text", "id": "review_count", "label": "Review count", "default": "20" },
+    { "type": "inline_richtext", "id": "review_quote", "label": "Quote" },
+    { "type": "text", "id": "review_author", "label": "Author", "default": "— Verified Buyer" }
+  ],
+  "presets": [{ "name": "Product Page" }]
+}
+{% endschema %}
