@@ -1,1 +1,277 @@
-PLACEHOLDER_LIQUID
+<!-- BRAND MANIFESTO — The Confession -->
+<section class="manifesto" id="manifesto" data-bg="bg-cream">
+
+  <!-- 1 — OPENING -->
+  <div class="mf-open" data-mf-color="{{ section.settings.color_open }}">
+    <div class="mf-dot-grid" aria-hidden="true"></div>
+    <div class="mf-open-inner">
+      <div class="label mf-eyebrow" style="color:{{ section.settings.text_eyebrow }}">{{ section.settings.eyebrow | escape }}</div>
+      <h2 class="mf-headline">
+        <span class="mf-h-line" style="color:{{ section.settings.text_headline_1 }}">{{ section.settings.headline_1 | escape }}</span>
+        <span class="mf-h-line" style="color:{{ section.settings.text_headline_2 }}">{{ section.settings.headline_2 | escape }}</span>
+      </h2>
+      <p class="mf-open-sub" style="color:{{ section.settings.text_subline }}">{{ section.settings.subline }}</p>
+    </div>
+  </div>
+
+  <!-- 2 — MARQUEE -->
+  {% style %}
+    #manifesto .mf-marquee-track { animation-duration: {{ section.settings.marquee_speed }}s; }
+    #manifesto .mf-finale-line {
+      font-family: {% if section.settings.finale_font_family == 'pacifico' %}'Pacifico', serif{% else %}"metallophile-sp8", sans-serif{% endif %};
+      font-size: clamp(1.2rem, 4vw, {{ section.settings.finale_font_size }}rem);
+    }
+  {% endstyle %}
+  <div class="mf-marquee" aria-hidden="true" style="background:{{ section.settings.color_marquee_bg }}">
+    <div class="mf-marquee-track">
+      <span style="color:{{ section.settings.color_marquee_text }}">{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
+      <span style="color:{{ section.settings.color_marquee_text }}">{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
+      <span style="color:{{ section.settings.color_marquee_text }}">{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
+      <span style="color:{{ section.settings.color_marquee_text }}">{{ section.settings.marquee_text }}&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- 3 — PANEL 1 -->
+  <div class="mf-panel mf-panel--1" data-mf-color="{{ section.settings.color_panel_1 }}">
+    <div class="mf-p1-media">
+      {%- if section.settings.image_1 != blank -%}
+        <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" width="{{ section.settings.image_1.width }}" height="{{ section.settings.image_1.height }}" loading="lazy" decoding="async">
+      {%- else -%}
+        <div class="mf-media-ph" data-label="Add image in Customizer"></div>
+      {%- endif -%}
+    </div>
+    <div class="mf-p1-copy">
+      <div class="mf-panel-num" aria-hidden="true">01</div>
+      <blockquote class="mf-big-quote" style="color:{{ section.settings.text_panel_1_quote }}">{{ section.settings.quote_1 }}</blockquote>
+      <p class="mf-body--cream" style="color:{{ section.settings.text_panel_1_body }}">{{ section.settings.body_1 }}</p>
+    </div>
+  </div>
+
+  <!-- 4 — PANEL 2 -->
+  <div class="mf-panel mf-panel--2" data-mf-color="{{ section.settings.color_panel_2 }}">
+    <div class="mf-p2-quote-wrap">
+      <div class="mf-panel-num" aria-hidden="true">02</div>
+      <blockquote class="mf-p2-quote" style="color:{{ section.settings.text_panel_2_quote }}">{{ section.settings.quote_2 }}</blockquote>
+    </div>
+    <div class="mf-p2-lower">
+      <div class="mf-p2-media">
+        {%- if section.settings.image_2 != blank -%}
+          <img src="{{ section.settings.image_2 | image_url: width: 1200 }}" alt="{{ section.settings.image_2.alt | default: '' | escape }}" width="{{ section.settings.image_2.width }}" height="{{ section.settings.image_2.height }}" loading="lazy" decoding="async">
+        {%- else -%}
+          <div class="mf-media-ph" data-label="Add image in Customizer"></div>
+        {%- endif -%}
+      </div>
+      <div class="mf-p2-body-wrap">
+        <div class="mf-rule--solar"></div>
+        <p class="mf-body--cream" style="color:{{ section.settings.text_panel_2_body }}">{{ section.settings.body_2 }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 — FINALE: cinematic image + poem sequence -->
+  <div class="mf-finale" data-mf-color="{{ section.settings.color_panel_3 }}">
+    <div class="mf-full-bg">
+      {%- if section.settings.image_3 != blank -%}
+        <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" width="{{ section.settings.image_3.width }}" height="{{ section.settings.image_3.height }}" loading="lazy" decoding="async" style="object-position: {{ section.settings.panel_3_focal_x }}% center">
+      {%- else -%}
+        <div class="mf-media-ph mf-media-ph--full" data-label="Add full-width image in Customizer"></div>
+      {%- endif -%}
+      <div class="mf-full-scrim"></div>
+    </div>
+    <div class="mf-finale-stage">
+      <div class="mf-finale-lines" aria-live="polite">
+        {%- if section.settings.finale_line_1 != blank -%}
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_1 | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.finale_line_2 != blank -%}
+          <p class="mf-finale-line mf-finale-line--bold" style="color:{{ section.settings.color_finale_bold }}">{{ section.settings.finale_line_2 | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.finale_line_3 != blank -%}
+          <p class="mf-finale-line mf-finale-line--bold" style="color:{{ section.settings.color_finale_bold }}">{{ section.settings.finale_line_3 | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.finale_line_4 != blank -%}
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_4 | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.finale_line_5 != blank -%}
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_5 | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.finale_line_6 != blank -%}
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_6 | escape }}</p>
+        {%- endif -%}
+      </div>
+      <div class="mf-finale-end">
+        <span class="mf-poem-finale-name" style="color:{{ section.settings.text_finale_name }}">{{ section.settings.poem_finale_name | escape }}</span>
+        <span class="mf-poem-finale-call" style="color:{{ section.settings.text_finale_call }}">{{ section.settings.poem_finale_call | escape }}</span>
+        {%- if section.settings.cta_url != blank -%}
+          <a class="mag-btn mag-dark mf-poem-cta" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+(function(){
+  var overlay = document.getElementById('bg-overlay');
+  var colorEls = Array.prototype.slice.call(document.querySelectorAll('[data-mf-color]'));
+
+  colorEls.forEach(function(el){
+    var top = 0, node = el;
+    while(node && node.offsetParent){ top += node.offsetTop; node = node.offsetParent; }
+    el._naturalTop = top;
+    el._naturalHeight = el.offsetHeight;
+  });
+
+  if(overlay && colorEls.length){
+    var lastScrollY = window.scrollY;
+
+    function updateColor(){
+      var scrollY = window.scrollY;
+      var viewBottom = scrollY + window.innerHeight;
+      var goingDown = scrollY >= lastScrollY;
+      lastScrollY = scrollY;
+      var active = null;
+
+      if(goingDown){
+        for(var i = 0; i < colorEls.length; i++){
+          var el = colorEls[i];
+          if(viewBottom >= el._naturalTop + el._naturalHeight * 0.2) active = el;
+        }
+      } else {
+        for(var i = 0; i < colorEls.length; i++){
+          var el = colorEls[i];
+          var elBottom = el._naturalTop + el._naturalHeight;
+          if(elBottom > scrollY && el._naturalTop < viewBottom && scrollY <= el._naturalTop + el._naturalHeight * 0.8){
+            active = el;
+            break;
+          }
+        }
+        if(!active){
+          for(var i = 0; i < colorEls.length; i++){
+            var el = colorEls[i];
+            if(viewBottom >= el._naturalTop + el._naturalHeight * 0.2) active = el;
+          }
+        }
+      }
+
+      if(active) overlay.style.background = active.dataset.mfColor;
+    }
+
+    window.addEventListener('scroll', updateColor, { passive: true });
+    updateColor();
+  }
+
+  var reveals = document.querySelectorAll('.manifesto .mf-reveal, .manifesto .mf-open-inner');
+  if(reveals.length){
+    var revealIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('on'); revealIO.unobserve(e.target); }
+      });
+    },{ threshold: 0.08 });
+    reveals.forEach(function(el){ revealIO.observe(el); });
+  }
+
+  // Finale poem sequence — scroll-based trigger (avoids scroll-snap IO conflicts)
+  var finaleEl = document.querySelector('.mf-finale');
+  if(finaleEl){
+    var finaleLines = Array.prototype.slice.call(finaleEl.querySelectorAll('.mf-finale-line'));
+    var finaleEnd = finaleEl.querySelector('.mf-finale-end');
+    var started = false;
+
+    function runSequence(){
+      if(started) return;
+      started = true;
+      var FADE = 800, HOLD = 2200, GAP = 300;
+      var t = 500;
+      finaleLines.forEach(function(line, i){
+        var isLast = i === finaleLines.length - 1;
+        setTimeout(function(){ line.classList.add('on'); }, t);
+        if(!isLast){
+          setTimeout(function(){ line.classList.remove('on'); }, t + FADE + HOLD);
+          t += FADE + HOLD + GAP;
+        } else {
+          setTimeout(function(){
+            if(finaleEnd) finaleEnd.classList.add('on');
+          }, t + FADE + HOLD + 500);
+        }
+      });
+    }
+
+    function checkFinale(){
+      if(started) return;
+      var rect = finaleEl.getBoundingClientRect();
+      if(rect.top < window.innerHeight * 0.85 && rect.bottom > 0){
+        runSequence();
+        window.removeEventListener('scroll', checkFinale);
+      }
+    }
+    window.addEventListener('scroll', checkFinale, { passive: true });
+    checkFinale();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Manifesto",
+  "settings": [
+    { "type": "header", "content": "Opening" },
+    { "type": "color", "id": "color_open", "label": "Background", "default": "#F3E6D1" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Hedonistas De La Fe" },
+    { "type": "color", "id": "text_eyebrow", "label": "Eyebrow color", "default": "#7C3A09" },
+    { "type": "text", "id": "headline_1", "label": "Headline - Line 1", "default": "We Don't Sell Drinks." },
+    { "type": "color", "id": "text_headline_1", "label": "Headline line 1 color", "default": "#1a1716" },
+    { "type": "text", "id": "headline_2", "label": "Headline - Line 2", "default": "We Sell The Unforgettable." },
+    { "type": "color", "id": "text_headline_2", "label": "Headline line 2 color", "default": "#7C3A09" },
+    { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Most brands sell a drink. A fleeting sensation. But drinks are forgotten - poured out, lost to the glass, abandoned on a table. At Hedonistas Mezcal, we are purveyors of something else entirely." },
+    { "type": "color", "id": "text_subline", "label": "Sub-headline color", "default": "#4F4E4F" },
+    { "type": "header", "content": "Marquee band" },
+    { "type": "text", "id": "marquee_text", "label": "Marquee words", "default": "GO DEEP - LAUGHTER - CONNECTION - EARTH - FIRE - TIME - NO SHORTCUTS - NO ALGORITHMS - THE UNFORGETTABLE -" },
+    { "type": "color", "id": "color_marquee_bg", "label": "Marquee background", "default": "#DBB149" },
+    { "type": "color", "id": "color_marquee_text", "label": "Marquee text color", "default": "#1a1716" },
+    { "type": "range", "id": "marquee_speed", "label": "Marquee speed", "info": "Seconds per loop — lower is faster, higher is slower", "min": 4, "max": 80, "step": 4, "unit": "s", "default": 32 },
+    { "type": "header", "content": "Panel 1" },
+    { "type": "color", "id": "color_panel_1", "label": "Background", "default": "#09627A" },
+    { "type": "image_picker", "id": "image_1", "label": "Image" },
+    { "type": "inline_richtext", "id": "quote_1", "label": "Statement", "default": "Late nights that bleed into early mornings. Laughter that cracks the room open." },
+    { "type": "color", "id": "text_panel_1_quote", "label": "Statement color", "default": "#F3E6D1" },
+    { "type": "inline_richtext", "id": "body_1", "label": "Body copy", "default": "Strangers who become soulmates over a shared pour. We believe conversation begins in person, not chat boxes. That moments matter more than follower count. And that participants live richer, fuller lives than spectators." },
+    { "type": "color", "id": "text_panel_1_body", "label": "Body color", "default": "#F3E6D1" },
+    { "type": "header", "content": "Panel 2" },
+    { "type": "color", "id": "color_panel_2", "label": "Background", "default": "#7C3A09" },
+    { "type": "image_picker", "id": "image_2", "label": "Image" },
+    { "type": "inline_richtext", "id": "quote_2", "label": "Statement (full width)", "default": "Our mezcal is forged the same way our best nights are. Slowly. Passionately. Without compromise." },
+    { "type": "color", "id": "text_panel_2_quote", "label": "Statement color", "default": "#F3E6D1" },
+    { "type": "inline_richtext", "id": "body_2", "label": "Body copy", "default": "It is the ritual of Earth, Fire, and Time. No shortcuts. No spreadsheets. No algorithms." },
+    { "type": "color", "id": "text_panel_2_body", "label": "Body color", "default": "#F3E6D1" },
+    { "type": "header", "content": "Finale - Image" },
+    { "type": "color", "id": "color_panel_3", "label": "Background tint", "default": "#1a1716" },
+    { "type": "image_picker", "id": "image_3", "label": "Full-width image" },
+    { "type": "range", "id": "panel_3_focal_x", "label": "Image focal point - horizontal", "info": "50 = center, lower = shift left, higher = shift right.", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "header", "content": "Finale - Poem sequence" },
+    { "type": "text", "id": "finale_line_1", "label": "Line 1", "default": "An invitation. A challenge." },
+    { "type": "text", "id": "finale_line_2", "label": "Line 2 (bold)", "default": "Go Deep into laughter that shakes the room loose." },
+    { "type": "text", "id": "finale_line_3", "label": "Line 3 (bold)", "default": "Into silence that dares to tell the truth." },
+    { "type": "text", "id": "finale_line_4", "label": "Line 4", "default": "Every bottle holds the story of its soil." },
+    { "type": "text", "id": "finale_line_5", "label": "Line 5", "default": "Every bartender, a Curandero — keeper of the sacred flame." },
+    { "type": "text", "id": "finale_line_6", "label": "Line 6", "default": "In a time that rewards the shallow, we go deeper." },
+    { "type": "select", "id": "finale_font_family", "label": "Line font", "options": [
+      { "value": "pacifico", "label": "Pacifico (Display)" },
+      { "value": "sans", "label": "Hedonistas Sans" }
+    ], "default": "pacifico" },
+    { "type": "range", "id": "finale_font_size", "label": "Line font size", "info": "Max size on desktop — scales down on mobile", "min": 1, "max": 6, "step": 0.5, "unit": "rem", "default": 3.5 },
+    { "type": "color", "id": "color_finale_regular", "label": "Regular line color", "default": "#F3E6D1" },
+    { "type": "color", "id": "color_finale_bold", "label": "Bold line color", "default": "#DBB149" },
+    { "type": "header", "content": "Finale - Sign-off" },
+    { "type": "text", "id": "poem_finale_name", "label": "Brand name", "default": "Hedonistas Mezcal." },
+    { "type": "color", "id": "text_finale_name", "label": "Brand name color", "default": "#F3E6D1" },
+    { "type": "text", "id": "poem_finale_call", "label": "Call (large)", "default": "Go Deep." },
+    { "type": "color", "id": "text_finale_call", "label": "Call color", "default": "#DBB149" },
+    { "type": "header", "content": "CTA Button" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "The Craft Behind Every Bottle" },
+    { "type": "url", "id": "cta_url", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Manifesto" }]
+}
+{% endschema %}
