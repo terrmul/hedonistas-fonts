@@ -355,6 +355,7 @@ function initMapScroll(root){
 
   // Track mouse X so we can distinguish map area (right ~60%) from results panel (left ~40%)
   var mouseX=0;
+  mapContainer.addEventListener('mouseenter',function(e){mouseX=e.clientX;},{passive:true});
   mapContainer.addEventListener('mousemove',function(e){mouseX=e.clientX;},{passive:true});
 
   mapContainer.addEventListener('wheel',function(e){
