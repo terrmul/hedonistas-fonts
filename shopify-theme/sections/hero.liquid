@@ -1,0 +1,103 @@
+<!-- HERO — flat Raspberry, halftone dots, logo centrepiece -->
+<main id="maincontent" tabindex="-1" style="display:contents">
+<section class="hero" id="hero">
+  {%- if section.blocks.size > 0 -%}
+    <div class="hero-video-carousel" id="hero-video-carousel">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.video != blank -%}
+          <video class="hero-video-bg{% if forloop.first %} is-active{% endif %}" autoplay muted playsinline{% if section.blocks.size == 1 %} loop{% endif %} {{ block.shopify_attributes }}>
+            {%- for source in block.settings.video.sources -%}
+              <source src="{{ source.url }}" type="{{ source.mime_type }}">
+            {%- endfor -%}
+          </video>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <div class="hero-dots"></div>
+  {%- endif -%}
+  <div class="hero-back" id="hero-back">{{ section.settings.backdrop_word | escape }}</div>
+  <div class="hero-mid" id="hero-mid">
+    <div class="hero-brand">
+      {%- assign logo_size = section.settings.logo_size | default: 180 -%}
+      {%- if section.settings.logo != blank -%}
+        <img class="hero-logo" src="{{ section.settings.logo | image_url: width: 360 }}" alt="{{ section.settings.logo_alt | escape }}" fetchpriority="high" decoding="async" style="height:{{ logo_size }}px;width:auto">
+      {%- else -%}
+        <img class="hero-logo" src="{{ 'icon.png' | asset_url }}" alt="{{ section.settings.logo_alt | escape }}" fetchpriority="high" decoding="async" style="height:{{ logo_size }}px;width:auto">
+      {%- endif -%}
+      <h1 class="hero-h1"><span class="split">{{ section.settings.heading_1 | escape }}</span><span class="split">{{ section.settings.heading_2 | escape }}</span></h1>
+    </div>
+  </div>
+  <a class="hero-badge" href="{{ section.settings.badge_link }}" aria-label="{{ section.settings.badge_aria | escape }}">
+    <span class="hero-badge-top">{{ section.settings.badge_top | escape }}</span>
+    <span class="hero-badge-medal">{{ section.settings.badge_medal | escape }}</span>
+    <span class="hero-badge-year">{{ section.settings.badge_year | escape }}</span>
+    <span class="hero-badge-body">{{ section.settings.badge_body | escape }}</span>
+  </a>
+  <div class="hero-fore" id="hero-fore">
+    <p class="hero-tagline">{{ section.settings.tagline }}</p>
+    <div class="hero-locale">
+      <p>{{ section.settings.locale }}</p>
+      <span class="hero-cue label">{{ section.settings.scroll_cue | escape }}</span>
+    </div>
+  </div>
+</section>
+
+{%- if section.blocks.size > 1 -%}
+<script>
+(function(){
+  var carousel = document.getElementById('hero-video-carousel');
+  if(!carousel) return;
+  var videos = Array.from(carousel.querySelectorAll('.hero-video-bg'));
+  if(videos.length < 2) return;
+  var current = 0;
+  function showNext(){
+    videos[current].classList.remove('is-active');
+    current = (current + 1) % videos.length;
+    var nxt = videos[current];
+    nxt.currentTime = 0;
+    nxt.play();
+    nxt.classList.add('is-active');
+  }
+  videos.forEach(function(v){ v.addEventListener('ended', showNext); });
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "header", "content": "Brand" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (cream / inverted PNG)" },
+    { "type": "text", "id": "logo_alt", "label": "Logo alt text", "default": "Hedonistas Mezcal" },
+    { "type": "range", "id": "logo_size", "label": "Logo size", "min": 60, "max": 280, "step": 10, "unit": "px", "default": 180 },
+    { "type": "text", "id": "backdrop_word", "label": "Oversized backdrop word", "default": "Hedonistas" },
+    { "type": "header", "content": "Headline" },
+    { "type": "text", "id": "heading_1", "label": "Headline line 1", "default": "Go" },
+    { "type": "text", "id": "heading_2", "label": "Headline line 2", "default": "Deep." },
+    { "type": "header", "content": "Award Badge" },
+    { "type": "text", "id": "badge_top", "label": "Lead-in line", "default": "Winner of" },
+    { "type": "text", "id": "badge_medal", "label": "Award", "default": "Four Golds" },
+    { "type": "text", "id": "badge_year", "label": "Year", "default": "2026" },
+    { "type": "text", "id": "badge_body", "label": "Competition / source", "default": "SF World Spirits" },
+    { "type": "url", "id": "badge_link", "label": "Badge link" },
+    { "type": "text", "id": "badge_aria", "label": "Badge screen-reader label", "default": "Winner of Four Golds, 2026, SF World Spirits Competition" },
+    { "type": "header", "content": "Foreground" },
+    { "type": "inline_richtext", "id": "tagline", "label": "Tagline", "default": "We are purveyors of the unforgettable. Late nights. Bold pours. No spectators." },
+    { "type": "inline_richtext", "id": "locale", "label": "Locale", "default": "Hecho en Oaxaca" },
+    { "type": "text", "id": "scroll_cue", "label": "Scroll cue", "default": "Scroll ↓" }
+  ],
+  "blocks": [
+    {
+      "type": "video_slide",
+      "name": "Background video",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}
