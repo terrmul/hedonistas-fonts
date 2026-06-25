@@ -10,6 +10,19 @@ nav .nav-wordmark,nav ul a{color:var(--ink)!important}
 nav .nav-cart{border-color:rgba(26,23,22,.35)!important}
 nav img.nav-icon{filter:brightness(0)!important}
 .nav-hamburger span{background:var(--ink)!important}
+
+@media(max-width:767px){
+  .pdp-page .bottles-selector{min-height:unset}
+  .pdp-page .ce-hero{flex-direction:column}
+  .pdp-page .ce-panel.active{flex-direction:column;min-height:unset}
+  .pdp-page .ce-visual{flex:0 0 auto;width:100%;max-width:100%;padding-top:5rem}
+  .pdp-page .ce-main-shot{display:flex;justify-content:center;align-items:center}
+  .pdp-page .ce-bottle-img{max-height:55vw;width:auto;max-width:60vw;object-fit:contain}
+  .pdp-page .ce-divider{display:none}
+  .pdp-page .ce-copy{width:100%;padding:1.5rem 1.25rem 2rem}
+  .pdp-page .ce-visual-word{font-size:clamp(3rem,18vw,7rem)}
+  .pdp-page .ce-shots{justify-content:center;gap:.5rem;padding:.75rem 0}
+}
 </style>
 
 <section class="bottles-section pdp-page" id="pdp" data-nav="light" data-bg="bg-cream">
