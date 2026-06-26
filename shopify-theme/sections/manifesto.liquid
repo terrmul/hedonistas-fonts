@@ -49,22 +49,18 @@
 
   <!-- 4 — PANEL 2 -->
   <div class="mf-panel mf-panel--2" data-mf-color="{{ section.settings.color_panel_2 }}">
-    <div class="mf-p2-quote-wrap">
+    <div class="mf-p2-media">
+      {%- if section.settings.image_2 != blank -%}
+        <img src="{{ section.settings.image_2 | image_url: width: 1200 }}" alt="{{ section.settings.image_2.alt | default: '' | escape }}" width="{{ section.settings.image_2.width }}" height="{{ section.settings.image_2.height }}" loading="lazy" decoding="async">
+      {%- else -%}
+        <div class="mf-media-ph" data-label="Add image in Customizer"></div>
+      {%- endif -%}
+    </div>
+    <div class="mf-p2-copy">
       <div class="mf-panel-num" aria-hidden="true">02</div>
       <blockquote class="mf-p2-quote" style="color:{{ section.settings.text_panel_2_quote }}">{{ section.settings.quote_2 }}</blockquote>
-    </div>
-    <div class="mf-p2-lower">
-      <div class="mf-p2-media">
-        {%- if section.settings.image_2 != blank -%}
-          <img src="{{ section.settings.image_2 | image_url: width: 1200 }}" alt="{{ section.settings.image_2.alt | default: '' | escape }}" width="{{ section.settings.image_2.width }}" height="{{ section.settings.image_2.height }}" loading="lazy" decoding="async">
-        {%- else -%}
-          <div class="mf-media-ph" data-label="Add image in Customizer"></div>
-        {%- endif -%}
-      </div>
-      <div class="mf-p2-body-wrap">
-        <div class="mf-rule--solar"></div>
-        <p class="mf-body--cream" style="color:{{ section.settings.text_panel_2_body }}">{{ section.settings.body_2 }}</p>
-      </div>
+      <div class="mf-rule--solar"></div>
+      <p class="mf-body--cream" style="color:{{ section.settings.text_panel_2_body }}">{{ section.settings.body_2 }}</p>
     </div>
   </div>
 
@@ -172,7 +168,7 @@
     reveals.forEach(function(el){ revealIO.observe(el); });
   }
 
-  // Finale poem sequence — scroll-based trigger (avoids scroll-snap IO conflicts)
+  // Finale poem sequence — scroll-based trigger
   var finaleEl = document.querySelector('.mf-finale');
   if(finaleEl){
     var finaleLines = Array.prototype.slice.call(finaleEl.querySelectorAll('.mf-finale-line'));
@@ -241,7 +237,7 @@
     { "type": "header", "content": "Panel 2" },
     { "type": "color", "id": "color_panel_2", "label": "Background", "default": "#7C3A09" },
     { "type": "image_picker", "id": "image_2", "label": "Image" },
-    { "type": "inline_richtext", "id": "quote_2", "label": "Statement (full width)", "default": "Our mezcal is forged the same way our best nights are. Slowly. Passionately. Without compromise." },
+    { "type": "inline_richtext", "id": "quote_2", "label": "Statement", "default": "Our mezcal is forged the same way our best nights are. Slowly. Passionately. Without compromise." },
     { "type": "color", "id": "text_panel_2_quote", "label": "Statement color", "default": "#F3E6D1" },
     { "type": "inline_richtext", "id": "body_2", "label": "Body copy", "default": "It is the ritual of Earth, Fire, and Time. No shortcuts. No spreadsheets. No algorithms." },
     { "type": "color", "id": "text_panel_2_body", "label": "Body color", "default": "#F3E6D1" },
