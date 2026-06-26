@@ -5,12 +5,12 @@
   <div class="mf-open" data-mf-color="{{ section.settings.color_open }}">
     <div class="mf-dot-grid" aria-hidden="true"></div>
     <div class="mf-open-inner">
-      <div class="label mf-eyebrow" style="color:{{ section.settings.text_eyebrow }}">{{ section.settings.eyebrow }}</div>
+      <div class="label mf-eyebrow" style="color:{{ section.settings.text_eyebrow }}">{{ section.settings.eyebrow | replace: '//', '<br>' }}</div>
       <h2 class="mf-headline">
-        <span class="mf-h-line" style="color:{{ section.settings.text_headline_1 }}">{{ section.settings.headline_1 }}</span>
-        <span class="mf-h-line" style="color:{{ section.settings.text_headline_2 }}">{{ section.settings.headline_2 }}</span>
+        <span class="mf-h-line" style="color:{{ section.settings.text_headline_1 }}">{{ section.settings.headline_1 | replace: '//', '<br>' }}</span>
+        <span class="mf-h-line" style="color:{{ section.settings.text_headline_2 }}">{{ section.settings.headline_2 | replace: '//', '<br>' }}</span>
       </h2>
-      <p class="mf-open-sub" style="color:{{ section.settings.text_subline }}">{{ section.settings.subline }}</p>
+      <p class="mf-open-sub" style="color:{{ section.settings.text_subline }}">{{ section.settings.subline | replace: '//', '<br>' }}</p>
     </div>
   </div>
 
@@ -43,8 +43,8 @@
     </div>
     <div class="mf-p1-copy">
       <div class="mf-panel-num" aria-hidden="true">01</div>
-      <blockquote class="mf-big-quote" style="color:{{ section.settings.text_panel_1_quote }}">{{ section.settings.quote_1 }}</blockquote>
-      <p class="mf-body--cream" style="color:{{ section.settings.text_panel_1_body }}">{{ section.settings.body_1 }}</p>
+      <blockquote class="mf-big-quote" style="color:{{ section.settings.text_panel_1_quote }}">{{ section.settings.quote_1 | replace: '//', '<br>' }}</blockquote>
+      <p class="mf-body--cream" style="color:{{ section.settings.text_panel_1_body }}">{{ section.settings.body_1 | replace: '//', '<br>' }}</p>
     </div>
   </div>
 
@@ -52,9 +52,9 @@
   <div class="mf-panel mf-panel--2" data-mf-color="{{ section.settings.color_panel_2 }}">
     <div class="mf-p2-copy">
       <div class="mf-panel-num" aria-hidden="true">02</div>
-      <blockquote class="mf-p2-quote" style="color:{{ section.settings.text_panel_2_quote }}">{{ section.settings.quote_2 }}</blockquote>
+      <blockquote class="mf-p2-quote" style="color:{{ section.settings.text_panel_2_quote }}">{{ section.settings.quote_2 | replace: '//', '<br>' }}</blockquote>
       <div class="mf-rule--solar"></div>
-      <p class="mf-body--cream" style="color:{{ section.settings.text_panel_2_body }}">{{ section.settings.body_2 }}</p>
+      <p class="mf-body--cream" style="color:{{ section.settings.text_panel_2_body }}">{{ section.settings.body_2 | replace: '//', '<br>' }}</p>
     </div>
     <div class="mf-p2-media">
       {%- if section.settings.image_2 != blank -%}
@@ -79,27 +79,27 @@
     <div class="mf-finale-stage">
       <div class="mf-finale-lines" aria-live="polite">
         {%- if section.settings.finale_line_1 != blank -%}
-          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_1 }}</p>
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_1 | replace: '//', '<br>' }}</p>
         {%- endif -%}
         {%- if section.settings.finale_line_2 != blank -%}
-          <p class="mf-finale-line mf-finale-line--bold" style="color:{{ section.settings.color_finale_bold }}">{{ section.settings.finale_line_2 }}</p>
+          <p class="mf-finale-line mf-finale-line--bold" style="color:{{ section.settings.color_finale_bold }}">{{ section.settings.finale_line_2 | replace: '//', '<br>' }}</p>
         {%- endif -%}
         {%- if section.settings.finale_line_3 != blank -%}
-          <p class="mf-finale-line mf-finale-line--bold" style="color:{{ section.settings.color_finale_bold }}">{{ section.settings.finale_line_3 }}</p>
+          <p class="mf-finale-line mf-finale-line--bold" style="color:{{ section.settings.color_finale_bold }}">{{ section.settings.finale_line_3 | replace: '//', '<br>' }}</p>
         {%- endif -%}
         {%- if section.settings.finale_line_4 != blank -%}
-          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_4 }}</p>
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_4 | replace: '//', '<br>' }}</p>
         {%- endif -%}
         {%- if section.settings.finale_line_5 != blank -%}
-          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_5 }}</p>
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_5 | replace: '//', '<br>' }}</p>
         {%- endif -%}
         {%- if section.settings.finale_line_6 != blank -%}
-          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_6 }}</p>
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_6 | replace: '//', '<br>' }}</p>
         {%- endif -%}
       </div>
       <div class="mf-finale-end">
-        <span class="mf-poem-finale-name" style="color:{{ section.settings.text_finale_name }}">{{ section.settings.poem_finale_name }}</span>
-        <span class="mf-poem-finale-call" style="color:{{ section.settings.text_finale_call }}">{{ section.settings.poem_finale_call }}</span>
+        <span class="mf-poem-finale-name" style="color:{{ section.settings.text_finale_name }}">{{ section.settings.poem_finale_name | replace: '//', '<br>' }}</span>
+        <span class="mf-poem-finale-call" style="color:{{ section.settings.text_finale_call }}">{{ section.settings.poem_finale_call | replace: '//', '<br>' }}</span>
         {%- if section.settings.cta_url != blank -%}
           <a class="mag-btn mag-dark mf-poem-cta" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label | escape }}</a>
         {%- endif -%}
@@ -206,7 +206,7 @@
 {
   "name": "Manifesto",
   "settings": [
-    { "type": "header", "content": "Opening" },
+    { "type": "header", "content": "Opening (use // for a line break)" },
     { "type": "color", "id": "color_open", "label": "Background", "default": "#F3E6D1" },
     { "type": "inline_richtext", "id": "eyebrow", "label": "Eyebrow", "default": "Hedonistas De La Fe" },
     { "type": "color", "id": "text_eyebrow", "label": "Eyebrow color", "default": "#7C3A09" },
@@ -221,7 +221,7 @@
     { "type": "color", "id": "color_marquee_bg", "label": "Marquee background", "default": "#DBB149" },
     { "type": "color", "id": "color_marquee_text", "label": "Marquee text color", "default": "#1a1716" },
     { "type": "range", "id": "marquee_speed", "label": "Marquee speed", "info": "Seconds per loop — lower is faster, higher is slower", "min": 4, "max": 80, "step": 4, "unit": "s", "default": 32 },
-    { "type": "header", "content": "Panel 1" },
+    { "type": "header", "content": "Panel 1 (use // for a line break)" },
     { "type": "color", "id": "color_panel_1", "label": "Background", "default": "#09627A" },
     { "type": "image_picker", "id": "image_1", "label": "Image" },
     { "type": "range", "id": "image_1_x", "label": "Image focus — horizontal", "info": "50 = center", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
@@ -231,7 +231,7 @@
     { "type": "color", "id": "text_panel_1_quote", "label": "Statement color", "default": "#F3E6D1" },
     { "type": "inline_richtext", "id": "body_1", "label": "Body copy", "default": "Strangers who become soulmates over a shared pour. We believe conversation begins in person, not chat boxes. That moments matter more than follower count. And that participants live richer, fuller lives than spectators." },
     { "type": "color", "id": "text_panel_1_body", "label": "Body color", "default": "#F3E6D1" },
-    { "type": "header", "content": "Panel 2" },
+    { "type": "header", "content": "Panel 2 (use // for a line break)" },
     { "type": "color", "id": "color_panel_2", "label": "Background", "default": "#7C3A09" },
     { "type": "image_picker", "id": "image_2", "label": "Image" },
     { "type": "range", "id": "image_2_x", "label": "Image focus — horizontal", "info": "50 = center", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
@@ -245,7 +245,7 @@
     { "type": "color", "id": "color_panel_3", "label": "Background tint", "default": "#1a1716" },
     { "type": "image_picker", "id": "image_3", "label": "Full-width image" },
     { "type": "range", "id": "panel_3_focal_x", "label": "Image focal point - horizontal", "info": "50 = center", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
-    { "type": "header", "content": "Finale - Poem sequence" },
+    { "type": "header", "content": "Finale - Poem sequence (use // for a line break)" },
     { "type": "inline_richtext", "id": "finale_line_1", "label": "Line 1", "default": "An invitation. A challenge." },
     { "type": "inline_richtext", "id": "finale_line_2", "label": "Line 2 (bold)", "default": "Go Deep into laughter that shakes the room loose." },
     { "type": "inline_richtext", "id": "finale_line_3", "label": "Line 3 (bold)", "default": "Into silence that dares to tell the truth." },
@@ -259,7 +259,7 @@
     { "type": "range", "id": "finale_font_size", "label": "Line font size", "info": "Max size on desktop — scales down on mobile", "min": 1, "max": 6, "step": 0.5, "unit": "rem", "default": 3.5 },
     { "type": "color", "id": "color_finale_regular", "label": "Regular line color", "default": "#F3E6D1" },
     { "type": "color", "id": "color_finale_bold", "label": "Bold line color", "default": "#DBB149" },
-    { "type": "header", "content": "Finale - Sign-off" },
+    { "type": "header", "content": "Finale - Sign-off (use // for a line break)" },
     { "type": "inline_richtext", "id": "poem_finale_name", "label": "Brand name", "default": "Hedonistas Mezcal." },
     { "type": "color", "id": "text_finale_name", "label": "Brand name color", "default": "#F3E6D1" },
     { "type": "inline_richtext", "id": "poem_finale_call", "label": "Call (large)", "default": "Go Deep." },

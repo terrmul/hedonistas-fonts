@@ -57,8 +57,7 @@ nav img.nav-icon{filter:brightness(0)!important}
             {%- endif -%}
             {%- if section.settings.shot_3_image != blank -%}
               <div class="ce-shot-thumb" data-shot="{{ section.settings.shot_3_image | image_url: width: 700 }}">
-                <img src="{{ section.settings.shot_3_image | image_url: width: 120 }}"
- alt="Style" loading="lazy" decoding="async">
+                <img src="{{ section.settings.shot_3_image | image_url: width: 120 }}" alt="Style" loading="lazy" decoding="async">
               </div>
             {%- else -%}
               <div class="ce-shot-thumb"><div class="ce-shot-label">Style</div></div>
@@ -80,35 +79,35 @@ nav img.nav-icon{filter:brightness(0)!important}
           </div>
 
           <div class="ce-tab-panel active" data-tab="desc">
-            <div class="ce-rev-head" style="font-size:1.2rem;margin-bottom:1rem">{{ section.settings.tier_name }}</div>
+            <div class="ce-rev-head" style="font-size:1.2rem;margin-bottom:1rem">{{ section.settings.tier_name | replace: '//', '<br>' }}</div>
             <ul class="ce-specs">
-              {%- if section.settings.spec_1 != blank -%}<li>{{ section.settings.spec_1 }}</li>{%- endif -%}
-              {%- if section.settings.spec_2 != blank -%}<li>{{ section.settings.spec_2 }}</li>{%- endif -%}
-              {%- if section.settings.spec_3 != blank -%}<li>{{ section.settings.spec_3 }}</li>{%- endif -%}
+              {%- if section.settings.spec_1 != blank -%}<li>{{ section.settings.spec_1 | replace: '//', '<br>' }}</li>{%- endif -%}
+              {%- if section.settings.spec_2 != blank -%}<li>{{ section.settings.spec_2 | replace: '//', '<br>' }}</li>{%- endif -%}
+              {%- if section.settings.spec_3 != blank -%}<li>{{ section.settings.spec_3 | replace: '//', '<br>' }}</li>{%- endif -%}
             </ul>
             <div class="ce-notes">
-              {%- if section.settings.nose != blank -%}<p><b>Nose:</b> {{ section.settings.nose }}</p>{%- endif -%}
-              {%- if section.settings.palate != blank -%}<p><b>Palate:</b> {{ section.settings.palate }}</p>{%- endif -%}
-              {%- if section.settings.body != blank -%}<p><b>Body:</b> {{ section.settings.body }}</p>{%- endif -%}
-              {%- if section.settings.finish != blank -%}<p><b>Finish:</b> {{ section.settings.finish }}</p>{%- endif -%}
+              {%- if section.settings.nose != blank -%}<p><b>Nose:</b> {{ section.settings.nose | replace: '//', '<br>' }}</p>{%- endif -%}
+              {%- if section.settings.palate != blank -%}<p><b>Palate:</b> {{ section.settings.palate | replace: '//', '<br>' }}</p>{%- endif -%}
+              {%- if section.settings.body != blank -%}<p><b>Body:</b> {{ section.settings.body | replace: '//', '<br>' }}</p>{%- endif -%}
+              {%- if section.settings.finish != blank -%}<p><b>Finish:</b> {{ section.settings.finish | replace: '//', '<br>' }}</p>{%- endif -%}
             </div>
-            <p class="ce-notes-body">{{ section.settings.desc_body }}</p>
+            <p class="ce-notes-body">{{ section.settings.desc_body | replace: '//', '<br>' }}</p>
           </div>
 
           <div class="ce-tab-panel" data-tab="pair">
             <div class="ce-notes">
-              {%- if section.settings.pair_cocktails != blank -%}<p><b>Cocktails:</b> {{ section.settings.pair_cocktails }}</p>{%- endif -%}
-              {%- if section.settings.pair_food != blank -%}<p><b>Food:</b> {{ section.settings.pair_food }}</p>{%- endif -%}
+              {%- if section.settings.pair_cocktails != blank -%}<p><b>Cocktails:</b> {{ section.settings.pair_cocktails | replace: '//', '<br>' }}</p>{%- endif -%}
+              {%- if section.settings.pair_food != blank -%}<p><b>Food:</b> {{ section.settings.pair_food | replace: '//', '<br>' }}</p>{%- endif -%}
             </div>
-            <p class="ce-notes-body">{{ section.settings.pair_body }}</p>
+            <p class="ce-notes-body">{{ section.settings.pair_body | replace: '//', '<br>' }}</p>
           </div>
 
           <div class="ce-tab-panel" data-tab="high">
             <ul class="ce-highlights">
-              {%- if section.settings.highlight_1 != blank -%}<li>{{ section.settings.highlight_1 }}</li>{%- endif -%}
-              {%- if section.settings.highlight_2 != blank -%}<li>{{ section.settings.highlight_2 }}</li>{%- endif -%}
-              {%- if section.settings.highlight_3 != blank -%}<li>{{ section.settings.highlight_3 }}</li>{%- endif -%}
-              {%- if section.settings.highlight_4 != blank -%}<li>{{ section.settings.highlight_4 }}</li>{%- endif -%}
+              {%- if section.settings.highlight_1 != blank -%}<li>{{ section.settings.highlight_1 | replace: '//', '<br>' }}</li>{%- endif -%}
+              {%- if section.settings.highlight_2 != blank -%}<li>{{ section.settings.highlight_2 | replace: '//', '<br>' }}</li>{%- endif -%}
+              {%- if section.settings.highlight_3 != blank -%}<li>{{ section.settings.highlight_3 | replace: '//', '<br>' }}</li>{%- endif -%}
+              {%- if section.settings.highlight_4 != blank -%}<li>{{ section.settings.highlight_4 | replace: '//', '<br>' }}</li>{%- endif -%}
             </ul>
           </div>
 
@@ -130,8 +129,8 @@ nav img.nav-icon{filter:brightness(0)!important}
                 <span>{{ section.settings.review_rating | escape }} ★ ({{ section.settings.review_count | escape }})</span>
                 <span class="ce-rev-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Verified</span>
               </div>
-              <p class="ce-rev-quote">{{ section.settings.review_quote }}</p>
-              <div class="ce-rev-author">{{ section.settings.review_author }}</div>
+              <p class="ce-rev-quote">{{ section.settings.review_quote | replace: '//', '<br>' }}</p>
+              <div class="ce-rev-author">{{ section.settings.review_author | replace: '//', '<br>' }}</div>
             </div>
           {%- endif -%}
 
@@ -179,7 +178,7 @@ nav img.nav-icon{filter:brightness(0)!important}
     { "type": "image_picker", "id": "bottle_image", "label": "Bottle — Front" },
     { "type": "image_picker", "id": "shot_2_image", "label": "Bottle — Back (optional)" },
     { "type": "image_picker", "id": "shot_3_image", "label": "Bottle — Lifestyle (optional)" },
-    { "type": "header", "content": "Description tab" },
+    { "type": "header", "content": "Description tab (use // for a line break)" },
     { "type": "inline_richtext", "id": "tier_name", "label": "Tier name", "default": "The Gateway" },
     { "type": "inline_richtext", "id": "spec_1", "label": "Spec 1" },
     { "type": "inline_richtext", "id": "spec_2", "label": "Spec 2" },
@@ -189,11 +188,11 @@ nav img.nav-icon{filter:brightness(0)!important}
     { "type": "inline_richtext", "id": "body", "label": "Body" },
     { "type": "inline_richtext", "id": "finish", "label": "Finish" },
     { "type": "inline_richtext", "id": "desc_body", "label": "Description paragraph" },
-    { "type": "header", "content": "Pairing tab" },
+    { "type": "header", "content": "Pairing tab (use // for a line break)" },
     { "type": "inline_richtext", "id": "pair_cocktails", "label": "Cocktails" },
     { "type": "inline_richtext", "id": "pair_food", "label": "Food" },
     { "type": "inline_richtext", "id": "pair_body", "label": "Pairing paragraph" },
-    { "type": "header", "content": "Highlights tab" },
+    { "type": "header", "content": "Highlights tab (use // for a line break)" },
     { "type": "inline_richtext", "id": "highlight_1", "label": "Highlight 1" },
     { "type": "inline_richtext", "id": "highlight_2", "label": "Highlight 2" },
     { "type": "inline_richtext", "id": "highlight_3", "label": "Highlight 3" },
