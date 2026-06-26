@@ -1,0 +1,210 @@
+<!-- BOTTLES — selector + hero (Concept E) -->
+<section class="bottles-section" id="mezcals" data-nav="light" data-bg="bg-cream" data-mf-color="#F3E6D1">
+<div class="bottles-selector">
+  <div class="ce-strip">
+    <div class="ce-strip-head">
+      <div class="label">{{ section.settings.strip_label | escape }}</div>
+      <h2>{{ section.settings.strip_heading | escape }}</h2>
+    </div>
+    <div class="ce-items">
+      {%- for block in section.blocks -%}
+        <div class="ce-item{% if forloop.first %} active{% endif %}" data-e="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="ce-thumb"><div class="ce-thumb-b" style="background:var(--{{ block.settings.accent }});height:{{ block.settings.thumb_height }}px"></div></div>
+          <div class="ce-item-meta">
+            <div class="ce-item-tag">{{ block.settings.species | escape }}</div>
+            <div class="ce-item-name">{{ block.settings.name | escape }}</div>
+            <div class="ce-item-price">{{ block.settings.price | escape }}</div>
+          </div>
+          <div class="ce-item-agave">
+            {%- if block.settings.agave_image != blank -%}
+              <img src="{{ block.settings.agave_image | image_url: width: 300 }}" alt="{{ block.settings.name | escape }} agave plant illustration" decoding="async" loading="lazy">
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  <div class="ce-hero">
+    {%- for block in section.blocks -%}
+      <div class="ce-panel{% if forloop.first %} active{% endif %}">
+        <div class="ce-visual">
+          <div class="ce-visual-word">{{ block.settings.name | escape }}</div>
+          <div class="ce-main-shot">
+            {%- if block.settings.bottle_image != blank -%}
+              <img class="ce-bottle-img" data-main-img src="{{ block.settings.bottle_image | image_url: width: 600 }}" alt="{{ block.settings.name | escape }} bottle" decoding="async">
+            {%- else -%}
+              <div class="b-shape" style="background:rgba(26,23,22,.2);width:88px;height:280px"></div>
+            {%- endif -%}
+          </div>
+          <div class="ce-shots">
+            {%- if block.settings.bottle_image != blank -%}
+              <div class="ce-shot-thumb active" data-shot="{{ block.settings.bottle_image | image_url: width: 600 }}">
+                <img src="{{ block.settings.bottle_image | image_url: width: 120 }}" alt="Front" loading="lazy" decoding="async">
+              </div>
+            {%- else -%}
+              <div class="ce-shot-thumb active"><div class="ce-shot-label">Front</div></div>
+            {%- endif -%}
+            {%- if block.settings.shot_2_image != blank -%}
+              <div class="ce-shot-thumb" data-shot="{{ block.settings.shot_2_image | image_url: width: 600 }}">
+                <img src="{{ block.settings.shot_2_image | image_url: width: 120 }}" alt="Back" loading="lazy" decoding="async">
+              </div>
+            {%- else -%}
+              <div class="ce-shot-thumb"><div class="ce-shot-label">Back</div></div>
+            {%- endif -%}
+            {%- if block.settings.shot_3_image != blank -%}
+              <div class="ce-shot-thumb" data-shot="{{ block.settings.shot_3_image | image_url: width: 600 }}">
+                <img src="{{ block.settings.shot_3_image | image_url: width: 120 }}" alt="Style" loading="lazy" decoding="async">
+              </div>
+            {%- else -%}
+              <div class="ce-shot-thumb"><div class="ce-shot-label">Style</div></div>
+            {%- endif -%}
+          </div>
+        </div>
+        <div class="ce-divider"></div>
+        <div class="ce-copy">
+          <div class="label">{{ block.settings.copy_label | escape }}</div>
+          <h3>{{ block.settings.name | escape }}</h3>
+          <div class="ce-tabs">
+            <button class="ce-tab active" data-tab="desc">Description</button>
+            <button class="ce-tab" data-tab="pair">Cocktail &amp; Food Pairing</button>
+            <button class="ce-tab" data-tab="high">Highlights</button>
+          </div>
+          <div class="ce-tab-panel active" data-tab="desc">
+            <div class="ce-rev-head" style="font-size:1.2rem;margin-bottom:1rem">{{ block.settings.tier_name | escape }}</div>
+            <ul class="ce-specs">
+              {%- if block.settings.spec_1 != blank -%}<li>{{ block.settings.spec_1 | escape }}</li>{%- endif -%}
+              {%- if block.settings.spec_2 != blank -%}<li>{{ block.settings.spec_2 | escape }}</li>{%- endif -%}
+              {%- if block.settings.spec_3 != blank -%}<li>{{ block.settings.spec_3 | escape }}</li>{%- endif -%}
+            </ul>
+            <div class="ce-notes">
+              {%- if block.settings.nose != blank -%}<p><b>Nose:</b> {{ block.settings.nose | escape }}</p>{%- endif -%}
+              {%- if block.settings.palate != blank -%}<p><b>Palate:</b> {{ block.settings.palate | escape }}</p>{%- endif -%}
+              {%- if block.settings.body != blank -%}<p><b>Body:</b> {{ block.settings.body | escape }}</p>{%- endif -%}
+              {%- if block.settings.finish != blank -%}<p><b>Finish:</b> {{ block.settings.finish | escape }}</p>{%- endif -%}
+            </div>
+            <p class="ce-notes-body">{{ block.settings.desc_body }}</p>
+          </div>
+          <div class="ce-tab-panel" data-tab="pair">
+            <div class="ce-notes">
+              {%- if block.settings.pair_cocktails != blank -%}<p><b>Cocktails:</b> {{ block.settings.pair_cocktails | escape }}</p>{%- endif -%}
+              {%- if block.settings.pair_food != blank -%}<p><b>Food:</b> {{ block.settings.pair_food | escape }}</p>{%- endif -%}
+            </div>
+            <p class="ce-notes-body">{{ block.settings.pair_body }}</p>
+          </div>
+          <div class="ce-tab-panel" data-tab="high">
+            <ul class="ce-highlights">
+              {%- if block.settings.highlight_1 != blank -%}<li>{{ block.settings.highlight_1 | escape }}</li>{%- endif -%}
+              {%- if block.settings.highlight_2 != blank -%}<li>{{ block.settings.highlight_2 | escape }}</li>{%- endif -%}
+              {%- if block.settings.highlight_3 != blank -%}<li>{{ block.settings.highlight_3 | escape }}</li>{%- endif -%}
+              {%- if block.settings.highlight_4 != blank -%}<li>{{ block.settings.highlight_4 | escape }}</li>{%- endif -%}
+            </ul>
+          </div>
+          <div class="ce-copy-buy">
+            <span class="ce-copy-price">{{ block.settings.price | escape }}</span>
+            <a class="mag-btn mag-dark" href="{{ block.settings.buy_url }}">{{ section.settings.buy_label | escape }}</a>
+            {%- if block.settings.detail_url != blank -%}
+              <a class="ce-more-info" href="{{ block.settings.detail_url }}">Full Details &rarr;</a>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.review_quote != blank -%}
+            <div class="ce-reviews">
+              <div class="ce-rev-head">Customers Are Saying</div>
+              <div class="ce-rev-meta">
+                <span class="ce-stars">★★★★★</span>
+                <span>{{ block.settings.review_rating | escape }} ★ ({{ block.settings.review_count | escape }})</span>
+                <span class="ce-rev-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Verified</span>
+              </div>
+              <p class="ce-rev-quote">{{ block.settings.review_quote }}</p>
+              <div class="ce-rev-author">{{ block.settings.review_author | escape }}</div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+</section>
+
+<script>
+(function(){
+  document.querySelectorAll('.ce-panel').forEach(function(panel){
+    panel.querySelectorAll('.ce-shot-thumb[data-shot]').forEach(function(thumb){
+      thumb.addEventListener('click', function(){
+        var main = panel.querySelector('[data-main-img]');
+        if(!main) return;
+        main.src = thumb.dataset.shot;
+        panel.querySelectorAll('.ce-shot-thumb').forEach(function(t){ t.classList.remove('active'); });
+        thumb.classList.add('active');
+      });
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Bottle Selector",
+  "settings": [
+    { "type": "text", "id": "strip_label", "label": "Eyebrow label", "default": "Four Expressions · Ships to 40+ States" },
+    { "type": "text", "id": "strip_heading", "label": "Heading", "default": "The Collection" },
+    { "type": "text", "id": "buy_label", "label": "Buy button text", "default": "Add to Cart" }
+  ],
+  "blocks": [
+    {
+      "type": "expression",
+      "name": "Expression",
+      "settings": [
+        { "type": "header", "content": "Identity" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Espadin" },
+        { "type": "text", "id": "species", "label": "Agave species (short)", "default": "Angustifolia" },
+        { "type": "text", "id": "copy_label", "label": "Copy eyebrow", "default": "100% Agave Angustifolia" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$64" },
+        { "type": "url", "id": "buy_url", "label": "Buy / product link" },
+        { "type": "url", "id": "detail_url", "label": "More Info link (product page)" },
+        { "type": "select", "id": "accent", "label": "Accent colour", "default": "hibiscus",
+          "options": [
+            { "value": "hibiscus", "label": "Hibiscus" },
+            { "value": "lake", "label": "Lake" },
+            { "value": "copper", "label": "Copper" },
+            { "value": "mustard", "label": "Mustard" },
+            { "value": "solar", "label": "Solar" },
+            { "value": "cactus", "label": "Cactus" },
+            { "value": "rose", "label": "Rose" }
+          ] },
+        { "type": "range", "id": "thumb_height", "label": "Selector swatch height", "min": 30, "max": 60, "step": 1, "unit": "px", "default": 42 },
+        { "type": "header", "content": "Images" },
+        { "type": "image_picker", "id": "agave_image", "label": "Agave illustration (PNG)" },
+        { "type": "image_picker", "id": "bottle_image", "label": "Bottle shot — Front (transparent PNG)" },
+        { "type": "image_picker", "id": "shot_2_image", "label": "Bottle shot — Back (optional)" },
+        { "type": "image_picker", "id": "shot_3_image", "label": "Bottle shot — Lifestyle / Style (optional)" },
+        { "type": "header", "content": "Description tab" },
+        { "type": "text", "id": "tier_name", "label": "Tier name", "default": "The Gateway" },
+        { "type": "text", "id": "spec_1", "label": "Spec 1", "default": "100% Agave Angustifolia" },
+        { "type": "text", "id": "spec_2", "label": "Spec 2", "default": "6-8 Year Plant Maturation" },
+        { "type": "text", "id": "spec_3", "label": "Spec 3", "default": "ABV: 46%" },
+        { "type": "text", "id": "nose", "label": "Nose", "default": "Gentle smoke, aloe, honey, green olive" },
+        { "type": "text", "id": "palate", "label": "Palate", "default": "Sichuan pepper, grapefruit peel, star fruit, miso, light smoke, citrus lift" },
+        { "type": "text", "id": "body", "label": "Body", "default": "Medium bodied, balanced, approachable" },
+        { "type": "text", "id": "finish", "label": "Finish", "default": "Clean, delicate" },
+        { "type": "inline_richtext", "id": "desc_body", "label": "Description paragraph", "default": "This expression captures a classic mezcal profile, balancing smoke, spice, acidity, and subtle sweetness." },
+        { "type": "header", "content": "Pairing tab" },
+        { "type": "text", "id": "pair_cocktails", "label": "Cocktails", "default": "Mezcal Negroni, Oaxacan Old Fashioned, Paloma" },
+        { "type": "text", "id": "pair_food", "label": "Food", "default": "Grilled citrus shrimp, queso fresco, charred corn, salsa verde" },
+        { "type": "inline_richtext", "id": "pair_body", "label": "Pairing paragraph", "default": "Its balanced smoke and bright acidity make Espadin the most versatile pour in the range." },
+        { "type": "header", "content": "Highlights tab" },
+        { "type": "text", "id": "highlight_1", "label": "Highlight 1", "default": "Single-village production in the highlands of Oaxaca" },
+        { "type": "text", "id": "highlight_2", "label": "Highlight 2", "default": "Earthen-pit roasted, tahona-crushed, copper distilled" },
+        { "type": "text", "id": "highlight_3", "label": "Highlight 3", "default": "Small-batch — never more than 600 bottles per run" },
+        { "type": "text", "id": "highlight_4", "label": "Highlight 4", "default": "The ideal introduction to artesanal mezcal" },
+        { "type": "header", "content": "Review" },
+        { "type": "text", "id": "review_rating", "label": "Rating", "default": "5.00" },
+        { "type": "text", "id": "review_count", "label": "Review count", "default": "20" },
+        { "type": "inline_richtext", "id": "review_quote", "label": "Quote", "default": "“Probably the most complex mezcal I’ve ever tasted. Truly special.”" },
+        { "type": "text", "id": "review_author", "label": "Author", "default": "— Verified Buyer" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [{ "name": "Bottle Selector" }]
+}
+{% endschema %}
