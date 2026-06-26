@@ -79,35 +79,35 @@ nav img.nav-icon{filter:brightness(0)!important}
           </div>
 
           <div class="ce-tab-panel active" data-tab="desc">
-            <div class="ce-rev-head" style="font-size:1.2rem;margin-bottom:1rem">{{ section.settings.tier_name | escape }}</div>
+            <div class="ce-rev-head" style="font-size:1.2rem;margin-bottom:1rem">{{ section.settings.tier_name | newline_to_br }}</div>
             <ul class="ce-specs">
-              {%- if section.settings.spec_1 != blank -%}<li>{{ section.settings.spec_1 | escape }}</li>{%- endif -%}
-              {%- if section.settings.spec_2 != blank -%}<li>{{ section.settings.spec_2 | escape }}</li>{%- endif -%}
-              {%- if section.settings.spec_3 != blank -%}<li>{{ section.settings.spec_3 | escape }}</li>{%- endif -%}
+              {%- if section.settings.spec_1 != blank -%}<li>{{ section.settings.spec_1 | newline_to_br }}</li>{%- endif -%}
+              {%- if section.settings.spec_2 != blank -%}<li>{{ section.settings.spec_2 | newline_to_br }}</li>{%- endif -%}
+              {%- if section.settings.spec_3 != blank -%}<li>{{ section.settings.spec_3 | newline_to_br }}</li>{%- endif -%}
             </ul>
             <div class="ce-notes">
-              {%- if section.settings.nose != blank -%}<p><b>Nose:</b> {{ section.settings.nose | escape }}</p>{%- endif -%}
-              {%- if section.settings.palate != blank -%}<p><b>Palate:</b> {{ section.settings.palate | escape }}</p>{%- endif -%}
-              {%- if section.settings.body != blank -%}<p><b>Body:</b> {{ section.settings.body | escape }}</p>{%- endif -%}
-              {%- if section.settings.finish != blank -%}<p><b>Finish:</b> {{ section.settings.finish | escape }}</p>{%- endif -%}
+              {%- if section.settings.nose != blank -%}<p><b>Nose:</b> {{ section.settings.nose | newline_to_br }}</p>{%- endif -%}
+              {%- if section.settings.palate != blank -%}<p><b>Palate:</b> {{ section.settings.palate | newline_to_br }}</p>{%- endif -%}
+              {%- if section.settings.body != blank -%}<p><b>Body:</b> {{ section.settings.body | newline_to_br }}</p>{%- endif -%}
+              {%- if section.settings.finish != blank -%}<p><b>Finish:</b> {{ section.settings.finish | newline_to_br }}</p>{%- endif -%}
             </div>
             <p class="ce-notes-body">{{ section.settings.desc_body }}</p>
           </div>
 
           <div class="ce-tab-panel" data-tab="pair">
             <div class="ce-notes">
-              {%- if section.settings.pair_cocktails != blank -%}<p><b>Cocktails:</b> {{ section.settings.pair_cocktails | escape }}</p>{%- endif -%}
-              {%- if section.settings.pair_food != blank -%}<p><b>Food:</b> {{ section.settings.pair_food | escape }}</p>{%- endif -%}
+              {%- if section.settings.pair_cocktails != blank -%}<p><b>Cocktails:</b> {{ section.settings.pair_cocktails | newline_to_br }}</p>{%- endif -%}
+              {%- if section.settings.pair_food != blank -%}<p><b>Food:</b> {{ section.settings.pair_food | newline_to_br }}</p>{%- endif -%}
             </div>
             <p class="ce-notes-body">{{ section.settings.pair_body }}</p>
           </div>
 
           <div class="ce-tab-panel" data-tab="high">
             <ul class="ce-highlights">
-              {%- if section.settings.highlight_1 != blank -%}<li>{{ section.settings.highlight_1 | escape }}</li>{%- endif -%}
-              {%- if section.settings.highlight_2 != blank -%}<li>{{ section.settings.highlight_2 | escape }}</li>{%- endif -%}
-              {%- if section.settings.highlight_3 != blank -%}<li>{{ section.settings.highlight_3 | escape }}</li>{%- endif -%}
-              {%- if section.settings.highlight_4 != blank -%}<li>{{ section.settings.highlight_4 | escape }}</li>{%- endif -%}
+              {%- if section.settings.highlight_1 != blank -%}<li>{{ section.settings.highlight_1 | newline_to_br }}</li>{%- endif -%}
+              {%- if section.settings.highlight_2 != blank -%}<li>{{ section.settings.highlight_2 | newline_to_br }}</li>{%- endif -%}
+              {%- if section.settings.highlight_3 != blank -%}<li>{{ section.settings.highlight_3 | newline_to_br }}</li>{%- endif -%}
+              {%- if section.settings.highlight_4 != blank -%}<li>{{ section.settings.highlight_4 | newline_to_br }}</li>{%- endif -%}
             </ul>
           </div>
 
@@ -130,7 +130,7 @@ nav img.nav-icon{filter:brightness(0)!important}
                 <span class="ce-rev-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Verified</span>
               </div>
               <p class="ce-rev-quote">{{ section.settings.review_quote }}</p>
-              <div class="ce-rev-author">{{ section.settings.review_author | escape }}</div>
+              <div class="ce-rev-author">{{ section.settings.review_author | newline_to_br }}</div>
             </div>
           {%- endif -%}
 
@@ -179,29 +179,29 @@ nav img.nav-icon{filter:brightness(0)!important}
     { "type": "image_picker", "id": "shot_2_image", "label": "Bottle — Back (optional)" },
     { "type": "image_picker", "id": "shot_3_image", "label": "Bottle — Lifestyle (optional)" },
     { "type": "header", "content": "Description tab" },
-    { "type": "text", "id": "tier_name", "label": "Tier name", "default": "The Gateway" },
-    { "type": "text", "id": "spec_1", "label": "Spec 1" },
-    { "type": "text", "id": "spec_2", "label": "Spec 2" },
-    { "type": "text", "id": "spec_3", "label": "Spec 3" },
-    { "type": "text", "id": "nose", "label": "Nose" },
-    { "type": "text", "id": "palate", "label": "Palate" },
-    { "type": "text", "id": "body", "label": "Body" },
-    { "type": "text", "id": "finish", "label": "Finish" },
+    { "type": "textarea", "id": "tier_name", "label": "Tier name", "default": "The Gateway" },
+    { "type": "textarea", "id": "spec_1", "label": "Spec 1" },
+    { "type": "textarea", "id": "spec_2", "label": "Spec 2" },
+    { "type": "textarea", "id": "spec_3", "label": "Spec 3" },
+    { "type": "textarea", "id": "nose", "label": "Nose" },
+    { "type": "textarea", "id": "palate", "label": "Palate" },
+    { "type": "textarea", "id": "body", "label": "Body" },
+    { "type": "textarea", "id": "finish", "label": "Finish" },
     { "type": "inline_richtext", "id": "desc_body", "label": "Description paragraph" },
     { "type": "header", "content": "Pairing tab" },
-    { "type": "text", "id": "pair_cocktails", "label": "Cocktails" },
-    { "type": "text", "id": "pair_food", "label": "Food" },
+    { "type": "textarea", "id": "pair_cocktails", "label": "Cocktails" },
+    { "type": "textarea", "id": "pair_food", "label": "Food" },
     { "type": "inline_richtext", "id": "pair_body", "label": "Pairing paragraph" },
     { "type": "header", "content": "Highlights tab" },
-    { "type": "text", "id": "highlight_1", "label": "Highlight 1" },
-    { "type": "text", "id": "highlight_2", "label": "Highlight 2" },
-    { "type": "text", "id": "highlight_3", "label": "Highlight 3" },
-    { "type": "text", "id": "highlight_4", "label": "Highlight 4" },
+    { "type": "textarea", "id": "highlight_1", "label": "Highlight 1" },
+    { "type": "textarea", "id": "highlight_2", "label": "Highlight 2" },
+    { "type": "textarea", "id": "highlight_3", "label": "Highlight 3" },
+    { "type": "textarea", "id": "highlight_4", "label": "Highlight 4" },
     { "type": "header", "content": "Review" },
     { "type": "text", "id": "review_rating", "label": "Rating", "default": "5.00" },
     { "type": "text", "id": "review_count", "label": "Review count", "default": "20" },
     { "type": "inline_richtext", "id": "review_quote", "label": "Quote" },
-    { "type": "text", "id": "review_author", "label": "Author", "default": "— Verified Buyer" }
+    { "type": "textarea", "id": "review_author", "label": "Author", "default": "— Verified Buyer" }
   ],
   "presets": [{ "name": "Product Page" }]
 }
