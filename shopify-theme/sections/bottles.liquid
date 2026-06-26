@@ -64,17 +64,17 @@
         <div class="ce-copy">
           <div class="label">{{ block.settings.copy_label | escape }}</div>
           <h3>{{ block.settings.name | escape }}</h3>
-          <div class="ce-rev-head" style="font-size:1.2rem;margin-bottom:1rem">{{ block.settings.tier_name | newline_to_br }}</div>
+          <div class="ce-rev-head" style="font-size:1.2rem;margin-bottom:1rem">{{ block.settings.tier_name }}</div>
           <ul class="ce-specs">
-            {%- if block.settings.spec_1 != blank -%}<li>{{ block.settings.spec_1 | newline_to_br }}</li>{%- endif -%}
-            {%- if block.settings.spec_2 != blank -%}<li>{{ block.settings.spec_2 | newline_to_br }}</li>{%- endif -%}
-            {%- if block.settings.spec_3 != blank -%}<li>{{ block.settings.spec_3 | newline_to_br }}</li>{%- endif -%}
+            {%- if block.settings.spec_1 != blank -%}<li>{{ block.settings.spec_1 }}</li>{%- endif -%}
+            {%- if block.settings.spec_2 != blank -%}<li>{{ block.settings.spec_2 }}</li>{%- endif -%}
+            {%- if block.settings.spec_3 != blank -%}<li>{{ block.settings.spec_3 }}</li>{%- endif -%}
           </ul>
           <div class="ce-notes">
-            {%- if block.settings.nose != blank -%}<p><b>Nose:</b> {{ block.settings.nose | newline_to_br }}</p>{%- endif -%}
-            {%- if block.settings.palate != blank -%}<p><b>Palate:</b> {{ block.settings.palate | newline_to_br }}</p>{%- endif -%}
-            {%- if block.settings.body != blank -%}<p><b>Body:</b> {{ block.settings.body | newline_to_br }}</p>{%- endif -%}
-            {%- if block.settings.finish != blank -%}<p><b>Finish:</b> {{ block.settings.finish | newline_to_br }}</p>{%- endif -%}
+            {%- if block.settings.nose != blank -%}<p><b>Nose:</b> {{ block.settings.nose }}</p>{%- endif -%}
+            {%- if block.settings.palate != blank -%}<p><b>Palate:</b> {{ block.settings.palate }}</p>{%- endif -%}
+            {%- if block.settings.body != blank -%}<p><b>Body:</b> {{ block.settings.body }}</p>{%- endif -%}
+            {%- if block.settings.finish != blank -%}<p><b>Finish:</b> {{ block.settings.finish }}</p>{%- endif -%}
           </div>
           <p class="ce-notes-body">{{ block.settings.desc_body }}</p>
           <div class="ce-copy-buy">
@@ -93,7 +93,7 @@
                 <span class="ce-rev-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Verified</span>
               </div>
               <p class="ce-rev-quote">{{ block.settings.review_quote }}</p>
-              <div class="ce-rev-author">{{ block.settings.review_author | newline_to_br }}</div>
+              <div class="ce-rev-author">{{ block.settings.review_author }}</div>
             </div>
           {%- endif -%}
         </div>
@@ -156,29 +156,29 @@
         { "type": "image_picker", "id": "shot_2_image", "label": "Bottle shot — Back (optional)" },
         { "type": "image_picker", "id": "shot_3_image", "label": "Bottle shot — Lifestyle / Style (optional)" },
         { "type": "header", "content": "Description" },
-        { "type": "textarea", "id": "tier_name", "label": "Tier name", "default": "The Gateway" },
-        { "type": "textarea", "id": "spec_1", "label": "Spec 1", "default": "100% Agave Angustifolia" },
-        { "type": "textarea", "id": "spec_2", "label": "Spec 2", "default": "6-8 Year Plant Maturation" },
-        { "type": "textarea", "id": "spec_3", "label": "Spec 3", "default": "ABV: 46%" },
-        { "type": "textarea", "id": "nose", "label": "Nose", "default": "Gentle smoke, aloe, honey, green olive" },
-        { "type": "textarea", "id": "palate", "label": "Palate", "default": "Sichuan pepper, grapefruit peel, star fruit, miso, light smoke, citrus lift" },
-        { "type": "textarea", "id": "body", "label": "Body", "default": "Medium bodied, balanced, approachable" },
-        { "type": "textarea", "id": "finish", "label": "Finish", "default": "Clean, delicate" },
+        { "type": "inline_richtext", "id": "tier_name", "label": "Tier name", "default": "The Gateway" },
+        { "type": "inline_richtext", "id": "spec_1", "label": "Spec 1", "default": "100% Agave Angustifolia" },
+        { "type": "inline_richtext", "id": "spec_2", "label": "Spec 2", "default": "6-8 Year Plant Maturation" },
+        { "type": "inline_richtext", "id": "spec_3", "label": "Spec 3", "default": "ABV: 46%" },
+        { "type": "inline_richtext", "id": "nose", "label": "Nose", "default": "Gentle smoke, aloe, honey, green olive" },
+        { "type": "inline_richtext", "id": "palate", "label": "Palate", "default": "Sichuan pepper, grapefruit peel, star fruit, miso, light smoke, citrus lift" },
+        { "type": "inline_richtext", "id": "body", "label": "Body", "default": "Medium bodied, balanced, approachable" },
+        { "type": "inline_richtext", "id": "finish", "label": "Finish", "default": "Clean, delicate" },
         { "type": "inline_richtext", "id": "desc_body", "label": "Description paragraph", "default": "This expression captures a classic mezcal profile, balancing smoke, spice, acidity, and subtle sweetness." },
         { "type": "header", "content": "Pairing tab (product page only)" },
-        { "type": "textarea", "id": "pair_cocktails", "label": "Cocktails", "default": "Mezcal Negroni, Oaxacan Old Fashioned, Paloma" },
-        { "type": "textarea", "id": "pair_food", "label": "Food", "default": "Grilled citrus shrimp, queso fresco, charred corn, salsa verde" },
+        { "type": "inline_richtext", "id": "pair_cocktails", "label": "Cocktails", "default": "Mezcal Negroni, Oaxacan Old Fashioned, Paloma" },
+        { "type": "inline_richtext", "id": "pair_food", "label": "Food", "default": "Grilled citrus shrimp, queso fresco, charred corn, salsa verde" },
         { "type": "inline_richtext", "id": "pair_body", "label": "Pairing paragraph", "default": "Its balanced smoke and bright acidity make Espadin the most versatile pour in the range." },
         { "type": "header", "content": "Highlights tab (product page only)" },
-        { "type": "textarea", "id": "highlight_1", "label": "Highlight 1", "default": "Single-village production in the highlands of Oaxaca" },
-        { "type": "textarea", "id": "highlight_2", "label": "Highlight 2", "default": "Earthen-pit roasted, tahona-crushed, copper distilled" },
-        { "type": "textarea", "id": "highlight_3", "label": "Highlight 3", "default": "Small-batch — never more than 600 bottles per run" },
-        { "type": "textarea", "id": "highlight_4", "label": "Highlight 4", "default": "The ideal introduction to artesanal mezcal" },
+        { "type": "inline_richtext", "id": "highlight_1", "label": "Highlight 1", "default": "Single-village production in the highlands of Oaxaca" },
+        { "type": "inline_richtext", "id": "highlight_2", "label": "Highlight 2", "default": "Earthen-pit roasted, tahona-crushed, copper distilled" },
+        { "type": "inline_richtext", "id": "highlight_3", "label": "Highlight 3", "default": "Small-batch — never more than 600 bottles per run" },
+        { "type": "inline_richtext", "id": "highlight_4", "label": "Highlight 4", "default": "The ideal introduction to artesanal mezcal" },
         { "type": "header", "content": "Review" },
         { "type": "text", "id": "review_rating", "label": "Rating", "default": "5.00" },
         { "type": "text", "id": "review_count", "label": "Review count", "default": "20" },
         { "type": "inline_richtext", "id": "review_quote", "label": "Quote", "default": "“Probably the most complex mezcal I’ve ever tasted. Truly special.”" },
-        { "type": "textarea", "id": "review_author", "label": "Author", "default": "— Verified Buyer" }
+        { "type": "inline_richtext", "id": "review_author", "label": "Author", "default": "— Verified Buyer" }
       ]
     }
   ],
