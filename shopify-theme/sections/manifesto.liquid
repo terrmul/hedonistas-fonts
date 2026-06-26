@@ -35,7 +35,8 @@
   <div class="mf-panel mf-panel--1" data-mf-color="{{ section.settings.color_panel_1 }}">
     <div class="mf-p1-media">
       {%- if section.settings.image_1 != blank -%}
-        <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" width="{{ section.settings.image_1.width }}" height="{{ section.settings.image_1.height }}" loading="lazy" decoding="async">
+        <img src="{{ section.settings.image_1 | image_url: width: 1200 }}" alt="{{ section.settings.image_1.alt | default: '' | escape }}" loading="lazy" decoding="async"
+          style="object-position:{{ section.settings.image_1_x }}% {{ section.settings.image_1_y }}%;transform:scale({{ section.settings.image_1_zoom | divided_by: 100.0 | plus: 1 }})">
       {%- else -%}
         <div class="mf-media-ph" data-label="Add image in Customizer"></div>
       {%- endif -%}
@@ -49,18 +50,19 @@
 
   <!-- 4 — PANEL 2 -->
   <div class="mf-panel mf-panel--2" data-mf-color="{{ section.settings.color_panel_2 }}">
-    <div class="mf-p2-media">
-      {%- if section.settings.image_2 != blank -%}
-        <img src="{{ section.settings.image_2 | image_url: width: 1200 }}" alt="{{ section.settings.image_2.alt | default: '' | escape }}" width="{{ section.settings.image_2.width }}" height="{{ section.settings.image_2.height }}" loading="lazy" decoding="async">
-      {%- else -%}
-        <div class="mf-media-ph" data-label="Add image in Customizer"></div>
-      {%- endif -%}
-    </div>
     <div class="mf-p2-copy">
       <div class="mf-panel-num" aria-hidden="true">02</div>
       <blockquote class="mf-p2-quote" style="color:{{ section.settings.text_panel_2_quote }}">{{ section.settings.quote_2 }}</blockquote>
       <div class="mf-rule--solar"></div>
       <p class="mf-body--cream" style="color:{{ section.settings.text_panel_2_body }}">{{ section.settings.body_2 }}</p>
+    </div>
+    <div class="mf-p2-media">
+      {%- if section.settings.image_2 != blank -%}
+        <img src="{{ section.settings.image_2 | image_url: width: 1200 }}" alt="{{ section.settings.image_2.alt | default: '' | escape }}" loading="lazy" decoding="async"
+          style="object-position:{{ section.settings.image_2_x }}% {{ section.settings.image_2_y }}%;transform:scale({{ section.settings.image_2_zoom | divided_by: 100.0 | plus: 1 }})">
+      {%- else -%}
+        <div class="mf-media-ph" data-label="Add image in Customizer"></div>
+      {%- endif -%}
     </div>
   </div>
 
@@ -68,7 +70,7 @@
   <div class="mf-finale" data-mf-color="{{ section.settings.color_panel_3 }}">
     <div class="mf-full-bg">
       {%- if section.settings.image_3 != blank -%}
-        <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" width="{{ section.settings.image_3.width }}" height="{{ section.settings.image_3.height }}" loading="lazy" decoding="async" style="object-position: {{ section.settings.panel_3_focal_x }}% center">
+        <img src="{{ section.settings.image_3 | image_url: width: 2000 }}" alt="{{ section.settings.image_3.alt | default: '' | escape }}" loading="lazy" decoding="async" style="object-position: {{ section.settings.panel_3_focal_x }}% center">
       {%- else -%}
         <div class="mf-media-ph mf-media-ph--full" data-label="Add full-width image in Customizer"></div>
       {%- endif -%}
@@ -168,7 +170,6 @@
     reveals.forEach(function(el){ revealIO.observe(el); });
   }
 
-  // Finale poem sequence — scroll-based trigger
   var finaleEl = document.querySelector('.mf-finale');
   if(finaleEl){
     var finaleLines = Array.prototype.slice.call(finaleEl.querySelectorAll('.mf-finale-line'));
@@ -230,6 +231,9 @@
     { "type": "header", "content": "Panel 1" },
     { "type": "color", "id": "color_panel_1", "label": "Background", "default": "#09627A" },
     { "type": "image_picker", "id": "image_1", "label": "Image" },
+    { "type": "range", "id": "image_1_x", "label": "Image focus — horizontal", "info": "50 = center", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_1_y", "label": "Image focus — vertical", "info": "50 = center", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_1_zoom", "label": "Image zoom", "info": "0 = no zoom, 50 = 50% larger", "min": 0, "max": 50, "step": 5, "unit": "%", "default": 0 },
     { "type": "inline_richtext", "id": "quote_1", "label": "Statement", "default": "Late nights that bleed into early mornings. Laughter that cracks the room open." },
     { "type": "color", "id": "text_panel_1_quote", "label": "Statement color", "default": "#F3E6D1" },
     { "type": "inline_richtext", "id": "body_1", "label": "Body copy", "default": "Strangers who become soulmates over a shared pour. We believe conversation begins in person, not chat boxes. That moments matter more than follower count. And that participants live richer, fuller lives than spectators." },
@@ -237,6 +241,9 @@
     { "type": "header", "content": "Panel 2" },
     { "type": "color", "id": "color_panel_2", "label": "Background", "default": "#7C3A09" },
     { "type": "image_picker", "id": "image_2", "label": "Image" },
+    { "type": "range", "id": "image_2_x", "label": "Image focus — horizontal", "info": "50 = center", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_2_y", "label": "Image focus — vertical", "info": "50 = center", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+    { "type": "range", "id": "image_2_zoom", "label": "Image zoom", "info": "0 = no zoom, 50 = 50% larger", "min": 0, "max": 50, "step": 5, "unit": "%", "default": 0 },
     { "type": "inline_richtext", "id": "quote_2", "label": "Statement", "default": "Our mezcal is forged the same way our best nights are. Slowly. Passionately. Without compromise." },
     { "type": "color", "id": "text_panel_2_quote", "label": "Statement color", "default": "#F3E6D1" },
     { "type": "inline_richtext", "id": "body_2", "label": "Body copy", "default": "It is the ritual of Earth, Fire, and Time. No shortcuts. No spreadsheets. No algorithms." },
