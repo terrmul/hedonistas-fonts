@@ -5,10 +5,10 @@
   <div class="mf-open" data-mf-color="{{ section.settings.color_open }}">
     <div class="mf-dot-grid" aria-hidden="true"></div>
     <div class="mf-open-inner">
-      <div class="label mf-eyebrow" style="color:{{ section.settings.text_eyebrow }}">{{ section.settings.eyebrow | newline_to_br }}</div>
+      <div class="label mf-eyebrow" style="color:{{ section.settings.text_eyebrow }}">{{ section.settings.eyebrow }}</div>
       <h2 class="mf-headline">
-        <span class="mf-h-line" style="color:{{ section.settings.text_headline_1 }}">{{ section.settings.headline_1 | newline_to_br }}</span>
-        <span class="mf-h-line" style="color:{{ section.settings.text_headline_2 }}">{{ section.settings.headline_2 | newline_to_br }}</span>
+        <span class="mf-h-line" style="color:{{ section.settings.text_headline_1 }}">{{ section.settings.headline_1 }}</span>
+        <span class="mf-h-line" style="color:{{ section.settings.text_headline_2 }}">{{ section.settings.headline_2 }}</span>
       </h2>
       <p class="mf-open-sub" style="color:{{ section.settings.text_subline }}">{{ section.settings.subline }}</p>
     </div>
@@ -79,27 +79,27 @@
     <div class="mf-finale-stage">
       <div class="mf-finale-lines" aria-live="polite">
         {%- if section.settings.finale_line_1 != blank -%}
-          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_1 | newline_to_br }}</p>
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_1 }}</p>
         {%- endif -%}
         {%- if section.settings.finale_line_2 != blank -%}
-          <p class="mf-finale-line mf-finale-line--bold" style="color:{{ section.settings.color_finale_bold }}">{{ section.settings.finale_line_2 | newline_to_br }}</p>
+          <p class="mf-finale-line mf-finale-line--bold" style="color:{{ section.settings.color_finale_bold }}">{{ section.settings.finale_line_2 }}</p>
         {%- endif -%}
         {%- if section.settings.finale_line_3 != blank -%}
-          <p class="mf-finale-line mf-finale-line--bold" style="color:{{ section.settings.color_finale_bold }}">{{ section.settings.finale_line_3 | newline_to_br }}</p>
+          <p class="mf-finale-line mf-finale-line--bold" style="color:{{ section.settings.color_finale_bold }}">{{ section.settings.finale_line_3 }}</p>
         {%- endif -%}
         {%- if section.settings.finale_line_4 != blank -%}
-          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_4 | newline_to_br }}</p>
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_4 }}</p>
         {%- endif -%}
         {%- if section.settings.finale_line_5 != blank -%}
-          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_5 | newline_to_br }}</p>
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_5 }}</p>
         {%- endif -%}
         {%- if section.settings.finale_line_6 != blank -%}
-          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_6 | newline_to_br }}</p>
+          <p class="mf-finale-line" style="color:{{ section.settings.color_finale_regular }}">{{ section.settings.finale_line_6 }}</p>
         {%- endif -%}
       </div>
       <div class="mf-finale-end">
-        <span class="mf-poem-finale-name" style="color:{{ section.settings.text_finale_name }}">{{ section.settings.poem_finale_name | newline_to_br }}</span>
-        <span class="mf-poem-finale-call" style="color:{{ section.settings.text_finale_call }}">{{ section.settings.poem_finale_call | newline_to_br }}</span>
+        <span class="mf-poem-finale-name" style="color:{{ section.settings.text_finale_name }}">{{ section.settings.poem_finale_name }}</span>
+        <span class="mf-poem-finale-call" style="color:{{ section.settings.text_finale_call }}">{{ section.settings.poem_finale_call }}</span>
         {%- if section.settings.cta_url != blank -%}
           <a class="mag-btn mag-dark mf-poem-cta" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label | escape }}</a>
         {%- endif -%}
@@ -208,11 +208,11 @@
   "settings": [
     { "type": "header", "content": "Opening" },
     { "type": "color", "id": "color_open", "label": "Background", "default": "#F3E6D1" },
-    { "type": "textarea", "id": "eyebrow", "label": "Eyebrow", "default": "Hedonistas De La Fe" },
+    { "type": "inline_richtext", "id": "eyebrow", "label": "Eyebrow", "default": "Hedonistas De La Fe" },
     { "type": "color", "id": "text_eyebrow", "label": "Eyebrow color", "default": "#7C3A09" },
-    { "type": "textarea", "id": "headline_1", "label": "Headline - Line 1", "default": "We Don't Sell Drinks." },
+    { "type": "inline_richtext", "id": "headline_1", "label": "Headline - Line 1", "default": "We Don't Sell Drinks." },
     { "type": "color", "id": "text_headline_1", "label": "Headline line 1 color", "default": "#1a1716" },
-    { "type": "textarea", "id": "headline_2", "label": "Headline - Line 2", "default": "We Sell The Unforgettable." },
+    { "type": "inline_richtext", "id": "headline_2", "label": "Headline - Line 2", "default": "We Sell The Unforgettable." },
     { "type": "color", "id": "text_headline_2", "label": "Headline line 2 color", "default": "#7C3A09" },
     { "type": "inline_richtext", "id": "subline", "label": "Sub-headline", "default": "Most brands sell a drink. A fleeting sensation. But drinks are forgotten - poured out, lost to the glass, abandoned on a table. At Hedonistas Mezcal, we are purveyors of something else entirely." },
     { "type": "color", "id": "text_subline", "label": "Sub-headline color", "default": "#4F4E4F" },
@@ -246,12 +246,12 @@
     { "type": "image_picker", "id": "image_3", "label": "Full-width image" },
     { "type": "range", "id": "panel_3_focal_x", "label": "Image focal point - horizontal", "info": "50 = center", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
     { "type": "header", "content": "Finale - Poem sequence" },
-    { "type": "textarea", "id": "finale_line_1", "label": "Line 1", "default": "An invitation. A challenge." },
-    { "type": "textarea", "id": "finale_line_2", "label": "Line 2 (bold)", "default": "Go Deep into laughter that shakes the room loose." },
-    { "type": "textarea", "id": "finale_line_3", "label": "Line 3 (bold)", "default": "Into silence that dares to tell the truth." },
-    { "type": "textarea", "id": "finale_line_4", "label": "Line 4", "default": "Every bottle holds the story of its soil." },
-    { "type": "textarea", "id": "finale_line_5", "label": "Line 5", "default": "Every bartender, a Curandero — keeper of the sacred flame." },
-    { "type": "textarea", "id": "finale_line_6", "label": "Line 6", "default": "In a time that rewards the shallow, we go deeper." },
+    { "type": "inline_richtext", "id": "finale_line_1", "label": "Line 1", "default": "An invitation. A challenge." },
+    { "type": "inline_richtext", "id": "finale_line_2", "label": "Line 2 (bold)", "default": "Go Deep into laughter that shakes the room loose." },
+    { "type": "inline_richtext", "id": "finale_line_3", "label": "Line 3 (bold)", "default": "Into silence that dares to tell the truth." },
+    { "type": "inline_richtext", "id": "finale_line_4", "label": "Line 4", "default": "Every bottle holds the story of its soil." },
+    { "type": "inline_richtext", "id": "finale_line_5", "label": "Line 5", "default": "Every bartender, a Curandero — keeper of the sacred flame." },
+    { "type": "inline_richtext", "id": "finale_line_6", "label": "Line 6", "default": "In a time that rewards the shallow, we go deeper." },
     { "type": "select", "id": "finale_font_family", "label": "Line font", "options": [
       { "value": "pacifico", "label": "Pacifico (Display)" },
       { "value": "sans", "label": "Hedonistas Sans" }
@@ -260,9 +260,9 @@
     { "type": "color", "id": "color_finale_regular", "label": "Regular line color", "default": "#F3E6D1" },
     { "type": "color", "id": "color_finale_bold", "label": "Bold line color", "default": "#DBB149" },
     { "type": "header", "content": "Finale - Sign-off" },
-    { "type": "textarea", "id": "poem_finale_name", "label": "Brand name", "default": "Hedonistas Mezcal." },
+    { "type": "inline_richtext", "id": "poem_finale_name", "label": "Brand name", "default": "Hedonistas Mezcal." },
     { "type": "color", "id": "text_finale_name", "label": "Brand name color", "default": "#F3E6D1" },
-    { "type": "textarea", "id": "poem_finale_call", "label": "Call (large)", "default": "Go Deep." },
+    { "type": "inline_richtext", "id": "poem_finale_call", "label": "Call (large)", "default": "Go Deep." },
     { "type": "color", "id": "text_finale_call", "label": "Call color", "default": "#DBB149" },
     { "type": "header", "content": "CTA Button" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "The Craft Behind Every Bottle" },

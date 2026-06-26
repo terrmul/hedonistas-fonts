@@ -9,9 +9,9 @@
 
   <div class="maestro-content">
     <div class="maestro-text">
-      <div class="label">{{ section.settings.label | newline_to_br }}</div>
+      <div class="label">{{ section.settings.label }}</div>
       <h2>{{ section.settings.heading }}</h2>
-      <div class="maestro-name">{{ section.settings.maestro_name | newline_to_br }}</div>
+      <div class="maestro-name">{{ section.settings.maestro_name }}</div>
       {{ section.settings.body }}
     </div>
   </div>
@@ -26,9 +26,9 @@
   "name": "Maestro",
   "settings": [
     { "type": "image_picker", "id": "portrait", "label": "Portrait (full-bleed, ~1600×2400)" },
-    { "type": "textarea", "id": "label", "label": "Eyebrow label", "default": "El Maestro Mezcalero" },
+    { "type": "inline_richtext", "id": "label", "label": "Eyebrow label", "default": "El Maestro Mezcalero" },
     { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "The Hands Behind Every Drop." },
-    { "type": "textarea", "id": "maestro_name", "label": "Maestro name", "default": "[Maestro Name]" },
+    { "type": "inline_richtext", "id": "maestro_name", "label": "Maestro name", "default": "[Maestro Name]" },
     { "type": "richtext", "id": "body", "label": "Body copy", "default": "<p>Third-generation mezcalero from the Sierra Juárez highlands, he learned the art of coaxing spirits from agave before he could read. His palenque sits at 1,800 metres — where the air is thin, the nights are cold, and the maguey grows slowly into something extraordinary.</p><p>He selects each plant by hand, reads the earth after rain, and still uses the same clay pot still his grandfather built. There is no recipe. There is only accumulated wisdom and an unhurried respect for the plant.</p>" }
   ],
   "presets": [{ "name": "Maestro" }]

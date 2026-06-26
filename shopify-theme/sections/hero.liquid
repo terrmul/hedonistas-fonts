@@ -25,14 +25,14 @@
       {%- else -%}
         <img class="hero-logo" src="{{ 'icon.png' | asset_url }}" alt="{{ section.settings.logo_alt | escape }}" fetchpriority="high" decoding="async" style="height:{{ logo_size }}px;width:auto">
       {%- endif -%}
-      <h1 class="hero-h1"><span class="split">{{ section.settings.heading_1 | newline_to_br }}</span><span class="split">{{ section.settings.heading_2 | newline_to_br }}</span></h1>
+      <h1 class="hero-h1"><span class="split">{{ section.settings.heading_1 }}</span><span class="split">{{ section.settings.heading_2 }}</span></h1>
     </div>
   </div>
   <a class="hero-badge" href="{{ section.settings.badge_link }}" aria-label="{{ section.settings.badge_aria | escape }}">
     <span class="hero-badge-top">{{ section.settings.badge_top | escape }}</span>
     <span class="hero-badge-medal">{{ section.settings.badge_medal | escape }}</span>
     <span class="hero-badge-year">{{ section.settings.badge_year | escape }}</span>
-    <span class="hero-badge-body">{{ section.settings.badge_body | newline_to_br }}</span>
+    <span class="hero-badge-body">{{ section.settings.badge_body }}</span>
   </a>
   <div class="hero-fore" id="hero-fore">
     <p class="hero-tagline">{{ section.settings.tagline }}</p>
@@ -74,13 +74,13 @@
     { "type": "range", "id": "logo_size", "label": "Logo size", "min": 60, "max": 280, "step": 10, "unit": "px", "default": 180 },
     { "type": "text", "id": "backdrop_word", "label": "Oversized backdrop word", "default": "Hedonistas" },
     { "type": "header", "content": "Headline" },
-    { "type": "textarea", "id": "heading_1", "label": "Headline line 1", "default": "Go" },
-    { "type": "textarea", "id": "heading_2", "label": "Headline line 2", "default": "Deep." },
+    { "type": "inline_richtext", "id": "heading_1", "label": "Headline line 1", "default": "Go" },
+    { "type": "inline_richtext", "id": "heading_2", "label": "Headline line 2", "default": "Deep." },
     { "type": "header", "content": "Award Badge" },
     { "type": "text", "id": "badge_top", "label": "Lead-in line", "default": "Winner of" },
     { "type": "text", "id": "badge_medal", "label": "Award", "default": "Four Golds" },
     { "type": "text", "id": "badge_year", "label": "Year", "default": "2026" },
-    { "type": "textarea", "id": "badge_body", "label": "Competition / source", "default": "SF World Spirits" },
+    { "type": "inline_richtext", "id": "badge_body", "label": "Competition / source", "default": "SF World Spirits" },
     { "type": "url", "id": "badge_link", "label": "Badge link" },
     { "type": "text", "id": "badge_aria", "label": "Badge screen-reader label", "default": "Winner of Four Golds, 2026, SF World Spirits Competition" },
     { "type": "header", "content": "Foreground" },
