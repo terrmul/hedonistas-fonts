@@ -1,0 +1,21 @@
+{
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {},
+      "blocks": {
+        "social_instagram": { "type": "social", "settings": { "platform": "instagram", "url": "https://www.instagram.com/hedonistasdelafe/" } },
+        "social_tiktok": { "type": "social", "settings": { "platform": "tiktok", "url": "https://www.tiktok.com/@hedonistasmezcal" } },
+        "social_facebook": { "type": "social", "settings": { "platform": "facebook", "url": "https://www.facebook.com/hedonistasmezcal" } },
+        "col_explore": { "type": "column", "settings": { "heading": "Explore", "link_1_label": "Mezcals", "link_1_url": "#mezcals", "link_2_label": "Our Craft", "link_2_url": "#craft", "link_3_label": "The Maestro", "link_3_url": "#maestro", "link_4_label": "Cocktails", "link_4_url": "#cocktails", "link_5_label": "Find Us", "link_5_url": "#findus", "link_6_label": "Journal", "link_6_url": "/blogs/journal" } },
+        "col_trade": { "type": "column", "settings": { "heading": "Trade", "link_1_label": "Distribution Enquiries", "link_1_url": "/pages/distribution", "link_2_label": "Wholesale & On-Premise", "link_2_url": "/pages/wholesale", "link_3_label": "Press & Media Kit", "link_3_url": "/pages/press", "link_4_label": "Become a Stockist", "link_4_url": "/pages/stockist", "link_5_label": "Stockist Login", "link_5_url": "/account" } },
+        "col_company": { "type": "column", "settings": { "heading": "Company", "link_1_label": "Our Story", "link_1_url": "#story", "link_2_label": "Awards", "link_2_url": "#awards", "link_3_label": "Sustainability", "link_3_url": "/pages/sustainability", "link_4_label": "Careers", "link_4_url": "/pages/careers", "link_5_label": "Contact", "link_5_url": "/pages/contact" } },
+        "col_legal": { "type": "column", "settings": { "heading": "Legal", "link_1_label": "AccelPay Partnership Terms", "link_1_url": "/pages/accelpay-terms", "link_2_label": "Shipping & Compliance", "link_2_url": "/pages/shipping", "link_3_label": "Privacy Policy", "link_3_url": "/policies/privacy-policy", "link_4_label": "Terms of Service", "link_4_url": "/policies/terms-of-service", "link_5_label": "Accessibility", "link_5_url": "/pages/accessibility" } }
+      },
+      "block_order": ["social_instagram", "social_tiktok", "social_facebook", "col_explore", "col_trade", "col_company", "col_legal"]
+    }
+  },
+  "order": ["footer"]
+}
