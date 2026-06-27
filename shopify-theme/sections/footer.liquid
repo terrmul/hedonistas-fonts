@@ -1,0 +1,115 @@
+<!-- FOOTER -->
+<footer>
+  <div class="f-top">
+    <div class="f-brand">
+      <div class="f-logo">
+        {%- if section.settings.brand_logo != blank -%}
+          <img src="{{ section.settings.brand_logo | image_url: width: 64 }}" alt="{{ section.settings.brand_name | escape }}" loading="lazy" decoding="async" width="32" height="32">
+        {%- else -%}
+          <img src="{{ 'icon.png' | asset_url }}" alt="{{ section.settings.brand_name | escape }}" loading="lazy" decoding="async" width="32" height="32">
+        {%- endif -%}
+        {{ section.settings.brand_name | escape }}
+      </div>
+      <p class="f-blurb">{{ section.settings.blurb | escape | replace: '//', '<br>' }}</p>
+      <div class="f-social">
+        {%- if section.settings.instagram_url != blank -%}
+        <a href="{{ section.settings.instagram_url }}" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        {%- endif -%}
+        {%- if section.settings.tiktok_url != blank -%}
+        <a href="{{ section.settings.tiktok_url }}" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.52V6.73a4.85 4.85 0 01-1.02-.04z"/></svg>
+        </a>
+        {%- endif -%}
+        {%- if section.settings.facebook_url != blank -%}
+        <a href="{{ section.settings.facebook_url }}" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="f-cols">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'column' -%}
+          <div class="f-col" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h4>{{ block.settings.heading | escape }}</h4>{%- endif -%}
+            {%- if block.settings.link_1_label != blank -%}<a href="{{ block.settings.link_1_url }}">{{ block.settings.link_1_label | escape }}</a>{%- endif -%}
+            {%- if block.settings.link_2_label != blank -%}<a href="{{ block.settings.link_2_url }}">{{ block.settings.link_2_label | escape }}</a>{%- endif -%}
+            {%- if block.settings.link_3_label != blank -%}<a href="{{ block.settings.link_3_url }}">{{ block.settings.link_3_label | escape }}</a>{%- endif -%}
+            {%- if block.settings.link_4_label != blank -%}<a href="{{ block.settings.link_4_url }}">{{ block.settings.link_4_label | escape }}</a>{%- endif -%}
+            {%- if block.settings.link_5_label != blank -%}<a href="{{ block.settings.link_5_url }}">{{ block.settings.link_5_label | escape }}</a>{%- endif -%}
+            {%- if block.settings.link_6_label != blank -%}<a href="{{ block.settings.link_6_url }}">{{ block.settings.link_6_label | escape }}</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- if section.settings.watermark_word != blank -%}
+  <div class="f-wordmark" id="f-watermark" aria-hidden="true">{{ section.settings.watermark_word | escape }}</div>
+  {%- endif -%}
+  <div class="f-center-logo">
+    {%- if section.settings.center_logo != blank -%}
+      <img src="{{ section.settings.center_logo | image_url: width: 600 }}" alt="{{ section.settings.brand_name | escape }}" loading="lazy" decoding="async">
+    {%- else -%}
+      <img src="{{ 'Logo.png' | asset_url }}" alt="{{ section.settings.brand_name | escape }}" loading="lazy" decoding="async">
+    {%- endif -%}
+  </div>
+  <div class="f-bottom">
+    <div class="f-legal">© {{ 'now' | date: '%Y' }} {{ section.settings.legal_text | escape | replace: '//', '<br>' }}</div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "header", "content": "Brand" },
+    { "type": "image_picker", "id": "brand_logo", "label": "Small logo icon" },
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Hedonistas Mezcal" },
+    { "type": "textarea", "id": "blurb", "label": "Blurb (use // for line break)", "default": "Purveyors of the unforgettable. Artesanal mezcal, hand-crafted in the highlands of Oaxaca — and shipped direct to your door." },
+    { "type": "header", "content": "Social links" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
+    { "type": "url", "id": "tiktok_url", "label": "TikTok URL" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook URL" },
+    { "type": "header", "content": "Center logo & watermark" },
+    { "type": "image_picker", "id": "center_logo", "label": "Center logo" },
+    { "type": "text", "id": "watermark_word", "label": "Background watermark word", "default": "Hedonistas" },
+    { "type": "header", "content": "Legal line" },
+    { "type": "text", "id": "legal_text", "label": "Legal text (year added automatically)", "default": "Hedonistas Mezcal · Drink Responsibly · 21+" }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Column heading", "default": "Explore" },
+        { "type": "text", "id": "link_1_label", "label": "Link 1 label" },
+        { "type": "url", "id": "link_1_url", "label": "Link 1 URL" },
+        { "type": "text", "id": "link_2_label", "label": "Link 2 label" },
+        { "type": "url", "id": "link_2_url", "label": "Link 2 URL" },
+        { "type": "text", "id": "link_3_label", "label": "Link 3 label" },
+        { "type": "url", "id": "link_3_url", "label": "Link 3 URL" },
+        { "type": "text", "id": "link_4_label", "label": "Link 4 label" },
+        { "type": "url", "id": "link_4_url", "label": "Link 4 URL" },
+        { "type": "text", "id": "link_5_label", "label": "Link 5 label" },
+        { "type": "url", "id": "link_5_url", "label": "Link 5 URL" },
+        { "type": "text", "id": "link_6_label", "label": "Link 6 label" },
+        { "type": "url", "id": "link_6_url", "label": "Link 6 URL" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "column", "settings": { "heading": "Explore", "link_1_label": "Mezcals", "link_1_url": "#mezcals", "link_2_label": "Our Craft", "link_2_url": "#craft", "link_3_label": "The Maestro", "link_3_url": "#maestro", "link_4_label": "Cocktails", "link_4_url": "#cocktails", "link_5_label": "Find Us", "link_5_url": "#findus", "link_6_label": "Journal", "link_6_url": "/blogs/journal" } },
+        { "type": "column", "settings": { "heading": "Trade", "link_1_label": "Distribution Enquiries", "link_1_url": "/pages/distribution", "link_2_label": "Wholesale & On-Premise", "link_2_url": "/pages/wholesale", "link_3_label": "Press & Media Kit", "link_3_url": "/pages/press", "link_4_label": "Become a Stockist", "link_4_url": "/pages/stockist", "link_5_label": "Stockist Login", "link_5_url": "/account" } },
+        { "type": "column", "settings": { "heading": "Company", "link_1_label": "Our Story", "link_1_url": "#story", "link_2_label": "Awards", "link_2_url": "#awards", "link_3_label": "Sustainability", "link_3_url": "/pages/sustainability", "link_4_label": "Careers", "link_4_url": "/pages/careers", "link_5_label": "Contact", "link_5_url": "/pages/contact" } },
+        { "type": "column", "settings": { "heading": "Legal", "link_1_label": "AccelPay Partnership Terms", "link_1_url": "/pages/accelpay-terms", "link_2_label": "Shipping & Compliance", "link_2_url": "/pages/shipping", "link_3_label": "Privacy Policy", "link_3_url": "/policies/privacy-policy", "link_4_label": "Terms of Service", "link_4_url": "/policies/terms-of-service", "link_5_label": "Accessibility", "link_5_url": "/pages/accessibility" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
