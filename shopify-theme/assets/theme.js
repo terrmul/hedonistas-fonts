@@ -353,28 +353,16 @@ function initMapScroll(root){
   if(!mapContainer||mapContainer.dataset.ms) return;
   mapContainer.dataset.ms='1';
 
-  // Track mouse X so we can distinguish map area (right ~60%) from results panel (left ~40%)
-  var mouseX=0;
-  mapContainer.addEventListener('mouseenter',function(e){mouseX=e.clientX;},{passive:true});
-  mapContainer.addEventListener('mousemove',function(e){mouseX=e.clientX;},{passive:true});
-
+  // Across the WHOLE map (left results panel + map viewport): plain scrolling
+  // moves the page instead of zooming the map, so the map never grabs the
+  // wheel and no "ctrl + scroll" prompt is needed. Holding Ctrl/Cmd still
+  // lets the map zoom for anyone who wants it.
   mapContainer.addEventListener('wheel',function(e){
-    var rect=mapContainer.getBoundingClientRect();
-    var inMapArea=(mouseX-rect.left)>rect.width*0.38;
-    if(inMapArea&&!e.ctrlKey&&!e.metaKey){
-      e.stopPropagation();
-      e.preventDefault();
-      window.scrollBy({top:e.deltaY,behavior:'auto'});
-    }
+    if(e.ctrlKey||e.metaKey) return;
+    e.stopPropagation();
+    e.preventDefault();
+    window.scrollBy({top:e.deltaY,behavior:'auto'});
   },{passive:false,capture:true});
-
-  // Inject hint directly — no shadow-DOM traversal needed
-  var hint=document.createElement('div');
-  hint.className='map-scroll-hint';
-  hint.setAttribute('aria-hidden','true');
-  hint.textContent='⌘ / Ctrl + scroll to zoom';
-  if(getComputedStyle(mapContainer).position==='static') mapContainer.style.position='relative';
-  mapContainer.appendChild(hint);
 }
 
 var SECTION_INITS={

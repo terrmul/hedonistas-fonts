@@ -3,7 +3,6 @@
   #findus .findus-head-left .label { color: {{ section.settings.color_label }} !important; }
   #findus .findus-head-left h2 { color: {{ section.settings.color_heading }} !important; }
   #findus .findus-head-right, #findus .findus-head-right p { color: {{ section.settings.color_intro }} !important; }
-  #findus .findus-map { position: relative; }
 {% endstyle %}
 <div class="findus" id="findus" data-nav="dark" data-bg="bg-cactus" style="background:{{ section.settings.color_section_bg }}">
   <div class="findus-head">
@@ -20,21 +19,6 @@
     <script async src="https://stockist.co/embed/v1/widget.min.js"></script>
   </div>
 </div>
-<script>
-(function(){
-  var map = document.getElementById('findus-map');
-  if(!map) return;
-  // Stop the scroll wheel from ever reaching the embedded map, so it never
-  // zooms (and Google's "use ctrl + scroll to zoom" prompt never fires).
-  // Capture phase + stopPropagation blocks the map's own wheel handlers, but
-  // we never preventDefault, so the page keeps scrolling normally. Clicks,
-  // drag-pan, the store list, search, and the +/- buttons all still work.
-  var block = function(e){ e.stopPropagation(); };
-  map.addEventListener('wheel', block, true);
-  map.addEventListener('mousewheel', block, true);
-  map.addEventListener('DOMMouseScroll', block, true);
-})();
-</script>
 {% schema %}
 {
   "name": "Find Us",
