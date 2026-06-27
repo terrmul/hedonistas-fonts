@@ -1,0 +1,79 @@
+<!-- NAV -->
+<style>
+  /* Self-contained mobile nav: hide inline links, show hamburger, full drawer.
+     Scoped with #ids/!important so it wins regardless of theme.css state. */
+  #nav-drawer{
+    position:fixed;top:0;left:0;right:0;z-index:9997;
+    mix-blend-mode:normal;
+    background:rgba(243,230,209,.97);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    display:flex;flex-direction:column;align-items:stretch;
+    gap:0;padding:0;
+    max-height:0;overflow:hidden;
+    transition:max-height .4s cubic-bezier(.4,0,.2,1),box-shadow .4s;
+    box-shadow:none;
+  }
+  #nav-drawer.open{
+    max-height:100vh;
+    box-shadow:0 12px 32px -8px rgba(0,0,0,.45);
+  }
+  #nav-drawer a{
+    display:block;width:100%;box-sizing:border-box;
+    font-family:"metallophile-sp8",sans-serif;font-size:1rem;letter-spacing:.2em;
+    text-transform:uppercase;color:#1a1716;text-decoration:none;
+    padding:.95rem 1.6rem;
+    border-bottom:1px solid rgba(26,23,22,.08);
+    transition:color .2s,background .2s;
+  }
+  #nav-drawer a:first-child{padding-top:5.5rem}
+  #nav-drawer a:hover{color:var(--raspberry);background:rgba(26,23,22,.04)}
+
+  #mainnav .nav-hamburger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:36px;height:36px;cursor:pointer;background:none;border:none;padding:4px;
+    z-index:9999;position:relative;
+  }
+  #mainnav .nav-hamburger span{
+    display:block;width:100%;height:2px;background:var(--cream);border-radius:2px;
+    transition:transform .3s,opacity .3s;transform-origin:center;
+  }
+  #mainnav .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  #mainnav .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+  #mainnav .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  body.nav-open #mainnav .nav-hamburger span{background:var(--ink)}
+
+  @media(max-width:1100px){
+    #mainnav ul{display:none !important}
+    #mainnav .nav-hamburger{display:flex !important}
+  }
+  @media(min-width:1101px){
+    #nav-drawer{display:none !important}
+  }
+</style>
+<nav id="mainnav" aria-label="Primary">
+  <a class="nav-logo" href="/">
+    <img class="nav-icon" src="{{ 'icon.png' | asset_url }}" alt="" decoding="async" width="52" height="52">
+    <span class="nav-wordmark">Hedonistas Mezcal</span>
+  </a>
+  <ul>
+    <li><a href="#mezcals">Expressions</a></li>
+    <li><a href="#maestro">El Maestro</a></li>
+    <li><a href="#cocktails">Cocktails</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#findus">Find Us</a></li>
+    <li><a href="/pages/story">Story</a></li>
+    <li><a class="nav-cart" href="/cart">Cart ({{ cart.item_count }})</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+  </button>
+</nav>
+<nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
+  <a href="#mezcals">Expressions</a>
+  <a href="#maestro">El Maestro</a>
+  <a href="#cocktails">Cocktails</a>
+  <a href="#awards">Awards</a>
+  <a href="#findus">Find Us</a>
+  <a href="/pages/story">Story</a>
+  <a href="/cart">Cart ({{ cart.item_count }})</a>
+</nav>
