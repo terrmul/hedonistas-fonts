@@ -5,7 +5,7 @@
   #findus .findus-head-right, #findus .findus-head-right p { color: {{ section.settings.color_intro }} !important; }
   #findus .findus-map { position: relative; }
   #findus .fu-gate {
-    position: absolute; inset: 0; z-index: 40;
+    position: absolute; inset: 0; z-index: 2147483646;
     cursor: pointer; background: transparent;
   }
   #findus .fu-gate.is-active { display: none; }
@@ -31,13 +31,18 @@
   var map = document.getElementById('findus-map');
   if(!map) return;
   var gate = document.getElementById('findus-gate');
-  if(!gate) return;
-  function activate(){ gate.classList.add('is-active'); }
-  function rearm(){ gate.classList.remove('is-active'); }
-  gate.addEventListener('click', activate);
-  gate.addEventListener('touchstart', function(){ activate(); }, { passive: true });
-  // Re-arm when the pointer leaves the map so casual page scrolling never zooms it
-  map.addEventListener('mouseleave', rearm);
+  var active = false;
+  function setActive(v){ active = v; if(gate){ gate.classList.toggle('is-active', v); } }
+  if(gate){
+    gate.addEventListener('click', function(){ setActive(true); });
+    gate.addEventListener('touchstart', function(){ setActive(true); }, { passive: true });
+  }
+  map.addEventListener('mouseleave', function(){ setActive(false); });
+  // Capture-phase guard: while not active, stop wheel/touch from reaching the map
+  // so it never zooms (and Google's "use ctrl + scroll" prompt never fires).
+  // Does NOT preventDefault, so the page keeps scrolling normally.
+  map.addEventListener('wheel', function(e){ if(!active){ e.stopPropagation(); } }, true);
+  map.addEventListener('touchmove', function(e){ if(!active){ e.stopPropagation(); } }, true);
 })();
 </script>
 {% schema %}
