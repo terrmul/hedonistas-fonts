@@ -1,6 +1,11 @@
 <!-- FOOTER -->
-{%- assign column_blocks = section.blocks | where: 'type', 'column' -%}
-{%- assign social_blocks = section.blocks | where: 'type', 'social' -%}
+{%- capture social_svg_instagram -%}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>{%- endcapture -%}
+{%- capture social_svg_tiktok -%}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.52V6.73a4.85 4.85 0 01-1.02-.04z"/></svg>{%- endcapture -%}
+{%- capture social_svg_facebook -%}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>{%- endcapture -%}
+{%- capture social_svg_x -%}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>{%- endcapture -%}
+{%- capture social_svg_youtube -%}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>{%- endcapture -%}
+{%- capture social_svg_linkedin -%}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>{%- endcapture -%}
+{%- capture social_svg_website -%}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm0 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"/></svg>{%- endcapture -%}
 <footer>
   <div class="f-top">
     <div class="f-brand">
@@ -14,90 +19,39 @@
       </div>
       <p class="f-blurb">{{ section.settings.blurb | escape | replace: '//', '<br>' }}</p>
       <div class="f-social">
-        {%- if social_blocks.size > 0 -%}
-          {%- for block in social_blocks -%}
-            {%- if block.settings.url != blank -%}
-              <a href="{{ block.settings.url }}" aria-label="{{ block.settings.platform }}" {{ block.shopify_attributes }}>
-                {%- case block.settings.platform -%}
-                  {%- when 'instagram' -%}
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                  {%- when 'tiktok' -%}
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.52V6.73a4.85 4.85 0 01-1.02-.04z"/></svg>
-                  {%- when 'facebook' -%}
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                  {%- when 'x' -%}
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                  {%- when 'youtube' -%}
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                  {%- when 'linkedin' -%}
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
-                  {%- else -%}
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm0 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"/></svg>
-                {%- endcase -%}
-              </a>
-            {%- endif -%}
-          {%- endfor -%}
-        {%- else -%}
-          <a href="https://www.instagram.com/hedonistasdelafe/" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          </a>
-          <a href="https://www.tiktok.com/@hedonistasmezcal" aria-label="TikTok">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.52V6.73a4.85 4.85 0 01-1.02-.04z"/></svg>
-          </a>
-          <a href="https://www.facebook.com/hedonistasmezcal" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </a>
-        {%- endif -%}
+        {%- for i in (1..6) -%}
+          {%- assign platform = section.settings['social_' | append: i | append: '_platform'] -%}
+          {%- assign url = section.settings['social_' | append: i | append: '_url'] -%}
+          {%- if platform != 'none' and url != blank -%}
+            <a href="{{ url }}" aria-label="{{ platform }}">
+              {%- case platform -%}
+                {%- when 'instagram' -%}{{ social_svg_instagram }}
+                {%- when 'tiktok' -%}{{ social_svg_tiktok }}
+                {%- when 'facebook' -%}{{ social_svg_facebook }}
+                {%- when 'x' -%}{{ social_svg_x }}
+                {%- when 'youtube' -%}{{ social_svg_youtube }}
+                {%- when 'linkedin' -%}{{ social_svg_linkedin }}
+                {%- else -%}{{ social_svg_website }}
+              {%- endcase -%}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     </div>
     <div class="f-cols">
-      {%- if column_blocks.size > 0 -%}
-        {%- for block in column_blocks -%}
-          <div class="f-col" {{ block.shopify_attributes }}>
-            {%- if block.settings.heading != blank -%}<h4>{{ block.settings.heading | escape }}</h4>{%- endif -%}
-            {%- if block.settings.link_1_label != blank -%}<a href="{{ block.settings.link_1_url }}">{{ block.settings.link_1_label | escape }}</a>{%- endif -%}
-            {%- if block.settings.link_2_label != blank -%}<a href="{{ block.settings.link_2_url }}">{{ block.settings.link_2_label | escape }}</a>{%- endif -%}
-            {%- if block.settings.link_3_label != blank -%}<a href="{{ block.settings.link_3_url }}">{{ block.settings.link_3_label | escape }}</a>{%- endif -%}
-            {%- if block.settings.link_4_label != blank -%}<a href="{{ block.settings.link_4_url }}">{{ block.settings.link_4_label | escape }}</a>{%- endif -%}
-            {%- if block.settings.link_5_label != blank -%}<a href="{{ block.settings.link_5_url }}">{{ block.settings.link_5_label | escape }}</a>{%- endif -%}
-            {%- if block.settings.link_6_label != blank -%}<a href="{{ block.settings.link_6_url }}">{{ block.settings.link_6_label | escape }}</a>{%- endif -%}
+      {%- for c in (1..4) -%}
+        {%- assign heading = section.settings['col_' | append: c | append: '_heading'] -%}
+        {%- if heading != blank -%}
+          <div class="f-col">
+            <h4>{{ heading | escape }}</h4>
+            {%- for l in (1..6) -%}
+              {%- assign lbl = section.settings['col_' | append: c | append: '_link_' | append: l | append: '_label'] -%}
+              {%- assign lurl = section.settings['col_' | append: c | append: '_link_' | append: l | append: '_url'] -%}
+              {%- if lbl != blank -%}<a href="{{ lurl }}">{{ lbl | escape }}</a>{%- endif -%}
+            {%- endfor -%}
           </div>
-        {%- endfor -%}
-      {%- else -%}
-        <div class="f-col">
-          <h4>Explore</h4>
-          <a href="#mezcals">Mezcals</a>
-          <a href="#craft">Our Craft</a>
-          <a href="#maestro">The Maestro</a>
-          <a href="#cocktails">Cocktails</a>
-          <a href="#findus">Find Us</a>
-          <a href="/blogs/journal">Journal</a>
-        </div>
-        <div class="f-col">
-          <h4>Trade</h4>
-          <a href="/pages/distribution">Distribution Enquiries</a>
-          <a href="/pages/wholesale">Wholesale &amp; On-Premise</a>
-          <a href="/pages/press">Press &amp; Media Kit</a>
-          <a href="/pages/stockist">Become a Stockist</a>
-          <a href="/account">Stockist Login</a>
-        </div>
-        <div class="f-col">
-          <h4>Company</h4>
-          <a href="#story">Our Story</a>
-          <a href="#awards">Awards</a>
-          <a href="/pages/sustainability">Sustainability</a>
-          <a href="/pages/careers">Careers</a>
-          <a href="/pages/contact">Contact</a>
-        </div>
-        <div class="f-col">
-          <h4>Legal</h4>
-          <a href="/pages/accelpay-terms">AccelPay Partnership Terms</a>
-          <a href="/pages/shipping">Shipping &amp; Compliance</a>
-          <a href="/policies/privacy-policy">Privacy Policy</a>
-          <a href="/policies/terms-of-service">Terms of Service</a>
-          <a href="/pages/accessibility">Accessibility</a>
-        </div>
-      {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </div>
   {%- if section.settings.watermark_word != blank -%}
@@ -123,61 +77,81 @@
     { "type": "image_picker", "id": "brand_logo", "label": "Small logo icon" },
     { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Hedonistas Mezcal" },
     { "type": "textarea", "id": "blurb", "label": "Blurb (use // for line break)", "default": "Purveyors of the unforgettable. Artesanal mezcal, hand-crafted in the highlands of Oaxaca — and shipped direct to your door." },
+    { "type": "header", "content": "Social links" },
+    { "type": "select", "id": "social_1_platform", "label": "Social 1 platform", "default": "instagram", "options": [ { "value": "none", "label": "— None —" }, { "value": "instagram", "label": "Instagram" }, { "value": "tiktok", "label": "TikTok" }, { "value": "facebook", "label": "Facebook" }, { "value": "x", "label": "X (Twitter)" }, { "value": "youtube", "label": "YouTube" }, { "value": "linkedin", "label": "LinkedIn" }, { "value": "website", "label": "Website / Other" } ] },
+    { "type": "text", "id": "social_1_url", "label": "Social 1 URL", "info": "Full https:// link", "default": "https://www.instagram.com/hedonistasdelafe/" },
+    { "type": "select", "id": "social_2_platform", "label": "Social 2 platform", "default": "tiktok", "options": [ { "value": "none", "label": "— None —" }, { "value": "instagram", "label": "Instagram" }, { "value": "tiktok", "label": "TikTok" }, { "value": "facebook", "label": "Facebook" }, { "value": "x", "label": "X (Twitter)" }, { "value": "youtube", "label": "YouTube" }, { "value": "linkedin", "label": "LinkedIn" }, { "value": "website", "label": "Website / Other" } ] },
+    { "type": "text", "id": "social_2_url", "label": "Social 2 URL", "info": "Full https:// link", "default": "https://www.tiktok.com/@hedonistasmezcal" },
+    { "type": "select", "id": "social_3_platform", "label": "Social 3 platform", "default": "facebook", "options": [ { "value": "none", "label": "— None —" }, { "value": "instagram", "label": "Instagram" }, { "value": "tiktok", "label": "TikTok" }, { "value": "facebook", "label": "Facebook" }, { "value": "x", "label": "X (Twitter)" }, { "value": "youtube", "label": "YouTube" }, { "value": "linkedin", "label": "LinkedIn" }, { "value": "website", "label": "Website / Other" } ] },
+    { "type": "text", "id": "social_3_url", "label": "Social 3 URL", "info": "Full https:// link", "default": "https://www.facebook.com/hedonistasmezcal" },
+    { "type": "select", "id": "social_4_platform", "label": "Social 4 platform", "default": "none", "options": [ { "value": "none", "label": "— None —" }, { "value": "instagram", "label": "Instagram" }, { "value": "tiktok", "label": "TikTok" }, { "value": "facebook", "label": "Facebook" }, { "value": "x", "label": "X (Twitter)" }, { "value": "youtube", "label": "YouTube" }, { "value": "linkedin", "label": "LinkedIn" }, { "value": "website", "label": "Website / Other" } ] },
+    { "type": "text", "id": "social_4_url", "label": "Social 4 URL", "info": "Full https:// link" },
+    { "type": "select", "id": "social_5_platform", "label": "Social 5 platform", "default": "none", "options": [ { "value": "none", "label": "— None —" }, { "value": "instagram", "label": "Instagram" }, { "value": "tiktok", "label": "TikTok" }, { "value": "facebook", "label": "Facebook" }, { "value": "x", "label": "X (Twitter)" }, { "value": "youtube", "label": "YouTube" }, { "value": "linkedin", "label": "LinkedIn" }, { "value": "website", "label": "Website / Other" } ] },
+    { "type": "text", "id": "social_5_url", "label": "Social 5 URL", "info": "Full https:// link" },
+    { "type": "select", "id": "social_6_platform", "label": "Social 6 platform", "default": "none", "options": [ { "value": "none", "label": "— None —" }, { "value": "instagram", "label": "Instagram" }, { "value": "tiktok", "label": "TikTok" }, { "value": "facebook", "label": "Facebook" }, { "value": "x", "label": "X (Twitter)" }, { "value": "youtube", "label": "YouTube" }, { "value": "linkedin", "label": "LinkedIn" }, { "value": "website", "label": "Website / Other" } ] },
+    { "type": "text", "id": "social_6_url", "label": "Social 6 URL", "info": "Full https:// link" },
+    { "type": "header", "content": "Column 1" },
+    { "type": "text", "id": "col_1_heading", "label": "Column 1 heading", "default": "Explore" },
+    { "type": "text", "id": "col_1_link_1_label", "label": "Link 1 label", "default": "Mezcals" },
+    { "type": "text", "id": "col_1_link_1_url", "label": "Link 1 URL", "default": "#mezcals" },
+    { "type": "text", "id": "col_1_link_2_label", "label": "Link 2 label", "default": "Our Craft" },
+    { "type": "text", "id": "col_1_link_2_url", "label": "Link 2 URL", "default": "#craft" },
+    { "type": "text", "id": "col_1_link_3_label", "label": "Link 3 label", "default": "The Maestro" },
+    { "type": "text", "id": "col_1_link_3_url", "label": "Link 3 URL", "default": "#maestro" },
+    { "type": "text", "id": "col_1_link_4_label", "label": "Link 4 label", "default": "Cocktails" },
+    { "type": "text", "id": "col_1_link_4_url", "label": "Link 4 URL", "default": "#cocktails" },
+    { "type": "text", "id": "col_1_link_5_label", "label": "Link 5 label", "default": "Find Us" },
+    { "type": "text", "id": "col_1_link_5_url", "label": "Link 5 URL", "default": "#findus" },
+    { "type": "text", "id": "col_1_link_6_label", "label": "Link 6 label", "default": "Journal" },
+    { "type": "text", "id": "col_1_link_6_url", "label": "Link 6 URL", "default": "/blogs/journal" },
+    { "type": "header", "content": "Column 2" },
+    { "type": "text", "id": "col_2_heading", "label": "Column 2 heading", "default": "Trade" },
+    { "type": "text", "id": "col_2_link_1_label", "label": "Link 1 label", "default": "Distribution Enquiries" },
+    { "type": "text", "id": "col_2_link_1_url", "label": "Link 1 URL", "default": "/pages/distribution" },
+    { "type": "text", "id": "col_2_link_2_label", "label": "Link 2 label", "default": "Wholesale & On-Premise" },
+    { "type": "text", "id": "col_2_link_2_url", "label": "Link 2 URL", "default": "/pages/wholesale" },
+    { "type": "text", "id": "col_2_link_3_label", "label": "Link 3 label", "default": "Press & Media Kit" },
+    { "type": "text", "id": "col_2_link_3_url", "label": "Link 3 URL", "default": "/pages/press" },
+    { "type": "text", "id": "col_2_link_4_label", "label": "Link 4 label", "default": "Become a Stockist" },
+    { "type": "text", "id": "col_2_link_4_url", "label": "Link 4 URL", "default": "/pages/stockist" },
+    { "type": "text", "id": "col_2_link_5_label", "label": "Link 5 label", "default": "Stockist Login" },
+    { "type": "text", "id": "col_2_link_5_url", "label": "Link 5 URL", "default": "/account" },
+    { "type": "text", "id": "col_2_link_6_label", "label": "Link 6 label" },
+    { "type": "text", "id": "col_2_link_6_url", "label": "Link 6 URL" },
+    { "type": "header", "content": "Column 3" },
+    { "type": "text", "id": "col_3_heading", "label": "Column 3 heading", "default": "Company" },
+    { "type": "text", "id": "col_3_link_1_label", "label": "Link 1 label", "default": "Our Story" },
+    { "type": "text", "id": "col_3_link_1_url", "label": "Link 1 URL", "default": "#story" },
+    { "type": "text", "id": "col_3_link_2_label", "label": "Link 2 label", "default": "Awards" },
+    { "type": "text", "id": "col_3_link_2_url", "label": "Link 2 URL", "default": "#awards" },
+    { "type": "text", "id": "col_3_link_3_label", "label": "Link 3 label", "default": "Sustainability" },
+    { "type": "text", "id": "col_3_link_3_url", "label": "Link 3 URL", "default": "/pages/sustainability" },
+    { "type": "text", "id": "col_3_link_4_label", "label": "Link 4 label", "default": "Careers" },
+    { "type": "text", "id": "col_3_link_4_url", "label": "Link 4 URL", "default": "/pages/careers" },
+    { "type": "text", "id": "col_3_link_5_label", "label": "Link 5 label", "default": "Contact" },
+    { "type": "text", "id": "col_3_link_5_url", "label": "Link 5 URL", "default": "/pages/contact" },
+    { "type": "text", "id": "col_3_link_6_label", "label": "Link 6 label" },
+    { "type": "text", "id": "col_3_link_6_url", "label": "Link 6 URL" },
+    { "type": "header", "content": "Column 4" },
+    { "type": "text", "id": "col_4_heading", "label": "Column 4 heading", "default": "Legal" },
+    { "type": "text", "id": "col_4_link_1_label", "label": "Link 1 label", "default": "AccelPay Partnership Terms" },
+    { "type": "text", "id": "col_4_link_1_url", "label": "Link 1 URL", "default": "/pages/accelpay-terms" },
+    { "type": "text", "id": "col_4_link_2_label", "label": "Link 2 label", "default": "Shipping & Compliance" },
+    { "type": "text", "id": "col_4_link_2_url", "label": "Link 2 URL", "default": "/pages/shipping" },
+    { "type": "text", "id": "col_4_link_3_label", "label": "Link 3 label", "default": "Privacy Policy" },
+    { "type": "text", "id": "col_4_link_3_url", "label": "Link 3 URL", "default": "/policies/privacy-policy" },
+    { "type": "text", "id": "col_4_link_4_label", "label": "Link 4 label", "default": "Terms of Service" },
+    { "type": "text", "id": "col_4_link_4_url", "label": "Link 4 URL", "default": "/policies/terms-of-service" },
+    { "type": "text", "id": "col_4_link_5_label", "label": "Link 5 label", "default": "Accessibility" },
+    { "type": "text", "id": "col_4_link_5_url", "label": "Link 5 URL", "default": "/pages/accessibility" },
+    { "type": "text", "id": "col_4_link_6_label", "label": "Link 6 label" },
+    { "type": "text", "id": "col_4_link_6_url", "label": "Link 6 URL" },
     { "type": "header", "content": "Center logo & watermark" },
     { "type": "image_picker", "id": "center_logo", "label": "Center logo" },
     { "type": "text", "id": "watermark_word", "label": "Background watermark word", "default": "Hedonistas" },
     { "type": "header", "content": "Legal line" },
-    { "type": "text", "id": "legal_text", "label": "Legal text (year added automatically)", "default": "Hedonistas Mezcal · Drink Responsibly · 21+" },
-    { "type": "header", "content": "Links & social" },
-    { "type": "paragraph", "content": "Edit, add, remove or reorder the Social link and Link column blocks below." }
+    { "type": "text", "id": "legal_text", "label": "Legal text (year added automatically)", "default": "Hedonistas Mezcal · Drink Responsibly · 21+" }
   ],
-  "blocks": [
-    {
-      "type": "social",
-      "name": "Social link",
-      "settings": [
-        { "type": "select", "id": "platform", "label": "Platform", "default": "instagram", "options": [
-          { "value": "instagram", "label": "Instagram" },
-          { "value": "tiktok", "label": "TikTok" },
-          { "value": "facebook", "label": "Facebook" },
-          { "value": "x", "label": "X (Twitter)" },
-          { "value": "youtube", "label": "YouTube" },
-          { "value": "linkedin", "label": "LinkedIn" }
-        ] },
-        { "type": "url", "id": "url", "label": "Profile URL" }
-      ]
-    },
-    {
-      "type": "column",
-      "name": "Link column",
-      "settings": [
-        { "type": "text", "id": "heading", "label": "Column heading", "default": "Explore" },
-        { "type": "text", "id": "link_1_label", "label": "Link 1 label" },
-        { "type": "url", "id": "link_1_url", "label": "Link 1 URL" },
-        { "type": "text", "id": "link_2_label", "label": "Link 2 label" },
-        { "type": "url", "id": "link_2_url", "label": "Link 2 URL" },
-        { "type": "text", "id": "link_3_label", "label": "Link 3 label" },
-        { "type": "url", "id": "link_3_url", "label": "Link 3 URL" },
-        { "type": "text", "id": "link_4_label", "label": "Link 4 label" },
-        { "type": "url", "id": "link_4_url", "label": "Link 4 URL" },
-        { "type": "text", "id": "link_5_label", "label": "Link 5 label" },
-        { "type": "url", "id": "link_5_url", "label": "Link 5 URL" },
-        { "type": "text", "id": "link_6_label", "label": "Link 6 label" },
-        { "type": "url", "id": "link_6_url", "label": "Link 6 URL" }
-      ]
-    }
-  ],
-  "max_blocks": 16,
-  "default": {
-    "blocks": [
-      { "type": "social", "settings": { "platform": "instagram", "url": "https://www.instagram.com/hedonistasdelafe/" } },
-      { "type": "social", "settings": { "platform": "tiktok", "url": "https://www.tiktok.com/@hedonistasmezcal" } },
-      { "type": "social", "settings": { "platform": "facebook", "url": "https://www.facebook.com/hedonistasmezcal" } },
-      { "type": "column", "settings": { "heading": "Explore", "link_1_label": "Mezcals", "link_1_url": "#mezcals", "link_2_label": "Our Craft", "link_2_url": "#craft", "link_3_label": "The Maestro", "link_3_url": "#maestro", "link_4_label": "Cocktails", "link_4_url": "#cocktails", "link_5_label": "Find Us", "link_5_url": "#findus", "link_6_label": "Journal", "link_6_url": "/blogs/journal" } },
-      { "type": "column", "settings": { "heading": "Trade", "link_1_label": "Distribution Enquiries", "link_1_url": "/pages/distribution", "link_2_label": "Wholesale & On-Premise", "link_2_url": "/pages/wholesale", "link_3_label": "Press & Media Kit", "link_3_url": "/pages/press", "link_4_label": "Become a Stockist", "link_4_url": "/pages/stockist", "link_5_label": "Stockist Login", "link_5_url": "/account" } },
-      { "type": "column", "settings": { "heading": "Company", "link_1_label": "Our Story", "link_1_url": "#story", "link_2_label": "Awards", "link_2_url": "#awards", "link_3_label": "Sustainability", "link_3_url": "/pages/sustainability", "link_4_label": "Careers", "link_4_url": "/pages/careers", "link_5_label": "Contact", "link_5_url": "/pages/contact" } },
-      { "type": "column", "settings": { "heading": "Legal", "link_1_label": "AccelPay Partnership Terms", "link_1_url": "/pages/accelpay-terms", "link_2_label": "Shipping & Compliance", "link_2_url": "/pages/shipping", "link_3_label": "Privacy Policy", "link_3_url": "/policies/privacy-policy", "link_4_label": "Terms of Service", "link_4_url": "/policies/terms-of-service", "link_5_label": "Accessibility", "link_5_url": "/pages/accessibility" } }
-    ]
-  }
+  "presets": [ { "name": "Footer" } ]
 }
 {% endschema %}
