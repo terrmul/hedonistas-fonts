@@ -1,4 +1,32 @@
 <!-- GO DEEP / SOCIAL + NEWSLETTER -->
+<style>
+  /* Remove the cream fade/blend on the edges of the Instagram strip */
+  .deep-social .ig-track-outer::before,
+  .deep-social .ig-track-outer::after { display:none !important; }
+
+  /* Mobile: stack the head full-width so nothing is cut off */
+  @media(max-width:900px){
+    .deep-social { overflow-x:hidden; }
+    .deep-social .deep-head{
+      flex-direction:column; align-items:stretch; gap:1.5rem; padding:2.5rem 1.25rem;
+    }
+    .deep-social .deep-panel{
+      width:100%; max-width:100%; flex-direction:column; align-items:flex-start; gap:1rem;
+    }
+    .deep-social .deep-word-h2{ font-size:clamp(2.2rem,12vw,3rem); }
+    .deep-social .handle{
+      white-space:normal; overflow-wrap:anywhere;
+      font-size:.72rem; letter-spacing:.16em; max-width:100%;
+    }
+    .deep-social .deep-panel-right{ flex-direction:column; align-items:flex-start; }
+    .deep-social .deep-panel-right h2{ font-size:clamp(1.8rem,9vw,2.6rem); }
+    .deep-social .deep-form{ flex-direction:column; width:100%; }
+    .deep-social .deep-form input{
+      width:100%; border-right:1.5px solid rgba(26,23,22,.4);
+    }
+    .deep-social .deep-form button{ width:100%; }
+  }
+</style>
 <section class="deep-social" data-nav="light" data-bg="bg-cream" style="background:{{ section.settings.section_bg }}">
   <div class="deep-head">
     <!-- LEFT panel: Instagram identity -->
