@@ -129,7 +129,7 @@
     { "type": "header", "content": "Legal line" },
     { "type": "text", "id": "legal_text", "label": "Legal text (year added automatically)", "default": "Hedonistas Mezcal · Drink Responsibly · 21+" },
     { "type": "header", "content": "Links & social" },
-    { "type": "paragraph", "content": "Add Link column and Social link blocks below. Until you add any, the original footer links and icons are shown automatically." }
+    { "type": "paragraph", "content": "Edit, add, remove or reorder the Social link and Link column blocks below." }
   ],
   "blocks": [
     {
@@ -168,6 +168,17 @@
     }
   ],
   "max_blocks": 16,
+  "default": {
+    "blocks": [
+      { "type": "social", "settings": { "platform": "instagram", "url": "https://www.instagram.com/hedonistasdelafe/" } },
+      { "type": "social", "settings": { "platform": "tiktok", "url": "https://www.tiktok.com/@hedonistasmezcal" } },
+      { "type": "social", "settings": { "platform": "facebook", "url": "https://www.facebook.com/hedonistasmezcal" } },
+      { "type": "column", "settings": { "heading": "Explore", "link_1_label": "Mezcals", "link_1_url": "#mezcals", "link_2_label": "Our Craft", "link_2_url": "#craft", "link_3_label": "The Maestro", "link_3_url": "#maestro", "link_4_label": "Cocktails", "link_4_url": "#cocktails", "link_5_label": "Find Us", "link_5_url": "#findus", "link_6_label": "Journal", "link_6_url": "/blogs/journal" } },
+      { "type": "column", "settings": { "heading": "Trade", "link_1_label": "Distribution Enquiries", "link_1_url": "/pages/distribution", "link_2_label": "Wholesale & On-Premise", "link_2_url": "/pages/wholesale", "link_3_label": "Press & Media Kit", "link_3_url": "/pages/press", "link_4_label": "Become a Stockist", "link_4_url": "/pages/stockist", "link_5_label": "Stockist Login", "link_5_url": "/account" } },
+      { "type": "column", "settings": { "heading": "Company", "link_1_label": "Our Story", "link_1_url": "#story", "link_2_label": "Awards", "link_2_url": "#awards", "link_3_label": "Sustainability", "link_3_url": "/pages/sustainability", "link_4_label": "Careers", "link_4_url": "/pages/careers", "link_5_label": "Contact", "link_5_url": "/pages/contact" } },
+      { "type": "column", "settings": { "heading": "Legal", "link_1_label": "AccelPay Partnership Terms", "link_1_url": "/pages/accelpay-terms", "link_2_label": "Shipping & Compliance", "link_2_url": "/pages/shipping", "link_3_label": "Privacy Policy", "link_3_url": "/policies/privacy-policy", "link_4_label": "Terms of Service", "link_4_url": "/policies/terms-of-service", "link_5_label": "Accessibility", "link_5_url": "/pages/accessibility" } }
+    ]
+  },
   "presets": [
     {
       "name": "Footer",
