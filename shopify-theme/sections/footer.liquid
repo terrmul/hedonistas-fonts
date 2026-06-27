@@ -20,8 +20,10 @@
       <p class="f-blurb">{{ section.settings.blurb | escape | replace: '//', '<br>' }}</p>
       <div class="f-social">
         {%- for i in (1..6) -%}
-          {%- assign platform = section.settings['social_' | append: i | append: '_platform'] -%}
-          {%- assign url = section.settings['social_' | append: i | append: '_url'] -%}
+          {%- assign pkey = 'social_' | append: i | append: '_platform' -%}
+          {%- assign ukey = 'social_' | append: i | append: '_url' -%}
+          {%- assign platform = section.settings[pkey] -%}
+          {%- assign url = section.settings[ukey] -%}
           {%- if platform != 'none' and url != blank -%}
             <a href="{{ url }}" aria-label="{{ platform }}">
               {%- case platform -%}
@@ -40,13 +42,16 @@
     </div>
     <div class="f-cols">
       {%- for c in (1..4) -%}
-        {%- assign heading = section.settings['col_' | append: c | append: '_heading'] -%}
+        {%- assign hkey = 'col_' | append: c | append: '_heading' -%}
+        {%- assign heading = section.settings[hkey] -%}
         {%- if heading != blank -%}
           <div class="f-col">
             <h4>{{ heading | escape }}</h4>
             {%- for l in (1..6) -%}
-              {%- assign lbl = section.settings['col_' | append: c | append: '_link_' | append: l | append: '_label'] -%}
-              {%- assign lurl = section.settings['col_' | append: c | append: '_link_' | append: l | append: '_url'] -%}
+              {%- assign lblkey = 'col_' | append: c | append: '_link_' | append: l | append: '_label' -%}
+              {%- assign urlkey = 'col_' | append: c | append: '_link_' | append: l | append: '_url' -%}
+              {%- assign lbl = section.settings[lblkey] -%}
+              {%- assign lurl = section.settings[urlkey] -%}
               {%- if lbl != blank -%}<a href="{{ lurl }}">{{ lbl | escape }}</a>{%- endif -%}
             {%- endfor -%}
           </div>
