@@ -1,0 +1,59 @@
+<!-- FIND US -->
+{% style %}
+  #findus .findus-head-left .label { color: {{ section.settings.color_label }} !important; }
+  #findus .findus-head-left h2 { color: {{ section.settings.color_heading }} !important; }
+  #findus .findus-head-right, #findus .findus-head-right p { color: {{ section.settings.color_intro }} !important; }
+  #findus .findus-map { position: relative; }
+  #findus .fu-gate {
+    position: absolute; inset: 0; z-index: 40;
+    cursor: pointer; background: transparent;
+  }
+  #findus .fu-gate.is-active { display: none; }
+{% endstyle %}
+<div class="findus" id="findus" data-nav="dark" data-bg="bg-cactus" style="background:{{ section.settings.color_section_bg }}">
+  <div class="findus-head">
+    <div class="findus-head-left">
+      <div class="label">{{ section.settings.label | escape }}</div>
+      <h2>{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="findus-head-right">{{ section.settings.intro }}</div>
+  </div>
+  <div class="findus-map" id="findus-map">
+    <stockist-store-locator data-stockist-widget-tag="{{ section.settings.stockist_tag }}" style="display:block;width:100%">
+      Loading store locator from <a href="https://stockist.co">Stockist store locator</a>...
+    </stockist-store-locator>
+    <script async src="https://stockist.co/embed/v1/widget.min.js"></script>
+    <div class="fu-gate" id="findus-gate" aria-hidden="true"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var map = document.getElementById('findus-map');
+  if(!map) return;
+  var gate = document.getElementById('findus-gate');
+  if(!gate) return;
+  function activate(){ gate.classList.add('is-active'); }
+  function rearm(){ gate.classList.remove('is-active'); }
+  gate.addEventListener('click', activate);
+  gate.addEventListener('touchstart', function(){ activate(); }, { passive: true });
+  // Re-arm when the pointer leaves the map so casual page scrolling never zooms it
+  map.addEventListener('mouseleave', rearm);
+})();
+</script>
+{% schema %}
+{
+  "name": "Find Us",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Eyebrow label", "default": "Bars · Restaurants · Retail" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find Us" },
+    { "type": "richtext", "id": "intro", "label": "Intro copy", "default": "<p>Every bar is a sanctuary where strangers become confidants and the bartender a Curandero. Find Hedonistas near you.</p>" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "color_section_bg", "label": "Section background", "default": "#286140" },
+    { "type": "color", "id": "color_label", "label": "Eyebrow color", "default": "#DBB149" },
+    { "type": "color", "id": "color_heading", "label": "Heading color", "default": "#F3E6D1" },
+    { "type": "color", "id": "color_intro", "label": "Intro text color", "default": "#F3E6D1" },
+    { "type": "text", "id": "stockist_tag", "label": "Stockist widget tag", "default": "map_93gwz2p3", "info": "From your Stockist dashboard." }
+  ],
+  "presets": [{ "name": "Find Us" }]
+}
+{% endschema %}
