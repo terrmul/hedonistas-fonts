@@ -1,5 +1,5 @@
 <!-- BOTTLES — selector + hero (Concept E) -->
-<section class="bottles-section" id="mezcals" data-nav="light" data-bg="bg-cream" data-mf-color="#F3E6D1">
+<section class="bottles-section" id="mezcals" data-nav="light" data-bg="bg-cream" data-mf-color="#F3E6D1" style="background:{{ section.settings.section_bg }}">
 <div class="bottles-selector">
   <div class="ce-strip">
     <div class="ce-strip-head">
@@ -123,6 +123,8 @@
 {
   "name": "Bottle Selector",
   "settings": [
+    { "type": "header", "content": "Section" },
+    { "type": "color", "id": "section_bg", "label": "Background color", "default": "#F3E6D1" },
     { "type": "text", "id": "strip_label", "label": "Eyebrow label", "default": "Four Expressions · Ships to 40+ States" },
     { "type": "text", "id": "strip_heading", "label": "Heading", "default": "The Collection" },
     { "type": "text", "id": "buy_label", "label": "Buy button text", "default": "Add to Cart" }
