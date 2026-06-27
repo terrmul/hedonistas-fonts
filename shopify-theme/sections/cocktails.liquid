@@ -1,0 +1,122 @@
+<!-- COCKTAILS — filterable horizontal menu -->
+<section id="cocktails" data-bg="bg-cream" style="background:{{ section.settings.section_bg }}">
+  <div class="ck-header reveal">
+    <div>
+      <div class="label">{{ section.settings.label | escape }}</div>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="ck-header-right">
+      <a class="mag-btn mag-dark" href="{{ section.settings.view_all_url }}">{{ section.settings.view_all_label | escape }}</a>
+      <div class="ck-filters">
+        <button class="ck-filter active" data-filter="all">All</button>
+        <button class="ck-filter" data-filter="citrus">Citrus</button>
+        <button class="ck-filter" data-filter="smoky">Smoky</button>
+        <button class="ck-filter" data-filter="stirred">Stirred</button>
+        <button class="ck-filter" data-filter="shaken">Shaken</button>
+        <button class="ck-filter" data-filter="spirit-forward">Spirit Forward</button>
+        <button class="ck-filter" data-filter="seasonal">Seasonal</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ck-track" id="cktrack">
+    {%- for block in section.blocks -%}
+      {%- assign n = forloop.index -%}
+      <div class="ck-card" data-cat="{{ block.settings.categories }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          <img class="ck-card-img" src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.name | escape }}" loading="lazy" decoding="async">
+        {%- endif -%}
+        <div class="ck-card-scrim"></div>
+        <div class="ck-card-num">{% if n < 10 %}0{% endif %}{{ n }}</div>
+        <div class="ck-card-front">
+          <div class="ck-card-cat">{{ block.settings.category_label | escape }}</div>
+          <div class="ck-card-name">{{ block.settings.name | escape }}</div>
+          <div class="ck-card-spirit">{{ block.settings.spirit | escape }}</div>
+        </div>
+        <div class="ck-card-back">
+          <div class="ck-card-name">{{ block.settings.name | escape }}</div>
+          {%- if block.settings.ingredient_1 != blank -%}<div class="ck-recipe-item">{{ block.settings.ingredient_1 | escape }}</div>{%- endif -%}
+          {%- if block.settings.ingredient_2 != blank -%}<div class="ck-recipe-item">{{ block.settings.ingredient_2 | escape }}</div>{%- endif -%}
+          {%- if block.settings.ingredient_3 != blank -%}<div class="ck-recipe-item">{{ block.settings.ingredient_3 | escape }}</div>{%- endif -%}
+          {%- if block.settings.ingredient_4 != blank -%}<div class="ck-recipe-item">{{ block.settings.ingredient_4 | escape }}</div>{%- endif -%}
+          {%- if block.settings.ingredient_5 != blank -%}<div class="ck-recipe-item">{{ block.settings.ingredient_5 | escape }}</div>{%- endif -%}
+          <div class="ck-recipe-method">{{ block.settings.method | escape }}</div>
+          <a class="mag-btn mag-cream" style="font-size:.75rem;padding:.6rem 1.4rem" href="{{ block.settings.recipe_url }}">{{ section.settings.recipe_button | escape }}</a>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="ck-footer">
+    <div class="ck-count"><span class="ck-count-shown"><span id="ck-visible-count">{{ section.blocks.size }}</span> {{ section.settings.count_suffix | escape }}</span><a class="ck-count-dl" href="{{ section.settings.pdf_url }}">{{ section.settings.pdf_label | escape }}</a></div>
+    <div class="ck-scroll-hint">{{ section.settings.scroll_hint | escape }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cocktails",
+  "settings": [
+    { "type": "header", "content": "Section" },
+    { "type": "color", "id": "section_bg", "label": "Background color", "default": "#F3E6D1" },
+    { "type": "text", "id": "label", "label": "Eyebrow label", "default": "Crafted with Hedonistas" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Signature Cocktails" },
+    { "type": "text", "id": "view_all_label", "label": "View-all button text", "default": "View All Recipes" },
+    { "type": "url", "id": "view_all_url", "label": "View-all button link" },
+    { "type": "text", "id": "recipe_button", "label": "Per-card button text", "default": "Full Recipe" },
+    { "type": "header", "content": "Footer" },
+    { "type": "text", "id": "count_suffix", "label": "Count suffix", "default": "cocktails · shuffled each visit" },
+    { "type": "text", "id": "pdf_label", "label": "PDF link text", "default": "Download Full Menu PDF" },
+    { "type": "url", "id": "pdf_url", "label": "PDF link" },
+    { "type": "text", "id": "scroll_hint", "label": "Scroll hint", "default": "← Drag to explore →" }
+  ],
+  "blocks": [
+    {
+      "type": "cocktail",
+      "name": "Cocktail",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card image" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Mezcalrita" },
+        { "type": "text", "id": "category_label", "label": "Category label (shown)", "default": "Citrus · Shaken" },
+        { "type": "text", "id": "categories", "label": "Filter categories (space-separated)", "default": "citrus shaken", "info": "Use: citrus smoky stirred shaken spirit-forward seasonal" },
+        { "type": "text", "id": "spirit", "label": "Base spirit", "default": "Espadín" },
+        { "type": "text", "id": "ingredient_1", "label": "Ingredient 1" },
+        { "type": "text", "id": "ingredient_2", "label": "Ingredient 2" },
+        { "type": "text", "id": "ingredient_3", "label": "Ingredient 3" },
+        { "type": "text", "id": "ingredient_4", "label": "Ingredient 4" },
+        { "type": "text", "id": "ingredient_5", "label": "Ingredient 5" },
+        { "type": "text", "id": "method", "label": "Method line" },
+        { "type": "url", "id": "recipe_url", "label": "Full-recipe link" }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [
+    {
+      "name": "Cocktails",
+      "blocks": [
+        { "type": "cocktail", "settings": { "name": "Mezcalrita", "category_label": "Citrus · Shaken", "categories": "citrus shaken", "spirit": "Espadín", "ingredient_1": "2oz Hedonistas Espadín", "ingredient_2": "½oz fresh lime juice", "ingredient_3": "½oz agave nectar", "ingredient_4": "Sal de gusano rim", "method": "Shake · Coupe · Lime wheel" } },
+        { "type": "cocktail", "settings": { "name": "Oaxacan Old Fashioned", "category_label": "Stirred · Spirit Forward", "categories": "stirred spirit-forward", "spirit": "Cuishe", "ingredient_1": "2oz Hedonistas Cuishe", "ingredient_2": "¼oz agave syrup", "ingredient_3": "2 dash mole bitters", "ingredient_4": "Orange expression", "method": "Stir · Rocks · Orange peel" } },
+        { "type": "cocktail", "settings": { "name": "Todo La Noche", "category_label": "Shaken · Smoky", "categories": "shaken citrus smoky", "spirit": "Tobalá", "ingredient_1": "2oz Hedonistas Tobalá", "ingredient_2": "¾doz hibiscus syrup", "ingredient_3": "½oz lime juice", "ingredient_4": "Habanero tincture (2 drops)", "method": "Shake · Nick & Nora · No garnish" } },
+        { "type": "cocktail", "settings": { "name": "Niebla Negra", "category_label": "Smoky · Stirred", "categories": "smoky spirit-forward stirred", "spirit": "Tepeztate", "ingredient_1": "2oz Hedonistas Tepeztate", "ingredient_2": "½oz Averna amaro", "ingredient_3": "¼oz black walnut bitters", "ingredient_4": "Smoked salt rim (optional)", "method": "Stir · Coupe · Expressed orange" } },
+        { "type": "cocktail", "settings": { "name": "La Cosecha", "category_label": "Citrus · Seasonal", "categories": "citrus shaken seasonal", "spirit": "Espadín", "ingredient_1": "1.5oz Hedonistas Espadín", "ingredient_2": "1oz fresh grapefruit juice", "ingredient_3": "½oz honey syrup", "ingredient_4": "Thyme sprig (muddled)", "method": "Shake · Highball · Grapefruit twist" } },
+        { "type": "cocktail", "settings": { "name": "El Curandero", "category_label": "Spirit Forward", "categories": "spirit-forward stirred smoky", "spirit": "Cuishe", "ingredient_1": "2oz Hedonistas Cuishe", "ingredient_2": "½oz Bénédictine", "ingredient_3": "¼oz mezcal rinse (Espadín)", "ingredient_4": "2 drops Angostura", "method": "Stir · Coupe · Lemon twist" } },
+        { "type": "cocktail", "settings": { "name": "Flor de Noche", "category_label": "Seasonal · Shaken", "categories": "shaken seasonal citrus", "spirit": "Tobalá", "ingredient_1": "1.5oz Hedonistas Tobalá", "ingredient_2": "¾doz elderflower liqueur", "ingredient_3": "½oz lemon juice", "ingredient_4": "Egg white", "method": "Dry shake · Shake · Coupe · Edible flower" } },
+        { "type": "cocktail", "settings": { "name": "Piedra Viva", "category_label": "Smoky · Spirit Forward", "categories": "smoky spirit-forward", "spirit": "Tepeztate", "ingredient_1": "2oz Hedonistas Tepeztate", "ingredient_2": "½oz mezcal-washed Aperol", "ingredient_3": "¼oz fresh lime", "ingredient_4": "Tajín rim", "method": "Build · Rocks · Lime wedge" } },
+        { "type": "cocktail", "settings": { "name": "Mezcal Negroni", "category_label": "Stirred · Smoky", "categories": "stirred spirit-forward smoky", "spirit": "Espadín", "ingredient_1": "1oz Hedonistas Espadín", "ingredient_2": "1oz Campari", "ingredient_3": "1oz sweet vermouth", "ingredient_4": "Orange peel", "method": "Stir · Rocks · Orange twist" } },
+        { "type": "cocktail", "settings": { "name": "Paloma Silvestre", "category_label": "Citrus · Shaken", "categories": "shaken citrus", "spirit": "Cuishe", "ingredient_1": "1.5oz Hedonistas Cuishe", "ingredient_2": "2oz fresh grapefruit juice", "ingredient_3": "¾doz lime juice", "ingredient_4": "Pinch of sea salt", "method": "Shake · Highball on ice · Grapefruit" } },
+        { "type": "cocktail", "settings": { "name": "Sangre de Agave", "category_label": "Seasonal · Smoky", "categories": "seasonal smoky stirred", "spirit": "Tobalá", "ingredient_1": "2oz Hedonistas Tobalá", "ingredient_2": "1oz pomegranate juice", "ingredient_3": "½oz fresh lime", "ingredient_4": "Rosemary sprig (smoked)", "method": "Stir · Coupe · Smoked rosemary" } },
+        { "type": "cocktail", "settings": { "name": "La Última", "category_label": "Spirit Forward · Stirred", "categories": "spirit-forward stirred", "spirit": "Tepeztate", "ingredient_1": "¾doz Hedonistas Tepeztate", "ingredient_2": "¾doz green Chartreuse", "ingredient_3": "¾doz maraschino liqueur", "ingredient_4": "¾doz fresh lime juice", "method": "Shake · Coupe · No garnish" } },
+        { "type": "cocktail", "settings": { "name": "Lluvia de Oro", "category_label": "Seasonal · Shaken", "categories": "shaken seasonal", "spirit": "Espadín", "ingredient_1": "1.5oz Hedonistas Espadín", "ingredient_2": "1oz passion fruit purée", "ingredient_3": "¾doz turmeric honey syrup", "ingredient_4": "¾doz lemon juice", "method": "Shake · Nick & Nora · Marigold petal" } },
+        { "type": "cocktail", "settings": { "name": "Carbon y Cobre", "category_label": "Smoky · Spirit Forward", "categories": "smoky stirred spirit-forward", "spirit": "Cuishe", "ingredient_1": "2oz Hedonistas Cuishe", "ingredient_2": "¾doz activated charcoal syrup", "ingredient_3": "¼oz peated Scotch rinse", "ingredient_4": "Dash of saline", "method": "Stir · Rocks · Smoked cedar plank" } },
+        { "type": "cocktail", "settings": { "name": "Sol de Invierno", "category_label": "Citrus · Seasonal", "categories": "citrus shaken seasonal", "spirit": "Tobalá", "ingredient_1": "1.5oz Hedonistas Tobalá", "ingredient_2": "1oz blood orange juice", "ingredient_3": "¾doz cardamom syrup", "ingredient_4": "Pinch Tajín", "method": "Shake · Coupe · Blood orange wheel" } },
+        { "type": "cocktail", "settings": { "name": "El Fantasma", "category_label": "Spirit Forward · Smoky", "categories": "spirit-forward stirred smoky", "spirit": "Tepeztate", "ingredient_1": "2oz Hedonistas Tepeztate", "ingredient_2": "¾doz blanc vermouth", "ingredient_3": "¼oz Suze", "ingredient_4": "2 dashes orange bitters", "method": "Stir · Coupe · Lemon oil" } },
+        { "type": "cocktail", "settings": { "name": "Bruja Sour", "category_label": "Shaken · Citrus", "categories": "shaken citrus smoky", "spirit": "Espadín", "ingredient_1": "2oz Hedonistas Espadín", "ingredient_2": "¾doz lemon juice", "ingredient_3": "½oz tamarind syrup", "ingredient_4": "Egg white", "method": "Dry shake · Shake · Rocks · Ancho dust" } },
+        { "type": "cocktail", "settings": { "name": "Costal de Seda", "category_label": "Seasonal · Stirred", "categories": "seasonal spirit-forward stirred", "spirit": "Cuishe", "ingredient_1": "1.5oz Hedonistas Cuishe", "ingredient_2": "¾doz pear eau de vie", "ingredient_3": "¼oz honey-ginger syrup", "ingredient_4": "Sage leaf", "method": "Stir · Coupe · Candied sage" } },
+        { "type": "cocktail", "settings": { "name": "Humo y Sal", "category_label": "Smoky · Shaken", "categories": "smoky shaken citrus", "spirit": "Tobalá", "ingredient_1": "2oz Hedonistas Tobalá", "ingredient_2": "¾doz mezcal-washed Cointreau", "ingredient_3": "¾doz lime juice", "ingredient_4": "Black lava salt rim", "method": "Shake · Coupe · Smoked lime wedge" } },
+        { "type": "cocktail", "settings": { "name": "Nocturno", "category_label": "Spirit Forward · Seasonal", "categories": "spirit-forward stirred seasonal", "spirit": "Tepeztate", "ingredient_1": "2oz Hedonistas Tepeztate", "ingredient_2": "¾doz cold-brew coffee concentrate", "ingredient_3": "¼oz dark agave syrup", "ingredient_4": "2 drops mole bitters", "method": "Stir · Rocks · Coffee bean garnish" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
