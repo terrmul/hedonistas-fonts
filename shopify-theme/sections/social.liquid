@@ -4,11 +4,20 @@
   .deep-social .ig-track-outer::before,
   .deep-social .ig-track-outer::after { display:none !important; }
 
+  /* Newsletter moved below the Instagram images, left-aligned */
+  .deep-social .deep-newsletter{
+    display:flex; flex-direction:column; align-items:flex-start; gap:1.25rem;
+    padding:1rem 3.5rem 5rem;
+  }
+  .deep-social .deep-newsletter h2{
+    font-size:clamp(2rem,4vw,3.4rem); color:var(--ink); line-height:.9; margin:0;
+  }
+
   /* Mobile: stack the head full-width so nothing is cut off */
   @media(max-width:900px){
     .deep-social { overflow-x:hidden; }
     .deep-social .deep-head{
-      flex-direction:column; align-items:stretch; gap:1.5rem; padding:2.5rem 1.25rem;
+      flex-direction:column; align-items:stretch; gap:1.5rem; padding:2.5rem 1.25rem 1.5rem;
     }
     .deep-social .deep-panel{
       width:100%; max-width:100%; flex-direction:column; align-items:flex-start; gap:1rem;
@@ -18,8 +27,8 @@
       white-space:normal; overflow-wrap:anywhere;
       font-size:.72rem; letter-spacing:.16em; max-width:100%;
     }
-    .deep-social .deep-panel-right{ flex-direction:column; align-items:flex-start; }
-    .deep-social .deep-panel-right h2{ font-size:clamp(1.8rem,9vw,2.6rem); }
+    .deep-social .deep-newsletter{ padding:0 1.25rem 3.5rem; width:100%; }
+    .deep-social .deep-newsletter h2{ font-size:clamp(1.8rem,9vw,2.6rem); }
     .deep-social .deep-form{ flex-direction:column; width:100%; }
     .deep-social .deep-form input{
       width:100%; border-right:1.5px solid rgba(26,23,22,.4);
@@ -29,29 +38,13 @@
 </style>
 <section class="deep-social" data-nav="light" data-bg="bg-cream" style="background:{{ section.settings.section_bg }}">
   <div class="deep-head">
-    <!-- LEFT panel: Instagram identity -->
+    <!-- Instagram identity -->
     <div class="deep-panel deep-panel-left reveal">
       <h2 class="deep-word-h2"><span>g</span><span>o</span><span class="sp"> </span><span>d</span><span>e</span><span>e</span><span>p</span><span>.</span></h2>
       <a class="handle" href="{{ section.settings.instagram_url }}" aria-label="Hedonistas on Instagram">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         {{ section.settings.instagram_handle | escape }}
       </a>
-    </div>
-    <!-- RIGHT panel: newsletter sign-up -->
-    <div class="deep-panel deep-panel-right reveal">
-      {%- if section.settings.newsletter_url != blank -%}
-        <form class="deep-form" action="{{ section.settings.newsletter_url }}" method="post" target="_blank">
-          <input type="email" name="email" placeholder="{{ section.settings.newsletter_placeholder | escape }}" aria-label="Email address" autocomplete="email"><button type="submit">{{ section.settings.newsletter_button | escape }}</button>
-        </form>
-      {%- else -%}
-        {%- form 'customer' -%}
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <div class="deep-form">
-            <input type="email" name="contact[email]" placeholder="{{ section.settings.newsletter_placeholder | escape }}" aria-label="Email address" autocomplete="email"><button type="submit">{{ section.settings.newsletter_button | escape }}</button>
-          </div>
-        {%- endform -%}
-      {%- endif -%}
-      <h2>{{ section.settings.newsletter_heading | escape }}</h2>
     </div>
   </div>
   <div class="ig-track-outer">
@@ -62,6 +55,22 @@
         s.src="https://w.behold.so/widget.js";d.head.append(s);
       })();
     </script>
+  </div>
+  <!-- Newsletter sign-up (below the images, left-aligned) -->
+  <div class="deep-newsletter reveal">
+    <h2>{{ section.settings.newsletter_heading | escape }}</h2>
+    {%- if section.settings.newsletter_url != blank -%}
+      <form class="deep-form" action="{{ section.settings.newsletter_url }}" method="post" target="_blank">
+        <input type="email" name="email" placeholder="{{ section.settings.newsletter_placeholder | escape }}" aria-label="Email address" autocomplete="email"><button type="submit">{{ section.settings.newsletter_button | escape }}</button>
+      </form>
+    {%- else -%}
+      {%- form 'customer' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="deep-form">
+          <input type="email" name="contact[email]" placeholder="{{ section.settings.newsletter_placeholder | escape }}" aria-label="Email address" autocomplete="email"><button type="submit">{{ section.settings.newsletter_button | escape }}</button>
+        </div>
+      {%- endform -%}
+    {%- endif -%}
   </div>
 </section>
 </main>
