@@ -13,6 +13,14 @@
     font-size:clamp(2rem,4vw,3.4rem); color:var(--ink); line-height:.9; margin:0;
   }
 
+  /* Email field: fixed comfortable height so the placeholder/text sits centered */
+  .deep-social .deep-form input{
+    height:3.6rem; padding-top:0; padding-bottom:0; line-height:normal; box-sizing:border-box;
+  }
+  .deep-social .deep-form button{
+    min-height:3.6rem; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;
+  }
+
   /* Mobile: stack the head full-width so nothing is cut off */
   @media(max-width:900px){
     .deep-social { overflow-x:hidden; }
