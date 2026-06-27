@@ -363,6 +363,14 @@ function initMapScroll(root){
     e.preventDefault();
     window.scrollBy({top:e.deltaY,behavior:'auto'});
   },{passive:false,capture:true});
+
+  // Desktop-only hint badge (CSS hides it on mobile) telling users how to zoom.
+  var hint=document.createElement('div');
+  hint.className='map-scroll-hint';
+  hint.setAttribute('aria-hidden','true');
+  hint.textContent='⌘ / Ctrl + scroll to zoom';
+  if(getComputedStyle(mapContainer).position==='static') mapContainer.style.position='relative';
+  mapContainer.appendChild(hint);
 }
 
 var SECTION_INITS={
