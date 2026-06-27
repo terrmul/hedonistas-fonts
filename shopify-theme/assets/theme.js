@@ -353,17 +353,6 @@ function initMapScroll(root){
   if(!mapContainer||mapContainer.dataset.ms) return;
   mapContainer.dataset.ms='1';
 
-  // Across the WHOLE map (left results panel + map viewport): plain scrolling
-  // moves the page instead of zooming the map, so the map never grabs the
-  // wheel and no "ctrl + scroll" prompt is needed. Holding Ctrl/Cmd still
-  // lets the map zoom for anyone who wants it.
-  mapContainer.addEventListener('wheel',function(e){
-    if(e.ctrlKey||e.metaKey) return;
-    e.stopPropagation();
-    e.preventDefault();
-    window.scrollBy({top:e.deltaY,behavior:'auto'});
-  },{passive:false,capture:true});
-
   // Desktop-only hint badge (CSS hides it on mobile) telling users how to zoom.
   var hint=document.createElement('div');
   hint.className='map-scroll-hint';
@@ -371,6 +360,27 @@ function initMapScroll(root){
   hint.textContent='⌘ / Ctrl + scroll to zoom';
   if(getComputedStyle(mapContainer).position==='static') mapContainer.style.position='relative';
   mapContainer.appendChild(hint);
+
+  // Jiggle + highlight the hint when the user interacts with the map
+  // (click, drag, or a plain scroll attempt) to point them at the instruction.
+  var pulseT;
+  function flashHint(){
+    hint.classList.remove('pulse');
+    void hint.offsetWidth; // restart the animation
+    hint.classList.add('pulse');
+    clearTimeout(pulseT);
+    pulseT=setTimeout(function(){hint.classList.remove('pulse');},700);
+  }
+
+  mapContainer.addEventListener('wheel',function(e){
+    if(e.ctrlKey||e.metaKey) return;
+    e.stopPropagation();
+    e.preventDefault();
+    window.scrollBy({top:e.deltaY,behavior:'auto'});
+    flashHint();
+  },{passive:false,capture:true});
+
+  mapContainer.addEventListener('mousedown',flashHint);
 }
 
 var SECTION_INITS={
