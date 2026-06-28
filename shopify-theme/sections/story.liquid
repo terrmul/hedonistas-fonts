@@ -12,21 +12,29 @@
       {%- endif -%}
     </header>
 
-    {%- if section.settings.story_image != blank -%}
-      <figure class="bss-figure reveal">
-        <img class="bss-photo" src="{{ section.settings.story_image | image_url: width: 2000 }}"
-          alt="{{ section.settings.story_image.alt | escape }}"
-          style="object-position:{{ section.settings.image_x }}% {{ section.settings.image_y }}%"
-          decoding="async" loading="lazy" onerror="this.closest('.bss-figure').remove()">
-      </figure>
-    {%- endif -%}
+    <div class="bss-grid">
 
-    <div class="bss-body reveal">{{ section.settings.story_body }}</div>
+      <div class="bss-media-col">
+        {%- if section.settings.story_image != blank -%}
+          <figure class="bss-figure reveal">
+            <img class="bss-photo" src="{{ section.settings.story_image | image_url: width: 1400 }}"
+              alt="{{ section.settings.story_image.alt | escape }}"
+              style="object-position:{{ section.settings.image_x }}% {{ section.settings.image_y }}%"
+              decoding="async" loading="lazy" onerror="this.closest('.bss-figure').remove()">
+          </figure>
+        {%- else -%}
+          <div class="bss-figure bss-figure--ph reveal"><span class="ph-label">📷 Founders — candid, Oaxaca</span></div>
+        {%- endif -%}
+        {%- if section.settings.quote != blank -%}
+          <blockquote class="bss-quote reveal">{{ section.settings.quote }}</blockquote>
+        {%- endif -%}
+      </div>
 
-    {%- if section.settings.quote != blank -%}
-      <blockquote class="bss-quote reveal">{{ section.settings.quote }}</blockquote>
-    {%- endif -%}
+      <div class="bss-text-col reveal">
+        <div class="bss-body">{{ section.settings.story_body }}</div>
+      </div>
 
+    </div>
   </div>
 </section>
 
@@ -37,54 +45,63 @@
     padding: clamp(4rem, 10vw, 9rem) 1.5rem;
   }
   #story .bss-wrap{
-    max-width: 820px;
+    max-width: 1180px;
     margin-inline: auto;
   }
-  #story .bss-head{ text-align: center; }
-  #story .bss-eyebrow{
-    color: var(--rust, #7C3A09);
-    margin-bottom: 1rem;
+
+  /* heading block */
+  #story .bss-head{ text-align: center; margin: 0 auto clamp(2.5rem, 6vw, 4.5rem); max-width: 720px; }
+  #story .bss-eyebrow{ color: var(--rust, #7C3A09); margin-bottom: 1rem; }
+  #story .bss-heading{ font-size: clamp(2.4rem, 6vw, 4.5rem); line-height: 1.02; margin: 0 0 1.2rem; }
+  #story .bss-intro{ font-size: clamp(1.1rem, 2.2vw, 1.45rem); line-height: 1.5; max-width: 46ch; margin: 0 auto; opacity: .82; }
+
+  /* two-column: sticky image | scrolling text */
+  #story .bss-grid{
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(2rem, 5vw, 5.5rem);
+    align-items: start;
   }
-  #story .bss-heading{
-    font-size: clamp(2.4rem, 6vw, 4.5rem);
-    line-height: 1.02;
-    margin: 0 0 1.5rem;
-  }
-  #story .bss-intro{
-    font-size: clamp(1.1rem, 2.2vw, 1.45rem);
-    line-height: 1.5;
-    max-width: 44ch;
-    margin: 0 auto;
-    opacity: .82;
-  }
+  #story .bss-media-col{ position: sticky; top: clamp(5rem, 9vh, 7.5rem); }
   #story .bss-figure{
-    margin: clamp(2.5rem, 6vw, 4.5rem) 0;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 5;
+    margin: 0;
   }
-  #story .bss-photo{
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  #story .bss-body{
-    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-    line-height: 1.75;
-  }
-  #story .bss-body p{ margin: 0 0 1.3em; }
-  #story .bss-body p:last-child{ margin-bottom: 0; }
+  #story .bss-figure--ph{ display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.18); }
+  #story .bss-figure--ph .ph-label{ opacity:.7; font-size:.9rem; }
+  #story .bss-photo{ width: 100%; height: 100%; object-fit: cover; display: block; }
+
   #story .bss-quote{
-    margin: clamp(2.5rem, 6vw, 4rem) auto 0;
-    max-width: 38ch;
-    text-align: center;
+    margin: 1.75rem 0 0;
     font-style: italic;
-    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-    line-height: 1.3;
+    font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+    line-height: 1.35;
     color: var(--rust, #7C3A09);
     border: 0;
-    padding: 0;
+    padding-left: 1.1rem;
+    border-left: 3px solid var(--rust, #7C3A09);
   }
+
+  #story .bss-text-col{ padding-top: .4rem; }
+  #story .bss-body{ font-size: clamp(1.08rem, 1.55vw, 1.3rem); line-height: 1.8; }
+  #story .bss-body p{ margin: 0 0 1.5em; }
+  #story .bss-body p:first-child{ font-size: 1.18em; line-height: 1.55; }
+  #story .bss-body p:first-child:first-letter{
+    float: left; font-size: 3.4em; line-height: .82; padding: .04em .12em 0 0;
+    color: var(--rust, #7C3A09); font-weight: 600;
+  }
+  #story .bss-body p:last-child{ margin-bottom: 0; }
+
+  /* mobile: stack, image first, no sticky */
+  @media (max-width: 900px){
+    #story .bss-grid{ grid-template-columns: 1fr; gap: 2.25rem; }
+    #story .bss-media-col{ position: static; top: auto; }
+    #story .bss-figure{ aspect-ratio: 16 / 10; }
+    #story .bss-quote{ margin-top: 1.25rem; }
+  }
+
   /* fade-in */
   #story .reveal{ opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
   #story .reveal.on{ opacity: 1; transform: none; }
@@ -111,7 +128,7 @@
     { "type": "text", "id": "story_label", "label": "Eyebrow label", "default": "Nuestra Historia" },
     { "type": "inline_richtext", "id": "story_heading", "label": "Heading", "default": "Born from Obsession." },
     { "type": "inline_richtext", "id": "intro", "label": "Intro line (optional)" },
-    { "type": "image_picker", "id": "story_image", "label": "Image — founders, candid (1600×900)" },
+    { "type": "image_picker", "id": "story_image", "label": "Image — founders, candid (1200×1500 portrait works best)" },
     { "type": "range", "id": "image_x", "label": "Image focus — horizontal", "info": "50 = center", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
     { "type": "range", "id": "image_y", "label": "Image focus — vertical", "info": "50 = center", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
     { "type": "richtext", "id": "story_body", "label": "Story copy", "default": "<p>Hedonistas Mezcal began with two friends and a stubborn belief — that the finest mezcal in the world deserves to be shared. Not hoarded. Not gatekept. Shared.</p><p>Founded in the highlands of Oaxaca, we partnered with maestros mezcaleros whose families have cultivated and cooked agave the same way for generations. No shortcuts. No industrial process. Just fire, stone, time, and copper — and a friendship that wouldn't settle for less.</p>" },
