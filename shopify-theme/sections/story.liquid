@@ -1,6 +1,6 @@
 <!-- BRAND STORY -->
 <section class="brand-story brand-story--solo reveal-section" id="story" data-nav="light" data-bg="bg-cream"
-  {% if section.settings.section_bg != blank %}style="background:{{ section.settings.section_bg }}"{% endif %}>
+  data-overlay="{{ section.settings.overlay_color | default: '#9C8769' }}">
 
   <div class="bss-wrap">
 
@@ -31,10 +31,10 @@
 </section>
 
 {% style %}
+  /* transparent so the scroll-colour overlay shows through (no split, no gradient) */
   #story.brand-story--solo{
+    background: transparent !important;
     padding: clamp(4rem, 10vw, 9rem) 1.5rem;
-    /* page-wide blend — section 1 of 3 (overridden if Section background is set) */
-    background: linear-gradient(180deg, #9C8769 0%, #8A6F52 100%) !important;
   }
   #story .bss-wrap{
     max-width: 820px;
@@ -106,7 +106,7 @@
 {
   "name": "Brand Story",
   "settings": [
-    { "type": "color", "id": "section_bg", "label": "Section background", "info": "Leave empty to keep the page blend. Set to override with a solid color." },
+    { "type": "color", "id": "overlay_color", "label": "Section background color", "info": "Scroll-blend color for this section. Leave empty for #9C8769." },
     { "type": "header", "content": "Story" },
     { "type": "text", "id": "story_label", "label": "Eyebrow label", "default": "Nuestra Historia" },
     { "type": "inline_richtext", "id": "story_heading", "label": "Heading", "default": "Born from Obsession." },
