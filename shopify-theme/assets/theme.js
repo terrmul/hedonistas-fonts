@@ -64,6 +64,27 @@ var bgMap={
   'bg-umber':'var(--umber)'
 };
 
+/* Generic per-section overlay colour crossfade.
+   Any element with data-overlay="#hex" swaps the fixed #bg-overlay to that
+   solid colour (same .6s ease feel as the craft chapters) when it scrolls
+   through the vertical centre of the viewport. */
+var overlayIO=null, hasOverlaySections=false;
+function initOverlaySections(){
+  if(!overlay) return;
+  var marks=document.querySelectorAll('[data-overlay]');
+  hasOverlaySections=marks.length>0;
+  if(overlayIO) overlayIO.disconnect();
+  if(!marks.length) return;
+  overlayIO=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var c=e.target.getAttribute('data-overlay');
+      if(c){ overlay.style.transition='background .6s ease'; overlay.style.background=c; }
+    });
+  },{threshold:0,rootMargin:'-45% 0px -45% 0px'});
+  marks.forEach(function(m){ overlayIO.observe(m); });
+}
+
 var panelIO=null;
 function initCraftIO(){
   var stickyWord=document.getElementById('sticky-word');
@@ -82,22 +103,33 @@ function initCraftIO(){
   chapter.querySelectorAll('.s-panel').forEach(function(p){panelIO.observe(p)})
   new IntersectionObserver(function(entries){
     if(!entries[0].isIntersecting){
-      if(overlay){overlay.style.transition='none';overlay.style.background='var(--cream)';}
+      /* On pages that drive the overlay per-section (data-overlay), let that
+         system reclaim the colour instead of snapping to cream. */
+      if(overlay && !hasOverlaySections){overlay.style.transition='none';overlay.style.background='var(--cream)';}
       if(stickyWord) stickyWord.classList.remove('active');
     }
   },{threshold:0}).observe(chapter);
 }
 
 var craftEl=null;
-var CREAM=[243,230,209], MARINE=[9,98,122], craftBlendActive=false, lastCraftRgb='';
+var CREAM=[243,230,209], MARINE=[9,98,122], craftBlendActive=false, lastCraftRgb='', craftStartRgb=CREAM;
 function lerp(a,b,t){return Math.round(a+(b-a)*t);}
+function parseRgb(s){ var m=s&&s.match(/(\d+)[,\s]+(\d+)[,\s]+(\d+)/); return m?[+m[1],+m[2],+m[3]]:CREAM; }
 function updateCraftBlend(){
   craftEl=craftEl||document.getElementById('craft');
   if(!craftEl||!overlay) return;
   var r=craftEl.getBoundingClientRect().top, vh=window.innerHeight;
-  if(r > -vh*0.4){
+  /* Only engage near craft so the upper sections keep their own overlay colour. */
+  if(r < vh*0.6 && r > -vh*0.4){
+    if(!craftBlendActive){
+      /* Blend from whatever colour the previous section left on the overlay
+         (so the page reads as one continuous transition). On the homepage,
+         where no data-overlay sections exist, fall back to cream. */
+      craftStartRgb=hasOverlaySections?parseRgb(getComputedStyle(overlay).backgroundColor):CREAM;
+    }
     var p=(vh*0.6 - r)/(vh*0.45); p=p<0?0:(p>1?1:p);
-    var rgb='rgb('+lerp(CREAM[0],MARINE[0],p)+','+lerp(CREAM[1],MARINE[1],p)+','+lerp(CREAM[2],MARINE[2],p)+')';
+    var s=craftStartRgb;
+    var rgb='rgb('+lerp(s[0],MARINE[0],p)+','+lerp(s[1],MARINE[1],p)+','+lerp(s[2],MARINE[2],p)+')';
     if(rgb!==lastCraftRgb){
       overlay.style.transition='none';
       overlay.style.background=rgb;
@@ -401,6 +433,7 @@ function initAll(){
   Object.keys(SECTION_INITS).forEach(function(type){
     SECTION_INITS[type](document);
   });
+  initOverlaySections();
   initFooterParallax();
   initHamburger();
   updateNav();
@@ -420,12 +453,14 @@ document.addEventListener('shopify:section:load', function(e){
     initReveal(el);
     initMagButtons(el);
   }
+  initOverlaySections();
   initWatermarkFit();
   updateNav();
 });
 
 document.addEventListener('shopify:section:reorder', function(){
   refreshNavSections();
+  initOverlaySections();
   updateNav();
 });
 
