@@ -1,4 +1,18 @@
 <!-- BOTTLES — selector + hero (Concept E) -->
+<style>
+  .bottles-section .ce-more-info{
+    display:inline-flex; align-items:center; gap:.4rem;
+    padding:1rem 2.4rem; border-radius:100px;
+    font-size:.75rem; letter-spacing:.22em; text-transform:uppercase; font-weight:500;
+    text-decoration:none;
+    background:var(--smoke); color:var(--cream);
+    transition:background .3s, transform .2s;
+  }
+  .bottles-section .ce-more-info:hover{
+    background:var(--ink); color:var(--cream); transform:translateY(-1px);
+  }
+  .bottles-section .ce-visual-word{ bottom:2.5rem !important; }
+</style>
 <section class="bottles-section" id="mezcals" data-nav="light" data-bg="bg-cream" data-mf-color="#F3E6D1" style="background:{{ section.settings.section_bg }}">
 <div class="bottles-selector">
   <div class="ce-strip">
@@ -81,7 +95,7 @@
             <span class="ce-copy-price">{{ block.settings.price | escape }}</span>
             <a class="mag-btn mag-dark" href="{{ block.settings.buy_url }}">{{ section.settings.buy_label | escape }}</a>
             {%- if block.settings.detail_url != blank -%}
-              <a class="ce-more-info" href="{{ block.settings.detail_url }}">Full Details &rarr;</a>
+              <a class="mag-btn ce-more-info" href="{{ block.settings.detail_url }}">Full Details &rarr;</a>
             {%- endif -%}
           </div>
           {%- if block.settings.review_quote != blank -%}
