@@ -1,0 +1,59 @@
+<!-- STICKY CRAFT PANELS -->
+<div class="sticky-chapter" id="craft">
+  <div class="sticky-word" id="sticky-word"><h2>{{ section.settings.sticky_word | escape }}</h2></div>
+  <div class="sticky-panels">
+    {%- for block in section.blocks -%}
+      <div class="s-panel" data-bg="{{ block.settings.bg }}" data-word="{{ block.settings.word | escape }}" {{ block.shopify_attributes }}>
+        <div class="s-panel-content reveal">
+          <div class="num" style="color:var(--solar)">{{ block.settings.num | escape }}</div>
+          <h3 style="color:var(--cream)">{{ block.settings.title | escape }}</h3>
+          {%- if block.settings.subtitle != blank -%}
+            <div style="color:var(--solar);font-size:.75rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;margin-bottom:1rem">{{ block.settings.subtitle | escape }}</div>
+          {%- endif -%}
+          <div class="panel-img">
+            {%- if block.settings.image != blank -%}
+              <img class="craft-img" src="{{ block.settings.image | image_url: width: 1000 }}" alt="{{ block.settings.image.alt | escape }}" decoding="async" loading="lazy" onerror="this.remove()">
+            {%- else -%}
+              <div class="pi-note">📷 {{ block.settings.word | escape }}</div>
+            {%- endif -%}
+          </div>
+          <p style="color:rgba(243,230,209,.9)">{{ block.settings.body }}</p>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Craft Chapters",
+  "settings": [
+    { "type": "text", "id": "sticky_word", "label": "Sticky title word", "default": "La Tradición" }
+  ],
+  "blocks": [
+    {
+      "type": "chapter",
+      "name": "Chapter",
+      "settings": [
+        { "type": "select", "id": "bg", "label": "Background colour", "default": "bg-marine",
+          "options": [
+            { "value": "bg-marine", "label": "Marine" },
+            { "value": "bg-rust", "label": "Rust" },
+            { "value": "bg-raspberry", "label": "Raspberry" },
+            { "value": "bg-umber", "label": "Umber" },
+            { "value": "bg-cactus", "label": "Cactus" },
+            { "value": "bg-copper", "label": "Copper" },
+            { "value": "bg-smoke", "label": "Smoke" }
+          ] },
+        { "type": "text", "id": "num", "label": "Number", "default": "01" },
+        { "type": "text", "id": "word", "label": "Sticky word (Spanish)", "default": "La Tierra" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Wild Harvest" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle (optional translation)" },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "inline_richtext", "id": "body", "label": "Body copy" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [{ "name": "Craft Chapters" }]
+}
+{% endschema %}
