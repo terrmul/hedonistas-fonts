@@ -4,23 +4,24 @@
   .deep-social .ig-track-outer::before,
   .deep-social .ig-track-outer::after { display:none !important; }
 
-  /* GO DEEP header: eyebrow + heading + handle, vertically centered in its space, left-aligned */
+  /* GO DEEP header: match the other section headers (eyebrow + heading, same size/indent) */
   .deep-social .deep-head{
-    display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
-    min-height:36vh; padding:0 3.5rem !important;
+    display:block; min-height:auto !important;
+    padding:3.5rem 4.5rem 2.2rem !important;
   }
-  .deep-social .deep-panel-left{ flex-direction:column; align-items:flex-start; gap:1.2rem; }
-  .deep-social .deep-head-text{ display:flex; flex-direction:column; align-items:flex-start; gap:.5rem; }
-  .deep-social .deep-head-text .label{ margin:0; }
+  .deep-social .deep-panel-left{ flex-direction:column; align-items:flex-start; gap:1.1rem; width:auto; }
+  .deep-social .deep-head-text{ display:flex; flex-direction:column; align-items:flex-start; }
+  .deep-social .deep-head-text .label{ margin:0 0 .8rem; }
+  .deep-social .deep-word-h2{ font-size:clamp(2.5rem,6vw,5rem) !important; line-height:.9; }
 
   /* Instagram strip + newsletter spacing */
   .deep-social .ig-track-outer{ padding:1.25rem 0 2.5rem !important; }
   .deep-social .deep-newsletter{
     display:flex; flex-direction:column; align-items:flex-start; gap:1.25rem;
-    padding:1rem 3.5rem 4rem;
+    padding:1.5rem 4.5rem 4rem;
   }
   .deep-social .deep-newsletter h2{
-    font-size:clamp(2rem,4vw,3.4rem); color:var(--ink); line-height:.9; margin:0;
+    font-size:clamp(2.5rem,6vw,5rem); color:var(--ink); line-height:.9; margin:0;
   }
 
   /* Email field: don't stretch (keeps text vertically centered) */
@@ -38,17 +39,17 @@
   @media(max-width:900px){
     .deep-social { overflow-x:hidden; }
     .deep-social .deep-head{
-      min-height:auto; flex-direction:column; align-items:stretch; gap:1.5rem; padding:2.5rem 1.25rem 1.5rem !important;
+      padding:2.5rem 1.5rem 1.5rem !important;
     }
     .deep-social .deep-panel{
       width:100%; max-width:100%; flex-direction:column; align-items:flex-start; gap:1rem;
     }
-    .deep-social .deep-word-h2{ font-size:clamp(2.2rem,12vw,3rem); }
+    .deep-social .deep-word-h2{ font-size:clamp(2.2rem,12vw,3rem) !important; }
     .deep-social .handle{
       white-space:normal; overflow-wrap:anywhere;
       font-size:.72rem; letter-spacing:.16em; max-width:100%;
     }
-    .deep-social .deep-newsletter{ padding:0 1.25rem 3.5rem; width:100%; }
+    .deep-social .deep-newsletter{ padding:0 1.5rem 3.5rem; width:100%; }
     .deep-social .deep-newsletter h2{ font-size:clamp(1.8rem,9vw,2.6rem); }
     .deep-social .deep-form{ flex-direction:column; width:100%; }
     .deep-social .deep-form input{
