@@ -1,0 +1,138 @@
+<!-- CONTACT -->
+<style>
+  /* Keep the nav readable on this cream page */
+  nav,nav.nav-scrolled,nav.nav-on-hero{
+    mix-blend-mode:normal!important;
+    background:rgba(243,230,209,.55)!important;
+    backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+    border-bottom:1px solid rgba(26,23,22,.12)!important;
+  }
+  nav .nav-wordmark,nav ul a{color:var(--ink)!important}
+  nav .nav-cart{border-color:rgba(26,23,22,.35)!important}
+  nav img.nav-icon{filter:brightness(0)!important}
+  .nav-hamburger span{background:var(--ink)!important}
+
+  .ct{ color:var(--ink); padding:9rem 1.5rem 6rem; }
+  .ct-wrap{ max-width:640px; margin:0 auto; }
+  .ct-intro{ margin-bottom:2.5rem; }
+  .ct-intro .label{ margin-bottom:.8rem; }
+  .ct-intro h1{ font-size:clamp(2.5rem,6vw,5rem); line-height:.9; margin:0 0 1.2rem; }
+  .ct-sub{ font-size:1rem; line-height:1.7; color:var(--smoke); max-width:52ch; }
+  .ct-sub p{ margin:0 0 .6rem; }
+
+  .ct-form{ display:flex; flex-direction:column; gap:1.1rem; }
+  .ct-field{ display:flex; flex-direction:column; gap:.4rem; }
+  .ct-field label{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink); }
+  .ct-field input,.ct-field select,.ct-field textarea{
+    width:100%; box-sizing:border-box;
+    padding:.95rem 1.1rem;
+    background:rgba(255,255,255,.35);
+    border:1.5px solid rgba(26,23,22,.4);
+    font-family:"metallophile-sp8",sans-serif; font-size:.95rem; color:var(--ink);
+    outline:none; border-radius:2px;
+    transition:border-color .2s;
+  }
+  .ct-field textarea{ min-height:150px; resize:vertical; }
+  .ct-field input:focus,.ct-field select:focus,.ct-field textarea:focus{ border-color:rgba(26,23,22,.75); }
+  .ct-field input::placeholder,.ct-field textarea::placeholder{ color:rgba(26,23,22,.45); }
+  .ct-actions{ margin-top:.6rem; }
+  .ct-form .mag-btn{ cursor:pointer; border:none; }
+
+  /* Honeypot — hidden from humans, bait for bots */
+  .ct-hp{ position:absolute !important; left:-9999px !important; width:1px; height:1px; overflow:hidden; }
+
+  .ct-success{
+    border:1.5px solid rgba(26,23,22,.25); background:rgba(255,255,255,.4);
+    padding:2rem 2rem; border-radius:4px;
+    font-size:1.05rem; line-height:1.6; color:var(--ink);
+  }
+  .ct-errors{
+    border:1.5px solid var(--raspberry); background:rgba(175,46,86,.08);
+    padding:1rem 1.2rem; border-radius:4px; margin-bottom:1.2rem; color:var(--ink);
+    font-size:.9rem;
+  }
+  .ct-errors ul{ margin:.3rem 0 0; padding-left:1.1rem; }
+</style>
+
+<section class="ct" id="contact" data-nav="dark" data-bg="bg-cream"{% if section.settings.section_bg != blank %} style="background:{{ section.settings.section_bg }}"{% endif %}>
+  <div class="ct-wrap">
+    <div class="ct-intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="label" style="color:{{ section.settings.eyebrow_color }}">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
+      <h1>{{ section.settings.heading | escape }}</h1>
+      <div class="ct-sub">{{ section.settings.intro }}</div>
+    </div>
+
+    {%- form 'contact', id: 'contact-form', class: 'ct-form' -%}
+      {%- if form.posted_successfully? -%}
+        <div class="ct-success">{{ section.settings.success_message }}</div>
+      {%- else -%}
+        {%- if form.errors -%}
+          <div class="ct-errors">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <div class="ct-field">
+          <label for="ct-name">Name</label>
+          <input type="text" id="ct-name" name="contact[name]" autocomplete="name" required>
+        </div>
+        <div class="ct-field">
+          <label for="ct-email">Email</label>
+          <input type="email" id="ct-email" name="contact[email]" autocomplete="email" required>
+        </div>
+        <div class="ct-field">
+          <label for="ct-type">Inquiry type</label>
+          <select id="ct-type" name="contact[Inquiry Type]">
+            <option value="{{ section.settings.opt_1 | escape }}">{{ section.settings.opt_1 | escape }}</option>
+            <option value="{{ section.settings.opt_2 | escape }}">{{ section.settings.opt_2 | escape }}</option>
+            <option value="{{ section.settings.opt_3 | escape }}">{{ section.settings.opt_3 | escape }}</option>
+          </select>
+        </div>
+        <div class="ct-field">
+          <label for="ct-body">Message</label>
+          <textarea id="ct-body" name="contact[body]" required></textarea>
+        </div>
+        <div class="ct-hp" aria-hidden="true">
+          <label>Leave this field empty
+            <input type="text" name="contact[website]" tabindex="-1" autocomplete="off">
+          </label>
+        </div>
+        <div class="ct-actions">
+          <button type="submit" class="mag-btn mag-dark">{{ section.settings.button_label | escape }}</button>
+        </div>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+<script>
+(function(){
+  var form = document.getElementById('contact-form');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    var hp = form.querySelector('input[name="contact[website]"]');
+    if(hp && hp.value.trim() !== ''){ e.preventDefault(); }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Contact",
+  "settings": [
+    { "type": "header", "content": "Section" },
+    { "type": "color", "id": "section_bg", "label": "Background color", "default": "#F3E6D1" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "Get In Touch" },
+    { "type": "color", "id": "eyebrow_color", "label": "Eyebrow color", "default": "#7C3A09" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Pull Up A Stool." },
+    { "type": "richtext", "id": "intro", "label": "Intro copy", "default": "<p>Trade enquiry, press request, or just want to talk mezcal? Tell us what you're after and we'll be in touch.</p>" },
+    { "type": "header", "content": "Inquiry types" },
+    { "type": "text", "id": "opt_1", "label": "Option 1", "default": "General" },
+    { "type": "text", "id": "opt_2", "label": "Option 2", "default": "Trade & Wholesale" },
+    { "type": "text", "id": "opt_3", "label": "Option 3", "default": "Press & Media" },
+    { "type": "header", "content": "Form" },
+    { "type": "text", "id": "button_label", "label": "Submit button text", "default": "Send Message" },
+    { "type": "richtext", "id": "success_message", "label": "Success message", "default": "<p>Message received — we'll be in touch soon. Salud.</p>" }
+  ],
+  "presets": [{ "name": "Contact" }]
+}
+{% endschema %}
