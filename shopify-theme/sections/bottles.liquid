@@ -13,7 +13,7 @@
   }
   .bottles-section .ce-visual-word{ bottom:2.5rem !important; }
 </style>
-<section class="bottles-section" id="mezcals" data-nav="light" data-bg="bg-cream" data-mf-color="#F3E6D1" style="background:{{ section.settings.section_bg }}">
+<section class="bottles-section" id="mezcals" data-nav="light" data-bg="bg-cream" data-mf-color="#F3E6D1"{% if section.settings.section_bg != blank %} style="background:{{ section.settings.section_bg }}"{% endif %}>
 <div class="bottles-selector">
   <div class="ce-strip">
     <div class="ce-strip-head">
@@ -138,7 +138,7 @@
   "name": "Bottle Selector",
   "settings": [
     { "type": "header", "content": "Section" },
-    { "type": "color", "id": "section_bg", "label": "Background color", "default": "#F3E6D1" },
+    { "type": "color", "id": "section_bg", "label": "Background color", "info": "Leave empty to keep the scroll color blend into the manifesto." },
     { "type": "text", "id": "strip_label", "label": "Eyebrow label", "default": "Four Expressions · Ships to 40+ States" },
     { "type": "text", "id": "strip_heading", "label": "Heading", "default": "The Collection" },
     { "type": "text", "id": "buy_label", "label": "Buy button text", "default": "Add to Cart" }
