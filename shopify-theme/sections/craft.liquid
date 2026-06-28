@@ -23,6 +23,13 @@
     {%- endfor -%}
   </div>
 </div>
+
+{% style %}
+  /* page-wide blend — section 3 of 3; panels ride the gradient instead of per-chapter colors */
+  #craft.sticky-chapter{ background: linear-gradient(180deg, #4A382A 0%, #1a1716 100%) !important; }
+  #craft .s-panel{ background: transparent !important; }
+{% endstyle %}
+
 {% schema %}
 {
   "name": "Craft Chapters",
