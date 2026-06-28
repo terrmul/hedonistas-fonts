@@ -1,0 +1,38 @@
+<!-- BRAND STORY -->
+<section class="brand-story brand-story--single reveal-section" id="story" data-nav="light" data-bg="bg-cream">
+  <div class="bs-inner">
+    <!-- STORY — image up top, narrative below -->
+    <div class="bs-panel bs-story">
+      <div class="label">{{ section.settings.story_label | escape }}</div>
+      <h2>{{ section.settings.story_heading }}</h2>
+      <div class="bs-img">
+        {%- if section.settings.story_image != blank -%}
+          <img class="bs-photo" src="{{ section.settings.story_image | image_url: width: 1600 }}" alt="{{ section.settings.story_image.alt | escape }}" decoding="async" loading="lazy" onerror="this.remove()">
+        {%- else -%}
+          <div class="ph-label">📷 Founders — candid, Oaxaca</div>
+        {%- endif -%}
+      </div>
+      <div class="bs-story-body">{{ section.settings.story_body }}</div>
+    </div>
+  </div>
+</section>
+
+{% style %}
+  /* Single-panel layout: let the story span the full width */
+  #story.brand-story--single .bs-inner { display: block; max-width: 980px; margin-inline: auto; }
+  #story.brand-story--single .bs-panel { width: 100%; }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Brand Story",
+  "settings": [
+    { "type": "header", "content": "Story" },
+    { "type": "text", "id": "story_label", "label": "Eyebrow label", "default": "Nuestra Historia" },
+    { "type": "inline_richtext", "id": "story_heading", "label": "Heading", "default": "Born from Obsession." },
+    { "type": "image_picker", "id": "story_image", "label": "Image — founders, candid (1200×800)" },
+    { "type": "richtext", "id": "story_body", "label": "Story copy", "default": "<p>Hedonistas Mezcal began with two friends and a stubborn belief — that the finest mezcal in the world deserves to be shared. Not hoarded. Not gatekept. Shared.</p><p>Founded in the highlands of Oaxaca, we partnered with maestros mezcaleros whose families have cultivated and cooked agave the same way for generations. No shortcuts. No industrial process. Just fire, stone, time, and copper — and a friendship that wouldn't settle for less.</p>" }
+  ],
+  "presets": [{ "name": "Brand Story" }]
+}
+{% endschema %}
