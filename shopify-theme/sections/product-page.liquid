@@ -16,6 +16,20 @@ nav img.nav-icon{filter:brightness(0)!important}
 .pdp-page .ce-copy{ padding-top:1.5rem; }
 .pdp-page .ce-visual-word{ bottom:2.5rem !important; }
 
+/* The Collection back link — match the Full Details pill (lighter shade) */
+.pdp-page .pdp-back{
+  display:inline-flex; align-items:center; gap:.4rem;
+  margin-top:2rem; align-self:flex-start;
+  padding:1rem 2.4rem; border-radius:100px;
+  font-size:.75rem; letter-spacing:.22em; text-transform:uppercase; font-weight:500;
+  text-decoration:none;
+  background:var(--smoke); color:var(--cream);
+  transition:background .3s, transform .2s;
+}
+.pdp-page .pdp-back:hover{
+  background:var(--ink); color:var(--cream); transform:translateY(-1px);
+}
+
 @media(max-width:767px){
   .pdp-page .bottles-selector{min-height:unset}
   .pdp-page .ce-hero{flex-direction:column}
@@ -30,7 +44,7 @@ nav img.nav-icon{filter:brightness(0)!important}
 }
 </style>
 
-<section class="bottles-section pdp-page" id="pdp" data-nav="light" data-bg="bg-cream" style="background:{{ section.settings.section_bg }}">
+<section class="bottles-section pdp-page" id="pdp" data-nav="light" data-bg="bg-cream"{% if section.settings.section_bg != blank %} style="background:{{ section.settings.section_bg }}"{% endif %}>
   <div class="bottles-selector">
     <div class="ce-hero">
       <div class="ce-panel active">
@@ -139,7 +153,7 @@ nav img.nav-icon{filter:brightness(0)!important}
             </div>
           {%- endif -%}
 
-          <a class="pdp-back" href="/#mezcals">&larr; The Collection</a>
+          <a class="mag-btn pdp-back" href="/#mezcals">&larr; The Collection</a>
         </div>
 
       </div>
