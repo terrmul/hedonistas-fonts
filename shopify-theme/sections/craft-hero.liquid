@@ -1,10 +1,10 @@
 <!-- CRAFT PAGE HERO -->
-<section class="craft-hero" data-bg="bg-ink">
+<section class="craft-hero" data-bg="bg-ink" data-overlay="{{ section.settings.overlay_color | default: '#5C3A22' }}">
   <div class="craft-hero-bg">
     {%- if section.settings.bg_image != blank -%}
       <img src="{{ section.settings.bg_image | image_url: width: 2000 }}" alt="" loading="eager" decoding="async">
+      <div class="craft-hero-scrim"></div>
     {%- endif -%}
-    <div class="craft-hero-scrim"></div>
     <div class="craft-hero-dots" aria-hidden="true"></div>
   </div>
   <div class="craft-hero-content">
@@ -16,14 +16,15 @@
 </section>
 
 {% style %}
-  /* page-wide blend — section 2 of 3 (shows when no background image is set) */
-  .craft-hero{ background: linear-gradient(180deg, #8A6F52 0%, #4A382A 100%) !important; }
+  /* transparent so the scroll-colour overlay shows through (no gradient) */
+  .craft-hero{ background: transparent !important; }
 {% endstyle %}
 
 {% schema %}
 {
   "name": "Craft Hero",
   "settings": [
+    { "type": "color", "id": "overlay_color", "label": "Section background color", "info": "Scroll-blend color for this section. Leave empty for #5C3A22." },
     { "type": "image_picker", "id": "bg_image", "label": "Background image" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "La Tradición" },
     { "type": "text", "id": "headline", "label": "Headline", "default": "Made By Hand. As It Always Was." },
