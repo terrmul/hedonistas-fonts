@@ -1,0 +1,102 @@
+<!-- AGE GATE -->
+<style>
+  html.age-gate-open, body.age-gate-open{ overflow: hidden !important; }
+
+  #age-gate{
+    position: fixed; inset: 0; z-index: 100000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
+    background: rgba(26,23,22,.82);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    opacity: 1; transition: opacity .35s ease;
+  }
+  #age-gate.ag-hidden{ opacity: 0; visibility: hidden; pointer-events: none; }
+
+  #age-gate .ag-card{
+    background: var(--cream, #F3E6D1); color: var(--ink, #1a1716);
+    width: 100%; max-width: 460px; border-radius: 16px;
+    padding: clamp(2rem, 5vw, 3rem); text-align: center;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,.6);
+  }
+  #age-gate .ag-logo{ width: 80px; height: auto; display: block; margin: 0 auto 1.3rem; filter: brightness(0); }
+  #age-gate .ag-eyebrow{ font-family:"metallophile-sp8",sans-serif; font-size:.7rem; letter-spacing:.24em; text-transform:uppercase; color: var(--rust, #7C3A09); margin-bottom:.7rem; }
+  #age-gate .ag-title{ font-family:'Pacifico',serif; text-transform:uppercase; font-size:clamp(1.5rem,4vw,2.3rem); line-height:1.02; margin:0 0 1rem; }
+  #age-gate .ag-text{ font-family:"metallophile-sp8",sans-serif; font-size:1rem; line-height:1.6; color: var(--smoke, #4F4E4F); margin:0 0 1.8rem; }
+  #age-gate .ag-actions{ display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  #age-gate .ag-btn{
+    cursor:pointer; font-family:"metallophile-sp8",sans-serif; font-size:.75rem; letter-spacing:.22em;
+    text-transform:uppercase; font-weight:500; border-radius:100px; padding:1rem 2.4rem;
+    border:1px solid var(--ink, #1a1716); transition: background .25s, color .25s, transform .2s;
+  }
+  #age-gate .ag-yes{ background: var(--ink, #1a1716); color: var(--cream, #F3E6D1); }
+  #age-gate .ag-yes:hover{ background: var(--copper, #C65602); border-color: var(--copper, #C65602); transform: translateY(-1px); }
+  #age-gate .ag-no{ background: transparent; color: var(--ink, #1a1716); }
+  #age-gate .ag-no:hover{ background: rgba(26,23,22,.06); }
+  #age-gate .ag-fine{ margin-top:1.4rem; font-size:.72rem; line-height:1.5; color: rgba(26,23,22,.55); }
+  #age-gate .ag-fine a{ color: var(--rust, #7C3A09); }
+
+  #age-gate .ag-deny{ display:none; }
+  #age-gate.ag-denied .ag-main{ display:none; }
+  #age-gate.ag-denied .ag-deny{ display:block; }
+</style>
+
+<div id="age-gate" role="dialog" aria-modal="true" aria-labelledby="ag-title" data-remember-days="30" data-min-age="21">
+  <div class="ag-card">
+    <div class="ag-main">
+      <img class="ag-logo" src="{{ 'icon.png' | asset_url }}" alt="Hedonistas Mezcal" width="80" height="80" decoding="async">
+      <div class="ag-eyebrow">Hecho en Oaxaca</div>
+      <h2 class="ag-title" id="ag-title">Are you of legal drinking age?</h2>
+      <p class="ag-text">You must be of legal drinking age to enter. We craft mezcal for those who savour responsibly.</p>
+      <div class="ag-actions">
+        <button type="button" class="ag-btn ag-yes" id="ag-yes">Yes, enter</button>
+        <button type="button" class="ag-btn ag-no" id="ag-no">No</button>
+      </div>
+      <p class="ag-fine">Please drink responsibly. By entering you accept our <a href="/policies/terms-of-service">Terms</a> &amp; <a href="/policies/privacy-policy">Privacy Policy</a>.</p>
+    </div>
+    <div class="ag-deny">
+      <div class="ag-eyebrow">Come back soon</div>
+      <h2 class="ag-title">Not just yet</h2>
+      <p class="ag-text">You must be of legal drinking age to enter this site.</p>
+      <div class="ag-actions">
+        <button type="button" class="ag-btn ag-no" id="ag-back">Go back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY = 'hed_age_ok';
+  var gate = document.getElementById('age-gate');
+  if(!gate) return;
+  var days = parseInt(gate.getAttribute('data-remember-days'), 10) || 30;
+
+  function verified(){
+    try{ var v = localStorage.getItem(KEY); return !!v && parseInt(v, 10) > Date.now(); }
+    catch(e){ return false; }
+  }
+  function lock(on){
+    document.documentElement.classList.toggle('age-gate-open', on);
+    document.body.classList.toggle('age-gate-open', on);
+  }
+
+  if(verified()){
+    gate.classList.add('ag-hidden');
+    lock(false);
+  } else {
+    lock(true);
+  }
+
+  var yes = document.getElementById('ag-yes');
+  var no  = document.getElementById('ag-no');
+  var back = document.getElementById('ag-back');
+
+  if(yes) yes.addEventListener('click', function(){
+    try{ localStorage.setItem(KEY, String(Date.now() + days * 86400000)); }catch(e){}
+    gate.classList.add('ag-hidden');
+    lock(false);
+  });
+  if(no) no.addEventListener('click', function(){ gate.classList.add('ag-denied'); });
+  if(back) back.addEventListener('click', function(){ gate.classList.remove('ag-denied'); });
+})();
+</script>
