@@ -26,8 +26,7 @@
 
 {% style %}
   /* Mobile + landscape phones: turn off the desktop sticky-scroll mechanic and
-     lay each chapter out as a simple vertical block — the image is the first
-     element in the markup, so block flow puts it on top with the text below. */
+     lay each chapter out as a simple vertical block — image on top, text below. */
   @media (max-width: 1024px){
     #craft{ overflow-x: hidden; }
     #craft .sticky-word{ display: none !important; }
@@ -44,8 +43,10 @@
       width: 100% !important;
       max-width: 100% !important;
     }
+    /* keep position:relative so the absolutely-positioned .craft-img stays
+       inside this image box instead of expanding to cover the whole panel */
     #craft .panel-img{
-      position: static !important;
+      position: relative !important;
       transform: none !important;
       display: block !important;
       width: 100% !important;
@@ -53,6 +54,7 @@
       aspect-ratio: 16 / 11 !important;
       max-height: 46vh !important;
       margin: 0 0 1.5rem !important;
+      overflow: hidden !important;
     }
     /* the reveal-on-scroll fade can leave text invisible when stacked —
        force everything visible so the chapter always shows on mobile */
