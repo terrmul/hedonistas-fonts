@@ -1,5 +1,9 @@
 <!-- NAV -->
 <style>
+  /* Offset in-page anchor jumps so the target section lands just below the
+     fixed frosted nav bar instead of being hidden behind it. */
+  html{ scroll-padding-top: 5rem; }
+
   /* Self-contained mobile nav: hide inline links, show hamburger, full drawer.
      Scoped with #ids/!important so it wins regardless of theme.css state. */
   #nav-drawer{
