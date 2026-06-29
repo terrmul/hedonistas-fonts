@@ -16,23 +16,38 @@
     position: relative; z-index: 1;   /* above the fixed #bg-overlay */
     background: var(--cream, #F3E6D1);
     color: var(--ink, #1a1716);
-    min-height: 82vh;
+    min-height: 82vh; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     padding: 9rem 1.5rem 6rem; text-align: center;
   }
-  .nf-inner{ max-width: 600px; }
+  .nf-inner{ max-width: 620px; position: relative; z-index: 2; }
+
+  .nf-skull{
+    width: clamp(74px, 12vw, 118px); height: auto; display: block; margin: 0 auto 1.2rem;
+    cursor: pointer; user-select: none; -webkit-user-drag: none;
+    filter: drop-shadow(0 10px 16px rgba(26,23,22,.18));
+    animation: nf-bob 3.4s ease-in-out infinite;
+    transition: transform .5s cubic-bezier(.2,.8,.25,1);
+  }
+  .nf-skull.spin{ transform: rotate(720deg) scale(1.08); }
+
   .nf-code{
     font-family: 'Pacifico', serif; line-height: .9;
     font-size: clamp(5rem, 22vw, 12rem); color: var(--rust, #7C3A09); margin: 0;
+    display: inline-block; animation: nf-wobble 4s ease-in-out infinite;
   }
   .nf-title{
     font-family: 'Pacifico', serif; text-transform: uppercase;
-    font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1.05; margin: .5rem 0 1.2rem;
+    font-size: clamp(1.5rem, 4vw, 2.4rem); line-height: 1.05; margin: .4rem 0 1.1rem;
   }
   .nf-text{
     font-family: "metallophile-sp8", sans-serif; font-size: 1.05rem; line-height: 1.7;
-    color: var(--smoke, #4F4E4F); margin: 0 auto 2.4rem; max-width: 40ch;
+    color: var(--smoke, #4F4E4F); margin: 0 auto 2.2rem; max-width: 42ch;
+    min-height: 3.4em;
+    transition: opacity .4s ease;
   }
+  .nf-text.fading{ opacity: 0; }
+
   .nf-actions{ display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
   .nf-btn{
     text-decoration: none; cursor: pointer;
@@ -46,16 +61,95 @@
   .nf-btn--dark:hover{ background: var(--copper, #C65602); border-color: var(--copper, #C65602); transform: translateY(-1px); }
   .nf-btn--ghost{ background: transparent; color: var(--ink, #1a1716); }
   .nf-btn--ghost:hover{ background: rgba(26,23,22,.06); }
+
+  .nf-hint{
+    margin-top: 2rem; font-family: "metallophile-sp8", sans-serif;
+    font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(26,23,22,.4);
+  }
+
+  /* floating background agave word */
+  .nf-ghost{
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .nf-ghost span{
+    font-family: 'Pacifico', serif; text-transform: uppercase; white-space: nowrap;
+    font-size: clamp(8rem, 30vw, 26rem); color: rgba(124,58,9,.06); line-height: 1;
+  }
+
+  @keyframes nf-bob{
+    0%,100%{ transform: translateY(0) rotate(-3deg); }
+    50%{ transform: translateY(-12px) rotate(3deg); }
+  }
+  @keyframes nf-wobble{
+    0%,100%{ transform: rotate(-1.5deg); }
+    50%{ transform: rotate(1.5deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .nf-skull, .nf-code{ animation: none; }
+  }
 </style>
 
 <div class="nf-page">
+  <div class="nf-ghost" aria-hidden="true"><span>Perdido</span></div>
   <div class="nf-inner">
+    <img class="nf-skull" id="nf-skull" src="{{ 'icon.png' | asset_url }}" alt="Hedonistas" width="118" height="118" decoding="async">
     <p class="nf-code">404</p>
     <h1 class="nf-title">Lost in the agave</h1>
-    <p class="nf-text">The page you're looking for wandered off into the highlands. Let's get you back to something worth sipping.</p>
+    <p class="nf-text" id="nf-text">This page went out for one mezcal and never came back.</p>
     <div class="nf-actions">
       <a class="nf-btn nf-btn--dark" href="/#mezcals">Shop the Collection</a>
       <a class="nf-btn nf-btn--ghost" href="/">Back to Home</a>
     </div>
+    <p class="nf-hint" aria-hidden="true">psst — tap the skull</p>
   </div>
 </div>
+
+<script>
+(function(){
+  var lines = [
+    "This page went out for one mezcal and never came back.",
+    "404: agave not found. Try one that's actually aged 12 years.",
+    "You've wandered past the last palenque.",
+    "Even the maestro can't find this one.",
+    "No mezcal here — but plenty back home.",
+    "Lost? So was Tepeztate, for 25 years.",
+    "This link took the scenic route. A little too scenic.",
+    "Nothing to pour here. Go deep elsewhere."
+  ];
+  var quips = [
+    "¡Salud! 🥃",
+    "One more won't hurt…",
+    "Go Deep.",
+    "Hecho en Oaxaca.",
+    "The night is young.",
+    "Sip slow."
+  ];
+  var el = document.getElementById('nf-text');
+  var skull = document.getElementById('nf-skull');
+  var i = 0;
+
+  function show(txt){
+    if(!el) return;
+    el.classList.add('fading');
+    setTimeout(function(){ el.textContent = txt; el.classList.remove('fading'); }, 380);
+  }
+
+  // rotate the cheeky lines every few seconds
+  if(el){
+    setInterval(function(){ i = (i + 1) % lines.length; show(lines[i]); }, 4200);
+  }
+
+  // easter egg: tap the skull → spin + a quip + count the "shots"
+  if(skull){
+    var shots = 0, spinT;
+    skull.addEventListener('click', function(){
+      shots++;
+      skull.classList.remove('spin'); void skull.offsetWidth; skull.classList.add('spin');
+      clearTimeout(spinT); spinT = setTimeout(function(){ skull.classList.remove('spin'); }, 700);
+      var q = quips[Math.floor((shots - 1) % quips.length)];
+      show(shots >= 5 ? "Okay, that's " + shots + " — pace yourself. 😅" : q);
+    });
+  }
+})();
+</script>
