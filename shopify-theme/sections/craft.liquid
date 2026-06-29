@@ -44,16 +44,17 @@
       max-width: 100% !important;
     }
     /* keep position:relative so the absolutely-positioned .craft-img stays
-       inside this image box instead of expanding to cover the whole panel */
+       inside this image box instead of expanding to cover the whole panel.
+       Portrait ratio so the image is taller than it is wide. */
     #craft .panel-img{
       position: relative !important;
       transform: none !important;
       display: block !important;
       width: 100% !important;
       height: auto !important;
-      aspect-ratio: 16 / 11 !important;
-      max-height: 46vh !important;
-      margin: 0 0 1.5rem !important;
+      aspect-ratio: 4 / 5 !important;
+      max-height: 75vh !important;
+      margin: 0 auto 1.6rem !important;
       overflow: hidden !important;
     }
     /* the reveal-on-scroll fade can leave text invisible when stacked —
@@ -92,7 +93,7 @@
         { "type": "text", "id": "subtitle", "label": "Subtitle (use // for a line break)" },
         { "type": "image_picker", "id": "image", "label": "Photo" },
         { "type": "range", "id": "img_width", "label": "Image width", "info": "% of panel — keep at/under 50 so it doesn't overlap the text (desktop only)", "min": 30, "max": 50, "step": 1, "unit": "%", "default": 46 },
-        { "type": "range", "id": "img_height", "label": "Image height", "info": "Desktop only — mobile uses a responsive height", "min": 200, "max": 1000, "step": 20, "unit": "px", "default": 500 },
+        { "type": "range", "id": "img_height", "label": "Image height", "info": "Desktop only — mobile uses a responsive portrait height", "min": 200, "max": 1000, "step": 20, "unit": "px", "default": 500 },
         { "type": "inline_richtext", "id": "body", "label": "Body copy (use // for a line break)" }
       ]
     }
