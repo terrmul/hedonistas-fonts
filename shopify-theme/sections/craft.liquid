@@ -12,7 +12,7 @@
           {%- endif -%}
           <div class="panel-img">
             {%- if block.settings.image != blank -%}
-              <img class="craft-img" src="{{ block.settings.image | image_url: width: 1000 }}" alt="{{ block.settings.image.alt | escape }}" decoding="async" loading="lazy" onerror="this.remove()">
+              <img class="craft-img" src="{{ block.settings.image | image_url: width: 1400 }}" alt="{{ block.settings.image.alt | escape }}" decoding="async" loading="lazy" onerror="this.remove()">
             {%- else -%}
               <div class="pi-note">📷 {{ block.settings.word | escape }}</div>
             {%- endif -%}
@@ -23,11 +23,25 @@
     {%- endfor -%}
   </div>
 </div>
+
+{% style %}
+  /* Customizer-controlled craft image dimensions (defaults match the theme) */
+  #craft .panel-img{
+    width: calc({{ section.settings.img_width }}% - 6rem) !important;
+    height: {{ section.settings.img_height }}% !important;
+    max-height: {{ section.settings.img_max_height }}px !important;
+  }
+{% endstyle %}
+
 {% schema %}
 {
   "name": "Craft Chapters",
   "settings": [
-    { "type": "text", "id": "sticky_word", "label": "Sticky title word", "default": "La Tradición" }
+    { "type": "text", "id": "sticky_word", "label": "Sticky title word", "default": "La Tradición" },
+    { "type": "header", "content": "Chapter image size" },
+    { "type": "range", "id": "img_width", "label": "Image width", "info": "% of panel — keep at/under 50 so it doesn't overlap the text", "min": 30, "max": 50, "step": 1, "unit": "%", "default": 46 },
+    { "type": "range", "id": "img_height", "label": "Image height", "info": "% of panel height", "min": 40, "max": 95, "step": 5, "unit": "%", "default": 60 },
+    { "type": "range", "id": "img_max_height", "label": "Image max height", "min": 300, "max": 1000, "step": 20, "unit": "px", "default": 500 }
   ],
   "blocks": [
     {
