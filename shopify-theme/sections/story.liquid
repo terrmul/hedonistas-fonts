@@ -11,6 +11,7 @@
 {%- if section.settings.quote_font == 'display' -%}{%- assign f_quote = "'Pacifico', serif" -%}{%- elsif section.settings.quote_font == 'sans' -%}{%- assign f_quote = '-apple-system, "Helvetica Neue", Arial, sans-serif' -%}{%- endif -%}
 {%- assign quote_style = 'normal' -%}
 {%- if section.settings.quote_italic -%}{%- assign quote_style = 'italic' -%}{%- endif -%}
+{%- capture quote_inline -%}font-family:{{ f_quote }};font-size:clamp(1rem,1.9vw,{{ section.settings.quote_size }}rem);font-style:{{ quote_style }}{%- endcapture -%}
 
 <section class="brand-story brand-story--solo reveal-section" id="story" data-nav="light" data-bg="bg-cream"
   data-overlay="{{ section.settings.overlay_color | default: '#9C8769' }}">
@@ -39,12 +40,15 @@
           <div class="bss-figure bss-figure--ph reveal"><span class="ph-label">📷 Founders — candid, Oaxaca</span></div>
         {%- endif -%}
         {%- if section.settings.quote != blank -%}
-          <blockquote class="bss-quote reveal" style="font-family:{{ f_quote }};font-size:clamp(1rem,1.9vw,{{ section.settings.quote_size }}rem);font-style:{{ quote_style }}">{{ section.settings.quote | escape | replace: '//', '<br>' }}</blockquote>
+          <blockquote class="bss-quote bss-quote--desktop reveal" style="{{ quote_inline }}">{{ section.settings.quote | escape | replace: '//', '<br>' }}</blockquote>
         {%- endif -%}
       </div>
 
       <div class="bss-text-col reveal">
         <div class="bss-body" style="font-family:{{ f_body }};font-size:clamp(1rem,1.6vw,{{ section.settings.body_size }}rem)">{{ section.settings.story_body | replace: '//', '<br>' }}</div>
+        {%- if section.settings.quote != blank -%}
+          <blockquote class="bss-quote bss-quote--mobile reveal" style="{{ quote_inline }}">{{ section.settings.quote | escape | replace: '//', '<br>' }}</blockquote>
+        {%- endif -%}
       </div>
 
     </div>
@@ -104,6 +108,7 @@
     padding-left: 1.1rem;
     border-left: 3px solid var(--rust, #7C3A09);
   }
+  #story .bss-quote--mobile{ display: none; }
 
   #story .bss-text-col{ padding-top: .4rem; }
   #story .bss-body{ line-height: 1.8; }
@@ -115,12 +120,19 @@
   }
   #story .bss-body p:last-child{ margin-bottom: 0; }
 
-  /* mobile: stack, image first, no sticky */
+  /* mobile: image pins at top, text scrolls beneath it */
   @media (max-width: 900px){
-    #story .bss-grid{ grid-template-columns: 1fr; gap: 2.25rem; }
-    #story .bss-media-col{ position: static; top: auto; }
-    #story .bss-figure{ aspect-ratio: 16 / 10; max-height: none; }
-    #story .bss-quote{ margin-top: 1.25rem; }
+    #story .bss-grid{ grid-template-columns: 1fr; gap: 1.5rem; }
+    #story .bss-media-col{
+      position: sticky;
+      top: clamp(4.5rem, 12vh, 6rem);
+      z-index: 2;
+      align-self: start;
+    }
+    #story .bss-figure{ aspect-ratio: 16 / 10; max-height: 42vh; }
+    #story .bss-text-col{ position: relative; z-index: 1; padding-top: 0; }
+    #story .bss-quote--desktop{ display: none; }
+    #story .bss-quote--mobile{ display: block; margin-top: 2rem; }
   }
 
   /* fade-in */
