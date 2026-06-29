@@ -1,0 +1,120 @@
+<!-- CART -->
+<style>
+  .cart-page{
+    background: var(--cream, #F3E6D1);
+    color: var(--ink, #1a1716);
+    min-height: 70vh;
+    padding: 9rem 1.5rem 6rem;
+  }
+  .cart-inner{ max-width: 880px; margin: 0 auto; }
+  .cart-title{
+    font-family: 'Pacifico', serif; text-transform: uppercase;
+    font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1; margin: 0 0 2.5rem;
+  }
+  .cart-lines{ border-top: 1px solid rgba(26,23,22,.14); }
+  .cart-line{
+    display: grid;
+    grid-template-columns: 84px 1fr 92px auto;
+    gap: 1.2rem; align-items: center;
+    padding: 1.5rem 0; border-bottom: 1px solid rgba(26,23,22,.14);
+  }
+  .cart-line-img img{ width: 80px; height: auto; border-radius: 6px; display: block; }
+  .cart-line-name{
+    font-family: 'Pacifico', serif; text-transform: uppercase;
+    font-size: 1.25rem; line-height: 1.05; color: var(--ink, #1a1716); text-decoration: none;
+  }
+  .cart-line-variant{ font-size: .8rem; color: var(--smoke, #4F4E4F); margin-top: .2rem; }
+  .cart-line-price{ font-size: .85rem; color: var(--smoke, #4F4E4F); margin-top: .35rem; }
+  .cart-line-remove{
+    display: inline-block; margin-top: .5rem;
+    font-family: "metallophile-sp8", sans-serif; font-size: .68rem; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--rust, #7C3A09); text-decoration: none;
+  }
+  .cart-line-remove:hover{ text-decoration: underline; }
+  .cart-line-qty input{
+    width: 64px; height: 2.6rem; text-align: center;
+    border: 1px solid rgba(26,23,22,.3); border-radius: 6px; background: transparent;
+    font-family: "metallophile-sp8", sans-serif; font-size: 1rem; color: var(--ink, #1a1716);
+  }
+  .cart-line-total{ font-family: 'Pacifico', serif; font-size: 1.2rem; text-align: right; white-space: nowrap; }
+  .cart-foot{ margin-top: 2.5rem; }
+  .cart-subtotal{
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'Pacifico', serif; text-transform: uppercase;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+  }
+  .cart-note{ font-size: .82rem; color: var(--smoke, #4F4E4F); margin: .6rem 0 1.8rem; }
+  .cart-actions{ display: flex; flex-wrap: wrap; gap: 1rem; }
+  .cart-update, .cart-checkout, .cart-continue{
+    font-family: "metallophile-sp8", sans-serif; font-size: .75rem; letter-spacing: .22em;
+    text-transform: uppercase; font-weight: 500; cursor: pointer; text-decoration: none;
+    border-radius: 100px; padding: 1rem 2.4rem; border: 1px solid var(--ink, #1a1716);
+    transition: background .25s, color .25s, transform .2s; display: inline-flex; align-items: center; justify-content: center;
+  }
+  .cart-update{ background: transparent; color: var(--ink, #1a1716); }
+  .cart-update:hover{ background: rgba(26,23,22,.06); }
+  .cart-checkout{ background: var(--ink, #1a1716); color: var(--cream, #F3E6D1); }
+  .cart-checkout:hover{ background: var(--copper, #C65602); border-color: var(--copper, #C65602); transform: translateY(-1px); }
+  .cart-continue{ margin-top: 1.6rem; border: 0; padding: 0; letter-spacing: .18em; color: var(--rust, #7C3A09); }
+  .cart-continue:hover{ text-decoration: underline; }
+  .cart-empty{ font-size: 1.1rem; color: var(--smoke, #4F4E4F); margin: 0 0 1.5rem; }
+
+  @media (max-width: 600px){
+    .cart-line{ grid-template-columns: 64px 1fr auto; grid-template-areas: "img info total" "img qty total"; row-gap: .6rem; }
+    .cart-line-img{ grid-area: img; align-self: start; }
+    .cart-line-info{ grid-area: info; }
+    .cart-line-qty{ grid-area: qty; }
+    .cart-line-total{ grid-area: total; align-self: start; }
+    .cart-line-img img{ width: 60px; }
+  }
+</style>
+
+<div class="cart-page">
+  <div class="cart-inner">
+    <h1 class="cart-title">Your Cart</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-form">
+        <div class="cart-lines">
+          {%- for item in cart.items -%}
+            <div class="cart-line">
+              <a class="cart-line-img" href="{{ item.url }}">
+                {%- if item.image -%}
+                  <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy" decoding="async">
+                {%- endif -%}
+              </a>
+              <div class="cart-line-info">
+                <a class="cart-line-name" href="{{ item.url }}">{{ item.product.title | escape }}</a>
+                {%- unless item.variant.title contains 'Default' -%}
+                  <div class="cart-line-variant">{{ item.variant.title | escape }}</div>
+                {%- endunless -%}
+                <div class="cart-line-price">{{ item.final_price | money }} each</div>
+                <a class="cart-line-remove" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0">Remove</a>
+              </div>
+              <div class="cart-line-qty">
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.product.title | escape }}">
+              </div>
+              <div class="cart-line-total">{{ item.final_line_price | money }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="cart-foot">
+          <div class="cart-subtotal">
+            <span>Subtotal</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <p class="cart-note">Taxes and shipping calculated at checkout.</p>
+          <div class="cart-actions">
+            <button type="submit" name="update" class="cart-update">Update</button>
+            <button type="submit" name="checkout" class="cart-checkout">Checkout</button>
+          </div>
+          <a class="cart-continue" href="{{ routes.all_products_collection_url | default: '/' }}">&larr; Continue shopping</a>
+        </div>
+      </form>
+    {%- else -%}
+      <p class="cart-empty">Your cart is empty.</p>
+      <a class="cart-checkout" href="/">Continue shopping</a>
+    {%- endif -%}
+  </div>
+</div>
