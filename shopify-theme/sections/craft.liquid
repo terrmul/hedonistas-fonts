@@ -5,11 +5,6 @@
     {%- for block in section.blocks -%}
       <div class="s-panel" data-bg="{{ block.settings.bg }}" data-word="{{ block.settings.word | escape }}" {{ block.shopify_attributes }}>
         <div class="s-panel-content reveal">
-          <div class="num" style="color:var(--solar)">{{ block.settings.num | escape }}</div>
-          <h3 style="color:var(--cream)">{{ block.settings.title | escape | replace: '//', '<br>' }}</h3>
-          {%- if block.settings.subtitle != blank -%}
-            <div style="color:var(--solar);font-size:.75rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;margin-bottom:1rem">{{ block.settings.subtitle | escape | replace: '//', '<br>' }}</div>
-          {%- endif -%}
           <div class="panel-img" style="width:calc({{ block.settings.img_width }}% - 6rem);height:{{ block.settings.img_height }}px;max-height:none">
             {%- if block.settings.image != blank -%}
               <img class="craft-img" src="{{ block.settings.image | image_url: width: 1400 }}" alt="{{ block.settings.image.alt | escape }}" decoding="async" loading="lazy" onerror="this.remove()">
@@ -17,6 +12,11 @@
               <div class="pi-note">📷 {{ block.settings.word | escape }}</div>
             {%- endif -%}
           </div>
+          <div class="num" style="color:var(--solar)">{{ block.settings.num | escape }}</div>
+          <h3 style="color:var(--cream)">{{ block.settings.title | escape | replace: '//', '<br>' }}</h3>
+          {%- if block.settings.subtitle != blank -%}
+            <div style="color:var(--solar);font-size:.75rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;margin-bottom:1rem">{{ block.settings.subtitle | escape | replace: '//', '<br>' }}</div>
+          {%- endif -%}
           <p style="color:rgba(243,230,209,.9)">{{ block.settings.body | replace: '//', '<br>' }}</p>
         </div>
       </div>
@@ -25,36 +25,38 @@
 </div>
 
 {% style %}
-  /* Mobile + landscape phones: turn off the desktop sticky-scroll mechanic
-     (100vh panels pulled up over the background word) and lay the chapters out
-     as a simple stacked list — image on top, then number / title / subtitle / body. */
+  /* Mobile + landscape phones: turn off the desktop sticky-scroll mechanic and
+     lay each chapter out as a simple vertical block — the image is the first
+     element in the markup, so block flow puts it on top with the text below. */
   @media (max-width: 1024px){
+    #craft{ overflow-x: hidden; }
     #craft .sticky-word{ display: none !important; }
     #craft .sticky-panels{ margin-top: 0 !important; }
     #craft .s-panel{
       min-height: 0 !important;
       display: block !important;
-      padding: 3.5rem 1.5rem !important;
+      width: 100% !important;
+      padding: 3rem 1.5rem !important;
+      box-sizing: border-box !important;
     }
     #craft .s-panel-content{
-      display: flex !important;
-      flex-direction: column !important;
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
     }
     #craft .panel-img{
       position: static !important;
       transform: none !important;
-      left: auto !important; top: auto !important;
-      order: -1 !important;
+      display: block !important;
       width: 100% !important;
       height: auto !important;
-      aspect-ratio: 16 / 11;
-      max-height: 48vh !important;
-      margin: 0 0 1.6rem !important;
+      aspect-ratio: 16 / 11 !important;
+      max-height: 46vh !important;
+      margin: 0 0 1.5rem !important;
     }
-    /* the reveal-on-scroll fade can leave this text invisible when stacked —
-       force it visible so the chapter copy always shows on mobile */
-    #craft .s-panel-content.reveal > :not(.panel-img),
-    #craft .s-panel-content.reveal > .panel-img{
+    /* the reveal-on-scroll fade can leave text invisible when stacked —
+       force everything visible so the chapter always shows on mobile */
+    #craft .s-panel-content.reveal > *{
       opacity: 1 !important;
       transform: none !important;
     }
