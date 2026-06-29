@@ -1,0 +1,229 @@
+<!-- ALL COCKTAILS — full-page filterable grid -->
+<style>
+  /* nav readable on this light page */
+  nav, nav.nav-scrolled, nav.nav-on-hero{
+    mix-blend-mode:normal!important;
+    background:rgba(243,230,209,.55)!important;
+    backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+    border-bottom:1px solid rgba(26,23,22,.12)!important;
+  }
+  nav .nav-wordmark, nav ul a{color:var(--ink,#1a1716)!important}
+  nav .nav-cart{border-color:rgba(26,23,22,.35)!important}
+  nav img.nav-icon{filter:brightness(0)!important}
+  .nav-hamburger span{background:var(--ink,#1a1716)!important}
+
+  .cg{
+    position:relative; z-index:1;
+    background: {{ section.settings.section_bg | default: '#F3E6D1' }};
+    color: var(--ink,#1a1716);
+    padding: 9rem 1.5rem 6rem;
+  }
+  .cg-inner{ max-width:1240px; margin:0 auto; }
+  .cg-head{ text-align:center; margin:0 auto 2.4rem; max-width:680px; }
+  .cg-eyebrow{ font-family:"metallophile-sp8",sans-serif; font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; color:var(--rust,#7C3A09); margin-bottom:.8rem; }
+  .cg-title{ font-family:'Pacifico',serif; text-transform:uppercase; font-size:clamp(2.4rem,6vw,4.5rem); line-height:1; margin:0 0 .8rem; }
+  .cg-sub{ font-family:"metallophile-sp8",sans-serif; font-size:1.02rem; line-height:1.6; color:var(--smoke,#4F4E4F); margin:0; }
+
+  .cg-filters{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin:1.8rem 0 2.6rem; }
+  .cg-filter{
+    background:transparent; border:1px solid rgba(26,23,22,.25); color:rgba(26,23,22,.6);
+    padding:.5rem 1.2rem; border-radius:100px; cursor:pointer;
+    font-family:"metallophile-sp8",sans-serif; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
+    transition:all .25s; white-space:nowrap;
+  }
+  .cg-filter:hover{ border-color:rgba(26,23,22,.55); color:var(--ink,#1a1716); }
+  .cg-filter.active{ background:var(--ink,#1a1716); color:var(--cream,#F3E6D1); border-color:var(--ink,#1a1716); }
+
+  .cg-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(258px,1fr)); gap:1.4rem; }
+  .cg-card{
+    position:relative; border-radius:14px; overflow:hidden; aspect-ratio:3/4;
+    background:var(--marine,#09627A); cursor:pointer;
+    opacity:0; transform:translateY(26px) scale(.99);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .cg-card.in{ opacity:1; transform:none; }
+  .cg-card.is-hidden{ display:none; }
+  .cg-card[data-cat~="citrus"]{ background:var(--cactus,#286140); }
+  .cg-card[data-cat~="smoky"]{ background:var(--rust,#7C3A09); }
+  .cg-card[data-cat~="stirred"]{ background:var(--marine,#09627A); }
+  .cg-card[data-cat~="shaken"]{ background:var(--raspberry,#72213A); }
+  .cg-card[data-cat~="seasonal"]{ background:var(--copper,#C65602); }
+  .cg-card[data-cat~="spirit-forward"]{ background:var(--umber,#91610C); }
+
+  .cg-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transition:transform .6s ease; }
+  .cg-card:hover img, .cg-card.open img{ transform:scale(1.06); }
+  .cg-scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(to top, rgba(26,23,22,.92) 0%, rgba(26,23,22,.25) 55%, rgba(26,23,22,.05) 100%); }
+  .cg-num{ position:absolute; top:.7rem; right:1rem; z-index:2; font-family:'Pacifico',serif; font-size:1.4rem; color:rgba(243,230,209,.5); }
+
+  .cg-front{ position:absolute; left:0; right:0; bottom:0; z-index:3; padding:1.3rem; color:var(--cream,#F3E6D1); transition:opacity .4s ease, transform .4s ease; }
+  .cg-cat{ font-family:"metallophile-sp8",sans-serif; font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--solar,#DBB149); margin-bottom:.4rem; }
+  .cg-name{ font-family:'Pacifico',serif; text-transform:uppercase; font-size:1.5rem; line-height:1; margin:0; }
+  .cg-spirit{ font-family:"metallophile-sp8",sans-serif; font-size:.78rem; color:rgba(243,230,209,.75); margin-top:.4rem; }
+
+  .cg-recipe{
+    position:absolute; inset:0; z-index:4; padding:1.4rem;
+    background:rgba(26,23,22,.9); color:var(--cream,#F3E6D1);
+    display:flex; flex-direction:column; justify-content:flex-end;
+    transform:translateY(101%); transition:transform .45s cubic-bezier(.4,0,.2,1);
+  }
+  .cg-card:hover .cg-recipe, .cg-card.open .cg-recipe{ transform:none; }
+  .cg-card:hover .cg-front, .cg-card.open .cg-front{ opacity:0; transform:translateY(10px); }
+  .cg-recipe-name{ font-family:'Pacifico',serif; text-transform:uppercase; font-size:1.25rem; line-height:1; margin:0 0 .8rem; }
+  .cg-recipe ul{ list-style:none; padding:0; margin:0 0 .8rem; }
+  .cg-recipe li{ font-family:"metallophile-sp8",sans-serif; font-size:.82rem; line-height:1.5; color:rgba(243,230,209,.9); padding-left:.9rem; position:relative; }
+  .cg-recipe li::before{ content:'·'; position:absolute; left:0; color:var(--solar,#DBB149); }
+  .cg-method{ font-family:"metallophile-sp8",sans-serif; font-size:.68rem; letter-spacing:.06em; color:var(--solar,#DBB149); text-transform:uppercase; margin-bottom:.9rem; }
+  .cg-recipe a{
+    align-self:flex-start; text-decoration:none; background:var(--cream,#F3E6D1); color:var(--ink,#1a1716);
+    font-family:"metallophile-sp8",sans-serif; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; font-weight:500;
+    border-radius:100px; padding:.55rem 1.3rem; transition:background .25s;
+  }
+  .cg-recipe a:hover{ background:var(--solar,#DBB149); }
+
+  .cg-empty{ text-align:center; color:var(--smoke,#4F4E4F); padding:3rem 0; font-family:"metallophile-sp8",sans-serif; }
+
+  @media (max-width:600px){
+    .cg-grid{ grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:.9rem; }
+    .cg-name{ font-size:1.2rem; }
+  }
+</style>
+
+<section class="cg" id="cocktails-page" data-nav="light">
+  <div class="cg-inner">
+    <div class="cg-head">
+      {%- if section.settings.eyebrow != blank -%}<div class="cg-eyebrow">{{ section.settings.eyebrow | escape }}</div>{%- endif -%}
+      <h1 class="cg-title">{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.subheading != blank -%}<p class="cg-sub">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+    </div>
+
+    <div class="cg-filters" id="cg-filters">
+      <button class="cg-filter active" data-filter="all">All</button>
+      <button class="cg-filter" data-filter="citrus">Citrus</button>
+      <button class="cg-filter" data-filter="smoky">Smoky</button>
+      <button class="cg-filter" data-filter="stirred">Stirred</button>
+      <button class="cg-filter" data-filter="shaken">Shaken</button>
+      <button class="cg-filter" data-filter="spirit-forward">Spirit Forward</button>
+      <button class="cg-filter" data-filter="seasonal">Seasonal</button>
+    </div>
+
+    <div class="cg-grid" id="cg-grid">
+      {%- for block in section.blocks -%}
+        {%- assign n = forloop.index -%}
+        <article class="cg-card" data-cat="{{ block.settings.categories }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 700 }}" alt="{{ block.settings.name | escape }}" loading="lazy" decoding="async">
+          {%- endif -%}
+          <div class="cg-scrim"></div>
+          <div class="cg-num">{% if n < 10 %}0{% endif %}{{ n }}</div>
+          <div class="cg-front">
+            {%- if block.settings.category_label != blank -%}<div class="cg-cat">{{ block.settings.category_label | escape }}</div>{%- endif -%}
+            <h3 class="cg-name">{{ block.settings.name | escape }}</h3>
+            {%- if block.settings.spirit != blank -%}<div class="cg-spirit">{{ block.settings.spirit | escape }}</div>{%- endif -%}
+          </div>
+          <div class="cg-recipe">
+            <div class="cg-recipe-name">{{ block.settings.name | escape }}</div>
+            <ul>
+              {%- if block.settings.ingredient_1 != blank -%}<li>{{ block.settings.ingredient_1 | escape }}</li>{%- endif -%}
+              {%- if block.settings.ingredient_2 != blank -%}<li>{{ block.settings.ingredient_2 | escape }}</li>{%- endif -%}
+              {%- if block.settings.ingredient_3 != blank -%}<li>{{ block.settings.ingredient_3 | escape }}</li>{%- endif -%}
+              {%- if block.settings.ingredient_4 != blank -%}<li>{{ block.settings.ingredient_4 | escape }}</li>{%- endif -%}
+              {%- if block.settings.ingredient_5 != blank -%}<li>{{ block.settings.ingredient_5 | escape }}</li>{%- endif -%}
+            </ul>
+            {%- if block.settings.method != blank -%}<div class="cg-method">{{ block.settings.method | escape }}</div>{%- endif -%}
+            {%- if block.settings.recipe_url != blank -%}<a href="{{ block.settings.recipe_url }}">{{ section.settings.recipe_button | default: 'Full Recipe' | escape }}</a>{%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+    <p class="cg-empty" id="cg-empty" hidden>No cocktails in this category yet.</p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.getElementById('cocktails-page');
+  if(!root) return;
+  var grid = document.getElementById('cg-grid');
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.cg-card'));
+  var empty = document.getElementById('cg-empty');
+
+  // scroll reveal (staggered)
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var card = e.target;
+          var i = cards.indexOf(card);
+          setTimeout(function(){ card.classList.add('in'); }, (i % 8) * 60);
+          io.unobserve(card);
+        }
+      });
+    }, { threshold: .08 });
+    cards.forEach(function(c){ io.observe(c); });
+  } else {
+    cards.forEach(function(c){ c.classList.add('in'); });
+  }
+
+  // filtering
+  function applyFilter(f){
+    var visible = 0;
+    cards.forEach(function(card){
+      var show = (f === 'all') || (card.getAttribute('data-cat') || '').split(' ').indexOf(f) > -1;
+      card.classList.toggle('is-hidden', !show);
+      if(show) visible++;
+    });
+    if(empty) empty.hidden = visible !== 0;
+  }
+  root.querySelectorAll('.cg-filter').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      root.querySelectorAll('.cg-filter').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      applyFilter(btn.getAttribute('data-filter'));
+    });
+  });
+
+  // tap-to-reveal recipe on touch devices (hover does it on desktop)
+  grid.addEventListener('click', function(e){
+    if(e.target.closest('a')) return;           // let recipe links work
+    var card = e.target.closest('.cg-card');
+    if(!card) return;
+    cards.forEach(function(c){ if(c !== card) c.classList.remove('open'); });
+    card.classList.toggle('open');
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Cocktails Grid",
+  "settings": [
+    { "type": "color", "id": "section_bg", "label": "Background color", "default": "#F3E6D1" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Crafted with Hedonistas" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Cocktail Book" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Every signature serve, in one place. Filter by style, tap a card for the recipe." },
+    { "type": "text", "id": "recipe_button", "label": "Per-card button text", "default": "Full Recipe" }
+  ],
+  "blocks": [
+    {
+      "type": "cocktail",
+      "name": "Cocktail",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card image" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Mezcalita" },
+        { "type": "text", "id": "category_label", "label": "Category label (shown)", "default": "Citrus · Shaken" },
+        { "type": "text", "id": "categories", "label": "Filter categories (space-separated)", "default": "citrus shaken", "info": "Use: citrus smoky stirred shaken spirit-forward seasonal" },
+        { "type": "text", "id": "spirit", "label": "Base spirit", "default": "Espadín" },
+        { "type": "text", "id": "ingredient_1", "label": "Ingredient 1" },
+        { "type": "text", "id": "ingredient_2", "label": "Ingredient 2" },
+        { "type": "text", "id": "ingredient_3", "label": "Ingredient 3" },
+        { "type": "text", "id": "ingredient_4", "label": "Ingredient 4" },
+        { "type": "text", "id": "ingredient_5", "label": "Ingredient 5" },
+        { "type": "text", "id": "method", "label": "Method line" },
+        { "type": "url", "id": "recipe_url", "label": "Full-recipe link" }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [{ "name": "Cocktails Grid" }]
+}
+{% endschema %}
