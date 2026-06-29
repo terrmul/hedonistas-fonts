@@ -21,10 +21,11 @@
       font-family: {% if section.settings.finale_font_family == 'pacifico' %}'Pacifico', serif{% else %}"metallophile-sp8", sans-serif{% endif %};
       font-size: clamp(1.2rem, 4vw, {{ section.settings.finale_font_size }}rem);
     }
-    /* finale poem: last two lines stack — line 5 stays (dimmed) as line 6 arrives below */
-    #manifesto .mf-finale-line { transition: opacity .8s ease, transform .8s ease; }
-    #manifesto .mf-finale-line.pair-top.dim { opacity: .4 !important; transform: translateY(-0.62em); }
-    #manifesto .mf-finale-line.pair-bottom.on { transform: translateY(0.62em); }
+    /* keep each poem line on a single line (breaks only at // ), and let the
+       last two lines stack — line 5 stays (dimmed) as line 6 arrives below it.
+       Their vertical offsets are set in JS from the measured line heights. */
+    #manifesto .mf-finale-line { white-space: nowrap; transition: opacity .8s ease, transform .8s ease; }
+    #manifesto .mf-finale-line.pair-top.dim { opacity: .4 !important; }
     #manifesto .mf-finale-lines { margin-bottom: 2.5rem; }
     #manifesto .mf-poem-finale-call { font-size: clamp(2.4rem, 6vw, 5rem); line-height: .9; }
     @media(max-width:920px){
@@ -213,9 +214,16 @@
         var isLast = i === n - 1;
         setTimeout(function(){ line.classList.add('on'); }, t);
         if(isLast){
-          // line 6 arrives below; dim line 5 but keep it in place
+          // line 6 arrives below; measure the real heights so the two lines
+          // stack with natural single-line spacing (no overlap), then dim line 5
           setTimeout(function(){
-            if(n >= 2) finaleLines[n - 2].classList.add('dim');
+            if(n >= 2){
+              var top = finaleLines[n - 2], bot = line;
+              var hTop = top.offsetHeight, hBot = bot.offsetHeight, gap = 6;
+              top.style.transform = 'translateY(' + (-(hBot + gap) / 2) + 'px)';
+              bot.style.transform = 'translateY(' + ((hTop + gap) / 2) + 'px)';
+              top.classList.add('dim');
+            }
           }, t);
           setTimeout(function(){
             if(finaleEnd) finaleEnd.classList.add('on');
