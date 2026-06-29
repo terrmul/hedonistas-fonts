@@ -198,6 +198,30 @@
     var finaleLines = Array.prototype.slice.call(finaleEl.querySelectorAll('.mf-finale-line'));
     var finaleEnd = finaleEl.querySelector('.mf-finale-end');
     var started = false;
+
+    // Tuck the call's trailing period so its right edge lines up with the right
+    // edge of the previous letter (e.g. the "P" in "GO DEEP.").
+    var callEl = finaleEl.querySelector('.mf-poem-finale-call');
+    if(callEl && /\.\s*$/.test(callEl.textContent)){
+      callEl.innerHTML = callEl.innerHTML.replace(/\.(\s*)$/, '<span class="mf-call-dot">.</span>$1');
+      var dotEl = callEl.querySelector('.mf-call-dot');
+      if(dotEl){
+        var tuckDot = function(){
+          dotEl.style.display = 'inline-block';
+          dotEl.style.transform = 'none';
+          dotEl.style.marginRight = '0';
+          var w = dotEl.getBoundingClientRect().width;
+          if(w){
+            dotEl.style.transform = 'translateX(-' + w + 'px)';
+            dotEl.style.marginRight = '-' + w + 'px';
+          }
+        };
+        if(document.fonts && document.fonts.ready){ document.fonts.ready.then(tuckDot); } else { tuckDot(); }
+        window.addEventListener('load', tuckDot);
+        window.addEventListener('resize', function(){ clearTimeout(dotEl._rT); dotEl._rT = setTimeout(tuckDot, 150); }, { passive: true });
+      }
+    }
+
     function runSequence(){
       if(started) return;
       started = true;
