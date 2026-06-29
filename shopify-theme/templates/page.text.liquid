@@ -1,0 +1,55 @@
+<!-- TEXT PAGE (header + body) — for AccelPay, Privacy, Terms, etc. -->
+<style>
+  /* Make the fixed nav readable on this light page (it defaults to the dark-hero
+     transparent style). */
+  nav, nav.nav-scrolled, nav.nav-on-hero{
+    mix-blend-mode:normal!important;
+    background:rgba(243,230,209,.55)!important;
+    backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+    border-bottom:1px solid rgba(26,23,22,.12)!important;
+  }
+  nav .nav-wordmark, nav ul a{color:var(--ink,#1a1716)!important}
+  nav .nav-cart{border-color:rgba(26,23,22,.35)!important}
+  nav img.nav-icon{filter:brightness(0)!important}
+  .nav-hamburger span{background:var(--ink,#1a1716)!important}
+
+  .page-text{
+    position: relative; z-index: 1;   /* sit above the fixed #bg-overlay */
+    background: var(--cream, #F3E6D1);
+    color: var(--ink, #1a1716);
+    min-height: 70vh;
+    padding: 9rem 1.5rem 6rem;
+  }
+  .page-text-inner{ max-width: 760px; margin: 0 auto; }
+  .pt-title{
+    font-family: 'Pacifico', serif; text-transform: uppercase;
+    font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.02; margin: 0 0 2rem;
+  }
+  .page-prose{
+    font-family: "metallophile-sp8", sans-serif;
+    font-size: 1.05rem; line-height: 1.8; color: var(--ink, #1a1716);
+  }
+  .page-prose h2, .page-prose h3{
+    font-family: 'Pacifico', serif; text-transform: uppercase;
+    line-height: 1.05; margin: 2.2rem 0 .9rem;
+  }
+  .page-prose h2{ font-size: clamp(1.5rem, 3vw, 2rem); }
+  .page-prose h3{ font-size: clamp(1.2rem, 2.4vw, 1.5rem); }
+  .page-prose p{ margin: 0 0 1.2em; }
+  .page-prose a{ color: var(--rust, #7C3A09); text-decoration: underline; }
+  .page-prose a:hover{ color: var(--ink, #1a1716); }
+  .page-prose ul, .page-prose ol{ padding-left: 1.4em; margin: 0 0 1.2em; }
+  .page-prose li{ margin-bottom: .45em; }
+  .page-prose strong, .page-prose b{ color: var(--ink, #1a1716); }
+  .page-prose hr{ border: 0; border-top: 1px solid rgba(26,23,22,.16); margin: 2rem 0; }
+  .page-prose img{ max-width: 100%; height: auto; border-radius: 8px; }
+</style>
+
+<div class="page-text">
+  <div class="page-text-inner">
+    <h1 class="pt-title">{{ page.title | escape }}</h1>
+    <div class="page-prose rte">
+      {{ page.content }}
+    </div>
+  </div>
+</div>
