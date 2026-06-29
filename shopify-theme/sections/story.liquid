@@ -9,6 +9,8 @@
 {%- if section.settings.body_font == 'display' -%}{%- assign f_body = "'Pacifico', serif" -%}{%- elsif section.settings.body_font == 'sans' -%}{%- assign f_body = '-apple-system, "Helvetica Neue", Arial, sans-serif' -%}{%- endif -%}
 {%- assign f_quote = '"metallophile-sp8", sans-serif' -%}
 {%- if section.settings.quote_font == 'display' -%}{%- assign f_quote = "'Pacifico', serif" -%}{%- elsif section.settings.quote_font == 'sans' -%}{%- assign f_quote = '-apple-system, "Helvetica Neue", Arial, sans-serif' -%}{%- endif -%}
+{%- assign quote_style = 'normal' -%}
+{%- if section.settings.quote_italic -%}{%- assign quote_style = 'italic' -%}{%- endif -%}
 
 <section class="brand-story brand-story--solo reveal-section" id="story" data-nav="light" data-bg="bg-cream"
   data-overlay="{{ section.settings.overlay_color | default: '#9C8769' }}">
@@ -37,7 +39,7 @@
           <div class="bss-figure bss-figure--ph reveal"><span class="ph-label">📷 Founders — candid, Oaxaca</span></div>
         {%- endif -%}
         {%- if section.settings.quote != blank -%}
-          <blockquote class="bss-quote reveal" style="font-family:{{ f_quote }};font-size:clamp(1rem,1.9vw,{{ section.settings.quote_size }}rem)">{{ section.settings.quote | escape | replace: '//', '<br>' }}</blockquote>
+          <blockquote class="bss-quote reveal" style="font-family:{{ f_quote }};font-size:clamp(1rem,1.9vw,{{ section.settings.quote_size }}rem);font-style:{{ quote_style }}">{{ section.settings.quote | escape | replace: '//', '<br>' }}</blockquote>
         {%- endif -%}
       </div>
 
@@ -96,7 +98,6 @@
 
   #story .bss-quote{
     margin: 1.6rem 0 0;
-    font-style: italic;
     line-height: 1.35;
     color: var(--rust, #7C3A09);
     border: 0;
@@ -109,8 +110,8 @@
   #story .bss-body p{ margin: 0 0 1.5em; }
   #story .bss-body p:first-child{ font-size: 1.18em; line-height: 1.55; }
   #story .bss-body p:first-child:first-letter{
-    float: left; font-size: 3.4em; line-height: .82; padding: .04em .12em 0 0;
-    color: var(--rust, #7C3A09); font-weight: 600;
+    float: left; font-family: 'Pacifico', serif; font-size: 3.4em; line-height: .82; padding: .04em .12em 0 0;
+    color: var(--rust, #7C3A09); font-weight: 400;
   }
   #story .bss-body p:last-child{ margin-bottom: 0; }
 
@@ -169,6 +170,7 @@
     { "type": "text", "id": "quote", "label": "Pull quote (optional)", "default": "\"The agave gives you everything. Your job is to not get in the way.\"" },
     { "type": "select", "id": "quote_font", "label": "Quote font", "options": [ { "value": "metallophile", "label": "Metallophile (brand sans)" }, { "value": "display", "label": "Pacifico (display)" }, { "value": "sans", "label": "Sans (system)" } ], "default": "metallophile" },
     { "type": "range", "id": "quote_size", "label": "Quote size", "min": 1, "max": 4, "step": 0.1, "unit": "rem", "default": 1.4 },
+    { "type": "checkbox", "id": "quote_italic", "label": "Italicize quote", "default": false },
 
     { "type": "header", "content": "Image" },
     { "type": "image_picker", "id": "story_image", "label": "Image — founders, candid (1200×1500 portrait works best)" },
