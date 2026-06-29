@@ -43,6 +43,25 @@
   </div>
 </section>
 
+{% style %}
+  /* Mobile: shrink the award badge and tuck it into the top-right corner so it
+     doesn't crowd the central logo. */
+  @media (max-width: 680px){
+    .hero-badge{
+      top: clamp(4.5rem, 9vh, 6.5rem);
+      right: .9rem;
+      min-width: 70px;
+      max-width: 106px;
+      padding: .75rem;
+    }
+    .hero-badge-top,
+    .hero-badge-body{ font-size: .55rem; letter-spacing: .12em; }
+    .hero-badge-medal{ font-size: .82rem; margin: .2rem 0 .28rem; }
+    .hero-badge-year{ font-size: .58rem; letter-spacing: .12em; margin-bottom: .2rem; }
+    .hero-badge-body{ max-width: 14ch; }
+  }
+{% endstyle %}
+
 {%- if section.blocks.size > 1 -%}
 <script>
 (function(){
