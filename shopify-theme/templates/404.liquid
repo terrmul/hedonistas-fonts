@@ -1,0 +1,61 @@
+<!-- 404 — PAGE NOT FOUND -->
+<style>
+  /* Make the fixed nav readable on this light page. */
+  nav, nav.nav-scrolled, nav.nav-on-hero{
+    mix-blend-mode:normal!important;
+    background:rgba(243,230,209,.55)!important;
+    backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+    border-bottom:1px solid rgba(26,23,22,.12)!important;
+  }
+  nav .nav-wordmark, nav ul a{color:var(--ink,#1a1716)!important}
+  nav .nav-cart{border-color:rgba(26,23,22,.35)!important}
+  nav img.nav-icon{filter:brightness(0)!important}
+  .nav-hamburger span{background:var(--ink,#1a1716)!important}
+
+  .nf-page{
+    position: relative; z-index: 1;   /* above the fixed #bg-overlay */
+    background: var(--cream, #F3E6D1);
+    color: var(--ink, #1a1716);
+    min-height: 82vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 9rem 1.5rem 6rem; text-align: center;
+  }
+  .nf-inner{ max-width: 600px; }
+  .nf-code{
+    font-family: 'Pacifico', serif; line-height: .9;
+    font-size: clamp(5rem, 22vw, 12rem); color: var(--rust, #7C3A09); margin: 0;
+  }
+  .nf-title{
+    font-family: 'Pacifico', serif; text-transform: uppercase;
+    font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1.05; margin: .5rem 0 1.2rem;
+  }
+  .nf-text{
+    font-family: "metallophile-sp8", sans-serif; font-size: 1.05rem; line-height: 1.7;
+    color: var(--smoke, #4F4E4F); margin: 0 auto 2.4rem; max-width: 40ch;
+  }
+  .nf-actions{ display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .nf-btn{
+    text-decoration: none; cursor: pointer;
+    font-family: "metallophile-sp8", sans-serif; font-size: .75rem; letter-spacing: .22em;
+    text-transform: uppercase; font-weight: 500;
+    border-radius: 100px; padding: 1rem 2.4rem; border: 1px solid var(--ink, #1a1716);
+    transition: background .25s, color .25s, transform .2s;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .nf-btn--dark{ background: var(--ink, #1a1716); color: var(--cream, #F3E6D1); }
+  .nf-btn--dark:hover{ background: var(--copper, #C65602); border-color: var(--copper, #C65602); transform: translateY(-1px); }
+  .nf-btn--ghost{ background: transparent; color: var(--ink, #1a1716); }
+  .nf-btn--ghost:hover{ background: rgba(26,23,22,.06); }
+</style>
+
+<div class="nf-page">
+  <div class="nf-inner">
+    <p class="nf-code">404</p>
+    <h1 class="nf-title">Lost in the agave</h1>
+    <p class="nf-text">The page you're looking for wandered off into the highlands. Let's get you back to something worth sipping.</p>
+    <div class="nf-actions">
+      <a class="nf-btn nf-btn--dark" href="/#mezcals">Shop the Collection</a>
+      <a class="nf-btn nf-btn--ghost" href="/">Back to Home</a>
+    </div>
+  </div>
+</div>
