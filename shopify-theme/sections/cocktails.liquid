@@ -53,6 +53,16 @@
   </div>
 </section>
 
+{% style %}
+  /* Mobile: stack the header so the View-All button and filter pills sit inside
+     the section padding instead of overflowing off the right edge. */
+  @media (max-width: 820px){
+    #cocktails .ck-header{ flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+    #cocktails .ck-header-right{ width: 100%; align-items: flex-start; }
+    #cocktails .ck-filters{ justify-content: flex-start; width: 100%; }
+  }
+{% endstyle %}
+
 {% schema %}
 {
   "name": "Cocktails",
