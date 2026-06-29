@@ -1,14 +1,14 @@
 <!-- BRAND STORY -->
 {%- assign f_eyebrow = '"metallophile-sp8", sans-serif' -%}
-{%- if section.settings.eyebrow_font == 'display' -%}{%- assign f_eyebrow = "'Pacifico', serif" -%}{%- endif -%}
+{%- if section.settings.eyebrow_font == 'display' -%}{%- assign f_eyebrow = "'Pacifico', serif" -%}{%- elsif section.settings.eyebrow_font == 'sans' -%}{%- assign f_eyebrow = '-apple-system, "Helvetica Neue", Arial, sans-serif' -%}{%- endif -%}
 {%- assign f_heading = "'Pacifico', serif" -%}
-{%- if section.settings.heading_font == 'sans' -%}{%- assign f_heading = '"metallophile-sp8", sans-serif' -%}{%- endif -%}
+{%- if section.settings.heading_font == 'metallophile' -%}{%- assign f_heading = '"metallophile-sp8", sans-serif' -%}{%- elsif section.settings.heading_font == 'sans' -%}{%- assign f_heading = '-apple-system, "Helvetica Neue", Arial, sans-serif' -%}{%- endif -%}
 {%- assign f_intro = '"metallophile-sp8", sans-serif' -%}
-{%- if section.settings.intro_font == 'display' -%}{%- assign f_intro = "'Pacifico', serif" -%}{%- endif -%}
+{%- if section.settings.intro_font == 'display' -%}{%- assign f_intro = "'Pacifico', serif" -%}{%- elsif section.settings.intro_font == 'sans' -%}{%- assign f_intro = '-apple-system, "Helvetica Neue", Arial, sans-serif' -%}{%- endif -%}
 {%- assign f_body = '"metallophile-sp8", sans-serif' -%}
-{%- if section.settings.body_font == 'display' -%}{%- assign f_body = "'Pacifico', serif" -%}{%- endif -%}
+{%- if section.settings.body_font == 'display' -%}{%- assign f_body = "'Pacifico', serif" -%}{%- elsif section.settings.body_font == 'sans' -%}{%- assign f_body = '-apple-system, "Helvetica Neue", Arial, sans-serif' -%}{%- endif -%}
 {%- assign f_quote = '"metallophile-sp8", sans-serif' -%}
-{%- if section.settings.quote_font == 'display' -%}{%- assign f_quote = "'Pacifico', serif" -%}{%- endif -%}
+{%- if section.settings.quote_font == 'display' -%}{%- assign f_quote = "'Pacifico', serif" -%}{%- elsif section.settings.quote_font == 'sans' -%}{%- assign f_quote = '-apple-system, "Helvetica Neue", Arial, sans-serif' -%}{%- endif -%}
 
 <section class="brand-story brand-story--solo reveal-section" id="story" data-nav="light" data-bg="bg-cream"
   data-overlay="{{ section.settings.overlay_color | default: '#9C8769' }}">
@@ -147,27 +147,27 @@
 
     { "type": "header", "content": "Eyebrow (use // for a line break)" },
     { "type": "text", "id": "story_label", "label": "Eyebrow label", "default": "Nuestra Historia" },
-    { "type": "select", "id": "eyebrow_font", "label": "Eyebrow font", "options": [ { "value": "sans", "label": "Sans (body)" }, { "value": "display", "label": "Display (Pacifico)" } ], "default": "sans" },
+    { "type": "select", "id": "eyebrow_font", "label": "Eyebrow font", "options": [ { "value": "metallophile", "label": "Metallophile (brand sans)" }, { "value": "display", "label": "Pacifico (display)" }, { "value": "sans", "label": "Sans (system)" } ], "default": "metallophile" },
     { "type": "range", "id": "eyebrow_size", "label": "Eyebrow size", "min": 0.6, "max": 2, "step": 0.1, "unit": "rem", "default": 0.8 },
 
     { "type": "header", "content": "Heading (use // for a line break)" },
     { "type": "text", "id": "story_heading", "label": "Heading", "default": "Born from Obsession." },
-    { "type": "select", "id": "heading_font", "label": "Heading font", "options": [ { "value": "display", "label": "Display (Pacifico)" }, { "value": "sans", "label": "Sans (body)" } ], "default": "display" },
+    { "type": "select", "id": "heading_font", "label": "Heading font", "options": [ { "value": "display", "label": "Pacifico (display)" }, { "value": "metallophile", "label": "Metallophile (brand sans)" }, { "value": "sans", "label": "Sans (system)" } ], "default": "display" },
     { "type": "range", "id": "heading_size", "label": "Heading size", "min": 1.5, "max": 7, "step": 0.5, "unit": "rem", "default": 4.5 },
 
     { "type": "header", "content": "Intro line (use // for a line break)" },
     { "type": "text", "id": "intro", "label": "Intro line (optional)" },
-    { "type": "select", "id": "intro_font", "label": "Intro font", "options": [ { "value": "sans", "label": "Sans (body)" }, { "value": "display", "label": "Display (Pacifico)" } ], "default": "sans" },
+    { "type": "select", "id": "intro_font", "label": "Intro font", "options": [ { "value": "metallophile", "label": "Metallophile (brand sans)" }, { "value": "display", "label": "Pacifico (display)" }, { "value": "sans", "label": "Sans (system)" } ], "default": "metallophile" },
     { "type": "range", "id": "intro_size", "label": "Intro size", "min": 0.9, "max": 3, "step": 0.1, "unit": "rem", "default": 1.4 },
 
     { "type": "header", "content": "Story copy (use // for a line break)" },
     { "type": "richtext", "id": "story_body", "label": "Story copy", "default": "<p>Hedonistas Mezcal began with two friends and a stubborn belief — that the finest mezcal in the world deserves to be shared. Not hoarded. Not gatekept. Shared.</p><p>Founded in the highlands of Oaxaca, we partnered with maestros mezcaleros whose families have cultivated and cooked agave the same way for generations. No shortcuts. No industrial process. Just fire, stone, time, and copper — and a friendship that wouldn't settle for less.</p>" },
-    { "type": "select", "id": "body_font", "label": "Body font", "options": [ { "value": "sans", "label": "Sans (body)" }, { "value": "display", "label": "Display (Pacifico)" } ], "default": "sans" },
+    { "type": "select", "id": "body_font", "label": "Body font", "options": [ { "value": "metallophile", "label": "Metallophile (brand sans)" }, { "value": "display", "label": "Pacifico (display)" }, { "value": "sans", "label": "Sans (system)" } ], "default": "metallophile" },
     { "type": "range", "id": "body_size", "label": "Body size", "min": 0.9, "max": 2, "step": 0.1, "unit": "rem", "default": 1.3 },
 
     { "type": "header", "content": "Pull quote (use // for a line break)" },
     { "type": "text", "id": "quote", "label": "Pull quote (optional)", "default": "\"The agave gives you everything. Your job is to not get in the way.\"" },
-    { "type": "select", "id": "quote_font", "label": "Quote font", "options": [ { "value": "sans", "label": "Sans (body)" }, { "value": "display", "label": "Display (Pacifico)" } ], "default": "sans" },
+    { "type": "select", "id": "quote_font", "label": "Quote font", "options": [ { "value": "metallophile", "label": "Metallophile (brand sans)" }, { "value": "display", "label": "Pacifico (display)" }, { "value": "sans", "label": "Sans (system)" } ], "default": "metallophile" },
     { "type": "range", "id": "quote_size", "label": "Quote size", "min": 1, "max": 4, "step": 0.1, "unit": "rem", "default": 1.4 },
 
     { "type": "header", "content": "Image" },
