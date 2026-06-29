@@ -25,12 +25,16 @@
 </div>
 
 {% style %}
-  /* Mobile + landscape phones: stack each chapter vertically — image on top,
-     then number / title / subtitle / body — instead of the desktop split. */
+  /* Mobile + landscape phones: turn off the desktop sticky-scroll mechanic
+     (100vh panels pulled up over the background word) and lay the chapters out
+     as a simple stacked list — image on top, then number / title / subtitle / body. */
   @media (max-width: 1024px){
+    #craft .sticky-word{ display: none !important; }
+    #craft .sticky-panels{ margin-top: 0 !important; }
     #craft .s-panel{
+      min-height: 0 !important;
       display: block !important;
-      padding: 7rem 1.5rem 5rem !important;
+      padding: 3.5rem 1.5rem !important;
     }
     #craft .s-panel-content{
       display: flex !important;
