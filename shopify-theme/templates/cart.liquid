@@ -14,6 +14,8 @@
   .nav-hamburger span{background:var(--ink,#1a1716)!important}
 
   .cart-page{
+    position: relative;   /* sit ABOVE the fixed #bg-overlay (which otherwise covers this) */
+    z-index: 1;
     background: var(--cream, #F3E6D1);
     color: var(--ink, #1a1716);
     min-height: 70vh;
