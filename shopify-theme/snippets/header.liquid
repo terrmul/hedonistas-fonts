@@ -81,3 +81,61 @@
   <a href="/pages/story">Story</a>
   <a href="/cart">Cart ({{ cart.item_count }})</a>
 </nav>
+
+<script>
+/* AJAX add-to-cart: add in the background and update the cart count instead of
+   navigating to /cart. Works for the bottle "Add to Cart" links (/cart/add?id=)
+   and the product-page <form action="/cart/add">. */
+(function(){
+  function updateCount(n){
+    document.querySelectorAll('.nav-cart, #nav-drawer a[href$="/cart"]').forEach(function(a){
+      a.textContent = 'Cart (' + n + ')';
+    });
+  }
+  function flash(el){
+    if(!el) return;
+    if(el.dataset.busy) return;
+    el.dataset.busy = '1';
+    var orig = el.dataset.orig || el.textContent;
+    el.dataset.orig = orig;
+    el.textContent = 'Added ✓';
+    setTimeout(function(){ el.textContent = el.dataset.orig; delete el.dataset.busy; }, 1600);
+  }
+  function add(id, qty, btn){
+    if(!id){ return false; }
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: id, quantity: qty || 1 })
+    })
+    .then(function(r){ if(!r.ok){ throw new Error('add failed'); } return r.json(); })
+    .then(function(){ return fetch('/cart.js', { headers: { 'Accept': 'application/json' } }); })
+    .then(function(r){ return r.json(); })
+    .then(function(cart){ updateCount(cart.item_count); flash(btn); })
+    .catch(function(){
+      /* fall back to a normal navigation if AJAX is blocked */
+      window.location.href = '/cart/add?id=' + id + '&return_to=/cart';
+    });
+    return true;
+  }
+
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href*="/cart/add"]');
+    if(!a) return;
+    var m = a.getAttribute('href').match(/[?&]id=\s*(\d+)/);
+    if(!m) return;            /* if no variant id, let the link behave normally */
+    e.preventDefault();
+    add(m[1], 1, a);
+  });
+
+  document.addEventListener('submit', function(e){
+    var f = e.target;
+    if(!f || !f.getAttribute('action') || f.getAttribute('action').indexOf('/cart/add') === -1) return;
+    var idEl = f.querySelector('[name="id"]');
+    var id = idEl ? idEl.value : null;
+    if(!id) return;
+    e.preventDefault();
+    add(id, 1, f.querySelector('[type="submit"], button'));
+  });
+})();
+</script>
