@@ -53,6 +53,45 @@
   @media(min-width:1101px){
     #nav-drawer{display:none !important}
   }
+
+  /* Slide-out cart drawer */
+  #cart-drawer-overlay{
+    position:fixed;inset:0;background:rgba(26,23,22,.45);z-index:10000;
+    opacity:0;visibility:hidden;transition:opacity .35s ease, visibility .35s;
+  }
+  #cart-drawer-overlay.open{opacity:1;visibility:visible;}
+  #cart-drawer{
+    position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);z-index:10001;
+    background:var(--cream,#F3E6D1);color:var(--ink,#1a1716);
+    display:flex;flex-direction:column;
+    transform:translateX(100%);transition:transform .38s cubic-bezier(.4,0,.2,1);
+    box-shadow:-12px 0 40px -10px rgba(0,0,0,.4);
+  }
+  #cart-drawer.open{transform:none;}
+  #cart-drawer .cd-head{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 1.5rem 1rem;border-bottom:1px solid rgba(26,23,22,.14);}
+  #cart-drawer .cd-title{font-family:'Pacifico',serif;text-transform:uppercase;font-size:1.6rem;line-height:1;}
+  #cart-drawer .cd-close{background:none;border:0;font-size:1.9rem;line-height:1;cursor:pointer;color:var(--ink,#1a1716);padding:0 .2rem;}
+  #cart-drawer .cd-body{flex:1;overflow-y:auto;padding:.5rem 1.5rem;}
+  #cart-drawer .cd-empty{color:var(--smoke,#4F4E4F);padding:2.5rem 0;text-align:center;}
+  #cart-drawer .cd-item{display:grid;grid-template-columns:64px 1fr auto;gap:.9rem;padding:1.1rem 0;border-bottom:1px solid rgba(26,23,22,.1);}
+  #cart-drawer .cd-item-img img{width:64px;height:auto;border-radius:6px;display:block;}
+  #cart-drawer .cd-item-name{font-family:'Pacifico',serif;text-transform:uppercase;font-size:1.05rem;line-height:1.05;color:var(--ink,#1a1716);text-decoration:none;}
+  #cart-drawer .cd-var{font-size:.75rem;color:var(--smoke,#4F4E4F);margin-top:.15rem;}
+  #cart-drawer .cd-qty{display:inline-flex;align-items:center;gap:.55rem;margin-top:.6rem;border:1px solid rgba(26,23,22,.25);border-radius:100px;padding:.15rem .55rem;}
+  #cart-drawer .cd-qty button{background:none;border:0;cursor:pointer;font-size:1.05rem;line-height:1;color:var(--ink,#1a1716);padding:.1rem .25rem;}
+  #cart-drawer .cd-qval{min-width:1.4ch;text-align:center;font-family:"metallophile-sp8",sans-serif;font-size:.85rem;}
+  #cart-drawer .cd-item-right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:.6rem;}
+  #cart-drawer .cd-item-price{font-family:'Pacifico',serif;font-size:1.05rem;white-space:nowrap;}
+  #cart-drawer .cd-remove{background:none;border:0;cursor:pointer;font-family:"metallophile-sp8",sans-serif;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust,#7C3A09);text-decoration:underline;padding:0;}
+  #cart-drawer .cd-remove:hover{color:var(--ink,#1a1716);}
+  #cart-drawer .cd-foot{padding:1.25rem 1.5rem 1.75rem;border-top:1px solid rgba(26,23,22,.14);}
+  #cart-drawer .cd-subtotal{display:flex;justify-content:space-between;align-items:baseline;font-family:'Pacifico',serif;text-transform:uppercase;font-size:1.4rem;}
+  #cart-drawer .cd-note{font-size:.75rem;color:var(--smoke,#4F4E4F);margin:.4rem 0 1rem;}
+  #cart-drawer .cd-checkout{display:flex;align-items:center;justify-content:center;width:100%;box-sizing:border-box;text-decoration:none;background:var(--ink,#1a1716);color:var(--cream,#F3E6D1);border-radius:100px;padding:1rem;font-family:"metallophile-sp8",sans-serif;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;transition:background .25s;}
+  #cart-drawer .cd-checkout:hover{background:var(--copper,#C65602);}
+  #cart-drawer .cd-viewcart{display:block;text-align:center;margin-top:.9rem;font-family:"metallophile-sp8",sans-serif;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rust,#7C3A09);text-decoration:none;}
+  #cart-drawer .cd-viewcart:hover{text-decoration:underline;}
+  body.cart-open{overflow:hidden;}
 </style>
 <nav id="mainnav" aria-label="Primary">
   <a class="nav-logo" href="/">
@@ -82,52 +121,126 @@
   <a href="/cart">Cart ({{ cart.item_count }})</a>
 </nav>
 
+<!-- Slide-out cart drawer -->
+<div id="cart-drawer-overlay" hidden></div>
+<aside id="cart-drawer" aria-label="Shopping cart" aria-hidden="true">
+  <div class="cd-head">
+    <span class="cd-title">Your Cart</span>
+    <button class="cd-close" id="cd-close" type="button" aria-label="Close cart">&times;</button>
+  </div>
+  <div class="cd-body" id="cd-body"></div>
+  <div class="cd-foot" id="cd-foot" hidden>
+    <div class="cd-subtotal"><span>Subtotal</span><span id="cd-subtotal-val"></span></div>
+    <p class="cd-note">Taxes &amp; shipping calculated at checkout.</p>
+    <a class="cd-checkout" href="/checkout">Checkout</a>
+    <a class="cd-viewcart" href="/cart">View full cart</a>
+  </div>
+</aside>
+
 <script>
-/* AJAX add-to-cart: add in the background and update the cart count instead of
-   navigating to /cart. Works for the bottle "Add to Cart" links (/cart/add?id=)
-   and the product-page <form action="/cart/add">. */
 (function(){
+  var overlay = document.getElementById('cart-drawer-overlay');
+  var drawer  = document.getElementById('cart-drawer');
+  var body    = document.getElementById('cd-body');
+  var foot    = document.getElementById('cd-foot');
+  if(!drawer) return;
+
+  function esc(s){ return (s == null ? '' : String(s)).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function money(cents, cur){
+    try { return new Intl.NumberFormat(undefined, { style:'currency', currency: cur || 'USD' }).format(cents/100); }
+    catch(e){ return '$' + (cents/100).toFixed(2); }
+  }
+  function sized(url, w){
+    if(!url) return '';
+    return url + (url.indexOf('?') > -1 ? '&' : '?') + 'width=' + w;
+  }
   function updateCount(n){
-    document.querySelectorAll('.nav-cart, #nav-drawer a[href$="/cart"]').forEach(function(a){
+    document.querySelectorAll('.nav-cart, #nav-drawer a[href="/cart"]').forEach(function(a){
       a.textContent = 'Cart (' + n + ')';
     });
   }
-  function flash(el){
-    if(!el) return;
-    if(el.dataset.busy) return;
-    el.dataset.busy = '1';
-    var orig = el.dataset.orig || el.textContent;
-    el.dataset.orig = orig;
-    el.textContent = 'Added ✓';
-    setTimeout(function(){ el.textContent = el.dataset.orig; delete el.dataset.busy; }, 1600);
+  function render(cart){
+    updateCount(cart.item_count);
+    if(!cart.items || !cart.items.length){
+      body.innerHTML = '<p class="cd-empty">Your cart is empty.</p>';
+      foot.hidden = true;
+      return;
+    }
+    foot.hidden = false;
+    body.innerHTML = cart.items.map(function(it, i){
+      var line = i + 1;
+      var img = it.image ? '<img src="' + esc(sized(it.image, 160)) + '" alt="" loading="lazy">' : '';
+      var variant = (it.variant_title && it.variant_title.indexOf('Default') < 0)
+        ? '<div class="cd-var">' + esc(it.variant_title) + '</div>' : '';
+      return '<div class="cd-item" data-line="' + line + '">' +
+        '<div class="cd-item-img"><a href="' + esc(it.url) + '">' + img + '</a></div>' +
+        '<div class="cd-item-info">' +
+          '<a class="cd-item-name" href="' + esc(it.url) + '">' + esc(it.product_title) + '</a>' + variant +
+          '<div class="cd-qty">' +
+            '<button type="button" class="cd-dec" aria-label="Decrease quantity">&minus;</button>' +
+            '<span class="cd-qval">' + it.quantity + '</span>' +
+            '<button type="button" class="cd-inc" aria-label="Increase quantity">+</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cd-item-right">' +
+          '<div class="cd-item-price">' + money(it.final_line_price, cart.currency) + '</div>' +
+          '<button type="button" class="cd-remove">Remove</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+    document.getElementById('cd-subtotal-val').textContent = money(cart.total_price, cart.currency);
   }
-  function add(id, qty, btn){
-    if(!id){ return false; }
+  function getCart(cb){
+    fetch('/cart.js', { headers:{ 'Accept':'application/json' } })
+      .then(function(r){ return r.json(); })
+      .then(function(cart){ render(cart); if(cb) cb(cart); })
+      .catch(function(){});
+  }
+  function change(line, qty){
+    fetch('/cart/change.js', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify({ line: line, quantity: qty })
+    }).then(function(r){ return r.json(); }).then(render).catch(function(){});
+  }
+  function open(){ overlay.classList.add('open'); drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); document.body.classList.add('cart-open'); }
+  function close(){ overlay.classList.remove('open'); drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); document.body.classList.remove('cart-open'); }
+
+  function add(id){
+    if(!id) return;
     fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ id: id, quantity: qty || 1 })
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify({ id: id, quantity: 1 })
     })
     .then(function(r){ if(!r.ok){ throw new Error('add failed'); } return r.json(); })
-    .then(function(){ return fetch('/cart.js', { headers: { 'Accept': 'application/json' } }); })
-    .then(function(r){ return r.json(); })
-    .then(function(cart){ updateCount(cart.item_count); flash(btn); })
-    .catch(function(){
-      /* fall back to a normal navigation if AJAX is blocked */
-      window.location.href = '/cart/add?id=' + id + '&return_to=/cart';
-    });
-    return true;
+    .then(function(){ getCart(function(){ open(); }); })
+    .catch(function(){ window.location.href = '/cart/add?id=' + id + '&return_to=/cart'; });
   }
 
+  /* open/close interactions */
+  overlay.addEventListener('click', close);
+  document.getElementById('cd-close').addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+
+  /* clicks: add-to-cart links, and cart links (open drawer instead of /cart) */
   document.addEventListener('click', function(e){
-    var a = e.target.closest && e.target.closest('a[href*="/cart/add"]');
-    if(!a) return;
-    var m = a.getAttribute('href').match(/[?&]id=\s*(\d+)/);
-    if(!m) return;            /* if no variant id, let the link behave normally */
-    e.preventDefault();
-    add(m[1], 1, a);
+    var addLink = e.target.closest && e.target.closest('a[href*="/cart/add"]');
+    if(addLink){
+      var m = addLink.getAttribute('href').match(/[?&]id=\s*(\d+)/);
+      if(m){ e.preventDefault(); add(m[1]); return; }
+    }
+    var cartLink = e.target.closest && e.target.closest('a[href="/cart"]');
+    if(cartLink && !cartLink.classList.contains('cd-viewcart')){
+      e.preventDefault();
+      var ham = document.getElementById('nav-hamburger');
+      if(document.body.classList.contains('nav-open') && ham) ham.click();
+      getCart(function(){ open(); });
+    }
   });
 
+  /* product-page add form */
   document.addEventListener('submit', function(e){
     var f = e.target;
     if(!f || !f.getAttribute('action') || f.getAttribute('action').indexOf('/cart/add') === -1) return;
@@ -135,7 +248,19 @@
     var id = idEl ? idEl.value : null;
     if(!id) return;
     e.preventDefault();
-    add(id, 1, f.querySelector('[type="submit"], button'));
+    add(id);
+  });
+
+  /* qty steppers + remove inside the drawer */
+  body.addEventListener('click', function(e){
+    var row = e.target.closest('.cd-item');
+    if(!row) return;
+    var line = +row.getAttribute('data-line');
+    var qEl = row.querySelector('.cd-qval');
+    var q = qEl ? +qEl.textContent : 1;
+    if(e.target.closest('.cd-inc')) change(line, q + 1);
+    else if(e.target.closest('.cd-dec')) change(line, Math.max(0, q - 1));
+    else if(e.target.closest('.cd-remove')) change(line, 0);
   });
 })();
 </script>
