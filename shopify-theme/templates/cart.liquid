@@ -1,5 +1,18 @@
 <!-- CART -->
 <style>
+  /* The fixed nav is built for the dark hero (transparent + blend mode), which
+     is invisible on this light page — force its readable/frosted state. */
+  nav, nav.nav-scrolled, nav.nav-on-hero{
+    mix-blend-mode:normal!important;
+    background:rgba(243,230,209,.55)!important;
+    backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+    border-bottom:1px solid rgba(26,23,22,.12)!important;
+  }
+  nav .nav-wordmark, nav ul a{color:var(--ink,#1a1716)!important}
+  nav .nav-cart{border-color:rgba(26,23,22,.35)!important}
+  nav img.nav-icon{filter:brightness(0)!important}
+  .nav-hamburger span{background:var(--ink,#1a1716)!important}
+
   .cart-page{
     background: var(--cream, #F3E6D1);
     color: var(--ink, #1a1716);
@@ -57,7 +70,7 @@
   .cart-checkout:hover{ background: var(--copper, #C65602); border-color: var(--copper, #C65602); transform: translateY(-1px); }
   .cart-continue{ margin-top: 1.6rem; border: 0; padding: 0; letter-spacing: .18em; color: var(--rust, #7C3A09); }
   .cart-continue:hover{ text-decoration: underline; }
-  .cart-empty{ font-size: 1.1rem; color: var(--smoke, #4F4E4F); margin: 0 0 1.5rem; }
+  .cart-empty{ font-size: 1.2rem; color: var(--smoke, #4F4E4F); margin: 0 0 1.8rem; }
 
   @media (max-width: 600px){
     .cart-line{ grid-template-columns: 64px 1fr auto; grid-template-areas: "img info total" "img qty total"; row-gap: .6rem; }
