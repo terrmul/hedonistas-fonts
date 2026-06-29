@@ -14,7 +14,7 @@
 
   .nf-page{
     position: relative; z-index: 1;   /* above the fixed #bg-overlay */
-    background: var(--cream, #F3E6D1);
+    background: #9C8769;
     color: var(--ink, #1a1716);
     min-height: 82vh; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
@@ -25,7 +25,7 @@
   .nf-skull{
     width: clamp(74px, 12vw, 118px); height: auto; display: block; margin: 0 auto 1.2rem;
     cursor: pointer; user-select: none; -webkit-user-drag: none;
-    filter: drop-shadow(0 10px 16px rgba(26,23,22,.18));
+    filter: brightness(0) drop-shadow(0 10px 16px rgba(26,23,22,.18));
     animation: nf-bob 3.4s ease-in-out infinite;
     transition: transform .5s cubic-bezier(.2,.8,.25,1);
   }
@@ -42,7 +42,7 @@
   }
   .nf-text{
     font-family: "metallophile-sp8", sans-serif; font-size: 1.05rem; line-height: 1.7;
-    color: var(--smoke, #4F4E4F); margin: 0 auto 2.2rem; max-width: 42ch;
+    color: rgba(26,23,22,.72); margin: 0 auto 2.2rem; max-width: 42ch;
     min-height: 3.4em;
     transition: opacity .4s ease;
   }
@@ -60,11 +60,11 @@
   .nf-btn--dark{ background: var(--ink, #1a1716); color: var(--cream, #F3E6D1); }
   .nf-btn--dark:hover{ background: var(--copper, #C65602); border-color: var(--copper, #C65602); transform: translateY(-1px); }
   .nf-btn--ghost{ background: transparent; color: var(--ink, #1a1716); }
-  .nf-btn--ghost:hover{ background: rgba(26,23,22,.06); }
+  .nf-btn--ghost:hover{ background: rgba(26,23,22,.08); }
 
   .nf-hint{
     margin-top: 2rem; font-family: "metallophile-sp8", sans-serif;
-    font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(26,23,22,.4);
+    font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(26,23,22,.45);
   }
 
   /* floating background agave word */
@@ -74,7 +74,7 @@
   }
   .nf-ghost span{
     font-family: 'Pacifico', serif; text-transform: uppercase; white-space: nowrap;
-    font-size: clamp(8rem, 30vw, 26rem); color: rgba(124,58,9,.06); line-height: 1;
+    font-size: clamp(8rem, 30vw, 26rem); color: rgba(26,23,22,.07); line-height: 1;
   }
 
   @keyframes nf-bob{
