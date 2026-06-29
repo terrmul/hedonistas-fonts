@@ -129,12 +129,12 @@
           <div class="cart-actions">
             <button type="submit" name="checkout" class="cart-checkout">Checkout</button>
           </div>
-          <a class="cart-continue" href="{{ routes.all_products_collection_url | default: '/' }}">&larr; Continue shopping</a>
+          <a class="cart-continue" href="/#mezcals">&larr; Continue shopping</a>
         </div>
       </form>
     {%- else -%}
       <p class="cart-empty">Your cart is empty.</p>
-      <a class="cart-checkout" href="/">Continue shopping</a>
+      <a class="cart-checkout" href="/#mezcals">Continue shopping</a>
     {%- endif -%}
   </div>
 </div>
