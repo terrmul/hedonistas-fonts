@@ -29,7 +29,7 @@
   .cart-lines{ border-top: 1px solid rgba(26,23,22,.14); }
   .cart-line{
     display: grid;
-    grid-template-columns: 84px 1fr 92px auto;
+    grid-template-columns: 84px 1fr auto auto;
     gap: 1.2rem; align-items: center;
     padding: 1.5rem 0; border-bottom: 1px solid rgba(26,23,22,.14);
   }
@@ -44,20 +44,19 @@
     display: inline-block; margin-top: .5rem;
     font-family: "metallophile-sp8", sans-serif; font-size: .68rem; letter-spacing: .18em;
     text-transform: uppercase; color: var(--rust, #7C3A09); text-decoration: none;
+    background: none; border: 0; cursor: pointer; padding: 0;
   }
   .cart-line-remove:hover{ text-decoration: underline; }
-  .cart-line-qty{ display: flex; flex-direction: column; align-items: center; gap: .5rem; }
-  .cart-line-qty input{
-    width: 64px; height: 2.6rem; text-align: center;
-    border: 1px solid rgba(26,23,22,.3); border-radius: 6px; background: transparent;
-    font-family: "metallophile-sp8", sans-serif; font-size: 1rem; color: var(--ink, #1a1716);
+  .cart-line-qty{ display: flex; align-items: center; justify-content: center; }
+  .cart-stepper{
+    display: inline-flex; align-items: center; gap: .6rem;
+    border: 1px solid rgba(26,23,22,.25); border-radius: 100px; padding: .2rem .65rem;
   }
-  .cart-qty-update{
-    background: none; border: 0; cursor: pointer; padding: 0;
-    font-family: "metallophile-sp8", sans-serif; font-size: .62rem; letter-spacing: .16em;
-    text-transform: uppercase; color: var(--rust, #7C3A09); text-decoration: underline;
+  .cart-stepper button{
+    background: none; border: 0; cursor: pointer; padding: .1rem .35rem;
+    font-size: 1.15rem; line-height: 1; color: var(--ink, #1a1716);
   }
-  .cart-qty-update:hover{ color: var(--ink, #1a1716); }
+  .cart-qval{ min-width: 1.4ch; text-align: center; font-family: "metallophile-sp8", sans-serif; font-size: .95rem; }
   .cart-line-total{ font-family: 'Pacifico', serif; font-size: 1.2rem; text-align: right; white-space: nowrap; }
   .cart-foot{ margin-top: 2.5rem; }
   .cart-subtotal{
@@ -80,24 +79,23 @@
   .cart-empty{ font-size: 1.2rem; color: var(--smoke, #4F4E4F); margin: 0 0 1.8rem; }
 
   @media (max-width: 600px){
-    .cart-line{ grid-template-columns: 64px 1fr auto; grid-template-areas: "img info total" "img qty total"; row-gap: .6rem; }
+    .cart-line{ grid-template-columns: 64px 1fr auto; grid-template-areas: "img info total" "img qty total"; row-gap: .8rem; column-gap: 1rem; }
     .cart-line-img{ grid-area: img; align-self: start; }
     .cart-line-info{ grid-area: info; }
-    .cart-line-qty{ grid-area: qty; align-items: start; }
+    .cart-line-qty{ grid-area: qty; justify-content: start; }
     .cart-line-total{ grid-area: total; align-self: start; }
     .cart-line-img img{ width: 60px; }
   }
 </style>
 
 <div class="cart-page">
-  <div class="cart-inner">
-    <h1 class="cart-title">Your Cart</h1>
-
+  <div class="cart-inner" id="cart-inner">
     {%- if cart.item_count > 0 -%}
+      <h1 class="cart-title">Your Cart</h1>
       <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-form">
-        <div class="cart-lines">
+        <div class="cart-lines" id="cart-lines">
           {%- for item in cart.items -%}
-            <div class="cart-line">
+            <div class="cart-line" data-line="{{ forloop.index }}">
               <a class="cart-line-img" href="{{ item.url }}">
                 {%- if item.image -%}
                   <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy" decoding="async">
@@ -109,11 +107,14 @@
                   <div class="cart-line-variant">{{ item.variant.title | escape }}</div>
                 {%- endunless -%}
                 <div class="cart-line-price">{{ item.final_price | money }} each</div>
-                <a class="cart-line-remove" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0">Remove</a>
+                <a class="cart-line-remove" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" data-remove>Remove</a>
               </div>
               <div class="cart-line-qty">
-                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.product.title | escape }}">
-                <button type="submit" name="update" class="cart-qty-update">Update</button>
+                <div class="cart-stepper">
+                  <button type="button" class="cart-dec" aria-label="Decrease quantity">&minus;</button>
+                  <span class="cart-qval">{{ item.quantity }}</span>
+                  <button type="button" class="cart-inc" aria-label="Increase quantity">+</button>
+                </div>
               </div>
               <div class="cart-line-total">{{ item.final_line_price | money }}</div>
             </div>
@@ -123,7 +124,7 @@
         <div class="cart-foot">
           <div class="cart-subtotal">
             <span>Subtotal</span>
-            <span>{{ cart.total_price | money }}</span>
+            <span id="cart-subtotal-val">{{ cart.total_price | money }}</span>
           </div>
           <p class="cart-note">Taxes and shipping calculated at checkout.</p>
           <div class="cart-actions">
@@ -133,8 +134,81 @@
         </div>
       </form>
     {%- else -%}
+      <h1 class="cart-title">Your Cart</h1>
       <p class="cart-empty">Your cart is empty.</p>
       <a class="cart-checkout" href="/#mezcals">Continue shopping</a>
     {%- endif -%}
   </div>
 </div>
+
+<script>
+(function(){
+  var page = document.querySelector('.cart-page');
+  if(!page) return;
+
+  function esc(s){ return (s == null ? '' : String(s)).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function money(cents, cur){
+    try { return new Intl.NumberFormat(undefined, { style:'currency', currency: cur || 'USD' }).format(cents/100); }
+    catch(e){ return '$' + (cents/100).toFixed(2); }
+  }
+  function sized(url, w){ if(!url) return ''; return url + (url.indexOf('?') > -1 ? '&' : '?') + 'width=' + w; }
+
+  function render(cart){
+    document.querySelectorAll('.nav-cart, #nav-drawer a[href="/cart"]').forEach(function(a){
+      a.textContent = 'Cart (' + cart.item_count + ')';
+    });
+    if(!cart.items || !cart.items.length){
+      document.getElementById('cart-inner').innerHTML =
+        '<h1 class="cart-title">Your Cart</h1>' +
+        '<p class="cart-empty">Your cart is empty.</p>' +
+        '<a class="cart-checkout" href="/#mezcals">Continue shopping</a>';
+      return;
+    }
+    var lines = document.getElementById('cart-lines');
+    if(lines){
+      lines.innerHTML = cart.items.map(function(it, i){
+        var line = i + 1;
+        var img = it.image ? '<img src="' + esc(sized(it.image, 200)) + '" alt="" loading="lazy">' : '';
+        var variant = (it.variant_title && it.variant_title.indexOf('Default') < 0)
+          ? '<div class="cart-line-variant">' + esc(it.variant_title) + '</div>' : '';
+        return '<div class="cart-line" data-line="' + line + '">' +
+          '<a class="cart-line-img" href="' + esc(it.url) + '">' + img + '</a>' +
+          '<div class="cart-line-info">' +
+            '<a class="cart-line-name" href="' + esc(it.url) + '">' + esc(it.product_title) + '</a>' + variant +
+            '<div class="cart-line-price">' + money(it.final_price, cart.currency) + ' each</div>' +
+            '<a class="cart-line-remove" href="#" data-remove>Remove</a>' +
+          '</div>' +
+          '<div class="cart-line-qty"><div class="cart-stepper">' +
+            '<button type="button" class="cart-dec" aria-label="Decrease quantity">−</button>' +
+            '<span class="cart-qval">' + it.quantity + '</span>' +
+            '<button type="button" class="cart-inc" aria-label="Increase quantity">+</button>' +
+          '</div></div>' +
+          '<div class="cart-line-total">' + money(it.final_line_price, cart.currency) + '</div>' +
+        '</div>';
+      }).join('');
+    }
+    var sub = document.getElementById('cart-subtotal-val');
+    if(sub) sub.textContent = money(cart.total_price, cart.currency);
+  }
+
+  function change(line, qty){
+    fetch('/cart/change.js', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify({ line: line, quantity: qty })
+    }).then(function(r){ return r.json(); }).then(render).catch(function(){});
+  }
+
+  page.addEventListener('click', function(e){
+    var row = e.target.closest('.cart-line');
+    if(!row) return;
+    var line = +row.getAttribute('data-line');
+    var qEl = row.querySelector('.cart-qval');
+    var q = qEl ? +qEl.textContent : 1;
+    if(e.target.closest('.cart-inc')){ e.preventDefault(); change(line, q + 1); }
+    else if(e.target.closest('.cart-dec')){ e.preventDefault(); change(line, Math.max(0, q - 1)); }
+    else if(e.target.closest('[data-remove]')){ e.preventDefault(); change(line, 0); }
+  });
+})();
+</script>
