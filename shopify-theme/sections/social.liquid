@@ -13,6 +13,8 @@
   .deep-social .deep-head-text{ display:flex; flex-direction:column; align-items:flex-start; }
   .deep-social .deep-head-text .label{ margin:0 0 .8rem; }
   .deep-social .deep-word-h2{ font-size:clamp(2.5rem,6vw,5rem) !important; line-height:.9; }
+  /* keep the trailing period tight to the P (it gets tucked in via JS) */
+  .deep-social .deep-word-h2 span:last-child{ display:inline-block; }
 
   /* Instagram strip + newsletter spacing */
   .deep-social .ig-track-outer{ padding:1.25rem 0 2.5rem !important; }
@@ -100,6 +102,28 @@
     {%- endif -%}
   </div>
 </section>
+
+<script>
+(function(){
+  var h = document.querySelector('.deep-social .deep-word-h2');
+  if(!h) return;
+  var dot = h.querySelector('span:last-child');
+  if(!dot || dot.textContent.replace(/\s/g,'') !== '.') return;
+  function tuckDot(){
+    dot.style.display = 'inline-block';
+    dot.style.transform = 'none';
+    dot.style.marginRight = '0';
+    var w = dot.getBoundingClientRect().width;
+    if(w){
+      dot.style.transform = 'translateX(-' + w + 'px)';
+      dot.style.marginRight = '-' + w + 'px';
+    }
+  }
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(tuckDot); } else { tuckDot(); }
+  window.addEventListener('load', tuckDot);
+  window.addEventListener('resize', function(){ clearTimeout(dot._rT); dot._rT = setTimeout(tuckDot, 150); }, { passive: true });
+})();
+</script>
 </main>
 
 {% schema %}
