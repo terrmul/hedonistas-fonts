@@ -6,9 +6,9 @@
       <div class="s-panel" data-bg="{{ block.settings.bg }}" data-word="{{ block.settings.word | escape }}" {{ block.shopify_attributes }}>
         <div class="s-panel-content reveal">
           <div class="num" style="color:var(--solar)">{{ block.settings.num | escape }}</div>
-          <h3 style="color:var(--cream)">{{ block.settings.title | escape }}</h3>
+          <h3 style="color:var(--cream)">{{ block.settings.title | escape | replace: '//', '<br>' }}</h3>
           {%- if block.settings.subtitle != blank -%}
-            <div style="color:var(--solar);font-size:.75rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;margin-bottom:1rem">{{ block.settings.subtitle | escape }}</div>
+            <div style="color:var(--solar);font-size:.75rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;margin-bottom:1rem">{{ block.settings.subtitle | escape | replace: '//', '<br>' }}</div>
           {%- endif -%}
           <div class="panel-img">
             {%- if block.settings.image != blank -%}
@@ -17,7 +17,7 @@
               <div class="pi-note">📷 {{ block.settings.word | escape }}</div>
             {%- endif -%}
           </div>
-          <p style="color:rgba(243,230,209,.9)">{{ block.settings.body }}</p>
+          <p style="color:rgba(243,230,209,.9)">{{ block.settings.body | replace: '//', '<br>' }}</p>
         </div>
       </div>
     {%- endfor -%}
@@ -46,10 +46,10 @@
           ] },
         { "type": "text", "id": "num", "label": "Number", "default": "01" },
         { "type": "text", "id": "word", "label": "Sticky word (Spanish)", "default": "La Tierra" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Wild Harvest" },
-        { "type": "text", "id": "subtitle", "label": "Subtitle (optional translation)" },
+        { "type": "text", "id": "title", "label": "Title (use // for a line break)", "default": "Wild Harvest" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle (use // for a line break)" },
         { "type": "image_picker", "id": "image", "label": "Photo" },
-        { "type": "inline_richtext", "id": "body", "label": "Body copy" }
+        { "type": "inline_richtext", "id": "body", "label": "Body copy (use // for a line break)" }
       ]
     }
   ],
