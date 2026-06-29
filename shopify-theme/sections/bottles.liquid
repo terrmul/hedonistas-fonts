@@ -12,21 +12,6 @@
     background:var(--ink); color:var(--cream); transform:translateY(-1px);
   }
   .bottles-section .ce-visual-word{ bottom:2.5rem !important; }
-
-  /* Prevent the left rail from bleeding up over the hero on short viewports.
-     The rail is height:100vh with content vertically centered; when its
-     content is taller than the viewport, centering overflows off both ends
-     and the top spills over the hero above. `safe` centering pins content to
-     the start instead of overflowing up, padding clears the fixed nav, and
-     an internal scroll keeps everything reachable. */
-  @media (min-width: 901px){
-    .bottles-section .ce-strip{
-      justify-content: safe center !important;
-      padding-top: 6rem !important;
-      padding-bottom: 3rem !important;
-      overflow-y: auto !important;
-    }
-  }
 </style>
 <section class="bottles-section" id="mezcals" data-nav="light" data-bg="bg-cream" data-mf-color="#F3E6D1"{% if section.settings.section_bg != blank %} style="background:{{ section.settings.section_bg }}"{% endif %}>
 <div class="bottles-selector">
