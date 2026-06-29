@@ -21,6 +21,12 @@
       font-family: {% if section.settings.finale_font_family == 'pacifico' %}'Pacifico', serif{% else %}"metallophile-sp8", sans-serif{% endif %};
       font-size: clamp(1.2rem, 4vw, {{ section.settings.finale_font_size }}rem);
     }
+    /* finale poem: last two lines stack — line 5 stays (dimmed) as line 6 arrives below */
+    #manifesto .mf-finale-line { transition: opacity .8s ease, transform .8s ease; }
+    #manifesto .mf-finale-line.pair-top.dim { opacity: .4 !important; transform: translateY(-0.62em); }
+    #manifesto .mf-finale-line.pair-bottom.on { transform: translateY(0.62em); }
+    #manifesto .mf-finale-lines { margin-bottom: 2.5rem; }
+    #manifesto .mf-poem-finale-call { font-size: clamp(2.4rem, 6vw, 5rem); line-height: .9; }
     @media(max-width:920px){
       #manifesto .mf-panel--1,
       #manifesto .mf-panel--2{
@@ -195,17 +201,31 @@
       if(started) return;
       started = true;
       var FADE = 800, HOLD = 2200, GAP = 300;
+      var n = finaleLines.length;
       var t = 500;
+      // tag the final pair so the last two lines can stack instead of replacing
+      if(n >= 2){
+        finaleLines[n - 2].classList.add('pair-top');
+        finaleLines[n - 1].classList.add('pair-bottom');
+      }
       finaleLines.forEach(function(line, i){
-        var isLast = i === finaleLines.length - 1;
+        var isPenult = n >= 2 && i === n - 2;
+        var isLast = i === n - 1;
         setTimeout(function(){ line.classList.add('on'); }, t);
-        if(!isLast){
-          setTimeout(function(){ line.classList.remove('on'); }, t + FADE + HOLD);
-          t += FADE + HOLD + GAP;
-        } else {
+        if(isLast){
+          // line 6 arrives below; dim line 5 but keep it in place
+          setTimeout(function(){
+            if(n >= 2) finaleLines[n - 2].classList.add('dim');
+          }, t);
           setTimeout(function(){
             if(finaleEnd) finaleEnd.classList.add('on');
           }, t + FADE + HOLD + 500);
+        } else if(isPenult){
+          // line 5 stays visible — do not fade it out, just advance the clock
+          t += FADE + HOLD + GAP;
+        } else {
+          setTimeout(function(){ line.classList.remove('on'); }, t + FADE + HOLD);
+          t += FADE + HOLD + GAP;
         }
       });
     }
