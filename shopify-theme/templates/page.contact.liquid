@@ -1,0 +1,121 @@
+<!-- CONTACT PAGE -->
+<style>
+  /* Make the fixed nav readable on this light page. */
+  nav, nav.nav-scrolled, nav.nav-on-hero{
+    mix-blend-mode:normal!important;
+    background:rgba(243,230,209,.55)!important;
+    backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+    border-bottom:1px solid rgba(26,23,22,.12)!important;
+  }
+  nav .nav-wordmark, nav ul a{color:var(--ink,#1a1716)!important}
+  nav .nav-cart{border-color:rgba(26,23,22,.35)!important}
+  nav img.nav-icon{filter:brightness(0)!important}
+  .nav-hamburger span{background:var(--ink,#1a1716)!important}
+
+  .contact-page{
+    position: relative; z-index: 1;   /* above the fixed #bg-overlay */
+    background: var(--cream, #F3E6D1);
+    color: var(--ink, #1a1716);
+    min-height: 70vh;
+    padding: 9rem 1.5rem 6rem;
+  }
+  .contact-inner{ max-width: 640px; margin: 0 auto; }
+  .contact-title{
+    font-family: 'Pacifico', serif; text-transform: uppercase;
+    font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.02; margin: 0 0 1rem;
+  }
+  .contact-intro{
+    font-family: "metallophile-sp8", sans-serif; font-size: 1.05rem; line-height: 1.7;
+    margin: 0 0 2.5rem; color: var(--ink, #1a1716);
+  }
+  .contact-intro p{ margin: 0 0 1em; }
+  .contact-intro a{ color: var(--rust, #7C3A09); }
+
+  .contact-field{ margin-bottom: 1.4rem; display: flex; flex-direction: column; gap: .45rem; }
+  .contact-field label{
+    font-family: "metallophile-sp8", sans-serif; font-size: .7rem; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--smoke, #4F4E4F);
+  }
+  .contact-field input, .contact-field select, .contact-field textarea{
+    width: 100%; box-sizing: border-box; background: transparent;
+    border: 1px solid rgba(26,23,22,.3); border-radius: 8px; padding: .85rem 1rem;
+    font-family: "metallophile-sp8", sans-serif; font-size: 1rem; color: var(--ink, #1a1716);
+  }
+  .contact-field input:focus, .contact-field select:focus, .contact-field textarea:focus{
+    outline: none; border-color: var(--rust, #7C3A09);
+  }
+  .contact-field textarea{ resize: vertical; min-height: 8rem; }
+  .contact-submit{
+    margin-top: .6rem; cursor: pointer;
+    background: var(--ink, #1a1716); color: var(--cream, #F3E6D1); border: 1px solid var(--ink, #1a1716);
+    border-radius: 100px; padding: 1rem 2.6rem;
+    font-family: "metallophile-sp8", sans-serif; font-size: .75rem; letter-spacing: .22em;
+    text-transform: uppercase; font-weight: 500; transition: background .25s, transform .2s;
+  }
+  .contact-submit:hover{ background: var(--copper, #C65602); border-color: var(--copper, #C65602); transform: translateY(-1px); }
+  .contact-success{
+    background: rgba(40,97,64,.12); border: 1px solid rgba(40,97,64,.35); border-radius: 10px;
+    padding: 1.1rem 1.3rem; margin: 0 0 2rem; font-family: "metallophile-sp8", sans-serif; color: var(--cactus, #286140);
+  }
+  .contact-errors{
+    background: rgba(175,46,86,.1); border: 1px solid rgba(175,46,86,.35); border-radius: 10px;
+    padding: 1.1rem 1.3rem; margin: 0 0 1.5rem; color: var(--raspberry, #72213A);
+  }
+  .contact-errors ul{ margin: 0; padding-left: 1.2em; }
+  /* honeypot — hidden from people, catches bots */
+  .contact-hp{ position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+</style>
+
+<div class="contact-page">
+  <div class="contact-inner">
+    <h1 class="contact-title">{{ page.title | default: 'Get in Touch' | escape }}</h1>
+
+    {%- if page.content != blank -%}
+      <div class="contact-intro rte">{{ page.content }}</div>
+    {%- endif -%}
+
+    {%- if form.posted_successfully? -%}
+      <p class="contact-success">Thank you — your message is on its way. We'll be in touch soon.</p>
+    {%- endif -%}
+
+    {% form 'contact' %}
+      {%- if form.errors -%}
+        <div class="contact-errors">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+
+      <div class="contact-field">
+        <label for="cf-name">Name</label>
+        <input id="cf-name" type="text" name="contact[name]" value="{{ form.name }}" autocomplete="name" required>
+      </div>
+
+      <div class="contact-field">
+        <label for="cf-email">Email</label>
+        <input id="cf-email" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" required>
+      </div>
+
+      <div class="contact-field">
+        <label for="cf-type">Inquiry type</label>
+        <select id="cf-type" name="contact[Inquiry Type]">
+          <option>General</option>
+          <option>Trade / Wholesale</option>
+          <option>Press</option>
+          <option>Events</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="contact-field">
+        <label for="cf-body">Message</label>
+        <textarea id="cf-body" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+      </div>
+
+      <div class="contact-hp" aria-hidden="true">
+        <label>Leave this field empty
+          <input type="text" name="contact[website]" tabindex="-1" autocomplete="off">
+        </label>
+      </div>
+
+      <button type="submit" class="contact-submit">Send Message</button>
+    {% endform %}
+  </div>
+</div>
