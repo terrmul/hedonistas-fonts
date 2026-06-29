@@ -135,6 +135,20 @@
     #story .bss-quote--mobile{ display: block; margin-top: 2rem; }
   }
 
+  /* short viewports (landscape phones): shrink the pinned image and tighten the
+     offset so there is still room to read the text scrolling beneath it */
+  @media (max-width: 900px) and (max-height: 600px){
+    #story .bss-media-col{ top: 3.75rem; }
+    #story .bss-figure{ aspect-ratio: 16 / 9; max-height: 32vh; }
+    #story .bss-quote--mobile{ margin-top: 1.25rem; }
+  }
+  /* very short (small landscape phones): give up the pin and just stack, so the
+     image never dominates the screen */
+  @media (max-width: 900px) and (max-height: 440px){
+    #story .bss-media-col{ position: static; top: auto; }
+    #story .bss-figure{ max-height: 60vh; }
+  }
+
   /* fade-in */
   #story .reveal{ opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
   #story .reveal.on{ opacity: 1; transform: none; }
