@@ -47,6 +47,13 @@
       max-height: 48vh !important;
       margin: 0 0 1.6rem !important;
     }
+    /* the reveal-on-scroll fade can leave this text invisible when stacked —
+       force it visible so the chapter copy always shows on mobile */
+    #craft .s-panel-content.reveal > :not(.panel-img),
+    #craft .s-panel-content.reveal > .panel-img{
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 {% endstyle %}
 
