@@ -118,32 +118,21 @@ function parseRgb(s){ var m=s&&s.match(/(\d+)[,\s]+(\d+)[,\s]+(\d+)/); return m?
 function updateCraftBlend(){
   craftEl=craftEl||document.getElementById('craft');
   if(!craftEl||!overlay) return;
+  /* On overlay-driven pages (e.g. the story page) the craft panel observer
+     sets each chapter's colour — including the first one. Running the hardcoded
+     cream -> marine entrance blend here would override the first chapter's
+     chosen colour, so skip it entirely on those pages. */
+  if(hasOverlaySections) return;
   var r=craftEl.getBoundingClientRect().top, vh=window.innerHeight;
-  if(hasOverlaySections){
-    /* Pages that drive the overlay per-section (e.g. the story page): only
-       engage near craft so the upper sections keep their own overlay colour,
-       and blend from whatever colour the previous section left on the overlay. */
-    if(r < vh*0.6 && r > -vh*0.4){
-      if(!craftBlendActive){ craftStartRgb=parseRgb(getComputedStyle(overlay).backgroundColor); }
-      var p=(vh*0.6 - r)/(vh*0.45); p=p<0?0:(p>1?1:p);
-      var s=craftStartRgb;
-      var rgb='rgb('+lerp(s[0],MARINE[0],p)+','+lerp(s[1],MARINE[1],p)+','+lerp(s[2],MARINE[2],p)+')';
-      if(rgb!==lastCraftRgb){ overlay.style.transition='none'; overlay.style.background=rgb; lastCraftRgb=rgb; }
-      craftBlendActive=true;
-    } else if(craftBlendActive){
-      craftBlendActive=false; lastCraftRgb='';
-    }
-  } else {
-    /* Original homepage behaviour — holds the overlay at cream across the upper
-       page and blends cream -> marine as craft approaches. */
-    if(r > -vh*0.4){
-      var p2=(vh*0.6 - r)/(vh*0.45); p2=p2<0?0:(p2>1?1:p2);
-      var rgb2='rgb('+lerp(CREAM[0],MARINE[0],p2)+','+lerp(CREAM[1],MARINE[1],p2)+','+lerp(CREAM[2],MARINE[2],p2)+')';
-      if(rgb2!==lastCraftRgb){ overlay.style.transition='none'; overlay.style.background=rgb2; lastCraftRgb=rgb2; }
-      craftBlendActive=true;
-    } else if(craftBlendActive){
-      craftBlendActive=false; lastCraftRgb='';
-    }
+  /* Original homepage behaviour — holds the overlay at cream across the upper
+     page and blends cream -> marine as craft approaches. */
+  if(r > -vh*0.4){
+    var p=(vh*0.6 - r)/(vh*0.45); p=p<0?0:(p>1?1:p);
+    var rgb='rgb('+lerp(CREAM[0],MARINE[0],p)+','+lerp(CREAM[1],MARINE[1],p)+','+lerp(CREAM[2],MARINE[2],p)+')';
+    if(rgb!==lastCraftRgb){ overlay.style.transition='none'; overlay.style.background=rgb; lastCraftRgb=rgb; }
+    craftBlendActive=true;
+  } else if(craftBlendActive){
+    craftBlendActive=false; lastCraftRgb='';
   }
 }
 
