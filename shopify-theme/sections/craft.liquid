@@ -24,6 +24,32 @@
   </div>
 </div>
 
+{% style %}
+  /* Mobile + landscape phones: stack each chapter vertically — image on top,
+     then number / title / subtitle / body — instead of the desktop split. */
+  @media (max-width: 1024px){
+    #craft .s-panel{
+      display: block !important;
+      padding: 7rem 1.5rem 5rem !important;
+    }
+    #craft .s-panel-content{
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    #craft .panel-img{
+      position: static !important;
+      transform: none !important;
+      left: auto !important; top: auto !important;
+      order: -1 !important;
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 16 / 11;
+      max-height: 48vh !important;
+      margin: 0 0 1.6rem !important;
+    }
+  }
+{% endstyle %}
+
 {% schema %}
 {
   "name": "Craft Chapters",
@@ -50,8 +76,8 @@
         { "type": "text", "id": "title", "label": "Title (use // for a line break)", "default": "Wild Harvest" },
         { "type": "text", "id": "subtitle", "label": "Subtitle (use // for a line break)" },
         { "type": "image_picker", "id": "image", "label": "Photo" },
-        { "type": "range", "id": "img_width", "label": "Image width", "info": "% of panel — keep at/under 50 so it doesn't overlap the text", "min": 30, "max": 50, "step": 1, "unit": "%", "default": 46 },
-        { "type": "range", "id": "img_height", "label": "Image height", "min": 200, "max": 1000, "step": 20, "unit": "px", "default": 500 },
+        { "type": "range", "id": "img_width", "label": "Image width", "info": "% of panel — keep at/under 50 so it doesn't overlap the text (desktop only)", "min": 30, "max": 50, "step": 1, "unit": "%", "default": 46 },
+        { "type": "range", "id": "img_height", "label": "Image height", "info": "Desktop only — mobile uses a responsive height", "min": 200, "max": 1000, "step": 20, "unit": "px", "default": 500 },
         { "type": "inline_richtext", "id": "body", "label": "Body copy (use // for a line break)" }
       ]
     }
