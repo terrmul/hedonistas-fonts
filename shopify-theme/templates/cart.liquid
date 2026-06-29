@@ -46,11 +46,18 @@
     text-transform: uppercase; color: var(--rust, #7C3A09); text-decoration: none;
   }
   .cart-line-remove:hover{ text-decoration: underline; }
+  .cart-line-qty{ display: flex; flex-direction: column; align-items: center; gap: .5rem; }
   .cart-line-qty input{
     width: 64px; height: 2.6rem; text-align: center;
     border: 1px solid rgba(26,23,22,.3); border-radius: 6px; background: transparent;
     font-family: "metallophile-sp8", sans-serif; font-size: 1rem; color: var(--ink, #1a1716);
   }
+  .cart-qty-update{
+    background: none; border: 0; cursor: pointer; padding: 0;
+    font-family: "metallophile-sp8", sans-serif; font-size: .62rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--rust, #7C3A09); text-decoration: underline;
+  }
+  .cart-qty-update:hover{ color: var(--ink, #1a1716); }
   .cart-line-total{ font-family: 'Pacifico', serif; font-size: 1.2rem; text-align: right; white-space: nowrap; }
   .cart-foot{ margin-top: 2.5rem; }
   .cart-subtotal{
@@ -60,14 +67,12 @@
   }
   .cart-note{ font-size: .82rem; color: var(--smoke, #4F4E4F); margin: .6rem 0 1.8rem; }
   .cart-actions{ display: flex; flex-wrap: wrap; gap: 1rem; }
-  .cart-update, .cart-checkout, .cart-continue{
+  .cart-checkout, .cart-continue{
     font-family: "metallophile-sp8", sans-serif; font-size: .75rem; letter-spacing: .22em;
     text-transform: uppercase; font-weight: 500; cursor: pointer; text-decoration: none;
     border-radius: 100px; padding: 1rem 2.4rem; border: 1px solid var(--ink, #1a1716);
     transition: background .25s, color .25s, transform .2s; display: inline-flex; align-items: center; justify-content: center;
   }
-  .cart-update{ background: transparent; color: var(--ink, #1a1716); }
-  .cart-update:hover{ background: rgba(26,23,22,.06); }
   .cart-checkout{ background: var(--ink, #1a1716); color: var(--cream, #F3E6D1); }
   .cart-checkout:hover{ background: var(--copper, #C65602); border-color: var(--copper, #C65602); transform: translateY(-1px); }
   .cart-continue{ margin-top: 1.6rem; border: 0; padding: 0; letter-spacing: .18em; color: var(--rust, #7C3A09); }
@@ -78,7 +83,7 @@
     .cart-line{ grid-template-columns: 64px 1fr auto; grid-template-areas: "img info total" "img qty total"; row-gap: .6rem; }
     .cart-line-img{ grid-area: img; align-self: start; }
     .cart-line-info{ grid-area: info; }
-    .cart-line-qty{ grid-area: qty; }
+    .cart-line-qty{ grid-area: qty; align-items: start; }
     .cart-line-total{ grid-area: total; align-self: start; }
     .cart-line-img img{ width: 60px; }
   }
@@ -108,6 +113,7 @@
               </div>
               <div class="cart-line-qty">
                 <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.product.title | escape }}">
+                <button type="submit" name="update" class="cart-qty-update">Update</button>
               </div>
               <div class="cart-line-total">{{ item.final_line_price | money }}</div>
             </div>
@@ -121,7 +127,6 @@
           </div>
           <p class="cart-note">Taxes and shipping calculated at checkout.</p>
           <div class="cart-actions">
-            <button type="submit" name="update" class="cart-update">Update</button>
             <button type="submit" name="checkout" class="cart-checkout">Checkout</button>
           </div>
           <a class="cart-continue" href="{{ routes.all_products_collection_url | default: '/' }}">&larr; Continue shopping</a>
