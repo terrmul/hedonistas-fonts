@@ -86,9 +86,27 @@
   <div class="ig-track-outer">
     <div data-behold-id="rmloD6PyZAAVIsB6Rp5L"></div>
     <script>
-      (function() {
-        const d=document,s=d.createElement("script");s.type="module";
-        s.src="https://w.behold.so/widget.js";d.head.append(s);
+      /* Lazy-load the Behold Instagram widget only when this section nears the
+         viewport, so it doesn't add requests/weight to the initial page load. */
+      (function(){
+        var holder = document.querySelector('.deep-social .ig-track-outer');
+        if(!holder) return;
+        var loaded = false;
+        function loadBehold(){
+          if(loaded) return; loaded = true;
+          var s = document.createElement('script');
+          s.type = 'module';
+          s.src = 'https://w.behold.so/widget.js';
+          document.head.appendChild(s);
+        }
+        if('IntersectionObserver' in window){
+          var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){ if(e.isIntersecting){ loadBehold(); io.disconnect(); } });
+          }, { rootMargin: '400px' });
+          io.observe(holder);
+        } else {
+          loadBehold();
+        }
       })();
     </script>
   </div>
