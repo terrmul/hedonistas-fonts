@@ -25,6 +25,13 @@
 </div>
 
 {% style %}
+  /* Watermark transparency — set in the Customizer (applies on every screen,
+     overriding the theme default for both idle and active states). */
+  #craft .sticky-word h2,
+  #craft .sticky-word.active h2{
+    opacity: {{ section.settings.wm_opacity | divided_by: 100.0 }} !important;
+  }
+
   /* Desktop: the watermark word swaps per chapter (driven by JS). Long words
      (e.g. "La Fermentación") cannot fit the narrow lane right of the image, so
      keep the word LEFT-ALIGNED at the far left, sized to fit the full screen
@@ -95,8 +102,9 @@
   "name": "Craft Chapters",
   "settings": [
     { "type": "header", "content": "Background watermark" },
-    { "type": "paragraph", "content": "The big faded word behind each chapter is that chapter's “Watermark word” below. Use the slider to size it so long words still fit." },
-    { "type": "range", "id": "wm_size", "label": "Watermark size", "info": "Max size on wide screens. Lower this if a long word runs off the edge.", "min": 3, "max": 14, "step": 0.5, "unit": "rem", "default": 8 }
+    { "type": "paragraph", "content": "The big faded word behind each chapter is that chapter's “Watermark word” below. Use the sliders to size it and set how faded it is." },
+    { "type": "range", "id": "wm_size", "label": "Watermark size", "info": "Max size on wide screens. Lower this if a long word runs off the edge.", "min": 3, "max": 14, "step": 0.5, "unit": "rem", "default": 8 },
+    { "type": "range", "id": "wm_opacity", "label": "Watermark transparency", "info": "0 = invisible, 100 = solid. The faded effect is usually 8–15.", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 11 }
   ],
   "blocks": [
     {
