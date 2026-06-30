@@ -13,6 +13,31 @@
   }
   .bottles-section .ce-visual-word{ bottom:2.5rem !important; }
 
+  /* Harden the bottle visual so it renders correctly even if theme.css drifts.
+     Kept here (not theme.css) so a theme.css paste can't clobber it. */
+  .bottles-section .ce-main-shot{ overflow: hidden; }
+  .bottles-section .ce-bottle-img{
+    max-height: min(90vh, 600px);
+    width: auto; max-width: 90%;
+    object-fit: contain;
+  }
+  .bottles-section .ce-shots{
+    position: absolute; left: 0; top: 0; bottom: 0; z-index: 3;
+    display: flex; flex-direction: column; justify-content: center; gap: 10px;
+    padding: 1.5rem 1rem; align-items: center;
+  }
+  .bottles-section .ce-shot-thumb{
+    width: 62px; aspect-ratio: 3/4; flex: 0 0 auto;
+    overflow: hidden; cursor: pointer;
+    border: 2px solid rgba(26,23,22,.15);
+    opacity: .5;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color .25s, opacity .25s;
+  }
+  .bottles-section .ce-shot-thumb.active{ opacity: 1; border-color: rgba(26,23,22,.45); }
+  .bottles-section .ce-shot-thumb:hover{ opacity: .85; }
+  .bottles-section .ce-shot-thumb img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+
   /* Mobile: keep the bottle photo inside its visual slot so it can't overflow
      down into the copy. Kept here (not theme.css) so it can't be clobbered. */
   @media (max-width: 900px){
