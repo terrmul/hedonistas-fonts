@@ -1,6 +1,6 @@
 <!-- STICKY CRAFT PANELS -->
 <div class="sticky-chapter" id="craft">
-  <div class="sticky-word" id="sticky-word"><h2>{{ section.settings.sticky_word | escape }}</h2></div>
+  <div class="sticky-word" id="sticky-word"><h2>{%- if section.blocks.size > 0 -%}{{ section.blocks.first.settings.word | escape }}{%- endif -%}</h2></div>
   <div class="sticky-panels">
     {%- for block in section.blocks -%}
       <div class="s-panel" data-bg="{{ block.settings.bg }}" data-word="{{ block.settings.word | escape }}" {{ block.shopify_attributes }}>
@@ -25,19 +25,30 @@
 </div>
 
 {% style %}
-  /* The sticky watermark word shares the left column with the chapter image.
-     On narrow-desktop widths the image rides over the word and it reads as
-     broken, so hide the decorative watermark up to 1200px — large screens keep
-     the effect, everything below gets the clean image-led layout. */
-  @media (max-width: 1200px){
-    #craft .sticky-word{ display: none !important; }
+  /* Desktop: the watermark word swaps per chapter (driven by JS). It is
+     left-aligned by default, which puts its leading letters behind the
+     left-column image so they get clipped. Right-align it into the text
+     column and size it to fit there, so the whole word is always visible. */
+  @media (min-width: 1201px){
+    #craft .sticky-word{
+      justify-content: flex-end !important;
+      padding-left: 50% !important;
+      padding-right: 3rem !important;
+    }
+    #craft .sticky-word h2{
+      font-size: clamp(4rem, 11vw, 9rem) !important;
+      text-align: right;
+    }
   }
 
   /* Mobile + landscape phones: turn off the desktop sticky-scroll mechanic and
-     lay each chapter out as a simple vertical block — image on top, text below. */
+     lay each chapter out as a simple vertical block — image on top, text below.
+     The decorative watermark is hidden here (no room for it without overlap). */
+  @media (max-width: 1200px){
+    #craft .sticky-word{ display: none !important; }
+  }
   @media (max-width: 1024px){
     #craft{ overflow-x: hidden; }
-    #craft .sticky-word{ display: none !important; }
     #craft .sticky-panels{ margin-top: 0 !important; }
     #craft .s-panel{
       min-height: 0 !important;
@@ -77,9 +88,7 @@
 {% schema %}
 {
   "name": "Craft Chapters",
-  "settings": [
-    { "type": "text", "id": "sticky_word", "label": "Sticky title word", "default": "La Tradición" }
-  ],
+  "settings": [],
   "blocks": [
     {
       "type": "chapter",
