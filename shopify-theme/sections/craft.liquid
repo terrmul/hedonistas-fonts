@@ -26,18 +26,20 @@
 
 {% style %}
   /* Desktop: the watermark word swaps per chapter (driven by JS). It is
-     left-aligned by default, which puts its leading letters behind the
-     left-column image so they get clipped. Right-align it into the text
-     column and size it to fit there, so the whole word is always visible. */
+     anchored at the far left, the same column as the chapter image, so at its
+     default position the image clips its leading letters. Keep it LEFT-ALIGNED
+     but start it just past the image — in the clear gap before the text — and
+     size it to fit that lane, so the whole word stays visible through every
+     transition without overlapping (or shortening) the images. */
   @media (min-width: 1201px){
     #craft .sticky-word{
-      justify-content: flex-end !important;
-      padding-left: 50% !important;
-      padding-right: 3rem !important;
+      justify-content: flex-start !important;
+      padding-left: 46% !important;
+      padding-right: 1.5rem !important;
     }
     #craft .sticky-word h2{
-      font-size: clamp(4rem, 11vw, 9rem) !important;
-      text-align: right;
+      font-size: clamp(4rem, 9vw, 8rem) !important;
+      text-align: left;
     }
   }
 
