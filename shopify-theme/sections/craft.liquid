@@ -29,9 +29,8 @@
      (e.g. "La Fermentación") cannot fit the narrow lane right of the image, so
      keep the word LEFT-ALIGNED at the far left, sized to fit the full screen
      width, and layer it ABOVE the panels so the left-column image no longer
-     clips it. It is a faint watermark — subtle texture over the photo, clearly
-     visible over the solid section colour. Images stay full size; scroll timing
-     and the data-bg colour blending are untouched. */
+     clips it. The max size is set in the Customizer (Watermark size). Images
+     stay full size; scroll timing and the data-bg colour blending are untouched. */
   @media (min-width: 1201px){
     #craft .sticky-word{
       z-index: 3 !important;          /* above .sticky-panels (images + text) */
@@ -41,7 +40,7 @@
       pointer-events: none;
     }
     #craft .sticky-word h2{
-      font-size: clamp(3rem, 7.5vw, 8rem) !important;
+      font-size: clamp(3rem, 7.5vw, {{ section.settings.wm_size }}rem) !important;
       text-align: left;
       white-space: nowrap;
     }
@@ -94,7 +93,11 @@
 {% schema %}
 {
   "name": "Craft Chapters",
-  "settings": [],
+  "settings": [
+    { "type": "header", "content": "Background watermark" },
+    { "type": "paragraph", "content": "The big faded word behind each chapter is that chapter's “Watermark word” below. Use the slider to size it so long words still fit." },
+    { "type": "range", "id": "wm_size", "label": "Watermark size", "info": "Max size on wide screens. Lower this if a long word runs off the edge.", "min": 3, "max": 14, "step": 0.5, "unit": "rem", "default": 8 }
+  ],
   "blocks": [
     {
       "type": "chapter",
@@ -111,7 +114,7 @@
             { "value": "bg-smoke", "label": "Smoke" }
           ] },
         { "type": "text", "id": "num", "label": "Number", "default": "01" },
-        { "type": "text", "id": "word", "label": "Sticky word (Spanish)", "default": "La Tierra" },
+        { "type": "text", "id": "word", "label": "Watermark word (big faded background word)", "default": "La Tierra" },
         { "type": "text", "id": "title", "label": "Title (use // for a line break)", "default": "Wild Harvest" },
         { "type": "text", "id": "subtitle", "label": "Subtitle (use // for a line break)" },
         { "type": "image_picker", "id": "image", "label": "Photo" },
