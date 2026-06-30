@@ -35,12 +35,17 @@
   /* Desktop: the watermark word swaps per chapter (driven by JS). Long words
      (e.g. "La Fermentación") cannot fit the narrow lane right of the image, so
      keep the word LEFT-ALIGNED at the far left, sized to fit the full screen
-     width, and layer it ABOVE the panels so the left-column image no longer
-     clips it. The max size is set in the Customizer (Watermark size). Images
-     stay full size; scroll timing and the data-bg colour blending are untouched. */
+     width. Layer order: image (1) < watermark (2) < body copy (3) — so the word
+     sits over the photo but the chapter text stays fully legible above it.
+     Images stay full size; scroll timing and the data-bg colour blending are
+     untouched. */
   @media (min-width: 1201px){
+    /* dissolve the panels' isolating stacking context so the watermark can sit
+       between the image and the body copy */
+    #craft .sticky-panels{ z-index: auto !important; }
+
     #craft .sticky-word{
-      z-index: 3 !important;          /* above .sticky-panels (images + text) */
+      z-index: 2 !important;
       justify-content: flex-start !important;
       padding-left: 3rem !important;
       padding-right: 1.5rem !important;
@@ -50,6 +55,13 @@
       font-size: clamp(3rem, 7.5vw, {{ section.settings.wm_size }}rem) !important;
       text-align: left;
       white-space: nowrap;
+    }
+
+    /* image below the watermark; everything else (the body copy) above it */
+    #craft .panel-img{ z-index: 1 !important; }
+    #craft .s-panel-content > :not(.panel-img){
+      position: relative !important;
+      z-index: 3 !important;
     }
   }
 
