@@ -25,21 +25,25 @@
 </div>
 
 {% style %}
-  /* Desktop: the watermark word swaps per chapter (driven by JS). It is
-     anchored at the far left, the same column as the chapter image, so at its
-     default position the image clips its leading letters. Keep it LEFT-ALIGNED
-     but start it just past the image — in the clear gap before the text — and
-     size it to fit that lane, so the whole word stays visible through every
-     transition without overlapping (or shortening) the images. */
+  /* Desktop: the watermark word swaps per chapter (driven by JS). Long words
+     (e.g. "La Fermentación") cannot fit the narrow lane right of the image, so
+     keep the word LEFT-ALIGNED at the far left, sized to fit the full screen
+     width, and layer it ABOVE the panels so the left-column image no longer
+     clips it. It is a faint watermark — subtle texture over the photo, clearly
+     visible over the solid section colour. Images stay full size; scroll timing
+     and the data-bg colour blending are untouched. */
   @media (min-width: 1201px){
     #craft .sticky-word{
+      z-index: 3 !important;          /* above .sticky-panels (images + text) */
       justify-content: flex-start !important;
-      padding-left: 46% !important;
+      padding-left: 3rem !important;
       padding-right: 1.5rem !important;
+      pointer-events: none;
     }
     #craft .sticky-word h2{
-      font-size: clamp(4rem, 9vw, 8rem) !important;
+      font-size: clamp(3rem, 7.5vw, 8rem) !important;
       text-align: left;
+      white-space: nowrap;
     }
   }
 
