@@ -163,33 +163,6 @@
 
 <script>
 (function(){
-  /* mobile hamburger toggles the nav drawer */
-  var ham = document.getElementById('nav-hamburger');
-  var navDrawer = document.getElementById('nav-drawer');
-  if(ham && navDrawer){
-    ham.addEventListener('click', function(){
-      var isOpen = navDrawer.classList.toggle('open');
-      ham.classList.toggle('open', isOpen);
-      ham.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      navDrawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-      document.body.classList.toggle('nav-open', isOpen);
-    });
-    /* close the drawer when a link inside it is tapped */
-    navDrawer.addEventListener('click', function(e){
-      if(e.target.closest('a')){
-        navDrawer.classList.remove('open');
-        ham.classList.remove('open');
-        ham.setAttribute('aria-expanded','false');
-        navDrawer.setAttribute('aria-hidden','true');
-        document.body.classList.remove('nav-open');
-      }
-    });
-  }
-})();
-</script>
-
-<script>
-(function(){
   var overlay = document.getElementById('cart-drawer-overlay');
   var drawer  = document.getElementById('cart-drawer');
   var body    = document.getElementById('cd-body');
