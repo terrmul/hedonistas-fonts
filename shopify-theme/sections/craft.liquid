@@ -32,13 +32,12 @@
     opacity: {{ section.settings.wm_opacity | divided_by: 100.0 }} !important;
   }
 
-  /* Desktop: the watermark word swaps per chapter (driven by JS). Long words
-     (e.g. "La Fermentación") cannot fit the narrow lane right of the image, so
-     keep the word LEFT-ALIGNED at the far left, sized to fit the full screen
-     width. Layer order: image (1) < watermark (2) < body copy (3) — so the word
-     sits over the photo but the chapter text stays fully legible above it.
-     Images stay full size; scroll timing and the data-bg colour blending are
-     untouched. */
+  /* Desktop (>1200): sticky scrollytelling with the per-chapter watermark word.
+     Long words can't fit the lane right of the image, so the word is
+     LEFT-ALIGNED at the far left and sized to fit full width. Layer order:
+     image (1) < watermark (2) < body copy (3) — the word sits over the photo
+     but the chapter text stays fully legible above it. Images stay full size;
+     scroll timing and the data-bg colour blending are untouched. */
   @media (min-width: 1201px){
     /* dissolve the panels' isolating stacking context so the watermark can sit
        between the image and the body copy */
@@ -65,14 +64,13 @@
     }
   }
 
-  /* Mobile + landscape phones: turn off the desktop sticky-scroll mechanic and
-     lay each chapter out as a simple vertical block — image on top, text below.
-     The decorative watermark is hidden here (no room for it without overlap). */
+  /* 1200px and below: turn the desktop sticky-scroll mechanic OFF and lay each
+     chapter out as a simple vertical block — image on top, text below. The
+     watermark is hidden here, so the panels' -100vh pull MUST be reset too or
+     chapter 1 slides up into the hero above. */
   @media (max-width: 1200px){
-    #craft .sticky-word{ display: none !important; }
-  }
-  @media (max-width: 1024px){
     #craft{ overflow-x: hidden; }
+    #craft .sticky-word{ display: none !important; }
     #craft .sticky-panels{ margin-top: 0 !important; }
     #craft .s-panel{
       min-height: 0 !important;
@@ -101,7 +99,7 @@
       overflow: hidden !important;
     }
     /* the reveal-on-scroll fade can leave text invisible when stacked —
-       force everything visible so the chapter always shows on mobile */
+       force everything visible so the chapter always shows */
     #craft .s-panel-content.reveal > *{
       opacity: 1 !important;
       transform: none !important;
