@@ -38,6 +38,12 @@
   .bottles-section .ce-shot-thumb:hover{ opacity: .85; }
   .bottles-section .ce-shot-thumb img{ width: 100%; height: 100%; object-fit: cover; display: block; }
 
+  /* Desktop: keep the centered bottle clear of the thumbnail strip on the left
+     (62px thumb + ~1rem padding each side ≈ 96px). */
+  @media (min-width: 901px){
+    .bottles-section .ce-main-shot{ padding-left: 96px; box-sizing: border-box; }
+  }
+
   /* Mobile: keep the bottle photo inside its visual slot so it can't overflow
      down into the copy. Kept here (not theme.css) so it can't be clobbered. */
   @media (max-width: 900px){
