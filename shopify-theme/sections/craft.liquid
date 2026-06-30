@@ -25,6 +25,14 @@
 </div>
 
 {% style %}
+  /* The sticky watermark word shares the left column with the chapter image.
+     On narrow-desktop widths the image rides over the word and it reads as
+     broken, so hide the decorative watermark up to 1200px — large screens keep
+     the effect, everything below gets the clean image-led layout. */
+  @media (max-width: 1200px){
+    #craft .sticky-word{ display: none !important; }
+  }
+
   /* Mobile + landscape phones: turn off the desktop sticky-scroll mechanic and
      lay each chapter out as a simple vertical block — image on top, text below. */
   @media (max-width: 1024px){
