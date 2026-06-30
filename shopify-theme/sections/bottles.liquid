@@ -12,6 +12,17 @@
     background:var(--ink); color:var(--cream); transform:translateY(-1px);
   }
   .bottles-section .ce-visual-word{ bottom:2.5rem !important; }
+
+  /* Mobile: keep the bottle photo inside its visual slot so it can't overflow
+     down into the copy. Kept here (not theme.css) so it can't be clobbered. */
+  @media (max-width: 900px){
+    .bottles-section .ce-visual{ overflow: hidden; }
+    .bottles-section .ce-main-shot{ height: 100%; padding: 1rem; box-sizing: border-box; }
+    .bottles-section .ce-bottle-img{
+      max-height: 100% !important;
+      max-width: 70% !important;
+    }
+  }
 </style>
 <section class="bottles-section" id="mezcals" data-nav="light" data-bg="bg-cream" data-mf-color="#F3E6D1"{% if section.settings.section_bg != blank %} style="background:{{ section.settings.section_bg }}"{% endif %}>
 <div class="bottles-selector">
