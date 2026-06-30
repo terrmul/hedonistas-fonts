@@ -59,6 +59,33 @@
     .hero-badge-year{ font-size: .58rem; letter-spacing: .12em; margin-bottom: .2rem; }
     .hero-badge-body{ max-width: 14ch; }
   }
+
+  /* Landscape phones / short viewports: the logo is sized inline (height in px)
+     so it stays huge in a short viewport and overlaps everything. Shrink it
+     (overriding the inline height), tighten the headline, and pin the badge to
+     the corner so it clears the locale text. */
+  @media (orientation: landscape) and (max-height: 600px){
+    .hero{ padding-bottom: 1.5rem; }
+    .hero-brand{ transform: none; }
+    .hero-logo{
+      height: clamp(48px, 17vh, 92px) !important;
+      margin-top: 0; margin-bottom: .7rem;
+    }
+    .hero-mid h1{ font-size: clamp(2rem, 11vh, 4.5rem); }
+    .hero-badge{
+      top: .7rem; right: .7rem;
+      min-width: 58px; max-width: 86px; padding: .55rem;
+      animation-delay: .6s;
+    }
+    .hero-badge-top,
+    .hero-badge-body{ font-size: .48rem; letter-spacing: .08em; }
+    .hero-badge-medal{ font-size: .7rem; margin: .12rem 0 .18rem; }
+    .hero-badge-year{ font-size: .48rem; letter-spacing: .08em; margin-bottom: .12rem; }
+    .hero-badge-body{ max-width: 11ch; }
+    .hero-tagline{ font-size: .82rem; line-height: 1.5; }
+    .hero-locale p{ font-size: clamp(1rem, 4.5vh, 1.7rem); }
+    .hero-cue{ margin-top: .5rem; }
+  }
 {% endstyle %}
 
 {%- if section.blocks.size > 1 -%}
