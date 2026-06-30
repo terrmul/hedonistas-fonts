@@ -1,4 +1,9 @@
 <!-- MAESTRO MEZCALERO -->
+<style>
+  /* Hide the 4px raspberry accent bar the theme draws at the top of this
+     section. Kept here so a theme.css paste can't reintroduce it. */
+  .maestro::before{ display: none !important; }
+</style>
 <section class="maestro" id="maestro" data-bg="bg-raspberry">
   {%- if section.settings.portrait != blank -%}
     <div class="maestro-portrait-bg" style="background-image:url('{{ section.settings.portrait | image_url: width: 1600 }}');background-size:cover;background-position:{{ section.settings.focus_x }}% {{ section.settings.focus_y }}%"></div>
