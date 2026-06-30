@@ -4,6 +4,26 @@
      fixed frosted nav bar instead of being hidden behind it. ~74px = bar height. */
   html{ scroll-padding-top: 4.6rem; }
 
+  /* Accessibility skip-link: visually hidden until keyboard-focused. Without
+     this it renders as a ~20px line at the top of the page (the cream "band"
+     above the hero). Kept here so a theme.css paste can't drop it again. */
+  .skip-link{
+    position:absolute !important;
+    left:-9999px !important; top:auto !important;
+    width:1px !important; height:1px !important;
+    overflow:hidden !important;
+    white-space:nowrap !important;
+  }
+  .skip-link:focus{
+    position:fixed !important; left:1rem !important; top:1rem !important;
+    width:auto !important; height:auto !important;
+    z-index:100001 !important; overflow:visible !important;
+    background:var(--cream,#F3E6D1); color:var(--ink,#1a1716);
+    padding:.75rem 1.25rem; border-radius:100px;
+    font-family:"metallophile-sp8",sans-serif; font-size:.8rem; letter-spacing:.1em;
+    box-shadow:0 8px 24px -8px rgba(0,0,0,.4);
+  }
+
   /* Self-contained mobile nav: hide inline links, show hamburger, full drawer.
      Scoped with #ids/!important so it wins regardless of theme.css state. */
   #nav-drawer{
