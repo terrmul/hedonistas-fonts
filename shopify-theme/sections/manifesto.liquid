@@ -28,6 +28,25 @@
     #manifesto .mf-finale-line.pair-top.dim { opacity: .4 !important; }
     #manifesto .mf-finale-lines { margin-bottom: 2.5rem; grid-template-columns: minmax(0, 1fr); justify-items: center; }
     #manifesto .mf-poem-finale-call { font-size: clamp(2.4rem, 6vw, 5rem); line-height: .9; }
+
+    /* DESKTOP Panel 2 layout. The theme's desktop CSS targets class names this
+       markup doesn't use (mf-p2-quote-wrap / mf-p2-lower / mf-p2-body-wrap), so
+       Panel 2 had no desktop layout and collapsed to a single unpadded column.
+       Restore a proper two-column layout (copy left, image right) that mirrors
+       Panel 1, using the classes that are actually in the markup. */
+    @media(min-width:921px){
+      #manifesto .mf-panel--2{
+        grid-template-columns: 1fr 55% !important;
+        min-height: 80vh;
+      }
+      #manifesto .mf-p2-copy{
+        display: flex; flex-direction: column; justify-content: center;
+        padding: 5rem 4rem;
+        order: 1;
+      }
+      #manifesto .mf-p2-media{ order: 2; min-height: 80vh; }
+    }
+
     @media(max-width:920px){
       #manifesto .mf-panel--1,
       #manifesto .mf-panel--2{
