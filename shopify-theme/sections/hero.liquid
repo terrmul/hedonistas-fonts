@@ -4,9 +4,9 @@
     <div class="hero-video-carousel" id="hero-video-carousel">
       {%- for block in section.blocks -%}
         {%- if block.settings.video != blank -%}
-          <video class="hero-video-bg{% if forloop.first %} is-active{% endif %}" autoplay muted playsinline{% if section.blocks.size == 1 %} loop{% endif %} {{ block.shopify_attributes }}>
+          <video class="hero-video-bg{% if forloop.first %} is-active{% endif %}" muted playsinline preload="none" data-autoload{% if section.blocks.size == 1 %} loop{% endif %}{% if section.settings.poster_image != blank %} poster="{{ section.settings.poster_image | image_url: width: 1600 }}"{% endif %} {{ block.shopify_attributes }}>
             {%- for source in block.settings.video.sources -%}
-              <source src="{{ source.url }}" type="{{ source.mime_type }}">
+              <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
             {%- endfor -%}
           </video>
         {%- endif -%}
@@ -88,6 +88,32 @@
   }
 {% endstyle %}
 
+<script>
+(function(){
+  /* Load the heavy background video AFTER the page is interactive so it never
+     blocks first paint. The poster image shows immediately. */
+  function loadHeroVideos(){
+    var vids = document.querySelectorAll('.hero-video-bg[data-autoload]');
+    if(!vids.length) return;
+    vids.forEach(function(v){
+      v.querySelectorAll('source[data-src]').forEach(function(s){
+        if(!s.src) s.src = s.getAttribute('data-src');
+      });
+      try{ v.load(); }catch(e){}
+      if(v.classList.contains('is-active')){
+        var p = v.play(); if(p && p.catch) p.catch(function(){});
+      }
+    });
+  }
+  function schedule(){
+    if('requestIdleCallback' in window){ requestIdleCallback(loadHeroVideos, { timeout: 2500 }); }
+    else { setTimeout(loadHeroVideos, 800); }
+  }
+  if(document.readyState === 'complete'){ schedule(); }
+  else { window.addEventListener('load', schedule); }
+})();
+</script>
+
 {%- if section.blocks.size > 1 -%}
 <script>
 (function(){
@@ -100,8 +126,8 @@
     videos[current].classList.remove('is-active');
     current = (current + 1) % videos.length;
     var nxt = videos[current];
-    nxt.currentTime = 0;
-    nxt.play();
+    try{ nxt.currentTime = 0; }catch(e){}
+    var p = nxt.play(); if(p && p.catch) p.catch(function(){});
     nxt.classList.add('is-active');
   }
   videos.forEach(function(v){ v.addEventListener('ended', showNext); });
@@ -118,6 +144,8 @@
     { "type": "text", "id": "logo_alt", "label": "Logo alt text", "default": "Hedonistas Mezcal" },
     { "type": "range", "id": "logo_size", "label": "Logo size", "min": 60, "max": 600, "step": 10, "unit": "px", "default": 180 },
     { "type": "text", "id": "backdrop_word", "label": "Oversized backdrop word", "default": "Hedonistas" },
+    { "type": "header", "content": "Background video" },
+    { "type": "image_picker", "id": "poster_image", "label": "Video poster (still frame shown while the video loads)", "info": "Strongly recommended for speed — a single still image instead of a blank hero while the video downloads." },
     { "type": "header", "content": "Headline (use // for a line break)" },
     { "type": "text", "id": "heading_1", "label": "Headline line 1", "default": "Go" },
     { "type": "text", "id": "heading_2", "label": "Headline line 2", "default": "Deep." },
