@@ -38,7 +38,9 @@
     box-shadow:none;
   }
   #nav-drawer.open{
-    max-height:100vh;
+    max-height:100dvh;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
     box-shadow:0 12px 32px -8px rgba(0,0,0,.45);
   }
   #nav-drawer a{
@@ -50,6 +52,7 @@
     transition:color .2s,background .2s;
   }
   #nav-drawer a:first-child{padding-top:5.5rem}
+  #nav-drawer a:last-child{ padding-bottom:1.4rem; }
   #nav-drawer a:hover{color:var(--raspberry);background:rgba(26,23,22,.04)}
 
   #mainnav .nav-hamburger{
