@@ -16,6 +16,9 @@ nav img.nav-icon{filter:brightness(0)!important}
 .pdp-page .ce-copy{ padding-top:1.5rem; }
 .pdp-page .ce-visual-word{ bottom:2.5rem !important; }
 
+/* Click-to-zoom affordance */
+.pdp-page .ce-bottle-img{ cursor:zoom-in; }
+
 /* The Collection back link — match the Full Details pill (lighter shade) */
 .pdp-page .pdp-back{
   display:inline-flex; align-items:center; gap:.4rem;
@@ -29,6 +32,30 @@ nav img.nav-icon{filter:brightness(0)!important}
 .pdp-page .pdp-back:hover{
   background:var(--ink); color:var(--cream); transform:translateY(-1px);
 }
+
+/* Click-to-zoom lightbox (shared markup id; hidden via [hidden] so it never
+   covers the page or captures the cursor when closed) */
+#ce-lightbox{
+  position: fixed; inset: 0; z-index: 100050;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(26,23,22,.9);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  padding: 5vmin; cursor: zoom-out;
+  opacity: 0; transition: opacity .25s ease;
+}
+#ce-lightbox[hidden]{ display: none !important; }
+#ce-lightbox.open{ opacity: 1; }
+#ce-lightbox img{
+  max-width: 92vw; max-height: 92vh; object-fit: contain;
+  cursor: default; border-radius: 8px;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,.7);
+}
+#ce-lightbox .ce-lightbox-close{
+  position: absolute; top: 1.1rem; right: 1.6rem;
+  background: none; border: 0; color: var(--cream,#F3E6D1);
+  font-size: 2.6rem; line-height: 1; cursor: pointer; padding: .2rem .4rem;
+}
+body.ce-zoom-open{ overflow: hidden; }
 
 @media(max-width:767px){
   .pdp-page .bottles-selector{min-height:unset}
@@ -54,28 +81,28 @@ nav img.nav-icon{filter:brightness(0)!important}
           <div class="ce-visual-word">{{ section.settings.name | escape }}</div>
           <div class="ce-main-shot">
             {%- if section.settings.bottle_image != blank -%}
-              <img class="ce-bottle-img" id="pdp-hero-img" src="{{ section.settings.bottle_image | image_url: width: 700 }}" alt="{{ section.settings.name | escape }} bottle" decoding="async">
+              <img class="ce-bottle-img" id="pdp-hero-img" src="{{ section.settings.bottle_image | image_url: width: 700 }}" data-zoom="{{ section.settings.bottle_image | image_url: width: 1600 }}" alt="{{ section.settings.name | escape }} bottle" decoding="async">
             {%- else -%}
               <div class="b-shape" style="background:rgba(26,23,22,.2);width:88px;height:280px"></div>
             {%- endif -%}
           </div>
           <div class="ce-shots">
             {%- if section.settings.bottle_image != blank -%}
-              <div class="ce-shot-thumb active" data-shot="{{ section.settings.bottle_image | image_url: width: 700 }}">
+              <div class="ce-shot-thumb active" data-shot="{{ section.settings.bottle_image | image_url: width: 700 }}" data-zoom="{{ section.settings.bottle_image | image_url: width: 1600 }}">
                 <img src="{{ section.settings.bottle_image | image_url: width: 120 }}" alt="Front" loading="lazy" decoding="async">
               </div>
             {%- else -%}
               <div class="ce-shot-thumb active"><div class="ce-shot-label">Front</div></div>
             {%- endif -%}
             {%- if section.settings.shot_2_image != blank -%}
-              <div class="ce-shot-thumb" data-shot="{{ section.settings.shot_2_image | image_url: width: 700 }}">
+              <div class="ce-shot-thumb" data-shot="{{ section.settings.shot_2_image | image_url: width: 700 }}" data-zoom="{{ section.settings.shot_2_image | image_url: width: 1600 }}">
                 <img src="{{ section.settings.shot_2_image | image_url: width: 120 }}" alt="Back" loading="lazy" decoding="async">
               </div>
             {%- else -%}
               <div class="ce-shot-thumb"><div class="ce-shot-label">Back</div></div>
             {%- endif -%}
             {%- if section.settings.shot_3_image != blank -%}
-              <div class="ce-shot-thumb" data-shot="{{ section.settings.shot_3_image | image_url: width: 700 }}">
+              <div class="ce-shot-thumb" data-shot="{{ section.settings.shot_3_image | image_url: width: 700 }}" data-zoom="{{ section.settings.shot_3_image | image_url: width: 1600 }}">
                 <img src="{{ section.settings.shot_3_image | image_url: width: 120 }}" alt="Style" loading="lazy" decoding="async">
               </div>
             {%- else -%}
@@ -161,16 +188,58 @@ nav img.nav-icon{filter:brightness(0)!important}
   </div>
 </section>
 
+<div id="ce-lightbox" aria-hidden="true" hidden>
+  <button class="ce-lightbox-close" type="button" aria-label="Close">&times;</button>
+  <img alt="">
+</div>
+
 <script>
 (function(){
   var hero = document.getElementById('pdp-hero-img');
+
+  /* lightbox */
+  var lb = document.getElementById('ce-lightbox');
+  var lbImg = lb ? lb.querySelector('img') : null;
+  function openLB(src, alt){
+    if(!lb || !lbImg || !src) return;
+    lbImg.src = src; lbImg.alt = alt || '';
+    lb.hidden = false;
+    requestAnimationFrame(function(){ lb.classList.add('open'); });
+    document.body.classList.add('ce-zoom-open');
+  }
+  function closeLB(){
+    if(!lb) return;
+    lb.classList.remove('open');
+    document.body.classList.remove('ce-zoom-open');
+    setTimeout(function(){ lb.hidden = true; if(lbImg) lbImg.src = ''; }, 250);
+  }
+  if(lb){
+    lb.addEventListener('click', function(e){
+      if(e.target === lb || e.target.closest('.ce-lightbox-close')) closeLB();
+    });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLB(); });
+  }
+
+  /* thumbnails swap the main image (no zoom) */
   document.querySelectorAll('.pdp-page .ce-shot-thumb[data-shot]').forEach(function(thumb){
     thumb.addEventListener('click', function(){
-      if(hero) hero.src = thumb.dataset.shot;
+      if(hero){
+        hero.src = thumb.dataset.shot;
+        if(thumb.dataset.zoom) hero.setAttribute('data-zoom', thumb.dataset.zoom);
+      }
       document.querySelectorAll('.pdp-page .ce-shot-thumb').forEach(function(t){ t.classList.remove('active'); });
       thumb.classList.add('active');
     });
   });
+
+  /* zoom opens only when the main image itself is clicked */
+  if(hero){
+    hero.addEventListener('click', function(){
+      openLB(hero.getAttribute('data-zoom') || hero.src, hero.alt);
+    });
+  }
+
+  /* tabs */
   document.querySelectorAll('.pdp-page .ce-tab').forEach(function(tab){
     tab.addEventListener('click', function(){
       var t = tab.dataset.tab;
