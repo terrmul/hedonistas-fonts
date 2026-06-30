@@ -36,6 +36,13 @@
     height:3.4rem !important; min-height:0 !important; box-sizing:border-box;
     display:inline-flex; align-items:center; justify-content:center;
   }
+  .deep-social .deep-form button[disabled]{ opacity:.6; cursor:default; }
+
+  /* Subscribe confirmation / error message */
+  .deep-social .deep-form-msg{
+    font-family:"metallophile-sp8",sans-serif; font-size:.95rem; line-height:1.4;
+    margin:0; letter-spacing:.02em;
+  }
 
   /* Mobile: stack full-width, natural height */
   @media(max-width:900px){
@@ -88,7 +95,59 @@
   <!-- Newsletter sign-up (below the images, left-aligned) -->
   <div class="deep-newsletter reveal">
     <h2>{{ section.settings.newsletter_heading | escape }}</h2>
-    {%- if section.settings.newsletter_url != blank -%}
+    {%- if section.settings.klaviyo_public_key != blank and section.settings.klaviyo_list_id != blank -%}
+      <form class="deep-form" id="klaviyo-subscribe" novalidate
+        data-company="{{ section.settings.klaviyo_public_key | escape }}"
+        data-list="{{ section.settings.klaviyo_list_id | escape }}"
+        data-success="{{ section.settings.newsletter_success | escape }}">
+        <input type="email" name="email" required placeholder="{{ section.settings.newsletter_placeholder | escape }}" aria-label="Email address" autocomplete="email"><button type="submit">{{ section.settings.newsletter_button | escape }}</button>
+      </form>
+      <p class="deep-form-msg" id="klaviyo-msg" role="status" aria-live="polite" hidden></p>
+      <script>
+      (function(){
+        var form = document.getElementById('klaviyo-subscribe');
+        if(!form || form.dataset.bound) return;
+        form.dataset.bound = '1';
+        var msg = document.getElementById('klaviyo-msg');
+        function show(text, ok){
+          if(!msg) return;
+          msg.textContent = text;
+          msg.hidden = false;
+          msg.style.color = ok ? 'var(--cactus, #286140)' : 'var(--hibiscus, #AF2E56)';
+        }
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          var input = form.querySelector('input[type=email]');
+          var email = (input && input.value || '').trim();
+          if(!email){ show('Please enter your email.', false); return; }
+          var btn = form.querySelector('button');
+          if(btn) btn.disabled = true;
+          fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(form.dataset.company), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'revision': '2024-10-15' },
+            body: JSON.stringify({
+              data: {
+                type: 'subscription',
+                attributes: { profile: { data: { type: 'profile', attributes: { email: email } } } },
+                relationships: { list: { data: { type: 'list', id: form.dataset.list } } }
+              }
+            })
+          }).then(function(r){
+            if(r.ok || r.status === 202){
+              show(form.dataset.success || 'You’re subscribed.', true);
+              form.reset();
+            } else {
+              show('Something went wrong — please try again.', false);
+            }
+          }).catch(function(){
+            show('Something went wrong — please try again.', false);
+          }).then(function(){
+            if(btn) btn.disabled = false;
+          });
+        });
+      })();
+      </script>
+    {%- elsif section.settings.newsletter_url != blank -%}
       <form class="deep-form" action="{{ section.settings.newsletter_url }}" method="post" target="_blank">
         <input type="email" name="email" placeholder="{{ section.settings.newsletter_placeholder | escape }}" aria-label="Email address" autocomplete="email"><button type="submit">{{ section.settings.newsletter_button | escape }}</button>
       </form>
@@ -141,7 +200,13 @@
     { "type": "text", "id": "newsletter_heading", "label": "Heading", "default": "Go Deeper." },
     { "type": "text", "id": "newsletter_placeholder", "label": "Input placeholder", "default": "Your email address" },
     { "type": "text", "id": "newsletter_button", "label": "Button label", "default": "Subscribe" },
-    { "type": "url", "id": "newsletter_url", "label": "External form action (Klaviyo/Mailchimp)", "info": "Leave blank to use Shopify's built-in customer signup." }
+    { "type": "text", "id": "newsletter_success", "label": "Success message", "default": "You’re subscribed. Welcome to the ritual." },
+    { "type": "header", "content": "Klaviyo (recommended)" },
+    { "type": "paragraph", "content": "Connects the form directly to a Klaviyo list. Both values are the public/safe ones from your Klaviyo account." },
+    { "type": "text", "id": "klaviyo_public_key", "label": "Klaviyo Public API Key (Site ID)", "default": "WU5u94" },
+    { "type": "text", "id": "klaviyo_list_id", "label": "Klaviyo List ID", "default": "VDmga8" },
+    { "type": "header", "content": "Other provider (only if not using Klaviyo)" },
+    { "type": "url", "id": "newsletter_url", "label": "External form action (Mailchimp/etc.)", "info": "Used only if the Klaviyo fields above are empty. Leave blank to fall back to Shopify's built-in signup." }
   ],
   "presets": [
     { "name": "Social + Newsletter" }
