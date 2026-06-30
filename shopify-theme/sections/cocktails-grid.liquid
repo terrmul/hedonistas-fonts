@@ -1,4 +1,4 @@
-<!-- ALL COCKTAILS — full-page filterable grid -->
+<!-- ALL COCKTAILS — full-page filterable grid + print-to-PDF book -->
 <style>
   /* nav readable on this light page */
   nav, nav.nav-scrolled, nav.nav-on-hero{
@@ -23,6 +23,16 @@
   .cg-eyebrow{ font-family:"metallophile-sp8",sans-serif; font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; color:var(--rust,#7C3A09); margin-bottom:.8rem; }
   .cg-title{ font-family:'Pacifico',serif; text-transform:uppercase; font-size:clamp(2.4rem,6vw,4.5rem); line-height:1; margin:0 0 .8rem; }
   .cg-sub{ font-family:"metallophile-sp8",sans-serif; font-size:1.02rem; line-height:1.6; color:var(--smoke,#4F4E4F); margin:0; }
+
+  .cg-actions{ display:flex; justify-content:center; margin:1.4rem 0 0; }
+  .cg-print-btn{
+    display:inline-flex; align-items:center; gap:.5rem;
+    background:var(--ink,#1a1716); color:var(--cream,#F3E6D1);
+    border:none; cursor:pointer; text-decoration:none;
+    font-family:"metallophile-sp8",sans-serif; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; font-weight:500;
+    border-radius:100px; padding:.7rem 1.5rem; transition:background .25s;
+  }
+  .cg-print-btn:hover{ background:var(--copper,#C65602); }
 
   .cg-filters{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin:1.8rem 0 2.6rem; }
   .cg-filter{
@@ -65,6 +75,7 @@
     background:rgba(26,23,22,.9); color:var(--cream,#F3E6D1);
     display:flex; flex-direction:column; justify-content:flex-end;
     transform:translateY(101%); transition:transform .45s cubic-bezier(.4,0,.2,1);
+    overflow-y:auto;
   }
   .cg-card:hover .cg-recipe, .cg-card.open .cg-recipe{ transform:none; }
   .cg-card:hover .cg-front, .cg-card.open .cg-front{ opacity:0; transform:translateY(10px); }
@@ -72,7 +83,8 @@
   .cg-recipe ul{ list-style:none; padding:0; margin:0 0 .8rem; }
   .cg-recipe li{ font-family:"metallophile-sp8",sans-serif; font-size:.82rem; line-height:1.5; color:rgba(243,230,209,.9); padding-left:.9rem; position:relative; }
   .cg-recipe li::before{ content:'·'; position:absolute; left:0; color:var(--solar,#DBB149); }
-  .cg-method{ font-family:"metallophile-sp8",sans-serif; font-size:.68rem; letter-spacing:.06em; color:var(--solar,#DBB149); text-transform:uppercase; margin-bottom:.9rem; }
+  .cg-method{ font-family:"metallophile-sp8",sans-serif; font-size:.68rem; letter-spacing:.06em; color:var(--solar,#DBB149); text-transform:uppercase; margin-bottom:.6rem; }
+  .cg-steps{ font-family:"metallophile-sp8",sans-serif; font-size:.8rem; line-height:1.55; color:rgba(243,230,209,.88); margin:0 0 .9rem; }
   .cg-recipe a{
     align-self:flex-start; text-decoration:none; background:var(--cream,#F3E6D1); color:var(--ink,#1a1716);
     font-family:"metallophile-sp8",sans-serif; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; font-weight:500;
@@ -86,6 +98,53 @@
     .cg-grid{ grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:.9rem; }
     .cg-name{ font-size:1.2rem; }
   }
+
+  /* ===== PRINT-TO-PDF BOOK (hidden on screen) ===== */
+  .cg-print{ display:none; }
+
+  @media print{
+    /* hide everything on screen except the book */
+    nav, .nav-drawer, #grain, #bg-overlay, footer,
+    .cg, .cg-actions, .cg-filters{ display:none !important; }
+
+    html, body{ background:#fff !important; }
+    .cg-print{ display:block !important; color:#1a1716; }
+
+    @page{ margin:14mm; }
+
+    .cgp-cover{
+      text-align:center;
+      min-height:88vh;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      page-break-after:always; break-after:page;
+    }
+    .cgp-cover-eyebrow{ font-family:"metallophile-sp8",sans-serif; font-size:11pt; letter-spacing:.24em; text-transform:uppercase; color:#7C3A09; margin-bottom:1rem; }
+    .cgp-cover-title{ font-family:'Pacifico',serif; text-transform:uppercase; font-size:42pt; line-height:1; margin:0 0 1rem; color:#1a1716; }
+    .cgp-cover-sub{ font-family:"metallophile-sp8",sans-serif; font-size:12pt; line-height:1.5; max-width:34em; margin:0 auto 2rem; color:#4F4E4F; }
+    .cgp-cover-mark{ font-family:"metallophile-sp8",sans-serif; font-size:10pt; letter-spacing:.3em; text-transform:uppercase; color:#1a1716; }
+
+    .cgp-item{
+      page-break-inside:avoid; break-inside:avoid;
+      page-break-after:always; break-after:page;
+      padding-top:.4rem;
+    }
+    .cgp-item:last-child{ page-break-after:auto; break-after:auto; }
+    .cgp-img{ width:100%; height:74mm; overflow:hidden; border-radius:6px; margin-bottom:8mm; }
+    .cgp-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .cgp-cat{ font-family:"metallophile-sp8",sans-serif; font-size:9pt; letter-spacing:.2em; text-transform:uppercase; color:#91610C; margin-bottom:.4rem; }
+    .cgp-name{ font-family:'Pacifico',serif; text-transform:uppercase; font-size:26pt; line-height:1; margin:0 0 .4rem; color:#1a1716; }
+    .cgp-spirit{ font-family:"metallophile-sp8",sans-serif; font-size:10pt; color:#4F4E4F; margin-bottom:6mm; }
+    .cgp-cols{ display:flex; gap:10mm; align-items:flex-start; }
+    .cgp-ing{ flex:0 0 38%; }
+    .cgp-steps-col{ flex:1; }
+    .cgp-h{ font-family:"metallophile-sp8",sans-serif; font-size:9pt; letter-spacing:.18em; text-transform:uppercase; color:#7C3A09; border-bottom:1px solid rgba(26,23,22,.25); padding-bottom:.3rem; margin:0 0 .6rem; }
+    .cgp-ing ul{ list-style:none; padding:0; margin:0; }
+    .cgp-ing li{ font-family:"metallophile-sp8",sans-serif; font-size:11pt; line-height:1.7; color:#1a1716; padding-left:1rem; position:relative; }
+    .cgp-ing li::before{ content:'—'; position:absolute; left:0; color:#C65602; }
+    .cgp-method{ font-family:"metallophile-sp8",sans-serif; font-size:11pt; line-height:1.6; color:#1a1716; margin:0 0 4mm; }
+    .cgp-method b{ color:#7C3A09; }
+    .cgp-instructions{ font-family:"metallophile-sp8",sans-serif; font-size:11pt; line-height:1.7; color:#1a1716; margin:0; }
+  }
 </style>
 
 <section class="cg" id="cocktails-page" data-nav="light">
@@ -95,6 +154,15 @@
       <h1 class="cg-title">{{ section.settings.heading | escape }}</h1>
       {%- if section.settings.subheading != blank -%}<p class="cg-sub">{{ section.settings.subheading | escape }}</p>{%- endif -%}
     </div>
+
+    {%- if section.settings.show_print_button -%}
+      <div class="cg-actions">
+        <button type="button" class="cg-print-btn" id="cg-print-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          {{ section.settings.print_button_label | default: 'Download the Cocktail Book (PDF)' | escape }}
+        </button>
+      </div>
+    {%- endif -%}
 
     <div class="cg-filters" id="cg-filters">
       <button class="cg-filter active" data-filter="all">All</button>
@@ -130,6 +198,7 @@
               {%- if block.settings.ingredient_5 != blank -%}<li>{{ block.settings.ingredient_5 | escape }}</li>{%- endif -%}
             </ul>
             {%- if block.settings.method != blank -%}<div class="cg-method">{{ block.settings.method | escape }}</div>{%- endif -%}
+            {%- if block.settings.instructions != blank -%}<div class="cg-steps">{{ block.settings.instructions | escape | newline_to_br }}</div>{%- endif -%}
             {%- if block.settings.recipe_url != blank -%}<a href="{{ block.settings.recipe_url }}">{{ section.settings.recipe_button | default: 'Full Recipe' | escape }}</a>{%- endif -%}
           </div>
         </article>
@@ -139,6 +208,49 @@
   </div>
 </section>
 
+<!-- PRINT-ONLY BOOK: same blocks, shown only when printing -->
+<div class="cg-print" aria-hidden="true">
+  <div class="cgp-cover">
+    {%- if section.settings.eyebrow != blank -%}<div class="cgp-cover-eyebrow">{{ section.settings.eyebrow | escape }}</div>{%- endif -%}
+    <div class="cgp-cover-title">{{ section.settings.heading | escape }}</div>
+    {%- if section.settings.subheading != blank -%}<div class="cgp-cover-sub">{{ section.settings.subheading | escape }}</div>{%- endif -%}
+    <div class="cgp-cover-mark">{{ section.settings.print_footer | default: 'Hedonistas Mezcal' | escape }}</div>
+  </div>
+
+  {%- for block in section.blocks -%}
+    <article class="cgp-item">
+      {%- if block.settings.image != blank -%}
+        <div class="cgp-img"><img src="{{ block.settings.image | image_url: width: 1400 }}" alt="{{ block.settings.name | escape }}"></div>
+      {%- endif -%}
+      {%- if block.settings.category_label != blank -%}<div class="cgp-cat">{{ block.settings.category_label | escape }}</div>{%- endif -%}
+      <div class="cgp-name">{{ block.settings.name | escape }}</div>
+      {%- if block.settings.spirit != blank -%}<div class="cgp-spirit">Base spirit · {{ block.settings.spirit | escape }}</div>{%- endif -%}
+      <div class="cgp-cols">
+        <div class="cgp-ing">
+          <div class="cgp-h">Ingredients</div>
+          <ul>
+            {%- if block.settings.ingredient_1 != blank -%}<li>{{ block.settings.ingredient_1 | escape }}</li>{%- endif -%}
+            {%- if block.settings.ingredient_2 != blank -%}<li>{{ block.settings.ingredient_2 | escape }}</li>{%- endif -%}
+            {%- if block.settings.ingredient_3 != blank -%}<li>{{ block.settings.ingredient_3 | escape }}</li>{%- endif -%}
+            {%- if block.settings.ingredient_4 != blank -%}<li>{{ block.settings.ingredient_4 | escape }}</li>{%- endif -%}
+            {%- if block.settings.ingredient_5 != blank -%}<li>{{ block.settings.ingredient_5 | escape }}</li>{%- endif -%}
+          </ul>
+        </div>
+        <div class="cgp-steps-col">
+          {%- if block.settings.method != blank -%}
+            <div class="cgp-h">Method</div>
+            <p class="cgp-method">{{ block.settings.method | escape }}</p>
+          {%- endif -%}
+          {%- if block.settings.instructions != blank -%}
+            <div class="cgp-h">Instructions</div>
+            <p class="cgp-instructions">{{ block.settings.instructions | escape | newline_to_br }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </article>
+  {%- endfor -%}
+</div>
+
 <script>
 (function(){
   var root = document.getElementById('cocktails-page');
@@ -146,6 +258,10 @@
   var grid = document.getElementById('cg-grid');
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.cg-card'));
   var empty = document.getElementById('cg-empty');
+
+  // print button
+  var printBtn = document.getElementById('cg-print-btn');
+  if(printBtn){ printBtn.addEventListener('click', function(){ window.print(); }); }
 
   // scroll reveal (staggered)
   if('IntersectionObserver' in window){
@@ -201,7 +317,11 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Crafted with Hedonistas" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "The Cocktail Book" },
     { "type": "text", "id": "subheading", "label": "Subheading", "default": "Every signature serve, in one place. Filter by style, tap a card for the recipe." },
-    { "type": "text", "id": "recipe_button", "label": "Per-card button text", "default": "Full Recipe" }
+    { "type": "text", "id": "recipe_button", "label": "Per-card button text", "default": "Full Recipe" },
+    { "type": "header", "content": "PDF / Print Book" },
+    { "type": "checkbox", "id": "show_print_button", "label": "Show download-PDF button", "default": true },
+    { "type": "text", "id": "print_button_label", "label": "PDF button text", "default": "Download the Cocktail Book (PDF)" },
+    { "type": "text", "id": "print_footer", "label": "PDF cover signature", "default": "Hedonistas Mezcal" }
   ],
   "blocks": [
     {
@@ -219,6 +339,7 @@
         { "type": "text", "id": "ingredient_4", "label": "Ingredient 4" },
         { "type": "text", "id": "ingredient_5", "label": "Ingredient 5" },
         { "type": "text", "id": "method", "label": "Method line" },
+        { "type": "textarea", "id": "instructions", "label": "Instructions (full steps)", "info": "Step-by-step shown in the recipe panel and the printable PDF book. One step per line." },
         { "type": "url", "id": "recipe_url", "label": "Full-recipe link" }
       ]
     }
