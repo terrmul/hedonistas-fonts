@@ -48,7 +48,7 @@
   </div>
 
   <div class="ck-footer">
-    <div class="ck-count"><span class="ck-count-shown"><span id="ck-visible-count">{{ section.blocks.size }}</span> {{ section.settings.count_suffix | escape }}</span><a class="ck-count-dl" href="{{ section.settings.pdf_url }}">{{ section.settings.pdf_label | escape }}</a></div>
+    <div class="ck-count"><span class="ck-count-shown"><span id="ck-visible-count">{{ section.blocks.size }}</span> {{ section.settings.count_suffix | escape }}</span></div>
     <div class="ck-scroll-hint">{{ section.settings.scroll_hint | escape }}</div>
   </div>
 </section>
@@ -76,8 +76,6 @@
     { "type": "text", "id": "recipe_button", "label": "Per-card button text", "default": "Full Recipe" },
     { "type": "header", "content": "Footer" },
     { "type": "text", "id": "count_suffix", "label": "Count suffix", "default": "cocktails · shuffled each visit" },
-    { "type": "text", "id": "pdf_label", "label": "PDF link text", "default": "Download Full Menu PDF" },
-    { "type": "url", "id": "pdf_url", "label": "PDF link" },
     { "type": "text", "id": "scroll_hint", "label": "Scroll hint", "default": "← Drag to explore →" }
   ],
   "blocks": [
@@ -129,4 +127,5 @@
     }
   ]
 }
+{% endschema %}
 {% endschema %}
