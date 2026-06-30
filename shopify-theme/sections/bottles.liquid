@@ -20,6 +20,7 @@
     max-height: min(90vh, 600px);
     width: auto; max-width: 90%;
     object-fit: contain;
+    cursor: zoom-in;
   }
   .bottles-section .ce-shots{
     position: absolute; left: 0; top: 0; bottom: 0; z-index: 3;
@@ -28,7 +29,7 @@
   }
   .bottles-section .ce-shot-thumb{
     width: 62px; aspect-ratio: 3/4; flex: 0 0 auto;
-    overflow: hidden; cursor: pointer;
+    overflow: hidden; cursor: zoom-in;
     border: 2px solid rgba(26,23,22,.15);
     opacity: .5;
     display: flex; align-items: center; justify-content: center;
@@ -54,6 +55,28 @@
       max-width: 70% !important;
     }
   }
+
+  /* Click-to-zoom lightbox (global; opened from the bottle or thumbnails) */
+  #ce-lightbox{
+    position: fixed; inset: 0; z-index: 100050;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(26,23,22,.9);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    padding: 5vmin; cursor: zoom-out;
+    opacity: 0; transition: opacity .25s ease;
+  }
+  #ce-lightbox.open{ opacity: 1; }
+  #ce-lightbox img{
+    max-width: 92vw; max-height: 92vh; object-fit: contain;
+    cursor: default; border-radius: 8px;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,.7);
+  }
+  #ce-lightbox .ce-lightbox-close{
+    position: absolute; top: 1.1rem; right: 1.6rem;
+    background: none; border: 0; color: var(--cream,#F3E6D1);
+    font-size: 2.6rem; line-height: 1; cursor: pointer; padding: .2rem .4rem;
+  }
+  body.ce-zoom-open{ overflow: hidden; }
 </style>
 <section class="bottles-section" id="mezcals" data-nav="light" data-bg="bg-cream" data-mf-color="#F3E6D1"{% if section.settings.section_bg != blank %} style="background:{{ section.settings.section_bg }}"{% endif %}>
 <div class="bottles-selector">
@@ -87,28 +110,28 @@
           <div class="ce-visual-word">{{ block.settings.name | escape }}</div>
           <div class="ce-main-shot">
             {%- if block.settings.bottle_image != blank -%}
-              <img class="ce-bottle-img" data-main-img src="{{ block.settings.bottle_image | image_url: width: 600 }}" alt="{{ block.settings.name | escape }} bottle" decoding="async">
+              <img class="ce-bottle-img" data-main-img src="{{ block.settings.bottle_image | image_url: width: 600 }}" data-zoom="{{ block.settings.bottle_image | image_url: width: 1600 }}" alt="{{ block.settings.name | escape }} bottle" decoding="async">
             {%- else -%}
               <div class="b-shape" style="background:rgba(26,23,22,.2);width:88px;height:280px"></div>
             {%- endif -%}
           </div>
           <div class="ce-shots">
             {%- if block.settings.bottle_image != blank -%}
-              <div class="ce-shot-thumb active" data-shot="{{ block.settings.bottle_image | image_url: width: 600 }}">
+              <div class="ce-shot-thumb active" data-shot="{{ block.settings.bottle_image | image_url: width: 600 }}" data-zoom="{{ block.settings.bottle_image | image_url: width: 1600 }}">
                 <img src="{{ block.settings.bottle_image | image_url: width: 120 }}" alt="Front" loading="lazy" decoding="async">
               </div>
             {%- else -%}
               <div class="ce-shot-thumb active"><div class="ce-shot-label">Front</div></div>
             {%- endif -%}
             {%- if block.settings.shot_2_image != blank -%}
-              <div class="ce-shot-thumb" data-shot="{{ block.settings.shot_2_image | image_url: width: 600 }}">
+              <div class="ce-shot-thumb" data-shot="{{ block.settings.shot_2_image | image_url: width: 600 }}" data-zoom="{{ block.settings.shot_2_image | image_url: width: 1600 }}">
                 <img src="{{ block.settings.shot_2_image | image_url: width: 120 }}" alt="Back" loading="lazy" decoding="async">
               </div>
             {%- else -%}
               <div class="ce-shot-thumb"><div class="ce-shot-label">Back</div></div>
             {%- endif -%}
             {%- if block.settings.shot_3_image != blank -%}
-              <div class="ce-shot-thumb" data-shot="{{ block.settings.shot_3_image | image_url: width: 600 }}">
+              <div class="ce-shot-thumb" data-shot="{{ block.settings.shot_3_image | image_url: width: 600 }}" data-zoom="{{ block.settings.shot_3_image | image_url: width: 1600 }}">
                 <img src="{{ block.settings.shot_3_image | image_url: width: 120 }}" alt="Style" loading="lazy" decoding="async">
               </div>
             {%- else -%}
@@ -159,18 +182,54 @@
 </div>
 </section>
 
+<div id="ce-lightbox" aria-hidden="true" hidden>
+  <button class="ce-lightbox-close" type="button" aria-label="Close">&times;</button>
+  <img alt="">
+</div>
+
 <script>
 (function(){
+  var lb = document.getElementById('ce-lightbox');
+  var lbImg = lb ? lb.querySelector('img') : null;
+  function openLB(src, alt){
+    if(!lb || !lbImg || !src) return;
+    lbImg.src = src; lbImg.alt = alt || '';
+    lb.hidden = false;
+    requestAnimationFrame(function(){ lb.classList.add('open'); });
+    document.body.classList.add('ce-zoom-open');
+  }
+  function closeLB(){
+    if(!lb) return;
+    lb.classList.remove('open');
+    document.body.classList.remove('ce-zoom-open');
+    setTimeout(function(){ lb.hidden = true; if(lbImg) lbImg.src = ''; }, 250);
+  }
+  if(lb){
+    lb.addEventListener('click', function(e){
+      if(e.target === lb || e.target.closest('.ce-lightbox-close')) closeLB();
+    });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLB(); });
+  }
+
   document.querySelectorAll('.ce-panel').forEach(function(panel){
+    var main = panel.querySelector('[data-main-img]');
     panel.querySelectorAll('.ce-shot-thumb[data-shot]').forEach(function(thumb){
       thumb.addEventListener('click', function(){
-        var main = panel.querySelector('[data-main-img]');
         if(!main) return;
+        // swap the main image to this shot (and track its zoom source)
         main.src = thumb.dataset.shot;
+        if(thumb.dataset.zoom) main.setAttribute('data-zoom', thumb.dataset.zoom);
         panel.querySelectorAll('.ce-shot-thumb').forEach(function(t){ t.classList.remove('active'); });
         thumb.classList.add('active');
+        // and open the large view
+        openLB(thumb.dataset.zoom || thumb.dataset.shot, 'Bottle');
       });
     });
+    if(main){
+      main.addEventListener('click', function(){
+        openLB(main.getAttribute('data-zoom') || main.src, main.alt);
+      });
+    }
   });
 })();
 </script>
