@@ -61,27 +61,27 @@
   }
 
   /* Landscape phones / short viewports: the logo is sized inline (height in px)
-     so it stays huge in a short viewport and overlaps everything. Shrink it
-     (overriding the inline height), tighten the headline, and pin the badge to
-     the corner so it clears the locale text. */
+     so it stays huge in a short viewport. Scale it down to fit (overriding the
+     inline height), tighten the headline, and drop the badge BELOW the nav bar
+     so it clears the hamburger. */
   @media (orientation: landscape) and (max-height: 600px){
     .hero{ padding-bottom: 1.5rem; }
     .hero-brand{ transform: none; }
     .hero-logo{
-      height: clamp(48px, 17vh, 92px) !important;
-      margin-top: 0; margin-bottom: .7rem;
+      height: clamp(80px, 26vh, 140px) !important;
+      margin-top: 0; margin-bottom: .8rem;
     }
     .hero-mid h1{ font-size: clamp(2rem, 11vh, 4.5rem); }
     .hero-badge{
-      top: .7rem; right: .7rem;
-      min-width: 58px; max-width: 86px; padding: .55rem;
+      top: clamp(4.5rem, 13vh, 6rem); right: .8rem;
+      min-width: 60px; max-width: 90px; padding: .6rem;
       animation-delay: .6s;
     }
     .hero-badge-top,
-    .hero-badge-body{ font-size: .48rem; letter-spacing: .08em; }
-    .hero-badge-medal{ font-size: .7rem; margin: .12rem 0 .18rem; }
-    .hero-badge-year{ font-size: .48rem; letter-spacing: .08em; margin-bottom: .12rem; }
-    .hero-badge-body{ max-width: 11ch; }
+    .hero-badge-body{ font-size: .5rem; letter-spacing: .08em; }
+    .hero-badge-medal{ font-size: .74rem; margin: .12rem 0 .18rem; }
+    .hero-badge-year{ font-size: .5rem; letter-spacing: .08em; margin-bottom: .12rem; }
+    .hero-badge-body{ max-width: 12ch; }
     .hero-tagline{ font-size: .82rem; line-height: 1.5; }
     .hero-locale p{ font-size: clamp(1rem, 4.5vh, 1.7rem); }
     .hero-cue{ margin-top: .5rem; }
