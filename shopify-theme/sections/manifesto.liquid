@@ -37,6 +37,8 @@
       transition:opacity .7s ease, transform .7s ease;
       text-transform:uppercase; line-height:1.05; padding:0 1rem;
     }
+    /* first line fades in slowly (duration adjustable in the Customizer) */
+    #manifesto .mf-finale-line:first-child{ transition-duration: {{ section.settings.finale_first_fade | default: 1.6 }}s; }
     #manifesto .mf-finale-line.on{ opacity:1; transform:none; }
     #manifesto .mf-finale-line.on.dim{ opacity:.4; }
     @media(max-width:640px){ #manifesto .mf-finale-line{ white-space:normal; } }
@@ -233,8 +235,10 @@
     var finaleLines = Array.prototype.slice.call(finaleEl.querySelectorAll('.mf-finale-line'));
     var finaleEnd = finaleEl.querySelector('.mf-finale-end');
     var started = false;
-    var HOLD = {{ section.settings.finale_line_speed | times: 1000 | round }};
+    var HOLD = {{ section.settings.finale_line_speed | default: 2.2 | times: 1000 | round }};
     if(!HOLD || HOLD < 300){ HOLD = 2200; }
+    var START = {{ section.settings.finale_start_delay | default: 1.0 | times: 1000 | round }};
+    if(START < 0){ START = 0; }
 
     // Tuck the call's trailing period so its right edge lines up with the right
     // edge of the previous letter (e.g. the "P" in "GO DEEP.").
@@ -275,8 +279,12 @@
           setTimeout(function(){ if(finaleEnd) finaleEnd.classList.add('on'); }, HOLD);
         }
       }
-      if(finaleLines.length){ step(); }
-      else if(finaleEnd){ finaleEnd.classList.add('on'); }
+      if(finaleLines.length){
+        // line 1 fades in slowly after the adjustable start delay
+        setTimeout(step, START);
+      } else if(finaleEnd){
+        finaleEnd.classList.add('on');
+      }
     }
     function checkFinale(){
       if(started) return;
@@ -347,6 +355,8 @@
       { "value": "sans", "label": "Hedonistas Sans" }
     ], "default": "pacifico" },
     { "type": "range", "id": "finale_font_size", "label": "Line font size", "info": "Max size on desktop — scales down on mobile", "min": 1, "max": 6, "step": 0.5, "unit": "rem", "default": 3.5 },
+    { "type": "range", "id": "finale_start_delay", "label": "Start delay (line 1)", "info": "Seconds to wait before the first line fades in", "min": 0, "max": 8, "step": 0.1, "unit": "s", "default": 1.0 },
+    { "type": "range", "id": "finale_first_fade", "label": "First line fade duration", "info": "How slowly line 1 fades in", "min": 0.4, "max": 5, "step": 0.1, "unit": "s", "default": 1.6 },
     { "type": "range", "id": "finale_line_speed", "label": "Line reveal speed", "info": "Seconds each line holds before the next appears", "min": 0.8, "max": 6, "step": 0.1, "unit": "s", "default": 2.2 },
     { "type": "color", "id": "color_finale_regular", "label": "Regular line color", "default": "#F3E6D1" },
     { "type": "color", "id": "color_finale_bold", "label": "Bold line color", "default": "#DBB149" },
