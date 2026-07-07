@@ -55,7 +55,7 @@
   }
   .contact-submit:hover{ background: var(--copper, #C65602); border-color: var(--copper, #C65602); transform: translateY(-1px); }
 
-  /* Success state (shown after a successful submit; the form is hidden) */
+  /* Success state (shown after a successful submit; the form fields are hidden) */
   .contact-success{
     background: rgba(40,97,64,.12); border: 1px solid rgba(40,97,64,.4); border-radius: 12px;
     padding: 1.6rem 1.6rem; margin: 0; color: var(--cactus, #286140);
@@ -84,24 +84,24 @@
   <div class="contact-inner">
     <h1 class="contact-title">{{ page.title | default: 'Get in Touch' | escape }}</h1>
 
-    {%- if form.posted_successfully? -%}
+    {% form 'contact' %}
+      {%- if form.posted_successfully? -%}
 
-      <div class="contact-success" role="status" aria-live="polite">
-        <strong>Message sent — thank you.</strong>
-        <p>We've received your note and will be in touch soon.</p>
-      </div>
-      <a class="contact-again" href="{{ request.path }}">Send another message</a>
+        <div class="contact-success" role="status" aria-live="polite">
+          <strong>Message sent — thank you.</strong>
+          <p>We've received your note and will be in touch soon.</p>
+        </div>
+        <a class="contact-again" href="{{ request.path }}">Send another message</a>
 
-    {%- else -%}
+      {%- else -%}
 
-      <div class="contact-intro">
-        <p>Questions, trade &amp; wholesale, press, or events — send us a note and we'll get back to you.</p>
-      </div>
-
-      {% form 'contact' %}
         {%- if form.errors -%}
           <div class="contact-errors">{{ form.errors | default_errors }}</div>
         {%- endif -%}
+
+        <div class="contact-intro">
+          <p>Questions, trade &amp; wholesale, press, or events — send us a note and we'll get back to you.</p>
+        </div>
 
         <div class="contact-field">
           <label for="cf-name">Name</label>
@@ -136,8 +136,8 @@
         </div>
 
         <button type="submit" class="contact-submit">Send Message</button>
-      {% endform %}
 
-    {%- endif -%}
+      {%- endif -%}
+    {% endform %}
   </div>
 </div>
