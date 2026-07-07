@@ -45,15 +45,28 @@
     .bottles-section .ce-main-shot{ padding-left: 96px; box-sizing: border-box; }
   }
 
-  /* Mobile: keep the bottle photo inside its visual slot so it can't overflow
-     down into the copy. Kept here (not theme.css) so it can't be clobbered. */
+  /* Mobile: stack the bottle on top and lay the Front/Back/Style thumbnails in
+     a row BELOW it, instead of overlaying them on the left (which bled up into
+     the tabs). Kept here (not theme.css) so it can't be clobbered. */
   @media (max-width: 900px){
-    .bottles-section .ce-visual{ overflow: hidden; }
-    .bottles-section .ce-main-shot{ height: 100%; padding: 1rem; box-sizing: border-box; }
-    .bottles-section .ce-bottle-img{
-      max-height: 100% !important;
-      max-width: 70% !important;
+    .bottles-section .ce-visual{
+      flex-direction: column !important;
+      height: auto !important; min-height: 0 !important;
+      overflow: visible !important;
+      padding: 1.5rem 0 .5rem !important;
     }
+    .bottles-section .ce-main-shot{
+      height: auto !important; padding: 0 1rem !important; box-sizing: border-box;
+    }
+    .bottles-section .ce-bottle-img{
+      max-height: 46vh !important; max-width: 68% !important;
+    }
+    .bottles-section .ce-shots{
+      position: static !important; left: auto; top: auto; bottom: auto;
+      flex-direction: row !important; justify-content: center !important;
+      width: 100%; gap: .6rem !important; padding: 1rem 0 .25rem !important;
+    }
+    .bottles-section .ce-visual-word{ display: none !important; }
   }
 
   /* Click-to-zoom lightbox (global; opened from the main bottle image) */
