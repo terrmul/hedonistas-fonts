@@ -29,6 +29,7 @@
     margin: 0 0 2.5rem; color: var(--ink, #1a1716);
   }
   .contact-intro p{ margin: 0 0 1em; }
+  .contact-intro p:last-child{ margin-bottom: 0; }
   .contact-intro a{ color: var(--rust, #7C3A09); }
 
   .contact-field{ margin-bottom: 1.4rem; display: flex; flex-direction: column; gap: .45rem; }
@@ -53,10 +54,23 @@
     text-transform: uppercase; font-weight: 500; transition: background .25s, transform .2s;
   }
   .contact-submit:hover{ background: var(--copper, #C65602); border-color: var(--copper, #C65602); transform: translateY(-1px); }
+
+  /* Success state (shown after a successful submit; the form is hidden) */
   .contact-success{
-    background: rgba(40,97,64,.12); border: 1px solid rgba(40,97,64,.35); border-radius: 10px;
-    padding: 1.1rem 1.3rem; margin: 0 0 2rem; font-family: "metallophile-sp8", sans-serif; color: var(--cactus, #286140);
+    background: rgba(40,97,64,.12); border: 1px solid rgba(40,97,64,.4); border-radius: 12px;
+    padding: 1.6rem 1.6rem; margin: 0; color: var(--cactus, #286140);
+    font-family: "metallophile-sp8", sans-serif;
   }
+  .contact-success strong{ display:block; font-size: 1.2rem; line-height: 1.2; margin-bottom: .4rem; color: var(--cactus, #286140); }
+  .contact-success p{ margin: 0; font-size: 1rem; line-height: 1.6; color: var(--ink, #1a1716); }
+  .contact-again{
+    display:inline-block; margin-top: 1.4rem;
+    font-family: "metallophile-sp8", sans-serif; font-size: .75rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--rust, #7C3A09);
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .contact-again:hover{ color: var(--ink, #1a1716); }
+
   .contact-errors{
     background: rgba(175,46,86,.1); border: 1px solid rgba(175,46,86,.35); border-radius: 10px;
     padding: 1.1rem 1.3rem; margin: 0 0 1.5rem; color: var(--raspberry, #72213A);
@@ -70,52 +84,60 @@
   <div class="contact-inner">
     <h1 class="contact-title">{{ page.title | default: 'Get in Touch' | escape }}</h1>
 
-    {%- if page.content != blank -%}
-      <div class="contact-intro rte">{{ page.content }}</div>
-    {%- endif -%}
-
     {%- if form.posted_successfully? -%}
-      <p class="contact-success">Thank you — your message is on its way. We'll be in touch soon.</p>
+
+      <div class="contact-success" role="status" aria-live="polite">
+        <strong>Message sent — thank you.</strong>
+        <p>We've received your note and will be in touch soon.</p>
+      </div>
+      <a class="contact-again" href="{{ request.path }}">Send another message</a>
+
+    {%- else -%}
+
+      <div class="contact-intro">
+        <p>Questions, trade &amp; wholesale, press, or events — send us a note and we'll get back to you.</p>
+      </div>
+
+      {% form 'contact' %}
+        {%- if form.errors -%}
+          <div class="contact-errors">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+
+        <div class="contact-field">
+          <label for="cf-name">Name</label>
+          <input id="cf-name" type="text" name="contact[name]" value="{{ form.name }}" autocomplete="name" required>
+        </div>
+
+        <div class="contact-field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" required>
+        </div>
+
+        <div class="contact-field">
+          <label for="cf-type">Inquiry type</label>
+          <select id="cf-type" name="contact[Inquiry Type]">
+            <option>General</option>
+            <option>Trade / Wholesale</option>
+            <option>Press</option>
+            <option>Events</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="contact-field">
+          <label for="cf-body">Message</label>
+          <textarea id="cf-body" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+        </div>
+
+        <div class="contact-hp" aria-hidden="true">
+          <label>Leave this field empty
+            <input type="text" name="contact[website]" tabindex="-1" autocomplete="off">
+          </label>
+        </div>
+
+        <button type="submit" class="contact-submit">Send Message</button>
+      {% endform %}
+
     {%- endif -%}
-
-    {% form 'contact' %}
-      {%- if form.errors -%}
-        <div class="contact-errors">{{ form.errors | default_errors }}</div>
-      {%- endif -%}
-
-      <div class="contact-field">
-        <label for="cf-name">Name</label>
-        <input id="cf-name" type="text" name="contact[name]" value="{{ form.name }}" autocomplete="name" required>
-      </div>
-
-      <div class="contact-field">
-        <label for="cf-email">Email</label>
-        <input id="cf-email" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" required>
-      </div>
-
-      <div class="contact-field">
-        <label for="cf-type">Inquiry type</label>
-        <select id="cf-type" name="contact[Inquiry Type]">
-          <option>General</option>
-          <option>Trade / Wholesale</option>
-          <option>Press</option>
-          <option>Events</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div class="contact-field">
-        <label for="cf-body">Message</label>
-        <textarea id="cf-body" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
-      </div>
-
-      <div class="contact-hp" aria-hidden="true">
-        <label>Leave this field empty
-          <input type="text" name="contact[website]" tabindex="-1" autocomplete="off">
-        </label>
-      </div>
-
-      <button type="submit" class="contact-submit">Send Message</button>
-    {% endform %}
   </div>
 </div>
