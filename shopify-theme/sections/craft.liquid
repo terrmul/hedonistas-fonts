@@ -32,6 +32,10 @@
     opacity: {{ section.settings.wm_opacity | divided_by: 100.0 }} !important;
   }
 
+  /* Rounded image corners to match the story page image (12px). The .panel-img
+     already has overflow:hidden, so the photo clips to the rounded corners. */
+  #craft .panel-img{ border-radius: 12px; }
+
   /* Desktop (>1200): sticky scrollytelling with the per-chapter watermark word.
      Long words can't fit the lane right of the image, so the word is
      LEFT-ALIGNED at the far left and sized to fit full width. Layer order:
