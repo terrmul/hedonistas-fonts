@@ -25,14 +25,17 @@
     /* Finale poem: lines stack vertically and accumulate — each new line is
        bright, previous lines stay visible but dimmed; the last line stays
        bright, then the sign-off fades in. */
+    #manifesto .mf-finale-stage{ margin-left: auto; margin-right: auto; }
     #manifesto .mf-finale-lines{
       display:flex !important; flex-direction:column; align-items:center;
       gap:.55em; min-height:auto !important; grid-template-columns:none;
-      margin-bottom:2.5rem;
+      width:100%; text-align:center; margin-bottom:2.5rem;
     }
     #manifesto .mf-finale-line{
       grid-area:auto !important;
-      white-space:nowrap; max-width:100%;
+      /* wrap (don't nowrap) so long lines never overflow their centered box */
+      white-space:normal; text-wrap:balance;
+      text-align:center; margin-left:auto; margin-right:auto; max-width:100%;
       opacity:0; transform:translateY(14px);
       transition:opacity .7s ease, transform .7s ease;
       text-transform:uppercase; line-height:1.05; padding:0 1rem;
@@ -41,7 +44,6 @@
     #manifesto .mf-finale-line:first-child{ transition-duration: {{ section.settings.finale_first_fade | default: 1.6 }}s; }
     #manifesto .mf-finale-line.on{ opacity:1; transform:none; }
     #manifesto .mf-finale-line.on.dim{ opacity:.4; }
-    @media(max-width:640px){ #manifesto .mf-finale-line{ white-space:normal; } }
 
     #manifesto .mf-poem-finale-call { font-size: clamp(2.4rem, 6vw, 5rem); line-height: .9; }
 
