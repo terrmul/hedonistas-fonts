@@ -1,0 +1,267 @@
+{%- comment -%} CONTACT — Customizer-editable contact page section {%- endcomment -%}
+<style>
+  /* Make the fixed nav readable on this light page. */
+  nav, nav.nav-scrolled, nav.nav-on-hero{
+    mix-blend-mode:normal!important;
+    background:rgba(243,230,209,.55)!important;
+    backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+    border-bottom:1px solid rgba(26,23,22,.12)!important;
+  }
+  nav .nav-wordmark, nav ul a{color:var(--ink,#1a1716)!important}
+  nav .nav-cart{border-color:rgba(26,23,22,.35)!important}
+  nav img.nav-icon{filter:brightness(0)!important}
+  .nav-hamburger span{background:var(--ink,#1a1716)!important}
+
+  .contact-page{
+    position: relative; z-index: 1; overflow: hidden;
+    color: var(--ink, #1a1716);
+    min-height: 80vh;
+    padding: 9rem 1.5rem 6rem;
+  }
+  .contact-back{
+    position: absolute; left: 50%; bottom: -.12em; transform: translateX(-50%);
+    font-family: 'Pacifico', serif; text-transform: uppercase;
+    font-size: clamp(9rem, 30vw, 26rem); line-height: .78;
+    opacity: .05; white-space: nowrap;
+    pointer-events: none; user-select: none; z-index: 0;
+  }
+  .contact-inner{ position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; }
+  .contact-grid{
+    display: grid; grid-template-columns: minmax(0,0.92fr) minmax(0,1.08fr);
+    gap: clamp(2.5rem, 6vw, 5rem); align-items: start;
+  }
+
+  .contact-eyebrow{
+    font-family: "metallophile-sp8", sans-serif; font-size: .72rem; letter-spacing: .24em;
+    text-transform: uppercase; margin: 0 0 1.1rem;
+  }
+  .contact-title{
+    font-family: 'Pacifico', serif; text-transform: uppercase;
+    font-size: clamp(2.8rem, 7vw, 5rem); line-height: .98; margin: 0 0 1.4rem;
+  }
+  .contact-blurb{
+    font-family: "metallophile-sp8", sans-serif; font-size: 1.05rem; line-height: 1.7;
+    max-width: 40ch; margin: 0;
+  }
+  .contact-blurb p{ margin: 0 0 1em; } .contact-blurb p:last-child{ margin-bottom: 0; }
+  .contact-channels{ display: flex; flex-direction: column; gap: 1.1rem; margin-top: 2.6rem; }
+  .contact-channel{ display: flex; align-items: flex-start; gap: .85rem; text-decoration: none; color: inherit; }
+  .contact-channel svg{ width: 22px; height: 22px; flex-shrink: 0; margin-top: .15rem; }
+  .contact-channel--note::before{
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--copper, #C65602); flex-shrink: 0; margin: .5rem .9rem 0 .35rem;
+  }
+  .contact-channel .cc-text{ display: flex; flex-direction: column; gap: .1rem; }
+  .contact-channel strong{ font-family: "metallophile-sp8", sans-serif; font-weight: 500; font-size: .95rem; letter-spacing: .02em; }
+  .contact-channel em{ font-style: normal; font-size: .82rem; line-height: 1.5; color: var(--smoke, #4F4E4F); }
+
+  .contact-field{ margin-bottom: 1.4rem; display: flex; flex-direction: column; gap: .45rem; }
+  .contact-field label{
+    font-family: "metallophile-sp8", sans-serif; font-size: .7rem; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--smoke, #4F4E4F);
+  }
+  .contact-field input, .contact-field select, .contact-field textarea{
+    width: 100%; box-sizing: border-box; background: rgba(255,255,255,.4);
+    border: 1px solid rgba(26,23,22,.3); border-radius: 8px; padding: .85rem 1rem;
+    font-family: "metallophile-sp8", sans-serif; font-size: 1rem; color: var(--ink, #1a1716);
+  }
+  .contact-field input:focus, .contact-field select:focus, .contact-field textarea:focus{
+    outline: none; border-color: var(--rust, #7C3A09); background: rgba(255,255,255,.7);
+  }
+  .contact-field textarea{ resize: vertical; min-height: 8rem; }
+  .contact-submit{
+    margin-top: .6rem; cursor: pointer; width: 100%;
+    background: var(--ink, #1a1716); color: var(--cream, #F3E6D1); border: 1px solid var(--ink, #1a1716);
+    border-radius: 100px; padding: 1.05rem 2.6rem;
+    font-family: "metallophile-sp8", sans-serif; font-size: .75rem; letter-spacing: .22em;
+    text-transform: uppercase; font-weight: 500; transition: background .25s, transform .2s;
+  }
+  .contact-submit:hover{ background: var(--copper, #C65602); border-color: var(--copper, #C65602); transform: translateY(-1px); }
+
+  .contact-success{
+    background: rgba(40,97,64,.12); border: 1px solid rgba(40,97,64,.4); border-radius: 12px;
+    padding: 1.6rem 1.6rem; margin: 0; color: var(--cactus, #286140);
+    font-family: "metallophile-sp8", sans-serif;
+  }
+  .contact-success[hidden]{ display: none !important; }
+  .contact-success strong{ display:block; font-size: 1.2rem; line-height: 1.2; margin-bottom: .4rem; color: var(--cactus, #286140); }
+  .contact-success p{ margin: 0; font-size: 1rem; line-height: 1.6; color: var(--ink, #1a1716); }
+  .contact-again{
+    display:inline-block; margin-top: 1.4rem;
+    font-family: "metallophile-sp8", sans-serif; font-size: .75rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--rust, #7C3A09);
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .contact-again:hover{ color: var(--ink, #1a1716); }
+  .contact-errors{
+    background: rgba(175,46,86,.1); border: 1px solid rgba(175,46,86,.35); border-radius: 10px;
+    padding: 1.1rem 1.3rem; margin: 0 0 1.5rem; color: var(--raspberry, #72213A);
+  }
+  .contact-errors ul{ margin: 0; padding-left: 1.2em; }
+  .contact-hp{ position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .contact-page .reveal{ opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s ease; }
+  .contact-page .reveal.on{ opacity: 1; transform: none; }
+  .contact-page .reveal.rd2{ transition-delay: .12s; }
+
+  @media (max-width: 820px){
+    .contact-page{ padding: 8rem 1.5rem 4.5rem; }
+    .contact-grid{ grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-blurb{ max-width: none; }
+    .contact-back{ font-size: clamp(7rem, 40vw, 12rem); }
+  }
+</style>
+
+<div class="contact-page" style="background:{{ section.settings.bg_color }}">
+  {%- if section.settings.wordmark != blank -%}
+    <div class="contact-back" aria-hidden="true" style="color:{{ section.settings.wordmark_color }}">{{ section.settings.wordmark | escape }}</div>
+  {%- endif -%}
+
+  <div class="contact-inner">
+    <div class="contact-grid">
+
+      <div class="contact-lead reveal">
+        {%- if section.settings.eyebrow != blank -%}
+          <div class="contact-eyebrow" style="color:{{ section.settings.accent_color }}">{{ section.settings.eyebrow | escape }}</div>
+        {%- endif -%}
+        <h1 class="contact-title" style="color:{{ section.settings.heading_color }}">{{ section.settings.heading | default: "Let's Talk." | escape }}</h1>
+        {%- if section.settings.blurb != blank -%}
+          <div class="contact-blurb" style="color:{{ section.settings.text_color }}">{{ section.settings.blurb }}</div>
+        {%- endif -%}
+
+        <div class="contact-channels">
+          {%- if section.settings.show_instagram -%}
+            <a class="contact-channel" href="{{ section.settings.instagram_url | default: 'https://www.instagram.com/hedonistasdelafe' }}" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="fill:{{ section.settings.accent_color }}"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <span class="cc-text"><strong style="color:{{ section.settings.text_color }}">{{ section.settings.instagram_handle | escape }}</strong><em>Follow &amp; DM us on Instagram</em></span>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.show_notes -%}
+            {%- if section.settings.trade_title != blank -%}
+              <div class="contact-channel contact-channel--note">
+                <span class="cc-text"><strong style="color:{{ section.settings.text_color }}">{{ section.settings.trade_title | escape }}</strong><em>{{ section.settings.trade_text | escape }}</em></span>
+              </div>
+            {%- endif -%}
+            {%- if section.settings.press_title != blank -%}
+              <div class="contact-channel contact-channel--note">
+                <span class="cc-text"><strong style="color:{{ section.settings.text_color }}">{{ section.settings.press_title | escape }}</strong><em>{{ section.settings.press_text | escape }}</em></span>
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="contact-form-col reveal rd2">
+        {% form 'contact' %}
+          <div class="contact-success" id="contact-success" role="status" aria-live="polite"{% unless form.posted_successfully? %} hidden{% endunless %}>
+            <strong>{{ section.settings.success_heading | default: 'Message sent — thank you.' | escape }}</strong>
+            <p>{{ section.settings.success_body | default: 'We’ve received your note and will be in touch soon.' | escape }}</p>
+            <a class="contact-again" href="{{ request.path }}">Send another message</a>
+          </div>
+
+          <div class="contact-fields" id="contact-fields"{% if form.posted_successfully? %} style="display:none"{% endif %}>
+            {%- if form.errors -%}
+              <div class="contact-errors">{{ form.errors | default_errors }}</div>
+            {%- endif -%}
+
+            <div class="contact-field">
+              <label for="cf-name">Name</label>
+              <input id="cf-name" type="text" name="contact[name]" value="{{ form.name }}" autocomplete="name" required>
+            </div>
+
+            <div class="contact-field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" required>
+            </div>
+
+            <div class="contact-field">
+              <label for="cf-type">Inquiry type</label>
+              <select id="cf-type" name="contact[Inquiry Type]">
+                <option>General</option>
+                <option>Trade / Wholesale</option>
+                <option>Press</option>
+                <option>Events</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="contact-field">
+              <label for="cf-body">Message</label>
+              <textarea id="cf-body" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+            </div>
+
+            <div class="contact-hp" aria-hidden="true">
+              <label>Leave this field empty
+                <input type="text" name="contact[website]" tabindex="-1" autocomplete="off">
+              </label>
+            </div>
+
+            <button type="submit" class="contact-submit">{{ section.settings.button_label | default: 'Send Message' | escape }}</button>
+          </div>
+        {% endform %}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.contact-page .reveal');
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      els.forEach(function(e){ io.observe(e); });
+    } else {
+      els.forEach(function(e){ e.classList.add('on'); });
+    }
+    if(window.location.search.indexOf('contact_posted=true') > -1){
+      var success = document.getElementById('contact-success');
+      var fields  = document.getElementById('contact-fields');
+      if(success){ success.hidden = false; }
+      if(fields){ fields.style.display = 'none'; }
+      if(success && success.scrollIntoView){
+        try{ success.scrollIntoView({ block: 'center', behavior: 'smooth' }); }catch(e){}
+      }
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Contact",
+  "settings": [
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#F3E6D1" },
+    { "type": "color", "id": "accent_color", "label": "Accent (eyebrow / icon)", "default": "#7C3A09" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#1a1716" },
+    { "type": "color", "id": "text_color", "label": "Body text color", "default": "#1a1716" },
+    { "type": "color", "id": "wordmark_color", "label": "Background wordmark color", "default": "#1a1716" },
+
+    { "type": "header", "content": "Lead" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Get in touch · Trade · Press · Events" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Let's Talk." },
+    { "type": "richtext", "id": "blurb", "label": "Blurb", "default": "<p>Whether you're a bar, a buyer, a writer, or a fellow hedonist — we read every message. Send us a note and we'll get back to you.</p>" },
+    { "type": "text", "id": "wordmark", "label": "Background wordmark", "info": "Big faded word behind the page. Leave blank to hide.", "default": "Hola" },
+
+    { "type": "header", "content": "Instagram" },
+    { "type": "checkbox", "id": "show_instagram", "label": "Show Instagram link", "default": true },
+    { "type": "text", "id": "instagram_handle", "label": "Handle", "default": "@hedonistasdelafe" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
+
+    { "type": "header", "content": "Routing notes" },
+    { "type": "checkbox", "id": "show_notes", "label": "Show routing notes", "default": true },
+    { "type": "text", "id": "trade_title", "label": "Note 1 title", "default": "Trade & Wholesale" },
+    { "type": "text", "id": "trade_text", "label": "Note 1 text", "default": "Use the form and choose “Trade / Wholesale.”" },
+    { "type": "text", "id": "press_title", "label": "Note 2 title", "default": "Press & Events" },
+    { "type": "text", "id": "press_text", "label": "Note 2 text", "default": "Use the form — we'll route it to the right person." },
+
+    { "type": "header", "content": "Form" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Send Message" },
+    { "type": "text", "id": "success_heading", "label": "Success heading", "default": "Message sent — thank you." },
+    { "type": "text", "id": "success_body", "label": "Success message", "default": "We’ve received your note and will be in touch soon." }
+  ],
+  "presets": [{ "name": "Contact" }]
+}
+{% endschema %}
