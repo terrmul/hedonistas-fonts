@@ -61,9 +61,9 @@
       endif
     -%}
     <a class="hero-badge" href="{{ section.settings.badge_link }}" aria-label="{{ section.settings.badge_aria | escape }}">
-      <span class="hero-badge-top" style="font-family:{{ ff_top }};font-size:{{ section.settings.badge_top_size }}rem;color:{{ section.settings.badge_top_color }}">{{ section.settings.badge_top | escape }}</span>
-      <span class="hero-badge-medal" style="font-family:{{ ff_medal }};font-size:{{ section.settings.badge_medal_size }}rem;color:{{ section.settings.badge_medal_color }}">{{ section.settings.badge_medal | escape }}</span>
-      <span class="hero-badge-year" style="font-family:{{ ff_year }};font-size:{{ section.settings.badge_year_size }}rem;color:{{ section.settings.badge_year_color }}">{{ section.settings.badge_year | escape }}</span>
+      <span class="hero-badge-top" style="font-family:{{ ff_top }};font-size:{{ section.settings.badge_top_size }}rem;color:{{ section.settings.badge_top_color }}">{{ section.settings.badge_top | escape | replace: '//', '<br>' }}</span>
+      <span class="hero-badge-medal" style="font-family:{{ ff_medal }};font-size:{{ section.settings.badge_medal_size }}rem;color:{{ section.settings.badge_medal_color }}">{{ section.settings.badge_medal | escape | replace: '//', '<br>' }}</span>
+      <span class="hero-badge-year" style="font-family:{{ ff_year }};font-size:{{ section.settings.badge_year_size }}rem;color:{{ section.settings.badge_year_color }}">{{ section.settings.badge_year | escape | replace: '//', '<br>' }}</span>
       <span class="hero-badge-body" style="font-family:{{ ff_body }};font-size:{{ section.settings.badge_body_size }}rem;color:{{ section.settings.badge_body_color }}">{{ section.settings.badge_body | escape | replace: '//', '<br>' }}</span>
     </a>
   {%- endif -%}
@@ -198,6 +198,7 @@
     { "type": "range", "id": "badge_image_size", "label": "Badge image size", "min": 60, "max": 320, "step": 5, "unit": "px", "default": 140 },
 
     { "type": "header", "content": "Award Badge — text" },
+    { "type": "paragraph", "content": "Use // in any line below to force a line break." },
     { "type": "url", "id": "badge_link", "label": "Badge link" },
     { "type": "text", "id": "badge_aria", "label": "Badge screen-reader label", "default": "Winner of Four Golds, 2026, SF World Spirits Competition" },
 
@@ -220,7 +221,6 @@
     { "type": "color", "id": "badge_year_color", "label": "Color", "default": "#F3E6D1" },
 
     { "type": "header", "content": "Badge · Line 4 (competition)" },
-    { "type": "paragraph", "content": "Use // for a line break." },
     { "type": "text", "id": "badge_body", "label": "Text", "default": "SF World Spirits" },
     { "type": "select", "id": "badge_body_font", "label": "Font", "default": "sans", "options": [ { "value": "sans", "label": "Metallophile (brand sans)" }, { "value": "display", "label": "Pacifico (display)" }, { "value": "system", "label": "System sans" } ] },
     { "type": "range", "id": "badge_body_size", "label": "Font size", "min": 0.4, "max": 2, "step": 0.1, "unit": "rem", "default": 0.8 },
